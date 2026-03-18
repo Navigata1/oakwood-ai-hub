@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for the Community — Oakwood AI Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332;
+    --navy-deep: #0f1724;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: #8c6e2e;
+    --cream: #f5edd6;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+
+  .no-print {
+    text-align: center;
+    margin: 1rem 0 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: var(--navy);
+    color: var(--gold-light);
+    border: none;
+    padding: 0.7rem 1.8rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .btn:hover { background: var(--navy-deep); }
+
+  /* The Flyer */
+  .flyer {
+    width: 8.5in;
+    min-height: 11in;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Gold geometric accent bars */
+  .flyer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .flyer::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  /* Top section */
+  .flyer-top {
+    padding: 0.55in 0.6in 0.35in;
+    background: var(--navy);
+    position: relative;
+  }
+
+  /* Decorative circle */
+  .deco-circle {
+    position: absolute;
+    top: -1.5in;
+    right: -1in;
+    width: 4in;
+    height: 4in;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .org-line {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.18in;
+  }
+
+  .headline {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.1in;
+  }
+
+  .headline span {
+    color: var(--gold);
+  }
+
+  .tagline {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.18in;
+    line-height: 1.5;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.1in;
+  }
+
+  .badge {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  /* Gold divider */
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(201,168,76,0.2) 100%);
+    margin: 0 0.6in;
+  }
+
+  /* Tracks section */
+  .tracks-section {
+    padding: 0.3in 0.6in;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.15in;
+  }
+
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2in;
+  }
+
+  .track-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-top: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 0.22in 0.2in;
+  }
+
+  .track-number {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.05in;
+  }
+
+  .track-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 0.06in;
+  }
+
+  .track-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .track-items {
+    list-style: none;
+    margin-top: 0.08in;
+  }
+
+  .track-items li {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    padding: 0.04rem 0;
+    padding-left: 0.7rem;
+    position: relative;
+  }
+
+  .track-items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* Schedule section */
+  .schedule-section {
+    padding: 0 0.6in 0.3in;
+  }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.15in;
+  }
+
+  .sched-item {
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 0.15in 0.18in;
+  }
+
+  .sched-audience {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.04in;
+  }
+
+  .sched-when {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.03in;
+  }
+
+  .sched-detail {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+
+  /* Middle stat bar */
+  .stat-bar {
+    background: rgba(201,168,76,0.08);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0.2in 0.6in;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2in;
+    text-align: center;
+  }
+
+  .stat-item {}
+
+  .stat-number {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.66rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.3;
+    margin-top: 0.04in;
+    font-weight: 500;
+  }
+
+  /* Bottom section */
+  .bottom-section {
+    padding: 0.25in 0.6in;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3in;
+    align-items: start;
+    flex: 1;
+  }
+
+  .bottom-left {}
+
+  .verse-block {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 6px;
+    padding: 0.2in;
+    margin-bottom: 0.15in;
+  }
+
+  .verse-text {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    margin-bottom: 0.06in;
+  }
+
+  .verse-ref {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .cta-block {
+    margin-top: 0.12in;
+  }
+
+  .cta-headline {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 0.06in;
+  }
+
+  .cta-detail {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .cta-url {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    margin-top: 0.1in;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+
+  /* QR code section */
+  .qr-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.08in;
+  }
+
+  .qr-box {
+    background: var(--white);
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4in;
+    height: 1.4in;
+  }
+
+  .qr-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* QR using CSS-only pattern as placeholder */
+  .qr-placeholder {
+    width: 1.2in;
+    height: 1.2in;
+    background:
+      linear-gradient(var(--navy) 0%, var(--navy) 100%) top left / 30% 30% no-repeat,
+      linear-gradient(var(--navy) 0%, var(--navy) 100%) top right / 30% 30% no-repeat,
+      linear-gradient(var(--navy) 0%, var(--navy) 100%) bottom left / 30% 30% no-repeat,
+      repeating-linear-gradient(45deg, transparent, transparent 3px, var(--navy) 3px, var(--navy) 6px);
+    border: 3px solid var(--navy);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .qr-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+  }
+
+  .qr-url-text {
+    font-size: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Branding footer inside flyer */
+  .flyer-footer {
+    padding: 0.15in 0.6in 0.25in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .brand-left {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+  }
+
+  .brand-right {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  .brand-name {
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* QR code embed via Google Charts API */
+  .qr-img {
+    width: 1.2in;
+    height: 1.2in;
+    border-radius: 4px;
+  }
+
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+
+    .flyer {
+      box-shadow: none;
+      page-break-inside: avoid;
+      width: 8.5in;
+      min-height: 11in;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .flyer {
+      width: 100%;
+      min-height: auto;
+    }
+
+    .tracks-grid,
+    .schedule-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-bar {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    .bottom-section {
+      grid-template-columns: 1fr;
+    }
+
+    .qr-section {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+  <a href="https://oakwood-ai-hub.vercel.app" class="btn" style="text-decoration:none; display:inline-block;">Visit Hub</a>
+</div>
+
+<div class="flyer">
+  <div class="deco-circle"></div>
+
+  <!-- Top Section -->
+  <div class="flyer-top">
+    <div class="org-line">Oakwood University Church + Island Development Crew</div>
+    <div class="headline">AI for the<br><span>Community</span></div>
+    <div class="tagline">A free 12-week AI literacy program for all ages — students, professionals, elders, and everyone in between.</div>
+    <div class="badge-row">
+      <span class="badge">All Ages</span>
+      <span class="badge">All Skill Levels</span>
+      <span class="badge">Zero Cost</span>
+      <span class="badge">12 Weeks</span>
+    </div>
+  </div>
+
+  <div class="gold-divider"></div>
+
+  <!-- Program Tracks -->
+  <div class="tracks-section">
+    <div class="section-label">Three Program Tracks</div>
+    <div class="tracks-grid">
+      <div class="track-card">
+        <div class="track-number">Track 01</div>
+        <div class="track-name">Foundations</div>
+        <div class="track-desc">AI literacy for everyone — no experience needed.</div>
+        <ul class="track-items">
+          <li>What AI is and how it works</li>
+          <li>Hands-on prompting basics</li>
+          <li>Ethics and values-driven use</li>
+          <li>Critical thinking with AI</li>
+        </ul>
+      </div>
+      <div class="track-card">
+        <div class="track-number">Track 02</div>
+        <div class="track-name">Creators</div>
+        <div class="track-desc">Build real things. Launch ideas. Grow your future.</div>
+        <ul class="track-items">
+          <li>Build apps without coding</li>
+          <li>Marketing and content creation</li>
+          <li>Business plans and proposals</li>
+          <li>Entrepreneurship tools</li>
+        </ul>
+      </div>
+      <div class="track-card">
+        <div class="track-number">Track 03</div>
+        <div class="track-name">Ministry</div>
+        <div class="track-desc">Serve your community more effectively with AI.</div>
+        <ul class="track-items">
+          <li>Sermon prep and outreach</li>
+          <li>Volunteer coordination</li>
+          <li>Church communications</li>
+          <li>Community impact tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stat-bar">
+    <div class="stat-item">
+      <div class="stat-number">86%</div>
+      <div class="stat-label">of students already<br>use AI daily</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">91%</div>
+      <div class="stat-label">of church leaders support<br>AI education</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$0</div>
+      <div class="stat-label">cost to the church —<br>IDC provides everything</div>
+    </div>
+  </div>
+
+  <!-- Schedule -->
+  <div class="schedule-section" style="margin-top:0.22in;">
+    <div class="section-label">Session Schedule</div>
+    <div class="schedule-grid">
+      <div class="sched-item">
+        <div class="sched-audience">OUC — Open Community</div>
+        <div class="sched-when">Saturday Evenings</div>
+        <div class="sched-detail">After sunset, 7:00 – 8:30 PM. All ages welcome. The flagship session.</div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-audience">OAA — Students</div>
+        <div class="sched-when">Fridays After School</div>
+        <div class="sched-detail">Every other Friday, 3:30 – 5:00 PM. K-12 focused, hands-on learning.</div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-audience">OCC — Pathfinders</div>
+        <div class="sched-when">Sundays</div>
+        <div class="sched-detail">During Pathfinder hours. Project-based, values-driven AI literacy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Content -->
+  <div class="bottom-section">
+    <div class="bottom-left">
+      <div class="verse-block">
+        <div class="verse-text">"Where there is no vision, the people perish."</div>
+        <div class="verse-ref">Proverbs 29:18 — KJV</div>
+      </div>
+      <div class="cta-block">
+        <div class="cta-headline">Join the Oakwood AI Initiative</div>
+        <div class="cta-detail">
+          Sign up today. Bring your phone, tablet, or laptop.<br>
+          All sessions are free. All skill levels are welcome.<br>
+          Scan the QR code or visit us online.
+        </div>
+        <a href="https://oakwood-ai-hub.vercel.app" class="cta-url">oakwood-ai-hub.vercel.app</a>
+      </div>
+    </div>
+
+    <!-- QR Code -->
+    <div class="qr-section">
+      <div class="qr-box">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://oakwood-ai-hub.vercel.app&bgcolor=ffffff&color=1a2332&qzone=1"
+          alt="QR Code — oakwood-ai-hub.vercel.app"
+          class="qr-img"
+          loading="eager"
+        >
+      </div>
+      <div class="qr-label">Scan to Sign Up</div>
+      <div class="qr-url-text">oakwood-ai-hub.vercel.app</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="flyer-footer">
+    <div class="brand-left">
+      <span class="brand-name">Oakwood University Church</span><br>
+      Huntsville, Alabama
+    </div>
+    <div class="brand-right">
+      <span class="brand-name">Island Development Crew LLC</span><br>
+      islanddevcrew.com
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

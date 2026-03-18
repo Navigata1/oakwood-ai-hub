@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pitch — Oakwood AI Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2332;
+    --navy-deep: #0f1724;
+    --navy-mid: #1f2d40;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: #8c6e2e;
+    --cream: #f5edd6;
+    --white: #ffffff;
+    --text-muted: #8a9bb0;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy-deep);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* Mode toggle */
+  .mode-bar {
+    background: var(--navy);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .brand {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .toggle-group {
+    display: flex;
+    background: var(--navy-deep);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 3px;
+  }
+
+  .toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .toggle-btn.active {
+    background: var(--gold);
+    color: var(--navy-deep);
+  }
+
+  .no-print {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .print-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .print-btn:hover { background: rgba(201,168,76,0.1); }
+
+  /* ==================== MODE 1: Script ==================== */
+  #mode-script {
+    display: block;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  #mode-onepager { display: none; }
+
+  .script-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .script-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .script-header h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .script-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .timer-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.25rem 0.9rem;
+    border-radius: 20px;
+    margin-top: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* Script card */
+  .script-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .script-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 12px 12px 0 0;
+  }
+
+  .script-lines {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--white);
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+
+  .script-lines .line {
+    display: block;
+    padding: 0.1rem 0;
+  }
+
+  .script-lines .pause {
+    color: var(--gold);
+    font-style: normal;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0;
+    display: block;
+  }
+
+  .script-lines .action {
+    color: var(--text-muted);
+    font-style: normal;
+    font-size: 0.8rem;
+    display: block;
+    margin: 0.25rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+  }
+
+  .script-lines .stat {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 700;
+    padding: 0.05rem 0.4rem;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .coaching-notes {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .coaching-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .coaching-item {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .coaching-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* ==================== MODE 2: One-Pager ==================== */
+  #mode-onepager {
+    padding: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .onepager-header {
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .onepager-header .org-line {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .onepager-header h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+
+  .onepager-header .sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .onepager-gold-bar {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  /* Main grid */
+  .onepager-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .onepager-grid { grid-template-columns: 1fr; }
+  }
+
+  .op-panel {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .op-panel-header {
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .op-panel-header .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #e74c3c; }
+  .dot-gold { background: var(--gold); }
+  .dot-green { background: #27ae60; }
+
+  .op-panel-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .op-panel-body {
+    padding: 1.25rem;
+  }
+
+  /* Problem panel stats */
+  .problem-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .prob-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(231,76,60,0.06);
+    border: 1px solid rgba(231,76,60,0.15);
+    border-radius: 8px;
+  }
+
+  .prob-number {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #e88;
+    line-height: 1;
+    min-width: 3rem;
+    letter-spacing: -0.03em;
+  }
+
+  .prob-text {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+    padding-top: 0.15rem;
+  }
+
+  .prob-source {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  /* Solution panel */
+  .solution-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .sol-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 8px;
+  }
+
+  .sol-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .sol-text {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+    padding-top: 0.05rem;
+  }
+
+  .sol-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  /* Church gets row */
+  .church-gets {
+    background: var(--navy);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .church-gets-header {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6ecf8e;
+    margin-bottom: 0.75rem;
+  }
+
+  .church-gets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .get-item {
+    padding: 0.6rem 0.75rem;
+    background: rgba(39,174,96,0.05);
+    border: 1px solid rgba(39,174,96,0.12);
+    border-radius: 6px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .get-item strong {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6ecf8e;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+  }
+
+  /* QR codes row */
+  .qr-row {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 500px) {
+    .qr-row { grid-template-columns: 1fr; }
+  }
+
+  .qr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .qr-box {
+    background: var(--white);
+    padding: 8px;
+    border-radius: 8px;
+    display: inline-flex;
+  }
+
+  .qr-box img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .qr-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+  }
+
+  .qr-url {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  /* Footer verse */
+  .verse-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  .verse-footer .verse {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.3rem;
+  }
+
+  .verse-footer .ref {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  @media print {
+    .mode-bar { display: none; }
+    #mode-script { display: none !important; }
+    #mode-onepager { display: block !important; }
+    body { background: white; color: #111; }
+    .op-panel, .church-gets, .qr-row {
+      border: 1px solid #ccc;
+      background: white;
+      break-inside: avoid;
+    }
+    .op-panel-header { background: #f5f5f5; }
+    .prob-stat, .sol-item, .get-item { background: #f9f9f9; border: 1px solid #ddd; }
+    .prob-number { color: #c0392b; }
+    .onepager-header h1, .op-panel-title, .church-gets-header { color: #1a2332; }
+    .prob-text, .sol-text, .get-item { color: #333; }
+    .verse-footer .verse { color: #555; }
+    .qr-box { border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mode-bar">
+  <div class="brand">Oakwood AI — The Pitch</div>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="btn-script" onclick="setMode('script')">30-Second Script</button>
+    <button class="toggle-btn" id="btn-onepager" onclick="setMode('onepager')">Visual One-Pager</button>
+  </div>
+  <div class="no-print">
+    <button class="print-btn" onclick="window.print()">Print / PDF</button>
+  </div>
+</div>
+
+<!-- MODE 1: The Script -->
+<div id="mode-script">
+  <div class="script-header">
+    <div class="script-label">The Elevator Pitch</div>
+    <h1>What Jon Says</h1>
+    <p>Word-for-word. In person. 30 seconds.</p>
+    <div class="timer-badge">30 Seconds</div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-lines">
+      <span class="line">"<span class="stat">91%</span> of church leaders want AI education."</span>
+      <span class="line">"Only <span class="stat">6%</span> have a plan."</span>
+      <span class="pause">— pause —</span>
+      <span class="line">"We built the plan."</span>
+      <span class="pause">— beat —</span>
+      <span class="line">"A 12-week program covering every generation — from Pathfinders to elders."</span>
+      <span class="line">"Three tracks: Foundations, Creators, Ministry."</span>
+      <span class="pause">— beat —</span>
+      <span class="line">"Zero cost to the church. IDC provides everything."</span>
+      <span class="pause">— beat —</span>
+      <span class="line">"Oakwood becomes the first SDA institution with a structured AI literacy program."</span>
+      <span class="pause">— pause —</span>
+      <span class="line">"Here is what it looks like..."</span>
+      <span class="action">[hand them the phone — pull up oakwood-ai-hub.vercel.app]</span>
+    </div>
+
+    <div class="coaching-notes">
+      <div class="coaching-label">Delivery Notes</div>
+      <div class="coaching-item">Open with the stats back-to-back — no filler words between them</div>
+      <div class="coaching-item">"We built the plan" — short, confident, final. Do not elaborate immediately</div>
+      <div class="coaching-item">"Zero cost" is the door-opener — say it clearly and let it land</div>
+      <div class="coaching-item">"First SDA institution" — this is the legacy moment. Slow down here</div>
+      <div class="coaching-item">Hand them the phone before they can ask a question — make it visual</div>
+      <div class="coaching-item">Eye contact throughout. Smile on "Zero cost." Gravity on "first SDA institution."</div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-lines" style="font-size:0.9rem; font-style:normal;">
+      <span class="pause" style="margin-bottom:0.5rem;">If They Ask "What's the catch?"</span>
+      <span class="line" style="font-style:italic; color:rgba(255,255,255,0.8);">"No catch. IDC keeps the curriculum. The church gets the program, the reputation, and the community impact — free. Both parties win."</span>
+      <span class="pause" style="margin-top:1rem; margin-bottom:0.5rem;">If They Ask "How does it work for our schedule?"</span>
+      <span class="line" style="font-style:italic; color:rgba(255,255,255,0.8);">"Saturday evenings after sunset. Fridays after school for OAA. Sundays for Pathfinders. We work around your calendar, not ours."</span>
+      <span class="pause" style="margin-top:1rem; margin-bottom:0.5rem;">If They Ask "Can this really work?"</span>
+      <span class="line" style="font-style:italic; color:rgba(255,255,255,0.8);">"A 10-year-old built a working app in our first session. A 70-year-old learned to manage health records. If you can have a conversation, you can learn this."</span>
+    </div>
+  </div>
+</div>
+
+<!-- MODE 2: The One-Pager -->
+<div id="mode-onepager">
+  <div class="onepager-header">
+    <div class="org-line">Oakwood University Church + Island Development Crew</div>
+    <h1>The Oakwood AI Initiative</h1>
+    <div class="sub">A structured AI literacy program for every generation. First in the SDA church network.</div>
+  </div>
+  <div class="onepager-gold-bar"></div>
+
+  <div class="onepager-grid">
+    <!-- Left: The Problem -->
+    <div class="op-panel">
+      <div class="op-panel-header">
+        <div class="dot dot-red"></div>
+        <div class="op-panel-title">The Problem — Why Now</div>
+      </div>
+      <div class="op-panel-body">
+        <div class="problem-stats">
+          <div class="prob-stat">
+            <div class="prob-number">86%</div>
+            <div>
+              <div class="prob-text">of students already use AI — without guidance, values, or oversight.</div>
+              <div class="prob-source">Digital Education Council, 2025</div>
+            </div>
+          </div>
+          <div class="prob-stat">
+            <div class="prob-number">6%</div>
+            <div>
+              <div class="prob-text">of churches have an established AI policy. 73% have nothing at all.</div>
+              <div class="prob-source">Exponential.org, 2025</div>
+            </div>
+          </div>
+          <div class="prob-stat">
+            <div class="prob-number">91%</div>
+            <div>
+              <div class="prob-text">of church leaders support AI education. 87% willing to invest. No one has built the program.</div>
+              <div class="prob-source">Exponential.org, 2025</div>
+            </div>
+          </div>
+          <div class="prob-stat">
+            <div class="prob-number">0</div>
+            <div>
+              <div class="prob-text">SDA institutions with a structured AI literacy program. Until now.</div>
+              <div class="prob-source">Current landscape assessment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: The Solution -->
+    <div class="op-panel">
+      <div class="op-panel-header">
+        <div class="dot dot-gold"></div>
+        <div class="op-panel-title">The Solution — What We Built</div>
+      </div>
+      <div class="op-panel-body">
+        <div class="solution-list">
+          <div class="sol-item">
+            <div class="sol-icon">01</div>
+            <div>
+              <div class="sol-text"><strong>Track 1: Foundations</strong></div>
+              <div class="sol-sub">AI literacy for all ages. What AI is, how to use it, ethics and values. No experience required.</div>
+            </div>
+          </div>
+          <div class="sol-item">
+            <div class="sol-icon">02</div>
+            <div>
+              <div class="sol-text"><strong>Track 2: Creators</strong></div>
+              <div class="sol-sub">Build apps, create content, write proposals, accelerate businesses. Real outcomes in 12 weeks.</div>
+            </div>
+          </div>
+          <div class="sol-item">
+            <div class="sol-icon">03</div>
+            <div>
+              <div class="sol-text"><strong>Track 3: Ministry</strong></div>
+              <div class="sol-sub">AI tools for sermon prep, outreach, volunteer coordination, and church communications.</div>
+            </div>
+          </div>
+          <div class="sol-item">
+            <div class="sol-icon">T</div>
+            <div>
+              <div class="sol-text"><strong>Tandem Teaching Model</strong></div>
+              <div class="sol-sub">Jon Isaac (IDC) + James Wilson (OUC IT). Technical expertise meets institutional trust.</div>
+            </div>
+          </div>
+          <div class="sol-item">
+            <div class="sol-icon">$0</div>
+            <div>
+              <div class="sol-text"><strong>Zero Cost to the Church</strong></div>
+              <div class="sol-sub">All technology, curriculum, and instruction provided by Island Development Crew. Church provides space.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What the Church Gets -->
+  <div class="church-gets">
+    <div class="church-gets-header">What Oakwood Gains — Immediate and Long-Term</div>
+    <div class="church-gets-grid">
+      <div class="get-item">
+        <strong>Historic First</strong>
+        First SDA institution with a structured AI literacy program
+      </div>
+      <div class="get-item">
+        <strong>Community Growth</strong>
+        New engagement driver for youth, professionals, and elders
+      </div>
+      <div class="get-item">
+        <strong>Ministry Tools</strong>
+        AI-powered outreach, communications, and admin efficiency
+      </div>
+      <div class="get-item">
+        <strong>Revenue Potential</strong>
+        Community workshops, certification paths, expansion model
+      </div>
+      <div class="get-item">
+        <strong>National Recognition</strong>
+        Oakwood leads the movement churches are being called to
+      </div>
+      <div class="get-item">
+        <strong>Clean IP Terms</strong>
+        Church brand content stays with the church. Curriculum with IDC.
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Codes -->
+  <div class="qr-row">
+    <div class="qr-item">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://oakwood-ai-hub.vercel.app&bgcolor=ffffff&color=1a2332&qzone=1" alt="Hub QR Code">
+      </div>
+      <div class="qr-title">The Full Hub</div>
+      <div class="qr-url">oakwood-ai-hub.vercel.app</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://oakwood-ai-hub.vercel.app/church&bgcolor=ffffff&color=1a2332&qzone=1" alt="Church Program QR Code">
+      </div>
+      <div class="qr-title">Church Program</div>
+      <div class="qr-url">oakwood-ai-hub.vercel.app/church</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://oakwood-ai-hub.vercel.app/academy&bgcolor=ffffff&color=1a2332&qzone=1" alt="Academy Program QR Code">
+      </div>
+      <div class="qr-title">Academy Program</div>
+      <div class="qr-url">oakwood-ai-hub.vercel.app/academy</div>
+    </div>
+  </div>
+
+  <div class="verse-footer">
+    <div class="verse">"Where there is no vision, the people perish."</div>
+    <div class="ref">Proverbs 29:18 — KJV</div>
+  </div>
+</div>
+
+<script>
+  function setMode(mode) {
+    const script = document.getElementById('mode-script');
+    const onepager = document.getElementById('mode-onepager');
+    const btnScript = document.getElementById('btn-script');
+    const btnOne = document.getElementById('btn-onepager');
+
+    if (mode === 'script') {
+      script.style.display = 'block';
+      onepager.style.display = 'none';
+      btnScript.classList.add('active');
+      btnOne.classList.remove('active');
+    } else {
+      script.style.display = 'none';
+      onepager.style.display = 'block';
+      btnScript.classList.remove('active');
+      btnOne.classList.add('active');
+    }
+  }
+</script>
+
+</body>
+</html>

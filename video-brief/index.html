@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Brief — Oakwood AI Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d12;
+    --bg-2: #0f1520;
+    --bg-3: #141d2b;
+    --surface: #1a2332;
+    --surface-2: #1f2a3d;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: #7a6030;
+    --text: #f0e8d8;
+    --text-muted: #8a9bb0;
+    --text-dim: #4a5568;
+    --border: rgba(201,168,76,0.15);
+    --border-bright: rgba(201,168,76,0.35);
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Navigation */
+  .nav {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .nav-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .duration-badge {
+    background: var(--gold);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .tech-specs {
+    display: inline-flex;
+    gap: 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .spec-item {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .spec-item strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* Timeline nav */
+  .timeline-nav {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+
+  .tnav-item {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tnav-item:hover,
+  .tnav-item.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
+  }
+
+  /* Main content */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Scene cards */
+  .scene-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .scene-card:hover {
+    border-color: var(--border-bright);
+  }
+
+  .scene-header {
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-3);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .scene-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .scene-number {
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .scene-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .scene-timing {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .scene-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 768px) {
+    .scene-body { grid-template-columns: 1fr; }
+  }
+
+  .scene-col {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .scene-col + .scene-col {
+    border-left: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .scene-col + .scene-col {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  .col-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .script-text {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .stat-callout {
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 0.5rem 0.8rem;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    font-style: normal;
+  }
+
+  .visual-list {
+    list-style: none;
+    margin: 0;
+  }
+
+  .visual-list li {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .visual-list li:last-child { border-bottom: none; }
+
+  .visual-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .broll-note {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    margin-top: 0.75rem;
+  }
+
+  .broll-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.25rem;
+  }
+
+  .broll-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Technical notes section */
+  .tech-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-section h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tech-item {
+    background: var(--bg-3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+  }
+
+  .tech-item-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .tech-item-value {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-track {
+    position: relative;
+    height: 8px;
+    background: var(--bg-2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.35rem;
+  }
+
+  .progress-segments {
+    display: flex;
+    height: 100%;
+  }
+
+  .seg {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .seg-1 { width: 10%; background: #e74c3c; }
+  .seg-2 { width: 20%; background: #e67e22; }
+  .seg-3 { width: 30%; background: var(--gold); }
+  .seg-4 { width: 20%; background: #27ae60; }
+  .seg-5 { width: 20%; background: #2980b9; }
+
+  .progress-markers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+  }
+
+  /* Footer */
+  .page-footer {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .page-footer a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media print {
+    .nav, .timeline-nav { display: none; }
+    body { background: white; color: #111; }
+    .scene-card, .tech-section, .progress-bar {
+      border: 1px solid #ccc;
+      background: white;
+      break-inside: avoid;
+    }
+    .scene-header { background: #f0f0f0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Oakwood AI Initiative — Video Brief</div>
+  <div class="nav-meta">
+    <span>Production Guide v1.0</span>
+    <span class="duration-badge">Est. 2:30</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Video Production Storyboard</div>
+  <h1>The <span>Oakwood AI</span> Story</h1>
+  <div class="hero-sub">A 2-minute 30-second cinematic brief for church leadership, community partners, and social media distribution.</div>
+  <div class="tech-specs">
+    <div class="spec-item"><strong>Format:</strong> 16:9 Landscape + 9:16 Portrait cut</div>
+    <div class="spec-item"><strong>Resolution:</strong> 4K / 3840x2160</div>
+    <div class="spec-item"><strong>Duration:</strong> 2:30 (150 seconds)</div>
+    <div class="spec-item"><strong>Tone:</strong> Cinematic, hopeful, urgent</div>
+  </div>
+</div>
+
+<div class="timeline-nav">
+  <button class="tnav-item active" onclick="scrollTo('scene-1')">Hook (0-15s)</button>
+  <button class="tnav-item" onclick="scrollTo('scene-2')">Problem (15-45s)</button>
+  <button class="tnav-item" onclick="scrollTo('scene-3')">Solution (45-90s)</button>
+  <button class="tnav-item" onclick="scrollTo('scene-4')">Proof (90-120s)</button>
+  <button class="tnav-item" onclick="scrollTo('scene-5')">Close (120-150s)</button>
+  <button class="tnav-item" onclick="scrollTo('tech-notes')">Tech Notes</button>
+</div>
+
+<div class="main">
+
+  <div class="progress-bar">
+    <div class="progress-label">Video Timeline — 150 Seconds Total</div>
+    <div class="progress-track">
+      <div class="progress-segments">
+        <div class="seg seg-1"></div>
+        <div class="seg seg-2"></div>
+        <div class="seg seg-3"></div>
+        <div class="seg seg-4"></div>
+        <div class="seg seg-5"></div>
+      </div>
+    </div>
+    <div class="progress-markers">
+      <span>0:00 Hook</span>
+      <span>0:15 Problem</span>
+      <span>0:45 Solution</span>
+      <span>1:30 Proof</span>
+      <span>2:00 Close</span>
+      <span>2:30</span>
+    </div>
+  </div>
+
+  <!-- Scene 1: The Hook -->
+  <div class="scene-card" id="scene-1">
+    <div class="scene-header">
+      <div class="scene-meta">
+        <span class="scene-number">Scene 01</span>
+        <span class="scene-title">The Hook</span>
+      </div>
+      <span class="scene-timing">0:00 — 0:15 (15 seconds)</span>
+    </div>
+    <div class="scene-body">
+      <div class="scene-col">
+        <div class="col-label">Narration Script</div>
+        <div class="script-text">
+          "In 1975, schools banned calculators."
+          <br><br>
+          [pause — 2 beats]
+          <br><br>
+          "They were wrong."
+          <br><br>
+          [beat — visual transition]
+          <br><br>
+          "AI is the calculator of this generation."
+        </div>
+        <div class="stat-callout">TEXT OVERLAY: "86% of your students are already using AI."</div>
+        <div class="broll-note">
+          <div class="broll-label">Audio Direction</div>
+          <div class="broll-text">Open on silence. First line delivered slowly, weight on each word. "They were wrong" punches — slight echo/reverb. Music swells underneath from the third line forward. Suggested track: cinematic orchestral, tempo build.</div>
+        </div>
+      </div>
+      <div class="scene-col">
+        <div class="col-label">Visual Direction</div>
+        <ul class="visual-list">
+          <li>OPEN: Black frame. Slow fade-in of a vintage calculator — warm, sepia-toned, slightly blurred edges</li>
+          <li>CUT: The calculator screen reads "ERROR" — flash to white</li>
+          <li>TRANSITION: The white morphs into a glowing AI chat interface</li>
+          <li>TEXT ANIMATION: "86% of your students are already using AI." — builds word by word in gold text on dark background</li>
+          <li>HOLD on text for 2 full seconds before cutting</li>
+        </ul>
+        <div class="broll-note">
+          <div class="broll-label">B-Roll Notes</div>
+          <div class="broll-text">Stock: vintage calculator, typewriter, school classroom circa 1970s. Can use AI-generated imagery for the morphing transition effect. Keep color grade: warm tones transitioning to cool blue-white.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 2: The Problem -->
+  <div class="scene-card" id="scene-2">
+    <div class="scene-header">
+      <div class="scene-meta">
+        <span class="scene-number">Scene 02</span>
+        <span class="scene-title">The Problem</span>
+      </div>
+      <span class="scene-timing">0:15 — 0:45 (30 seconds)</span>
+    </div>
+    <div class="scene-body">
+      <div class="scene-col">
+        <div class="col-label">Narration Script</div>
+        <div class="script-text">
+          "Right now, your kids are learning AI on YouTube."
+          <br><br>
+          "Without guidance. Without values. Without you."
+          <br><br>
+          [pause]
+          <br><br>
+          "Only 6% of churches have an AI policy. 73% have nothing at all."
+          <br><br>
+          [beat]
+          <br><br>
+          "The gap is widening. Every single day."
+        </div>
+        <div class="stat-callout">GRAPHIC: 6% vs 94% — animated bar/donut chart in gold and dark tones</div>
+        <div class="broll-note">
+          <div class="broll-label">Audio Direction</div>
+          <div class="broll-text">Music becomes slightly discordant — tension builds. Each statistic lands with a subtle sonic "thud." Pacing is deliberate — do not rush these lines. Let the silence after "without you" breathe.</div>
+        </div>
+      </div>
+      <div class="scene-col">
+        <div class="col-label">Visual Direction</div>
+        <ul class="visual-list">
+          <li>OPEN: B-roll of a teenager on a phone, face lit by screen in a dark room</li>
+          <li>SPLIT SCREEN: phone screen showing YouTube AI tutorials vs. empty church meeting room</li>
+          <li>GRAPHIC: Animated stat card — "Only 6% of churches have AI policies" (Exponential.org, 2025)</li>
+          <li>GRAPHIC: Second stat — "73% have NO policy at all" — empty bar chart fills in with red</li>
+          <li>VISUAL: Time-lapse of a classroom clock, then a church bulletin board — no AI content visible</li>
+          <li>CLOSE: Wide shot of church sanctuary, empty. Feeling of missed opportunity.</li>
+        </ul>
+        <div class="broll-note">
+          <div class="broll-label">B-Roll Notes</div>
+          <div class="broll-text">Avoid anything that looks accusatory. The tone is: "This isn't anyone's fault — the world moved fast." Suggest cool blue/grey color grading for this section to signal the problem phase.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: The Solution -->
+  <div class="scene-card" id="scene-3">
+    <div class="scene-header">
+      <div class="scene-meta">
+        <span class="scene-number">Scene 03</span>
+        <span class="scene-title">The Solution</span>
+      </div>
+      <span class="scene-timing">0:45 — 1:30 (45 seconds)</span>
+    </div>
+    <div class="scene-body">
+      <div class="scene-col">
+        <div class="col-label">Narration Script</div>
+        <div class="script-text">
+          "Introducing the Oakwood AI Initiative."
+          <br><br>
+          "A 12-week program. Three tracks. Every generation."
+          <br><br>
+          "From Pathfinders to elders — everyone learns together."
+          <br><br>
+          [beat — show the hub]
+          <br><br>
+          "Foundations. Creators. Ministry."
+          <br><br>
+          "Taught by Jon Isaac and James Wilson — together."
+          <br><br>
+          "One brings the technology. The other brings the community."
+          <br><br>
+          "And it costs the church absolutely nothing."
+        </div>
+        <div class="stat-callout">TEXT OVERLAY: "Zero cost. Zero barriers. Zero excuses." — animates in on white flash</div>
+        <div class="broll-note">
+          <div class="broll-label">Audio Direction</div>
+          <div class="broll-text">Music lifts here — triumphant, hopeful. Tempo increases slightly. The word "nothing" should hit with warmth, not harshness. Consider a brief musical swell on "nothing."</div>
+        </div>
+      </div>
+      <div class="scene-col">
+        <div class="col-label">Visual Direction</div>
+        <ul class="visual-list">
+          <li>OPEN: Screen recording of oakwood-ai-hub.vercel.app loading — smooth, impressive</li>
+          <li>QUICK CUTS: Hub landing page, /church, /academy, /pathfinders routes — 2 seconds each</li>
+          <li>TITLE CARDS: "Track 01: Foundations" / "Track 02: Creators" / "Track 03: Ministry" — elegant, gold text on dark</li>
+          <li>SPLIT SCREEN: Jon and James — side by side, professional portrait style</li>
+          <li>MONTAGE: Mixed age group learning — child on tablet, professional at laptop, elder in conversation</li>
+          <li>GRAPHIC: "$0 Cost to the Church" — large, gold, centered. Hold 2 seconds.</li>
+        </ul>
+        <div class="broll-note">
+          <div class="broll-label">B-Roll Notes</div>
+          <div class="broll-text">This is the warmth section. Color grade: warm golds and ambers. Show real spaces — the CHAC auditorium, classroom settings. Use the actual hub website in screen recordings. Authentic over polished.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: The Proof -->
+  <div class="scene-card" id="scene-4">
+    <div class="scene-header">
+      <div class="scene-meta">
+        <span class="scene-number">Scene 04</span>
+        <span class="scene-title">The Proof</span>
+      </div>
+      <span class="scene-timing">1:30 — 2:00 (30 seconds)</span>
+    </div>
+    <div class="scene-body">
+      <div class="scene-col">
+        <div class="col-label">Narration Script</div>
+        <div class="script-text">
+          "A 10-year-old built a working app in our first test session."
+          <br><br>
+          "A 70-year-old learned to manage health records with AI."
+          <br><br>
+          [beat — demo roll]
+          <br><br>
+          "Build an app in 60 seconds."
+          <br><br>
+          "Write a grant proposal for the church."
+          <br><br>
+          "Redesign a website without a developer."
+          <br><br>
+          "If you can have a conversation, you can learn this."
+        </div>
+        <div class="stat-callout">LOWER THIRD: "91% of church leaders support AI education. 87% are willing to invest." — Exponential.org 2025</div>
+        <div class="broll-note">
+          <div class="broll-label">Audio Direction</div>
+          <div class="broll-text">Upbeat momentum. Music is confident, almost playful. Each "demo item" should have a quick sonic cue — like a notification sound or a soft keyboard click. Final line "if you can have a conversation" should slow down slightly — warm and inviting.</div>
+        </div>
+      </div>
+      <div class="scene-col">
+        <div class="col-label">Visual Direction</div>
+        <ul class="visual-list">
+          <li>RAPID DEMO CUTS: Screen recordings — each demo 4-5 seconds max, fast-paced montage</li>
+          <li>DEMO 1: AI coding tool generating an app from a text prompt — show the result loading</li>
+          <li>DEMO 2: AI writing a church grant proposal in real-time — text streaming on screen</li>
+          <li>DEMO 3: Before/after — basic church website transforms into a polished design</li>
+          <li>DEMO 4: Sign-up form submission instantly appearing in Google Sheets</li>
+          <li>INTERCUT: Reaction shots — genuine surprise, delight, engagement from participants</li>
+          <li>GRAPHIC: Stat card fades in during final line — lower third style, subtle</li>
+        </ul>
+        <div class="broll-note">
+          <div class="broll-label">B-Roll Notes</div>
+          <div class="broll-text">Screen recordings are key. Use real tools — Claude, Cursor, or similar. The 10-year-old and 70-year-old references should be illustrated, not literally shown (privacy). Consider animated "story cards" as visual stand-ins.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 5: The Close -->
+  <div class="scene-card" id="scene-5">
+    <div class="scene-header">
+      <div class="scene-meta">
+        <span class="scene-number">Scene 05</span>
+        <span class="scene-title">The Close</span>
+      </div>
+      <span class="scene-timing">2:00 — 2:30 (30 seconds)</span>
+    </div>
+    <div class="scene-body">
+      <div class="scene-col">
+        <div class="col-label">Narration Script</div>
+        <div class="script-text">
+          [slow, measured — scripture voice]
+          <br><br>
+          "Where there is no vision..."
+          <br><br>
+          "...the people perish."
+          <br><br>
+          [pause — 3 full seconds of silence with visual]
+          <br><br>
+          "Oakwood has vision."
+          <br><br>
+          "Join us."
+          <br><br>
+          [beat]
+          <br><br>
+          "oakwood-ai-hub.vercel.app"
+        </div>
+        <div class="stat-callout">FULL SCREEN TEXT: "Proverbs 29:18 — KJV" — white on black, hold 3 seconds</div>
+        <div class="broll-note">
+          <div class="broll-label">Audio Direction</div>
+          <div class="broll-text">Music drops to near-silence for the scripture. Single piano note or choir chord underneath. Builds slowly for "Oakwood has vision." Full swell for "Join us." URL reads clearly over music — do not let it get buried. Final 5 seconds: music out, URL displayed in silence.</div>
+        </div>
+      </div>
+      <div class="scene-col">
+        <div class="col-label">Visual Direction</div>
+        <ul class="visual-list">
+          <li>OPEN: Slow aerial or wide establishing shot of Oakwood campus — golden hour preferred</li>
+          <li>TITLE CARD: Scripture text builds word by word — "Where there is no vision..." in white on black</li>
+          <li>CUT TO: "...the people perish." — isolated, full screen, pause</li>
+          <li>TRANSITION: Slow dissolve to warm shot of community gathering — multi-generational</li>
+          <li>CLOSE: Oakwood AI Initiative logo mark, then URL</li>
+          <li>FINAL FRAME: Dark navy background, gold text — "oakwood-ai-hub.vercel.app" — centered, breathing room, QR code in corner</li>
+        </ul>
+        <div class="broll-note">
+          <div class="broll-label">B-Roll Notes</div>
+          <div class="broll-text">The final frame must be screenshottable for sharing. High contrast, URL large and clear. Include the QR code in the bottom-right corner at approximately 15% of frame width. Hold for minimum 5 seconds.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Notes -->
+  <div class="tech-section" id="tech-notes">
+    <h2>Technical Production Notes</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-item-label">Primary Format</div>
+        <div class="tech-item-value">16:9 landscape, 3840x2160 (4K). Export H.264 MP4 for web; ProRes for editing master.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Social Cut (9:16)</div>
+        <div class="tech-item-value">Reframe for vertical — 1080x1920. Key text must remain within safe zone (80% of frame). Ideal for Instagram Reels, TikTok, WhatsApp Status.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Square Cut (1:1)</div>
+        <div class="tech-item-value">1080x1080 for Facebook / Instagram feed. Create separately from 16:9 master — do not auto-crop.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Color Grade</div>
+        <div class="tech-item-value">Problem section: desaturated cool blue. Solution section: warm gold and amber. Close: deep navy with high-contrast gold. Consistent with brand palette #1a2332 / #c9a84c.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Typography</div>
+        <div class="tech-item-value">All text overlays: Outfit font, weights 700-900. Gold (#c9a84c) on dark. White on very dark or black backgrounds only. No thin weights for text overlays.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Music</div>
+        <div class="tech-item-value">Royalty-free cinematic track. Tempo: ~80-100 BPM. Genre: orchestral-electronic hybrid. Suggested: Artlist.io or Epidemic Sound "inspiring documentary" category.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Captions</div>
+        <div class="tech-item-value">Auto-generate via Whisper AI, then proof manually. Captions required for accessibility and muted autoplay on social. Style: white text, black outline, bottom-center.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Screen Recordings</div>
+        <div class="tech-item-value">Record at 2x or 3x scale for crisp playback. Use a clean browser profile — no personal bookmarks or extensions visible. Disable notifications before recording.</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-item-label">Pacing</div>
+        <div class="tech-item-value">Hook: slow and deliberate. Problem: measured tension. Solution: confident flow. Proof: rapid montage. Close: slow and reverent. Do not rush scripture. Let silences breathe.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <strong>Island Development Crew LLC</strong> x Oakwood University Church — Video Production Brief<br>
+  Hub: <a href="https://oakwood-ai-hub.vercel.app">oakwood-ai-hub.vercel.app</a> — "Where there is no vision, the people perish." — Proverbs 29:18 KJV
+</div>
+
+<script>
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    document.querySelectorAll('.tnav-item').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

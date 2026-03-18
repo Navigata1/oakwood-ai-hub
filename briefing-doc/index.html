@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprehensive Briefing — Oakwood AI Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @media print {
+    body { font-size: 10.5pt; background: white !important; color: #111 !important; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    a { color: #1a2332 !important; text-decoration: none !important; }
+    .card, .panel { break-inside: avoid; border-color: #ccc !important; background: #f9f9f9 !important; }
+    h2 { color: #1a2332 !important; border-color: #c9a84c !important; }
+    .stat-number { color: #8c6e2e !important; }
+    .gold-text { color: #8c6e2e !important; }
+    .nav-doc { display: none; }
+    .doc-header { border-color: #1a2332 !important; }
+  }
+
+  :root {
+    --navy: #1a2332;
+    --navy-deep: #0f1724;
+    --navy-mid: #1f2a3d;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: #8c6e2e;
+    --cream: #f5f0e8;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --text: #1e1e1e;
+    --text-muted: #5a6472;
+    --border: #ddd8cc;
+    --border-gold: rgba(201,168,76,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* Top doc nav */
+  .nav-doc {
+    background: var(--navy);
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--gold); }
+
+  .no-print {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 2rem;
+    text-align: right;
+  }
+
+  .print-btn {
+    background: var(--navy);
+    color: var(--gold-light);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .print-btn:hover { background: var(--navy-deep); }
+
+  /* Document wrapper */
+  .doc-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .doc-header-left {}
+
+  .doc-firm-line {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.4rem;
+  }
+
+  .doc-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .doc-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .doc-header-right {
+    text-align: right;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    flex-shrink: 0;
+  }
+
+  .doc-header-right .date {
+    font-size: 0.9rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .doc-header-right .conf {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    margin-top: 0.3rem;
+  }
+
+  @media (max-width: 600px) {
+    .doc-header { flex-direction: column; }
+    .doc-header-right { text-align: left; }
+  }
+
+  /* Table of contents */
+  .toc {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .toc-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+
+  @media (max-width: 500px) {
+    .toc-list { columns: 1; }
+  }
+
+  .toc-list li {
+    margin-bottom: 0.25rem;
+  }
+
+  .toc-list a {
+    font-size: 0.82rem;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .toc-list a:hover { color: var(--gold-dim); text-decoration: underline; }
+
+  /* Sections */
+  h2 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    border-left: 4px solid var(--gold);
+    padding-left: 0.75rem;
+    margin: 2.5rem 0 0.75rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0.75rem 0 0.3rem;
+  }
+
+  p {
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  ul, ol {
+    padding-left: 1.3rem;
+    margin: 0.3rem 0 0.8rem;
+  }
+
+  li {
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.3rem;
+  }
+
+  /* Two columns */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 0 0 8px 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--gold-dim);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .stat-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .stat-source {
+    font-size: 0.6rem;
+    color: #aaa;
+    margin-top: 0.2rem;
+    font-style: italic;
+  }
+
+  /* Highlight box */
+  .highlight-box {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 0.8rem 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .highlight-box p {
+    font-size: 0.88rem;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* Quote block */
+  .quote-block {
+    border-left: 4px solid var(--gold);
+    background: var(--cream);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-bottom: 0.3rem;
+  }
+
+  .quote-ref {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 0.7rem 1rem;
+  }
+
+  .tl-time {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gold-dim);
+    white-space: nowrap;
+    min-width: 90px;
+    padding-top: 0.1rem;
+  }
+
+  .tl-content h3 { margin: 0 0 0.15rem; font-size: 0.88rem; }
+  .tl-content p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+
+  /* Talking points */
+  .tp-item {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tp-item:last-child { border-bottom: none; }
+
+  .tp-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.15rem;
+  }
+
+  .tp-content {
+    font-size: 0.87rem;
+    color: var(--text);
+  }
+
+  .gold-text { color: var(--gold-dim); font-weight: 700; }
+
+  /* Links */
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 500px) {
+    .links-grid { grid-template-columns: 1fr; }
+  }
+
+  .link-card {
+    background: var(--navy);
+    color: white;
+    padding: 0.7rem 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  .link-card:hover { background: var(--navy-deep); }
+
+  .link-card .lt { font-size: 0.78rem; font-weight: 600; color: var(--gold-light); margin-bottom: 0.15rem; }
+  .link-card .lu { font-size: 0.65rem; color: rgba(255,255,255,0.45); word-break: break-all; }
+
+  /* Roadmap */
+  .roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 2rem;
+    margin: 0.75rem 0;
+  }
+
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 0.6rem;
+    top: 0.8rem;
+    bottom: 0.8rem;
+    width: 2px;
+    background: var(--gold);
+    opacity: 0.3;
+  }
+
+  .rm-item {
+    position: relative;
+    padding: 0.6rem 0 0.6rem 0.75rem;
+  }
+
+  .rm-item::before {
+    content: '';
+    position: absolute;
+    left: -1.42rem;
+    top: 0.85rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+  }
+
+  .rm-phase {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.1rem;
+  }
+
+  .rm-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.15rem;
+  }
+
+  .rm-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Checklist */
+  .checklist li {
+    list-style: none;
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--gold);
+    border-radius: 3px;
+  }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .doc-footer .verse {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 500px) {
+    .doc-footer { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-doc">
+  <div class="nav-brand">Oakwood AI Initiative — Comprehensive Brief</div>
+  <div class="nav-links">
+    <a href="#national" class="nav-link">National Context</a>
+    <a href="#program" class="nav-link">Program</a>
+    <a href="#why-oakwood" class="nav-link">Why Oakwood</a>
+    <a href="#roadmap" class="nav-link">Roadmap</a>
+  </div>
+</nav>
+
+<div class="no-print">
+  <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="doc-wrap">
+
+  <!-- Document Header -->
+  <div class="doc-header">
+    <div class="doc-header-left">
+      <div class="doc-firm-line">Island Development Crew LLC — Prepared for Church Leadership</div>
+      <div class="doc-title">Oakwood AI Initiative</div>
+      <div class="doc-subtitle">Comprehensive Briefing Document — James Wilson (OUC IT) x Jon Isaac (IDC)</div>
+    </div>
+    <div class="doc-header-right">
+      <div class="date">March 2026</div>
+      Oakwood University Church<br>
+      Huntsville, Alabama<br>
+      <span class="conf">Confidential</span>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <div class="toc-label">Document Contents</div>
+    <ul class="toc-list">
+      <li><a href="#national">I. National Context — The AI Gap</a></li>
+      <li><a href="#why-oakwood">II. Why Oakwood First?</a></li>
+      <li><a href="#agenda">III. Meeting Agenda</a></li>
+      <li><a href="#talking-points">IV. Key Talking Points</a></li>
+      <li><a href="#program">V. 12-Week Program</a></li>
+      <li><a href="#schedule">VI. Schedule</a></li>
+      <li><a href="#demos">VII. Live Demo Arsenal</a></li>
+      <li><a href="#links">VIII. Live Sites</a></li>
+      <li><a href="#admin">IX. Admin One-Pager</a></li>
+      <li><a href="#roadmap">X. Expansion Roadmap</a></li>
+      <li><a href="#qa">XI. Anticipated Q&A</a></li>
+      <li><a href="#actions">XII. Action Items</a></li>
+    </ul>
+  </div>
+
+  <!-- ================================ -->
+  <!-- I. NATIONAL CONTEXT -->
+  <!-- ================================ -->
+  <h2 id="national">I. National Context — The AI Gap in American Churches</h2>
+
+  <p>The American church is at a pivotal inflection point. AI adoption is accelerating in every sector of society — education, business, healthcare, and government — while religious institutions lag significantly behind. The data tells a clear story: church leaders want AI literacy, but almost none have built the structures to deliver it.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">91%</div>
+      <div class="stat-desc">of church leaders support AI use in ministry</div>
+      <div class="stat-source">Exponential.org, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">87%</div>
+      <div class="stat-desc">willing to invest in AI education for their congregation</div>
+      <div class="stat-source">Exponential.org, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">6%</div>
+      <div class="stat-desc">of churches have an established AI policy</div>
+      <div class="stat-source">Exponential.org, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">73%</div>
+      <div class="stat-desc">of churches have NO AI policy whatsoever</div>
+      <div class="stat-source">Exponential.org, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">82%</div>
+      <div class="stat-desc">believe AI will make churches more effective in 5 years</div>
+      <div class="stat-source">Exponential.org, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">86%</div>
+      <div class="stat-desc">of students already use AI in their daily academic work</div>
+      <div class="stat-source">Digital Education Council, 2025</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>The Gap:</strong> 91% want AI education. Only 6% have built anything. That 85-point gap is the single largest unmet opportunity in the American church landscape today. The institutions that move first will define the conversation for a generation.</p>
+  </div>
+
+  <p>Secondary and post-secondary education is already moving: 80% of high school students now receive structured AI and responsible use education (EdWeek, March 2026). The question is no longer whether students will encounter AI — they already have. The question is whether they encounter it with or without the values-based guidance that faith communities are uniquely positioned to provide.</p>
+
+  <div class="quote-block">
+    <div class="quote-text">"Churches are being called to become centers of AI literacy in their communities."</div>
+    <div class="quote-ref">Emerging consensus — faith-based technology leadership, 2025-2026</div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- II. WHY OAKWOOD FIRST -->
+  <!-- ================================ -->
+  <h2 id="why-oakwood">II. Why Oakwood First?</h2>
+
+  <p>Oakwood University Church is uniquely positioned to lead the SDA church network — and the broader faith community — into the AI era. The convergence of institutional strength, community reach, and existing digital infrastructure creates a window that may not remain open indefinitely.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Institutional Strength</div>
+      <ul>
+        <li>University-adjacent community with high educational attainment</li>
+        <li>Diverse age demographics — students to elders</li>
+        <li>Existing technology infrastructure (AV systems, campus facilities)</li>
+        <li>James Wilson: credentialed IT leadership on the inside</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">Community Position</div>
+      <ul>
+        <li>OAA (Oakwood Adventist Academy) — direct K-12 access</li>
+        <li>OCC (Oakwood Christian Crusaders) — Pathfinder integration</li>
+        <li>Huntsville's growing tech and aerospace sector provides context</li>
+        <li>Regional SDA conference relationships enable rapid expansion</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">The Historic Opportunity</div>
+      <ul>
+        <li>No SDA institution currently has a structured AI literacy program</li>
+        <li>Oakwood can be the first — and set the standard for others</li>
+        <li>The "first mover" position carries lasting institutional prestige</li>
+        <li>National and conference leadership are watching</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">The Partnership Advantage</div>
+      <ul>
+        <li>Jon Isaac (IDC): technical expertise, curriculum development, live demos</li>
+        <li>James Wilson (OUC): institutional trust, community relationships, facilities</li>
+        <li>Tandem model: neither party replicable without the other</li>
+        <li>Zero cost to church — IDC provides all technology and curriculum</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">"Where there is no vision, the people perish."</div>
+    <div class="quote-ref">Proverbs 29:18 — KJV</div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- III. MEETING AGENDA -->
+  <!-- ================================ -->
+  <h2 id="agenda">III. Meeting Agenda</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">10:00 AM</div>
+      <div class="tl-content">
+        <h3>Phase 1 — Church: Zoom Room Review</h3>
+        <p>Walk through James's AV proposal for the Community Health Actions Center Auditorium. 3x SRG 840 cameras, 5x monitors, VX80 switcher. Discuss AI-assisted camera switching and auto-transcription (Fireflies).</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:00 AM</div>
+      <div class="tl-content">
+        <h3>Phase 2 — Harvard: Walk-Through</h3>
+        <p>Document the space. Photograph equipment and layout. Assess tech integration opportunities for AI initiative sessions.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:45 AM</div>
+      <div class="tl-content">
+        <h3>Phase 3 — The Track: Assessment</h3>
+        <p>Review existing infrastructure. Identify gaps. Map to program session requirements.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30 PM</div>
+      <div class="tl-content">
+        <h3>Phase 4 — The Pitch: AI Education Vision</h3>
+        <p>Present curriculum, tandem teaching model, content strategy, and admin one-pager. This is the primary objective of the meeting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- IV. TALKING POINTS -->
+  <!-- ================================ -->
+  <h2 id="talking-points">IV. Key Talking Points</h2>
+  <div class="card">
+    <div class="tp-item">
+      <div class="tp-label">The Opening Line</div>
+      <div class="tp-content">"In 1975, schools banned calculators. They were wrong. AI is the calculator of this generation — and Oakwood can lead, not react."</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">The Stat — Students</div>
+      <div class="tp-content"><span class="gold-text">86% of students already use AI</span> (Digital Education Council, 2025). Usage surged from 66% to 92% in a single year. The question is not IF — it is whether they learn it with guidance or alone on YouTube.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">The Stat — Churches</div>
+      <div class="tp-content"><span class="gold-text">91% of church leaders support AI education</span> but only 6% have a policy. The gap between intent and action is the opportunity. We are here to close it.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">The Tandem Model</div>
+      <div class="tp-content">Jon (technical expertise, live demos, curriculum) plus James (institutional knowledge, church relationships, community trust). Neither can do this alone. Together it is a complete system.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">Cost to Church</div>
+      <div class="tp-content"><span class="gold-text">$0.</span> Zero cost to Oakwood. IDC provides all technology, curriculum, and tools. The church provides space and community access. Revenue potential through community workshops and eventual expansion licensing.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">The Historic Position</div>
+      <div class="tp-content">There is currently no SDA institution with a structured AI literacy program. Oakwood has the opportunity to be the first — and to set the standard that every other church in the network will follow.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">The Vision Close</div>
+      <div class="tp-content">"Where there is no vision, the people perish." — Proverbs 29:18 KJV. Oakwood has vision. From here: sister churches, the Huntsville community, regional conferences, and beyond.</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- V. 12-WEEK PROGRAM -->
+  <!-- ================================ -->
+  <h2 id="program">V. 12-Week Curriculum Overview</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Track 1 — Foundations</div>
+      <h3>AI Literacy for Everyone</h3>
+      <ul>
+        <li>What AI is (and what it is not)</li>
+        <li>Critical thinking and evaluation skills</li>
+        <li>Hands-on prompting basics</li>
+        <li>Ethics and values-driven use</li>
+        <li>Privacy, safety, and responsible AI</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">Track 2 — Creators and Entrepreneurs</div>
+      <h3>Build Real Things</h3>
+      <ul>
+        <li>App development — no CS degree required</li>
+        <li>Marketing campaigns and content creation</li>
+        <li>Business plans and grant proposals</li>
+        <li>Side hustle and entrepreneurship acceleration</li>
+        <li>Career and professional advancement tools</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">Track 3 — Ministry and Community</div>
+      <h3>Serve More Effectively</h3>
+      <ul>
+        <li>Sermon preparation and outreach tools</li>
+        <li>Volunteer coordination and scheduling</li>
+        <li>Church website and communications</li>
+        <li>Community impact tracking and reporting</li>
+        <li>AI-powered administration efficiency</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-label">Audience Segments</div>
+      <h3>Three Groups, One Mission</h3>
+      <ul>
+        <li><strong>Students (K-12):</strong> Age-appropriate, mentoring model, project-based</li>
+        <li><strong>Professionals:</strong> Career growth, business tools, entrepreneurship</li>
+        <li><strong>Elders and Community:</strong> Daily life, health, connection, accessibility</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- VI. SCHEDULE -->
+  <!-- ================================ -->
+  <h2 id="schedule">VI. Proposed Session Schedule</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">OAA — Weekday</div>
+      <p><strong>Every Other Friday, 3:30 – 5:00 PM</strong><br>After school at the academy. Opportunity to pair with existing STEM presentations by Ms. Kimberly Grace Trott's team.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">OUC — Saturday Evening</div>
+      <p><strong>After Sunset, 7:00 – 8:30 PM</strong><br>Open community workshop. All ages, all skill levels. The flagship session accessible to the broadest audience.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">OCC — Sunday</div>
+      <p><strong>During Pathfinder Hours</strong><br>Integrated into Oakwood Christian Crusaders. Project-based, hands-on, values-driven AI literacy for young people.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Deep-Dives — Weekday</div>
+      <p><strong>Bi-Weekly, Day TBD</strong><br>Advanced topics, 1-on-1 coaching, entrepreneurship workshops, ministry tooling. By appointment and cohort.</p>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- VII. DEMOS -->
+  <!-- ================================ -->
+  <div class="page-break"></div>
+  <h2 id="demos">VII. Live Demo Arsenal</h2>
+  <p style="color:var(--text-muted); margin-bottom:0.75rem; font-size:0.85rem;">Pull these up during the pitch. Each takes 30 seconds to demonstrate. Use a phone for maximum portability.</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Demo 1</div>
+      <h3>"Build an app in 60 seconds"</h3>
+      <p>Show AI coding tool generating a working app from a plain-English text prompt. The jaw-dropper — proves that technical barriers are gone.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Demo 2</div>
+      <h3>"Write a grant proposal"</h3>
+      <p>AI drafts a compelling grant petition for the church in real-time. Instantly demonstrates ministry-specific utility to leadership.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Demo 3</div>
+      <h3>"Redesign a website"</h3>
+      <p>Show the OAA, OUC, and OCC sites built with AI assistance — proof a student with no coding background could accomplish this.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Demo 4</div>
+      <h3>"Sign-up forms to live data"</h3>
+      <p>Submit a test sign-up. Watch it appear in Google Sheets instantly. Infrastructure is live and ready — the system is already built.</p>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- VIII. LIVE SITES -->
+  <!-- ================================ -->
+  <h2 id="links">VIII. Live Sites — Show James These</h2>
+  <div class="links-grid">
+    <a href="https://oakwood-ai-hub.vercel.app" class="link-card" target="_blank">
+      <div class="lt">Oakwood AI Hub — Main Portal</div>
+      <div class="lu">oakwood-ai-hub.vercel.app</div>
+    </a>
+    <a href="https://oakwood-ai-hub.vercel.app/church" class="link-card" target="_blank">
+      <div class="lt">OUC — Church Program</div>
+      <div class="lu">oakwood-ai-hub.vercel.app/church</div>
+    </a>
+    <a href="https://oakwood-ai-hub.vercel.app/academy" class="link-card" target="_blank">
+      <div class="lt">OAA — Academy Program</div>
+      <div class="lu">oakwood-ai-hub.vercel.app/academy</div>
+    </a>
+    <a href="https://oakwood-ai-hub.vercel.app/pathfinders" class="link-card" target="_blank">
+      <div class="lt">OCC — Pathfinders Program</div>
+      <div class="lu">oakwood-ai-hub.vercel.app/pathfinders</div>
+    </a>
+    <a href="https://oakwood-ai-hub.vercel.app/initiative" class="link-card" target="_blank">
+      <div class="lt">The Initiative — Full Vision</div>
+      <div class="lu">oakwood-ai-hub.vercel.app/initiative</div>
+    </a>
+    <a href="https://oakwood-ai-hub.vercel.app/literacy" class="link-card" target="_blank">
+      <div class="lt">AI Literacy Curriculum</div>
+      <div class="lu">oakwood-ai-hub.vercel.app/literacy</div>
+    </a>
+  </div>
+
+  <!-- ================================ -->
+  <!-- IX. ADMIN ONE-PAGER -->
+  <!-- ================================ -->
+  <h2 id="admin">IX. Admin One-Pager — For James to Present to Leadership</h2>
+  <div class="card">
+    <div class="two-col">
+      <div>
+        <h3>What We Are Proposing</h3>
+        <ul>
+          <li>12-week AI literacy program</li>
+          <li>Three tracks: Foundations, Creators, Ministry</li>
+          <li>K-12 students, professionals, and elders</li>
+          <li>Integrated into existing church schedule</li>
+          <li>Tandem-taught: Jon Isaac + James Wilson</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What the Church Receives</h3>
+        <ul>
+          <li>Historic first: first SDA church with structured AI program</li>
+          <li>Community engagement and enrollment growth</li>
+          <li>Modern technology reputation — locally and nationally</li>
+          <li>Ministry efficiency tools for staff</li>
+          <li>Revenue potential via community workshops</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--border);">
+      <div class="two-col">
+        <div>
+          <h3>Cost to the Church</h3>
+          <p><span class="gold-text">$0 — Zero.</span> All technology, curriculum, and instruction are provided by Island Development Crew. The church provides space and community access. No budget line required.</p>
+        </div>
+        <div>
+          <h3>Intellectual Property</h3>
+          <p><strong>Church brand content</strong> remains with Oakwood. <strong>Curriculum and IDC IP</strong> remains with Island Development Crew. Clean, equitable, and straightforward. Both parties benefit fully.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- X. EXPANSION ROADMAP -->
+  <!-- ================================ -->
+  <h2 id="roadmap">X. Expansion Roadmap</h2>
+  <p>The Oakwood initiative is the seed. The vision is national. The model is designed to be replicated — every component is documented, digitized, and scalable.</p>
+
+  <div class="roadmap">
+    <div class="rm-item">
+      <div class="rm-phase">Phase 1 — Q2 2026</div>
+      <div class="rm-title">Oakwood University Church — Pilot Launch</div>
+      <div class="rm-desc">Launch all three tracks at OUC, OAA, and OCC. Establish the model. Document outcomes and attendance. Build the case study. Target: 50-100 participants in inaugural cohort.</div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-phase">Phase 2 — Q3 2026</div>
+      <div class="rm-title">Sister Churches — Huntsville Region</div>
+      <div class="rm-desc">Expand to 2-3 Huntsville-area SDA churches. Use the OUC model as the playbook. James Wilson becomes a regional advisor. Begin tracking aggregate community impact metrics.</div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-phase">Phase 3 — Q4 2026</div>
+      <div class="rm-title">Huntsville Community — Beyond the Church</div>
+      <div class="rm-desc">Open the program to the broader Huntsville community. Partner with local schools, businesses, and civic organizations. Potential for community workshop revenue model.</div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-phase">Phase 4 — 2027</div>
+      <div class="rm-title">Regional SDA Conference Adoption</div>
+      <div class="rm-desc">Pitch the South Central Conference and adjacent conferences with a fully documented, proven model. Conference-level endorsement creates automatic reach across hundreds of congregations.</div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-phase">Phase 5 — 2027-2028</div>
+      <div class="rm-title">National SDA Network</div>
+      <div class="rm-desc">General Conference presentation. Oakwood's model becomes the standard AI literacy curriculum for the North American Division. IDC recognized as the originating institution. National reach.</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- XI. Q&A -->
+  <!-- ================================ -->
+  <h2 id="qa">XI. Anticipated Questions and Responses</h2>
+  <div class="card">
+    <div class="tp-item">
+      <div class="tp-label">"What is the catch?"</div>
+      <div class="tp-content">No catch. IDC retains curriculum IP and the rights for expansion. The church receives the program, the community impact, and the historic recognition — at zero cost. Both parties win cleanly.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"What if students misuse AI?"</div>
+      <div class="tp-content">That is precisely why structured teaching matters. The 86% already using AI are doing so without supervision. We are adding the values layer — the one only a faith-based institution can authentically provide.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"Do we need to purchase equipment?"</div>
+      <div class="tp-content">No. All tools used in the program are free-tier or provided by IDC. Students use their own devices — phones, tablets, laptops. No procurement budget is required.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"How is this different from a coding class?"</div>
+      <div class="tp-content">This is not coding. This is AI literacy — the ability to use intelligence tools across every domain: writing, business, ministry, daily life, and health. Coding is one small component of a much broader skillset.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"Can this work for our community specifically?"</div>
+      <div class="tp-content">In our test session, a 10-year-old built a working app. A 70-year-old learned to manage health records with AI. The only prerequisite is the ability to have a conversation. This was designed for every generation of the Oakwood community.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"What is the time commitment for church staff?"</div>
+      <div class="tp-content">James's primary role is relationship bridge and community connection — the technical instruction is handled by Jon. Staff time commitment is minimal beyond room scheduling and communication support.</div>
+    </div>
+    <div class="tp-item">
+      <div class="tp-label">"What happens after 12 weeks?"</div>
+      <div class="tp-content">The program is designed to continue. Advanced tracks, deep-dives, 1-on-1 coaching, and community workshops extend the model indefinitely. The 12-week structure is the foundation, not the ceiling.</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- XII. ACTION ITEMS -->
+  <!-- ================================ -->
+  <h2 id="actions">XII. Action Items — Walk Away With These</h2>
+  <div class="card">
+    <ul class="checklist">
+      <li>Confirm James's buy-in on the tandem teaching model</li>
+      <li>Identify which space or spaces to use for initial sessions</li>
+      <li>Agree on start date — target within 2-3 weeks of this meeting</li>
+      <li>James presents admin one-pager to church leadership and board</li>
+      <li>Confirm Saturday evening slot — after sunset, 7:00-8:30 PM</li>
+      <li>Confirm Sunday Pathfinder integration with OCC leadership</li>
+      <li>Coordinate with Ms. Kimberly Grace Trott on OAA Friday sessions</li>
+      <li>Set up shared communication channel (WhatsApp or Signal group)</li>
+      <li>Schedule follow-up meeting within one week</li>
+      <li>Begin promoting via church bulletin and social media channels</li>
+      <li>Share sign-up links with James for community distribution</li>
+      <li>Document today's walk-throughs — photograph spaces and equipment</li>
+      <li>Review and approve content at oakwood-ai-hub.vercel.app/church</li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div>
+      <strong>Island Development Crew LLC</strong> x Oakwood University Church IT Department<br>
+      Prepared for Church Leadership — March 2026<br>
+      Hub: <strong>oakwood-ai-hub.vercel.app</strong>
+    </div>
+    <div class="verse">
+      "Where there is no vision, the people perish." — Proverbs 29:18 KJV
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

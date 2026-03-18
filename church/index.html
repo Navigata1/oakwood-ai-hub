@@ -814,6 +814,111 @@
             .timeline-strip { flex-direction: column; gap: 1.5rem; }
             .tl-node::after { display: none; }
         }
+
+        /* ─── SIGNUP ───────────────────────────────── */
+        .signup-section { padding: 9rem 0; background: var(--mist); }
+        .signup-card {
+            background: white;
+            border-radius: 28px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 24px 80px rgba(143,42,50,0.12);
+            border: 1px solid rgba(143,42,50,0.08);
+        }
+        .signup-card h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        .signup-card p {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: 'DM Sans', sans-serif;
+            margin-bottom: 2.5rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem 1.6rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--maroon);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.08);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            background: var(--warm-gray);
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .full { grid-column: 1 / -1; }
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.6rem;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--warm-gray);
+            border: 1px solid rgba(143,42,50,0.08);
+            padding: 0.6rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .submit-btn {
+            background: var(--gold);
+            color: var(--maroon-deep);
+            border: none;
+            padding: 0.95rem 2.4rem;
+            border-radius: 50px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 32px rgba(218,145,0,0.35);
+            transition: transform 0.25s ease;
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .spinner {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(64,18,22,0.2);
+            border-top-color: var(--maroon-deep);
+            border-radius: 50%;
+            display: none;
+            animation: spin 0.8s linear infinite;
+        }
+        .form-status { font-size: 0.9rem; color: var(--maroon); }
+        .form-success {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            background: rgba(143,42,50,0.08);
+            color: var(--maroon-deep);
+            font-weight: 600;
+        }
+        .form-success.show { display: block; animation: pop 0.6s ease; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pop { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -830,6 +935,7 @@
             <li><a href="#learn">What You'll Learn</a></li>
             <li><a href="#who">Who It's For</a></li>
             <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#signup">Sign Up</a></li>
             <li><a href="#contact" class="nav-cta">Get Involved</a></li>
         </ul>
     </div>
@@ -1069,6 +1175,97 @@
     </div>
 </section>
 
+<!-- SIGN UP -->
+<section class="signup-section" id="signup">
+    <div class="container">
+        <div class="signup-card reveal">
+            <h2>Reserve Your Spot</h2>
+            <p>AI literacy is for every generation. Add your name and we’ll send session details.</p>
+            <form id="signup-form">
+                <input type="hidden" name="source" value="ouc">
+                <input type="hidden" name="tracks" value="">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input id="fullName" name="fullName" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input id="email" name="email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (optional)</label>
+                        <input id="phone" name="phone" type="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="ageGroup">Age Group</label>
+                        <select id="ageGroup" name="ageGroup">
+                            <option value="">Select...</option>
+                            <option>Under 12</option>
+                            <option>12-17</option>
+                            <option>18-25</option>
+                            <option>26-40</option>
+                            <option>41-60</option>
+                            <option>60+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role / Interest</label>
+                        <select id="role" name="role">
+                            <option value="">Select...</option>
+                            <option>Church Member</option>
+                            <option>Community Resident</option>
+                            <option>Entrepreneur/Professional</option>
+                            <option>Educator</option>
+                            <option>Youth/Student</option>
+                            <option>Senior/Elder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Session Time</label>
+                        <select id="preferredTime" name="preferredTime">
+                            <option value="">Select...</option>
+                            <option>Saturday Evening (After Sunset, 7:00-8:30 PM)</option>
+                            <option>Sunday Pathfinder Hours</option>
+                            <option>Weekday Deep-Dive (TBD)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experience Level</label>
+                        <select id="experience" name="experience">
+                            <option value="">Select...</option>
+                            <option>Complete Beginner</option>
+                            <option>Some Exposure</option>
+                            <option>Regular User</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label>Track Interest</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Communication & Writing"> Communication & Writing</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="App Development"> App Development</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Entrepreneurship"> Entrepreneurship</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Education"> Education</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Daily Life"> Daily Life</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Ministry"> Ministry</label>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label for="hear">How did you hear about us? (optional)</label>
+                        <textarea id="hear" name="hear" placeholder="Friend, church bulletin, social media..."></textarea>
+                    </div>
+                </div>
+                <div class="submit-row">
+                    <button class="submit-btn" type="submit">Submit Interest <span class="spinner"></span></button>
+                    <span class="form-status" id="form-status"></span>
+                </div>
+                <div class="form-success" id="form-success">Thanks! Your seat is reserved. We’ll reach out soon.</div>
+            </form>
+        </div>
+    </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
     <div class="container">
@@ -1115,6 +1312,45 @@
             document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
+
+    // Signup form
+    const form = document.getElementById('signup-form');
+    if (form) {
+        const statusEl = document.getElementById('form-status');
+        const successEl = document.getElementById('form-success');
+        const spinner = form.querySelector('.spinner');
+        const submitBtn = form.querySelector('button');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            const tracks = Array.from(form.querySelectorAll('input[name="track"]:checked'))
+                .map(el => el.value)
+                .join(', ');
+            form.querySelector('input[name="tracks"]').value = tracks;
+
+            submitBtn.disabled = true;
+            if (spinner) spinner.style.display = 'inline-block';
+            if (statusEl) statusEl.textContent = 'Submitting...';
+
+            try {
+                const res = await fetch('https://script.google.com/macros/s/AKfycbys2NnSJO3hpo2FsqXM0-yhTDoKJpKQo3Q6Q_Yl9QsQHLNpQDtTJRmQpM2_kdilhw1W/exec', { method: 'POST', body: new FormData(form) });
+                const json = await res.json().catch(() => ({}));
+                if (!res.ok || json.success === false) throw new Error(json.error || 'Submission failed');
+                form.reset();
+                if (successEl) successEl.classList.add('show');
+                if (statusEl) statusEl.textContent = '';
+            } catch (err) {
+                if (statusEl) statusEl.textContent = 'Sorry, there was an error. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                if (spinner) spinner.style.display = 'none';
+            }
+        });
+    }
 </script>
 
 </body>

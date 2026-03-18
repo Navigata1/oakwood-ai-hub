@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting Brief — James Wilson × Jon Isaac | March 10, 2026</title>
+<style>
+  @media print {
+    body { font-size: 11pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    a { color: #1a2332 !important; text-decoration: none !important; }
+    .card { break-inside: avoid; }
+  }
+
+  :root {
+    --navy: #1a2332;
+    --gold: #c9a84c;
+    --gold-light: #f5e6b8;
+    --text: #2c2c2c;
+    --text-light: #666;
+    --cream: #faf7f2;
+    --white: #fff;
+    --border: #e0dbd2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .header-left h1 {
+    font-size: 1.6rem;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .header-left .subtitle {
+    font-family: system-ui, sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.2rem;
+  }
+
+  .header-right {
+    text-align: right;
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  .header-right .date {
+    font-size: 1rem;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 1.15rem;
+    color: var(--navy);
+    border-left: 4px solid var(--gold);
+    padding-left: 0.8rem;
+    margin: 1.8rem 0 0.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0.8rem 0 0.3rem;
+  }
+
+  p, li {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  ul { padding-left: 1.3rem; margin: 0.3rem 0 0.8rem; }
+  li { margin-bottom: 0.25rem; }
+
+  /* Cards */
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-label {
+    font-family: system-ui, sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .timeline-time {
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    padding-top: 0.1rem;
+  }
+
+  .timeline-content h3 { margin: 0 0 0.2rem; font-size: 0.9rem; }
+  .timeline-content p { font-size: 0.82rem; color: var(--text-light); margin: 0; }
+
+  /* Two column */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .header { flex-direction: column; }
+    .header-right { text-align: left; margin-top: 0.5rem; }
+  }
+
+  /* Links section */
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  .link-card {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .link-card:hover { transform: translateY(-2px); }
+  .link-card .link-title {
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+  .link-card .link-url {
+    font-family: system-ui, sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    word-break: break-all;
+  }
+
+  /* Checklist */
+  .checklist li {
+    list-style: none;
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  /* Talking points */
+  .talking-point {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .talking-point:last-child { border-bottom: none; }
+
+  .talking-point .label {
+    font-family: system-ui, sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .talking-point .content {
+    font-size: 0.88rem;
+    margin-top: 0.15rem;
+  }
+
+  .highlight {
+    background: var(--gold-light);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  .footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--navy);
+    font-family: system-ui, sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  .print-btn {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold-light);
+    border: none;
+    padding: 0.7rem 2rem;
+    font-family: system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1rem 0;
+  }
+
+  .print-btn:hover { background: #0f1724; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Oakwood AI Initiative</h1>
+    <div class="subtitle">Meeting Brief — James Wilson (OUC IT) × Jon Isaac (IDC)</div>
+  </div>
+  <div class="header-right">
+    <div class="date">Tuesday, March 10, 2026</div>
+    10:00 AM — Oakwood University Church<br>
+    Prepared by Island Development Crew
+  </div>
+</div>
+
+<div class="no-print" style="text-align:center">
+  <button class="print-btn" onclick="window.print()">🖨️ Print This Brief</button>
+</div>
+
+<h2>📋 Meeting Agenda & Timeline</h2>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-time">10:00 AM</div>
+    <div class="timeline-content">
+      <h3>Phase 1 — Church: Zoom Room Review</h3>
+      <p>Walk through James's AV proposal for the Community Health Actions Center Auditorium. 3× SRG 840 cameras, 5× monitors, VX80 switcher. Discuss AI-assisted camera switching + auto-transcription (Fireflies).</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">~11:00 AM</div>
+    <div class="timeline-content">
+      <h3>Phase 2 — Harvard: Walk-Through</h3>
+      <p>Document the space. Photograph equipment and layout. Assess tech integration opportunities.</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">~11:45 AM</div>
+    <div class="timeline-content">
+      <h3>Phase 3 — The Track: Assessment</h3>
+      <p>See what's in place. Identify gaps. Map existing infrastructure to support the AI initiative.</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">~12:30 PM</div>
+    <div class="timeline-content">
+      <h3>Phase 4 — The Pitch: AI Education Vision</h3>
+      <p>Present curriculum, tandem teaching model, content strategy, and admin one-pager. <strong>This is the big moment.</strong></p>
+    </div>
+  </div>
+</div>
+
+<h2>🎯 Key Talking Points</h2>
+<div class="card">
+  <div class="talking-point">
+    <div class="label">The Opening Line</div>
+    <div class="content">"In 1975, schools banned calculators. They were wrong. AI is the calculator of this generation — and Oakwood can lead, not react."</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">The Stat</div>
+    <div class="content"><span class="highlight">86% of students already use AI</span> (Digital Education Council). Usage surged from 66% → 92% in one year. The question isn't IF — it's whether they learn it with guidance or alone on YouTube.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">The Model</div>
+    <div class="content"><strong>Tandem Teaching:</strong> Jon (technical expertise + live demos) + James (institutional knowledge + church relationships). Neither can do this alone. Together it's unstoppable.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">Cost to Church</div>
+    <div class="content"><span class="highlight">$0.</span> Zero cost to the church. Jon provides all tech, curriculum, and tools. Revenue potential through community workshops and expansion.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">The Vision Close</div>
+    <div class="content">"Where there is no vision, the people perish." — <em>Proverbs 29:18 (KJV)</em>. Oakwood → sister churches → Huntsville → beyond.</div>
+  </div>
+</div>
+
+<h2>📚 12-Week Curriculum Overview</h2>
+<div class="two-col">
+  <div class="card">
+    <div class="card-label">Track 1 — Foundations</div>
+    <h3>AI Literacy for Everyone</h3>
+    <ul>
+      <li>What AI is (and isn't)</li>
+      <li>Critical thinking & evaluation</li>
+      <li>Hands-on prompting basics</li>
+      <li>Ethics & values-driven use</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-label">Track 2 — Creators & Entrepreneurs</div>
+    <h3>Build Real Things</h3>
+    <ul>
+      <li>App development (no CS degree needed)</li>
+      <li>Marketing campaigns & content</li>
+      <li>Business plans & grant proposals</li>
+      <li>Side hustle acceleration</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-label">Track 3 — Ministry & Community</div>
+    <h3>Serve More Effectively</h3>
+    <ul>
+      <li>Sermon prep & outreach</li>
+      <li>Volunteer coordination tools</li>
+      <li>Church website & communications</li>
+      <li>Community impact tracking</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-label">Audience Segments</div>
+    <h3>Three Groups, One Mission</h3>
+    <ul>
+      <li><strong>Students (K-12):</strong> Age-appropriate, mentoring model</li>
+      <li><strong>Professionals:</strong> Career growth, business tools</li>
+      <li><strong>Elders & Community:</strong> Daily life, connection, health</li>
+    </ul>
+  </div>
+</div>
+
+<h2>📅 Proposed Schedule</h2>
+<div class="two-col">
+  <div class="card">
+    <div class="card-label">OAA — Weekday</div>
+    <p><strong>Every Other Friday, 3:30–5:00 PM</strong><br>After school at the academy. Can pair with existing STEM presentations by Ms. Kimberly Grace Trott's team.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">OUC — Saturday Evening</div>
+    <p><strong>After Sunset, 7:00–8:30 PM</strong><br>Open community workshop. All ages, all skill levels. The flagship session.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">OCC — Sunday</div>
+    <p><strong>During Pathfinder Hours</strong><br>Integrated into Oakwood Christian Crusaders. Project-based, hands-on, values-driven.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Deep-Dives — Weekday</div>
+    <p><strong>Bi-Weekly, Day TBD</strong><br>Advanced topics, 1-on-1 coaching, entrepreneurship workshops, ministry tooling.</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>🎮 Live Demo Arsenal</h2>
+<p style="font-size:0.88rem; color:var(--text-light); margin-bottom:0.8rem;">Pull these up on your phone during the pitch. Each takes 30 seconds to show.</p>
+<div class="two-col">
+  <div class="card">
+    <div class="card-label">Demo 1</div>
+    <h3>"Build an app in 60 seconds"</h3>
+    <p style="font-size:0.82rem; color:var(--text-light);">Show a live AI coding demo — natural language → working app. The jaw-dropper.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Demo 2</div>
+    <h3>"Write a grant proposal"</h3>
+    <p style="font-size:0.82rem; color:var(--text-light);">AI drafts a compelling grant petition for the church in real-time.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Demo 3</div>
+    <h3>"Redesign a website"</h3>
+    <p style="font-size:0.82rem; color:var(--text-light);">Show the OAA/OUC/OCC sites you built — proof a student could do this.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Demo 4</div>
+    <h3>"Sign-up forms → live data"</h3>
+    <p style="font-size:0.82rem; color:var(--text-light);">Submit a test sign-up. Watch it appear in Google Sheets instantly. Infrastructure is ready.</p>
+  </div>
+</div>
+
+<h2>🔗 Live Sites (Show James These)</h2>
+<div class="links-grid">
+  <a href="https://presentation-tan-eight.vercel.app" class="link-card" target="_blank">
+    <div class="link-title">📊 Full Meeting Presentation</div>
+    <div class="link-url">presentation-tan-eight.vercel.app</div>
+  </a>
+  <a href="https://oaa-ai-flyer.vercel.app" class="link-card" target="_blank">
+    <div class="link-title">🏫 OAA — School Program</div>
+    <div class="link-url">oaa-ai-flyer.vercel.app</div>
+  </a>
+  <a href="https://ouc-ai-program.vercel.app" class="link-card" target="_blank">
+    <div class="link-title">⛪ OUC — Church Program</div>
+    <div class="link-url">ouc-ai-program.vercel.app</div>
+  </a>
+  <a href="https://occ-pathfinders.vercel.app" class="link-card" target="_blank">
+    <div class="link-title">🛡️ OCC — Pathfinders</div>
+    <div class="link-url">occ-pathfinders.vercel.app</div>
+  </a>
+</div>
+
+<h2>👤 Admin One-Pager (For James to Hand to Leadership)</h2>
+<div class="card">
+  <div class="two-col">
+    <div>
+      <h3>What We're Proposing</h3>
+      <ul>
+        <li>12-week AI literacy program</li>
+        <li>3 tracks: Foundations, Creators, Ministry</li>
+        <li>K-12 students + adults + elders</li>
+        <li>Integrated into existing church schedule</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What the Church Gets</h3>
+      <ul>
+        <li>First SDA church with structured AI program</li>
+        <li>Community engagement & enrollment growth</li>
+        <li>Modern technology reputation</li>
+        <li>Revenue potential from community workshops</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:0.8rem; padding-top:0.8rem; border-top:1px solid var(--border);">
+    <div class="two-col">
+      <div>
+        <h3>What It Costs</h3>
+        <p><span class="highlight">$0 to the church.</span> All technology, curriculum, and instruction provided by Island Development Crew. Church provides space and community access.</p>
+      </div>
+      <div>
+        <h3>Content Ownership</h3>
+        <p><strong>Church brand content</strong> stays with the church. <strong>Curriculum & IP</strong> belongs to IDC. Clean, fair, simple. Both parties win.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>✅ Action Items — Walk Away With These</h2>
+<div class="card">
+  <ul class="checklist">
+    <li>Get James's buy-in on the tandem teaching model</li>
+    <li>Identify which space(s) to use for sessions</li>
+    <li>Agree on start date (target: within 2-3 weeks)</li>
+    <li>James presents admin one-pager to church leadership</li>
+    <li>Confirm Saturday evening slot (after sunset, 7-8:30 PM)</li>
+    <li>Confirm Sunday Pathfinder integration with OCC leadership</li>
+    <li>Coordinate with Ms. Kimberly Grace Trott on Friday OAA sessions</li>
+    <li>Set up shared communication channel (WhatsApp/Signal group)</li>
+    <li>Schedule follow-up meeting within 1 week</li>
+    <li>Begin promoting via church bulletin + social media</li>
+    <li>Share sign-up links with James for distribution</li>
+    <li>Document today's walk-throughs (photos of spaces/equipment)</li>
+  </ul>
+</div>
+
+<h2>🗣️ If James Asks...</h2>
+<div class="card">
+  <div class="talking-point">
+    <div class="label">"What's the catch?"</div>
+    <div class="content">No catch. IDC retains curriculum IP and content rights for expansion. Church gets the program, the community impact, and the reputation — free.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">"What if students misuse AI?"</div>
+    <div class="content">That's exactly why we teach it WITH guidance. The 86% already using it are doing it WITHOUT supervision. We're adding the values layer.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">"Do we need to buy anything?"</div>
+    <div class="content">No. All tools we use are free-tier or provided by IDC. Students use their own devices (phones, tablets, laptops).</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">"How is this different from a coding class?"</div>
+    <div class="content">This isn't coding. This is AI literacy — using intelligence tools across EVERY domain: writing, business, ministry, daily life. Coding is one small piece.</div>
+  </div>
+  <div class="talking-point">
+    <div class="label">"Can this really work in our community?"</div>
+    <div class="content">A 10-year-old built a working app in our test session. A 70-year-old learned to manage health records with AI. If you can have a conversation, you can learn this.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>Island Development Crew LLC</strong> × Oakwood University Church IT Department<br>
+  Prepared by PulseVibeDaily AI — March 10, 2026<br>
+  <em>"Where there is no vision, the people perish." — Proverbs 29:18</em>
+</div>
+
+</body>
+</html>

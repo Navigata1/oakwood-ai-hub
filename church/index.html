@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for the Community — Oakwood University Church</title>
+    <meta name="description" content="AI literacy for every generation. Presented by Oakwood University Church IT Department. Open to all ages, all backgrounds, all skill levels.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --maroon: #8F2A32;
+            --maroon-deep: #401216;
+            --maroon-light: #B83A44;
+            --gold: #DA9100;
+            --gold-light: #F5C24C;
+            --gold-soft: #FAECD0;
+            --charcoal: #1A1A1A;
+            --ink: #0A0A0A;
+            --warm-gray: #F5F3F0;
+            --mist: #FAFAF8;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: var(--mist);
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+        .container-wide { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ─── ANIMATIONS ────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.12s; }
+        .reveal-delay-2 { transition-delay: 0.24s; }
+        .reveal-delay-3 { transition-delay: 0.36s; }
+        .reveal-delay-4 { transition-delay: 0.48s; }
+        .reveal-delay-5 { transition-delay: 0.6s; }
+
+        .scale-reveal {
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-reveal.active { opacity: 1; transform: scale(1); }
+
+        /* ─── STICKY NAV ────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.85rem 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(250,250,248,0.88);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 0.6rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo { height: 30px; width: auto; transition: all 0.4s; }
+        .nav.scrolled .nav-logo-white { opacity: 0; pointer-events: none; position: absolute; }
+        .nav .nav-logo-dark { opacity: 0; pointer-events: none; position: absolute; }
+        .nav.scrolled .nav-logo-dark { opacity: 1; pointer-events: auto; position: relative; }
+        .nav .nav-logo-white { opacity: 1; position: relative; }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: rgba(255,255,255,0.75);
+            transition: color 0.3s;
+            letter-spacing: 0.3px;
+        }
+        .nav.scrolled .nav-links a { color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-cta {
+            font-size: 0.78rem !important;
+            font-weight: 600 !important;
+            background: var(--gold) !important;
+            color: var(--maroon-deep) !important;
+            padding: 0.5rem 1.3rem;
+            border-radius: 50px;
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover { background: var(--gold-light) !important; transform: scale(1.05); }
+
+        @media (max-width: 768px) { .nav-links { display: none; } }
+
+        /* ─── HERO ──────────────────────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--ink);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('./hero-community.png') center/cover no-repeat;
+            opacity: 0.3;
+            transform: scale(1.1);
+            will-change: transform;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(10,10,10,0.5) 0%,
+                rgba(64,18,22,0.55) 45%,
+                rgba(10,10,10,0.95) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-logo-wrap { margin-bottom: 2.5rem; }
+        .hero-logo-wrap img {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+        .hero-eyebrow::before { right: calc(100% + 20px); background: linear-gradient(to left, transparent, var(--gold)); }
+        .hero-eyebrow::after { left: calc(100% + 20px); }
+
+        .hero h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-weight: 800;
+            color: white;
+            line-height: 1.06;
+            letter-spacing: -0.035em;
+            margin-bottom: 1.75rem;
+        }
+        .hero h1 .thin { font-weight: 300; display: block; color: rgba(255,255,255,0.65); }
+        .hero h1 .gold-text {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #E8A800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 400;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.75;
+            max-width: 620px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.95rem 2.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--maroon-deep);
+            box-shadow: 0 4px 28px rgba(218,145,0,0.3);
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 36px rgba(218,145,0,0.45);
+            background: var(--gold-light);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.35);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        .hero-scroll span {
+            display: block;
+            width: 24px;
+            height: 42px;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+        }
+        .hero-scroll span::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: scroll-dot 2.2s ease-in-out infinite;
+        }
+        @keyframes scroll-dot {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 22px; opacity: 0.2; }
+        }
+
+        /* ─── STATS RIBBON ──────────────────────────── */
+        .stats-ribbon {
+            background: var(--maroon-deep);
+            padding: 3.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-ribbon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('./abstract-tech-faith.png') center/cover no-repeat;
+            opacity: 0.1;
+        }
+        .stats-inner {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .stat-label {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* ─── WAKE UP SECTION ───────────────────────── */
+        .wake-section {
+            padding: 10rem 0;
+            background: var(--mist);
+            text-align: center;
+        }
+        .overline {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .section-heading {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+        .section-heading .muted { color: var(--text-secondary); font-weight: 300; }
+        .body-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.12rem;
+            line-height: 1.85;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 2rem;
+        }
+        .body-text strong { color: var(--text-primary); }
+
+        .timeline-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 700px;
+            margin: 3rem auto 0;
+        }
+        .tl-node { text-align: center; position: relative; flex: 1; }
+        .tl-node::after {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 55%;
+            width: 90%;
+            height: 2px;
+            background: linear-gradient(to right, var(--maroon), var(--gold));
+        }
+        .tl-node:last-child::after { display: none; }
+        .tl-dot {
+            width: 56px; height: 56px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.82rem;
+            position: relative; z-index: 1;
+        }
+        .tl-node:nth-child(1) .tl-dot { background: var(--maroon-deep); color: white; }
+        .tl-node:nth-child(2) .tl-dot { background: var(--maroon); color: white; }
+        .tl-node:nth-child(3) .tl-dot { background: var(--gold); color: var(--maroon-deep); box-shadow: 0 0 28px rgba(218,145,0,0.35); }
+        .tl-label { display: block; margin-top: 0.75rem; font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+        .tl-sub { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem; font-style: italic; }
+
+        /* ─── FULL-BLEED IMAGE BREAK ─────────────────── */
+        .image-break {
+            position: relative;
+            height: 55vh;
+            min-height: 380px;
+            overflow: hidden;
+        }
+        .image-break img { width: 100%; height: 100%; object-fit: cover; }
+        .image-break .overlay-text {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(64,18,22,0.65) 100%);
+            text-align: center; padding: 2rem;
+        }
+        .image-break .overlay-text h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 800; color: white; letter-spacing: -0.02em; max-width: 700px;
+        }
+        .image-break .overlay-text p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-top: 1rem; max-width: 500px;
+        }
+
+        /* ─── WHAT YOU'LL LEARN (NANO BANANA ICONS) ── */
+        .learn-section { padding: 8rem 0; background: white; }
+        .learn-header { text-align: center; margin-bottom: 5rem; }
+
+        .learn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 768px) { .learn-grid { grid-template-columns: 1fr; } }
+
+        .learn-card {
+            background: var(--warm-gray);
+            border-radius: 24px;
+            padding: 2.5rem 2rem 2rem;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .learn-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--maroon), var(--gold));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        .learn-card:hover::before { transform: scaleX(1); }
+        .learn-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.08);
+            background: white;
+        }
+
+        .learn-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(143,42,50,0.15);
+        }
+
+        .learn-icon-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--maroon), var(--gold));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .learn-card:hover .learn-icon-wrap::after { opacity: 1; }
+
+        .learn-icon-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        .learn-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .learn-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .learn-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--maroon);
+            background: rgba(143,42,50,0.07);
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+        }
+
+        /* ─── INFOGRAPHIC ───────────────────────────── */
+        .infographic-section {
+            padding: 6rem 0;
+            background: var(--ink);
+            text-align: center;
+        }
+
+        .infographic-section .overline { color: var(--gold); }
+        .infographic-section .section-heading { color: white; margin-bottom: 3rem; }
+
+        .infographic-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(218,145,0,0.15);
+        }
+        .infographic-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ─── WHO IT'S FOR (NANO BANANA PORTRAITS) ── */
+        .who-section { padding: 8rem 0; background: var(--ink); color: white; }
+        .who-header { text-align: center; margin-bottom: 5rem; }
+        .who-header .overline { color: var(--gold); }
+        .who-header .section-heading { color: white; }
+
+        .who-tracks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 768px) { .who-tracks { grid-template-columns: 1fr; } }
+
+        .who-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .who-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(218,145,0,0.1);
+        }
+
+        .who-card-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .who-card-icon::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--maroon), var(--gold));
+            z-index: 0;
+        }
+
+        .who-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            border: 3px solid var(--ink);
+        }
+
+        .who-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .who-card .age {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .who-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* ─── SCHEDULE ──────────────────────────────── */
+        .schedule-section { padding: 8rem 0; background: var(--warm-gray); }
+        .schedule-header { text-align: center; margin-bottom: 4rem; }
+        .schedule-header p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .schedule-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .sched-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .sched-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 56px rgba(0,0,0,0.07);
+        }
+        .sched-card .accent-bar {
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        }
+        .sched-card:nth-child(1) .accent-bar { background: var(--maroon); }
+        .sched-card:nth-child(2) .accent-bar { background: var(--gold); }
+        .sched-card:nth-child(3) .accent-bar { background: linear-gradient(to right, var(--maroon), var(--gold)); }
+
+        .sched-day {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2.5px;
+            color: var(--gold); margin-bottom: 0.75rem;
+        }
+        .sched-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 0.75rem;
+        }
+        .sched-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);
+        }
+        .sched-time {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            margin-top: 1.25rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.82rem; font-weight: 600;
+            color: var(--maroon);
+            background: rgba(143,42,50,0.06);
+            padding: 0.4rem 1rem; border-radius: 50px;
+        }
+
+        /* ─── PHILOSOPHY ────────────────────────────── */
+        .philosophy-section { padding: 8rem 0; background: white; }
+        .phil-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        @media (max-width: 768px) { .phil-grid { grid-template-columns: 1fr; } }
+
+        .phil-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 28px 72px rgba(0,0,0,0.1);
+        }
+        .phil-image img {
+            width: 100%; height: auto; display: block;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .phil-image:hover img { transform: scale(1.04); }
+
+        .phil-text h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800; letter-spacing: -0.025em;
+            color: var(--text-primary); line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .phil-text p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1rem;
+        }
+        .phil-text p strong { color: var(--text-primary); }
+
+        .phil-pillars { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .pillar {
+            background: var(--warm-gray); border-radius: 16px; padding: 1.25rem 1.5rem; flex: 1; min-width: 140px;
+        }
+        .pillar h4 {
+            font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+            color: var(--maroon); margin-bottom: 0.25rem;
+        }
+        .pillar p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 0;
+        }
+
+        /* ─── INSTRUCTOR ────────────────────────────── */
+        .instructor-section { padding: 8rem 0; background: var(--warm-gray); }
+        .instructor-layout {
+            display: grid; grid-template-columns: 200px 1fr; gap: 3.5rem;
+            align-items: start; max-width: 800px; margin: 0 auto;
+        }
+        @media (max-width: 600px) { .instructor-layout { grid-template-columns: 1fr; text-align: center; } }
+
+        .instructor-photo {
+            width: 200px; height: 200px; border-radius: 24px;
+            background: linear-gradient(135deg, var(--maroon), var(--gold));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem; font-weight: 900; color: white;
+            box-shadow: 0 16px 48px rgba(143,42,50,0.2);
+        }
+        .instructor-meta h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.8rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem;
+        }
+        .instructor-meta .title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.9rem; font-weight: 500; color: var(--maroon); margin-bottom: 1.25rem;
+        }
+        .instructor-meta p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem; line-height: 1.75; color: var(--text-secondary);
+        }
+        .cred-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+        .cred-pill {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 0.35rem 0.85rem; border-radius: 50px;
+            background: rgba(143,42,50,0.07); color: var(--maroon);
+        }
+
+        /* ─── FINAL CTA ─────────────────────────────── */
+        .cta-section {
+            padding: 10rem 0;
+            background: var(--ink);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('./abstract-tech-faith.png') center/cover no-repeat;
+            opacity: 0.06;
+        }
+        .cta-section .container { position: relative; z-index: 1; }
+
+        .cta-section h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800; letter-spacing: -0.035em;
+            color: white; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .cta-section h2 .gold-text {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #E8A800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cta-section p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem; color: rgba(255,255,255,0.55);
+            max-width: 550px; margin: 0 auto 3rem; line-height: 1.75;
+        }
+        .cta-presented {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem; color: rgba(255,255,255,0.3); margin-top: 2.5rem; line-height: 1.8;
+        }
+        .cta-presented strong { color: rgba(255,255,255,0.5); }
+
+        /* ─── FOOTER ────────────────────────────────── */
+        .footer {
+            background: var(--maroon-deep);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        .footer-logo { height: 28px; margin-bottom: 1rem; opacity: 0.5; }
+        .footer p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.7;
+        }
+        .footer a { color: var(--gold); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .stats-inner { gap: 2rem; }
+            .timeline-strip { flex-direction: column; gap: 1.5rem; }
+            .tl-node::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <div style="position: relative;">
+            <img src="./ouc-logo-white.png" alt="OUC" class="nav-logo nav-logo-white">
+            <img src="./ouc-logo-dark.png" alt="OUC" class="nav-logo nav-logo-dark">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#why">Why AI</a></li>
+            <li><a href="#learn">What You'll Learn</a></li>
+            <li><a href="#who">Who It's For</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#contact" class="nav-cta">Get Involved</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-logo-wrap reveal">
+            <img src="./ouc-logo-white.png" alt="Oakwood University Church">
+        </div>
+        <p class="hero-eyebrow reveal reveal-delay-1">IT Department Initiative</p>
+        <h1 class="reveal reveal-delay-2">
+            <span class="thin">The world isn't slowing down.</span>
+            <span class="gold-text">Neither should we.</span>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-3">
+            AI literacy for every generation — from the youngest Pathfinder to the wisest elder.
+            Presented by Oakwood University Church. Open to all.
+        </p>
+        <div class="hero-buttons reveal reveal-delay-4">
+            <a href="#contact" class="btn btn-gold">Join the Program</a>
+            <a href="#why" class="btn btn-ghost">Learn More</a>
+        </div>
+    </div>
+    <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- STATS -->
+<section class="stats-ribbon">
+    <div class="container stats-inner">
+        <div class="stat-item reveal"><div class="stat-number">20+</div><div class="stat-label">Ministries Served</div></div>
+        <div class="stat-item reveal reveal-delay-1"><div class="stat-number">21,345</div><div class="stat-label">People Helped</div></div>
+        <div class="stat-item reveal reveal-delay-2"><div class="stat-number">519</div><div class="stat-label">Active Volunteers</div></div>
+        <div class="stat-item reveal reveal-delay-3"><div class="stat-number">∞</div><div class="stat-label">Potential Unlocked</div></div>
+    </div>
+</section>
+
+<!-- WAKE UP -->
+<section class="wake-section" id="why">
+    <div class="container">
+        <p class="overline reveal">The Moment We're In</p>
+        <h2 class="section-heading reveal">In 1975, schools banned calculators.<br><span class="muted">They were wrong.</span></h2>
+        <p class="body-text reveal">
+            Every generation faces a tool so powerful it scares us. The printing press. The calculator. The internet.
+            Each time, the institutions that <strong>embraced it early</strong> didn't just survive — they led.
+        </p>
+        <p class="body-text reveal">
+            AI is that tool for our generation. The gap between those who understand it and those who don't
+            is growing <strong>every single day</strong>. This isn't about Silicon Valley. It's about making sure
+            <strong>our community</strong> — our youth, our entrepreneurs, our elders, our church — isn't left behind
+            while the world rewrites itself.
+        </p>
+        <div class="timeline-strip reveal">
+            <div class="tl-node"><div class="tl-dot">1975</div><span class="tl-label">Calculators</span><span class="tl-sub">"They'll stop learning"</span></div>
+            <div class="tl-node"><div class="tl-dot">1995</div><span class="tl-label">The Internet</span><span class="tl-sub">"It's just a fad"</span></div>
+            <div class="tl-node"><div class="tl-dot">2026</div><span class="tl-label">AI</span><span class="tl-sub">"It'll replace us"</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="image-break scale-reveal">
+    <img src="./hands-learning.png" alt="Generations learning together">
+    <div class="overlay-text">
+        <h2>Every hand can learn.<br>Every mind can grow.</h2>
+        <p>From 4 to 104 — if you're willing, there's a seat for you.</p>
+    </div>
+</div>
+
+<!-- WHAT YOU'LL LEARN -->
+<section class="learn-section" id="learn">
+    <div class="container">
+        <div class="learn-header">
+            <p class="overline reveal">Practical Skills. Immediate Impact.</p>
+            <h2 class="section-heading reveal">What You'll Actually Learn</h2>
+        </div>
+        <div class="learn-grid">
+            <div class="learn-card reveal">
+                <div class="learn-icon-wrap"><img src="./icon-writing.png" alt="Writing"></div>
+                <h3>Write Like a Professional</h3>
+                <p>Craft grant proposals, business plans, resumes, and church communications that move people — powered by AI, polished by you.</p>
+                <span class="learn-tag">Communication</span>
+            </div>
+            <div class="learn-card reveal reveal-delay-1">
+                <div class="learn-icon-wrap"><img src="./icon-apps.png" alt="App Building"></div>
+                <h3>Build Real Applications</h3>
+                <p>From mobile apps to websites — create tools your church, business, or community can actually use. No CS degree required.</p>
+                <span class="learn-tag">Development</span>
+            </div>
+            <div class="learn-card reveal reveal-delay-2">
+                <div class="learn-icon-wrap"><img src="./icon-business.png" alt="Business"></div>
+                <h3>Start or Scale a Business</h3>
+                <p>Market research, branding, financial projections, marketing campaigns — AI gives entrepreneurs superpowers. Huntsville's next startup could be yours.</p>
+                <span class="learn-tag">Entrepreneurship</span>
+            </div>
+            <div class="learn-card reveal reveal-delay-1">
+                <div class="learn-icon-wrap"><img src="./icon-education.png" alt="Education"></div>
+                <h3>Accelerate Your Education</h3>
+                <p>Students: research papers, study plans, tutoring on any subject, college prep. Adults: certifications, skill development, career pivots.</p>
+                <span class="learn-tag">Education</span>
+            </div>
+            <div class="learn-card reveal reveal-delay-2">
+                <div class="learn-icon-wrap"><img src="./icon-daily.png" alt="Daily Life"></div>
+                <h3>Simplify Daily Life</h3>
+                <p>Organize finances, plan meals, manage health records, connect with family across distances. AI handles the tedious so you can live fully.</p>
+                <span class="learn-tag">Everyday Life</span>
+            </div>
+            <div class="learn-card reveal reveal-delay-3">
+                <div class="learn-icon-wrap"><img src="./icon-ministry.png" alt="Ministry"></div>
+                <h3>Strengthen Ministry Work</h3>
+                <p>Sermon prep, outreach campaigns, volunteer coordination, event planning, community impact tracking. Serve more effectively with modern tools.</p>
+                <span class="learn-tag">Ministry</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INFOGRAPHIC -->
+<section class="infographic-section">
+    <div class="container">
+        <p class="overline reveal">The Complete Picture</p>
+        <h2 class="section-heading reveal">OUC IT × AI — Skills Pathway</h2>
+        <div class="infographic-wrap scale-reveal">
+            <img src="./infographic-skills.png" alt="AI Skills Infographic — Writing, Apps, Business, Education, Daily Life, Ministry">
+        </div>
+    </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who-section" id="who">
+    <div class="container">
+        <div class="who-header">
+            <p class="overline reveal">No Prerequisites. No Limits.</p>
+            <h2 class="section-heading reveal">Built for Every Generation</h2>
+        </div>
+        <div class="who-tracks">
+            <div class="who-card reveal">
+                <div class="who-card-icon"><img src="./icon-pathfinders.png" alt="Pathfinders"></div>
+                <h3>Youth & Pathfinders</h3>
+                <div class="age">Oakwood Christian Crusaders · Ages 4–18</div>
+                <p>Build apps, create content, learn coding fundamentals — all within a values-based environment. Pathfinder-integrated Sunday sessions available. High schoolers mentor younger students.</p>
+            </div>
+            <div class="who-card reveal reveal-delay-1">
+                <div class="who-card-icon"><img src="./icon-professionals.png" alt="Professionals"></div>
+                <h3>Professionals & Entrepreneurs</h3>
+                <div class="age">Huntsville Tech Community & Beyond</div>
+                <p>AI for business strategy, automation, marketing, and career growth. Whether you're launching a side hustle or scaling an existing venture — this is your competitive edge.</p>
+            </div>
+            <div class="who-card reveal reveal-delay-2">
+                <div class="who-card-icon"><img src="./icon-elders.png" alt="Elders & Community"></div>
+                <h3>Elders & Community</h3>
+                <div class="age">All Ages · All Backgrounds</div>
+                <p>Connect with grandchildren over technology. Manage health. Stay sharp. Stay connected. If you can hold a conversation, you can learn to use AI. Period.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+    <div class="container">
+        <div class="schedule-header">
+            <p class="overline reveal">Fits Your Life</p>
+            <h2 class="section-heading reveal">Proposed Sessions</h2>
+            <p class="reveal">Designed around Sabbath, school, work, and family.</p>
+        </div>
+        <div class="schedule-cards">
+            <div class="sched-card reveal">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Saturday Evening</div>
+                <h3>Community AI Workshop</h3>
+                <p>Open to everyone — church members, surrounding congregations, and the greater Huntsville community. All ages, all skill levels.</p>
+                <div class="sched-time">After Sunset · 7:00–8:30 PM</div>
+            </div>
+            <div class="sched-card reveal reveal-delay-1">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Sunday</div>
+                <h3>Pathfinder AI Lab</h3>
+                <p>Integrated into Oakwood Christian Crusaders Pathfinder hours. Project-based, hands-on, values-driven. Youth who can't attend other sessions get AI literacy here.</p>
+                <div class="sched-time">During Pathfinder Hours</div>
+            </div>
+            <div class="sched-card reveal reveal-delay-2">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Weekday Session</div>
+                <h3>Focused Deep-Dives</h3>
+                <p>Bi-weekly sessions for advanced topics — one-on-one coaching, entrepreneurship workshops, ministry tooling, and specialized tracks.</p>
+                <div class="sched-time">Bi-Weekly · Day & Time TBD</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-section">
+    <div class="container">
+        <div class="phil-grid">
+            <div class="phil-image scale-reveal">
+                <img src="./abstract-tech-faith.png" alt="Technology meets faith">
+            </div>
+            <div class="phil-text reveal">
+                <p class="overline">Our Approach</p>
+                <h2>Sharpen the Mind.<br>Never Replace It.</h2>
+                <p>We teach AI as what it is: a <strong>tool</strong>. Like a hammer doesn't build a house — the carpenter does. AI doesn't think for you — it amplifies what's already there.</p>
+                <p>Our approach is grounded in <strong>critical thinking first</strong>, ethical use always, and practical application above everything. We're not creating dependence. We're creating <strong>command</strong>.</p>
+                <div class="phil-pillars">
+                    <div class="pillar"><h4>Think First</h4><p>AI assists. You decide.</p></div>
+                    <div class="pillar"><h4>Use Ethically</h4><p>Values-guided. Always.</p></div>
+                    <div class="pillar"><h4>Build Real Things</h4><p>Every session ships something.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INSTRUCTOR -->
+<section class="instructor-section">
+    <div class="container">
+        <div class="instructor-layout reveal">
+            <div class="instructor-photo">JI</div>
+            <div class="instructor-meta">
+                <p class="overline">Your Instructor</p>
+                <h3>Jonathan Isaac</h3>
+                <p class="title">CEO, Island Development Crew · AI Systems Engineer</p>
+                <p>A builder, not a lecturer. Jon designs multi-agent AI systems professionally and is raising his daughter in the Oakwood community. Meet people where they are. Make every minute practical. Never let the tool overshadow the human using it.</p>
+                <div class="cred-pills">
+                    <span class="cred-pill">AI Systems Architect</span>
+                    <span class="cred-pill">15+ Applications</span>
+                    <span class="cred-pill">OAA Parent</span>
+                    <span class="cred-pill">Pathfinder Leader</span>
+                    <span class="cred-pill">Community First</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="container">
+        <h2 class="reveal">The future belongs to<br><span class="gold-text">those who show up for it.</span></h2>
+        <p class="reveal">Our community has led for generations. This is the next frontier. Don't watch from the sidelines.</p>
+        <div class="hero-buttons reveal">
+            <a href="mailto:Jon-Isaac@islanddevcrew.com?subject=OUC%20AI%20Program%20Interest" class="btn btn-gold">Get in Touch</a>
+            <a href="sms:+12566688248?body=Hi%20Jon%2C%20I%27m%20interested%20in%20the%20AI%20program%20at%20Oakwood%20University%20Church" class="btn btn-ghost">Send a Text</a>
+        </div>
+        <p class="cta-presented reveal">
+            Presented by the <strong>Oakwood University Church IT Department</strong><br>
+            Under the direction of <strong>James Wilson</strong> · Taught by <strong>Jonathan Isaac</strong><br>
+            <span style="margin-top: 0.5rem; display: inline-block;">Open to all surrounding churches & the greater Huntsville community</span>
+        </p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <img src="./ouc-logo-white.png" alt="OUC" class="footer-logo">
+    <p>
+        AI Literacy Initiative · <a href="https://oucsda.org" target="_blank">Oakwood University Church</a><br>
+        5500 Adventist Blvd NW, Huntsville, AL 35896<br>
+        <span style="opacity: 0.6;">Powered by <strong>Island Development Crew</strong></span>
+    </p>
+</footer>
+
+<script>
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal, .scale-reveal').forEach(el => revealObserver.observe(el));
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+        const bg = document.querySelector('.hero-bg');
+        if (bg) bg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.2}px)`;
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+
+</body>
+</html>

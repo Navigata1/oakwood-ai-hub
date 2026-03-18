@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Roland V-80HD — Complete PTZ & Board Mastery Guide</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #131a2b;
+    --border: #1e2a42;
+    --accent: #3b82f6;
+    --accent2: #f59e0b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --heading: #f8fafc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 16px;
+    padding-bottom: 80px;
+    -webkit-text-size-adjust: 100%;
+  }
+  h1 { font-size: 1.6rem; color: var(--heading); margin-bottom: 4px; }
+  h2 { font-size: 1.25rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1.05rem; color: var(--accent2); margin: 20px 0 8px; }
+  h4 { font-size: 0.95rem; color: var(--green); margin: 14px 0 6px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .card-highlight {
+    border-left: 3px solid var(--accent);
+  }
+  .card-warn {
+    border-left: 3px solid var(--accent2);
+  }
+  .card-success {
+    border-left: 3px solid var(--green);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .badge-page { background: #1e3a5f; color: #60a5fa; }
+  .badge-key { background: #3b1f0b; color: #fbbf24; }
+  .badge-tip { background: #0b3b1f; color: #4ade80; }
+  ol, ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 6px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 10px 0;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #1a2235; color: var(--accent); font-weight: 600; }
+  td { background: var(--card); }
+  code {
+    background: #1a2235;
+    color: #f59e0b;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+  .menu-path {
+    font-family: monospace;
+    background: #1a2235;
+    color: #60a5fa;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    display: inline-block;
+    margin: 2px 0;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+  .step-text { flex: 1; }
+  .toc { list-style: none; padding: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .video-link {
+    display: block;
+    background: #1a1a2e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .video-link:hover { border-color: var(--accent); }
+  .video-link .title { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+  .video-link .desc { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  .emoji { font-size: 1.2em; }
+  details { margin: 8px 0; }
+  details summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 600;
+    padding: 8px 0;
+  }
+  details[open] summary { margin-bottom: 8px; }
+  @media (max-width: 480px) {
+    body { padding: 12px; }
+    h1 { font-size: 1.35rem; }
+    table { font-size: 0.78rem; }
+    th, td { padding: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🎛️ Roland V-80HD — Complete Board Mastery Guide</h1>
+<p class="subtitle">PTZ Camera Control, Scenes, Macros, Automation & Every Feature You Need<br>
+Source: Official Roland V-80HD Reference Manual (166 pages) · Built by Pulse ⚡</p>
+
+<div class="card card-highlight">
+<strong>🎯 Purpose:</strong> Get you fully proficient on the V-80HD so you can run the entire CHAC production from the board — no external joystick needed. Everything the joystick does, this board does natively.
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<h2 id="toc">📋 Table of Contents</h2>
+<ul class="toc">
+  <li><a href="#ptz-overview">1. PTZ Camera Control Overview</a></li>
+  <li><a href="#ptz-network">2. Network Setup for PTZ Cameras</a></li>
+  <li><a href="#ptz-register">3. Registering & Configuring Cameras</a></li>
+  <li><a href="#ptz-presets">4. Saving & Recalling Camera Presets</a></li>
+  <li><a href="#ptz-pads">5. PTZ via Assignable Pads (No Joystick!)</a></li>
+  <li><a href="#ptz-controls">6. Full PTZ Control Parameters</a></li>
+  <li><a href="#scenes">7. Scene Memories (32 Total Snapshots)</a></li>
+  <li><a href="#macros">8. Macros (100 Automated Operations)</a></li>
+  <li><a href="#sequencer">9. Sequencer (1,000-Step Automation)</a></li>
+  <li><a href="#switching">10. Video Switching Modes</a></li>
+  <li><a href="#dsk">11. DSK (Downstream Keyer) — Graphics Overlay</a></li>
+  <li><a href="#pinp">12. Picture-in-Picture (PinP)</a></li>
+  <li><a href="#audio">13. Audio Mixing (28 Channels)</a></li>
+  <li><a href="#streaming">14. Live Streaming & Recording</a></li>
+  <li><a href="#remote">15. Remote Control (iPad, Computer, LAN)</a></li>
+  <li><a href="#tally">16. Smart Tally & GPIO</a></li>
+  <li><a href="#backup">17. Backup & Restore Settings</a></li>
+  <li><a href="#videos">18. Video Resources & Manual Links</a></li>
+  <li><a href="#cheatsheet">19. Quick Reference Cheat Sheet</a></li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 1: PTZ OVERVIEW -->
+<h2 id="ptz-overview">1. 📷 PTZ Camera Control — Overview</h2>
+
+<div class="card card-success">
+<strong>✅ Bottom line:</strong> The V-80HD controls up to <strong>8 PTZ cameras simultaneously</strong> over LAN via the DIRECT STREAM port. Full pan, tilt, zoom, focus, exposure, and preset recall — all from the board.
+</div>
+
+<h3>Supported Camera Brands & Protocols</h3>
+<table>
+  <tr><th>Brand</th><th>Protocol Setting</th><th>Functions</th></tr>
+  <tr><td><strong>JVC</strong></td><td><code>JVC</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+  <tr><td><strong>Panasonic</strong></td><td><code>Panasonic</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+  <tr><td><strong>Canon</strong></td><td><code>Canon PTZ</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+  <tr><td><strong>Sony</strong></td><td><code>VISCA over IP</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+  <tr><td><strong>PTZOptics</strong></td><td><code>PTZOptics</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+  <tr><td><strong>Avonic</strong></td><td><code>Avonic</code></td><td>PTZ, Focus, Exposure, Preset, Tally</td></tr>
+</table>
+
+<div class="card card-warn">
+<span class="badge badge-key">KEY</span> You can <strong>mix different brands</strong> at the same time. Camera 1 can be Sony, Camera 2 can be Panasonic, etc. The V-80HD handles all protocols simultaneously.
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 2: NETWORK SETUP -->
+<h2 id="ptz-network">2. 🌐 Network Setup for PTZ Cameras</h2>
+<p><span class="badge badge-page">Manual p.99 & p.151</span></p>
+
+<div class="card">
+<h4>Prerequisites</h4>
+<ul>
+  <li>Cameras and V-80HD must be on the <strong>same network/subnet</strong></li>
+  <li>Each camera needs a <strong>static IP address</strong> configured on the camera itself</li>
+  <li>Connection goes through the <strong>DIRECT STREAM port</strong> (LAN/Ethernet)</li>
+</ul>
+</div>
+
+<h3>V-80HD Network Configuration</h3>
+<p><span class="menu-path">[MENU] → Network → LAN Setup</span></p>
+
+<table>
+  <tr><th>Setting</th><th>Options</th><th>Notes</th></tr>
+  <tr><td>Configure</td><td><code>Manual</code> / <code>Using DHCP</code></td><td>Manual recommended for production stability</td></tr>
+  <tr><td>IP Address</td><td>e.g. <code>192.168.0.100</code></td><td>Must be on same subnet as cameras</td></tr>
+  <tr><td>Subnet Mask</td><td>e.g. <code>255.255.255.0</code></td><td>Match your network</td></tr>
+  <tr><td>Default Gateway</td><td>e.g. <code>192.168.0.1</code></td><td>Your router</td></tr>
+  <tr><td>DNS Server</td><td>e.g. <code>8.8.8.8</code></td><td>Required for streaming features</td></tr>
+</table>
+
+<div class="card card-warn">
+<span class="badge badge-tip">TIP</span> Use <span class="menu-path">Network → Network Information</span> to verify your connection status (Link Status, assigned IP, etc.)
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 3: REGISTERING CAMERAS -->
+<h2 id="ptz-register">3. 🔧 Registering & Configuring Cameras</h2>
+<p><span class="badge badge-page">Manual p.99 & p.152</span></p>
+
+<h3>Step-by-Step: Add a Camera</h3>
+<p><span class="menu-path">[MENU] → Camera Control</span></p>
+
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Select <strong>Camera ID</strong> → Choose <code>Camera 1</code> through <code>Camera 8</code></div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Set <strong>Protocol</strong> → Select the matching protocol for your camera brand:<br>
+    <code>N/A</code> | <code>JVC</code> | <code>Panasonic</code> | <code>Canon PTZ</code> | <code>VISCA over IP</code> | <code>PTZOptics</code> | <code>Avonic</code></div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Set <strong>IP Address</strong> → Enter the camera's static IP (e.g. <code>192.168.0.101</code>)</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text"><strong>JVC only:</strong> Enter <strong>Login Name</strong> and <strong>Password</strong> (JVC cameras require authentication)</div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text">Set <strong>Tally Channel</strong> → Specify which input connector (HDMI 1–4, SDI 1–4, SRT In) the camera's video comes in on. This enables the camera's tally light when it's live.</div></div>
+  <div class="step"><span class="step-num">6</span><div class="step-text">Press <strong>[MENU]</strong> to save and exit</div></div>
+</div>
+
+<div class="card card-warn">
+<span class="badge badge-key">IMPORTANT</span> Repeat for each camera (up to 8). Each camera gets its own Camera ID, Protocol, IP, and Tally Channel assignment.
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 4: PRESETS -->
+<h2 id="ptz-presets">4. 💾 Saving & Recalling Camera Presets</h2>
+<p><span class="badge badge-page">Manual p.99–100</span></p>
+
+<div class="card card-success">
+<strong>Each camera supports 8 presets.</strong> Presets store: pan position, tilt position, zoom level, focus, and exposure. Presets are saved <strong>in the camera itself</strong> (not in the V-80HD), so they persist even if the board is powered off.
+</div>
+
+<h3>Saving a Preset</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text"><span class="menu-path">[MENU] → Camera Control → Camera ID</span> → Select the camera</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Adjust <strong>Pan</strong>, <strong>Tilt</strong>, <strong>Zoom</strong>, <strong>Focus</strong>, <strong>Exposure</strong> to the desired position (hold [VALUE] knob to move)</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Set <strong>Pan/Tilt Speed</strong> (1–24) to control how fast the camera moves</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Select <strong>Camera Preset</strong> → Choose <code>Preset 1–8</code></div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text">Select <strong>Store</strong> → Press [VALUE] knob → Confirm "OK"</div></div>
+</div>
+
+<h3>Recalling a Preset (Single Camera)</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text"><span class="menu-path">[MENU] → Camera Control</span></div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Set <strong>Camera ID</strong> → Select the camera</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Set <strong>All Cameras Recall</strong> → <code>OFF</code></div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Select <strong>Camera Preset</strong> → Choose the preset number (1–8)</div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text">Select <strong>Recall</strong> → Press [VALUE] → "Completed."</div></div>
+</div>
+
+<h3>Recalling Presets from ALL Cameras at Once</h3>
+<div class="card card-highlight">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Set <strong>All Cameras Recall</strong> → <code>ON</code></div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Select <strong>Camera Preset</strong> → Choose preset number</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Select <strong>Recall</strong> → ALL cameras jump to their respective preset at that number</div></div>
+  <p style="margin-top:8px;color:var(--accent2);">💡 This is HUGE for church production — set Preset 1 as "wide shot" on every camera, Preset 2 as "podium close-up", etc. One button = every camera moves.</p>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 5: ASSIGNABLE PADS FOR PTZ -->
+<h2 id="ptz-pads">5. 🎹 PTZ via Assignable Pads — Replace the Joystick</h2>
+<p><span class="badge badge-page">Manual p.97 & p.141–142</span></p>
+
+<div class="card card-success">
+<strong>This is how you eliminate the joystick.</strong> The V-80HD has <strong>8 assignable pads × 8 banks (A–H) = 64 assignable functions</strong>. You can dedicate an entire bank to camera control.
+</div>
+
+<h3>All Camera Control Pad Functions</h3>
+<p>Category: <code>Camera Control</code></p>
+
+<table>
+  <tr><th>Function</th><th>What It Does</th></tr>
+  <tr><td><code>Mode</code></td><td>Turns camera control mode on/off</td></tr>
+  <tr><td><code>Pan Left</code></td><td>Pans camera left (hold pad)</td></tr>
+  <tr><td><code>Pan Right</code></td><td>Pans camera right (hold pad)</td></tr>
+  <tr><td><code>Tilt Down</code></td><td>Tilts camera down (hold pad)</td></tr>
+  <tr><td><code>Tilt Up</code></td><td>Tilts camera up (hold pad)</td></tr>
+  <tr><td><code>Zoom Wide (Slow)</code></td><td>Zooms out slowly</td></tr>
+  <tr><td><code>Zoom Wide (Fast)</code></td><td>Zooms out fast</td></tr>
+  <tr><td><code>Zoom Tele (Slow)</code></td><td>Zooms in slowly</td></tr>
+  <tr><td><code>Zoom Tele (Fast)</code></td><td>Zooms in fast</td></tr>
+  <tr><td><code>Focus Near</code></td><td>Focus closer to camera</td></tr>
+  <tr><td><code>Focus Far</code></td><td>Focus further from camera</td></tr>
+  <tr><td><code>Auto Focus</code></td><td>Toggle auto focus on/off</td></tr>
+  <tr><td><code>Auto Exposure</code></td><td>Toggle auto exposure on/off</td></tr>
+  <tr><td><code>Preset 1–8 Recall</code></td><td>Instantly recall saved camera position</td></tr>
+  <tr><td><code>Camera 1–8 Select</code></td><td>Switch which camera you're controlling</td></tr>
+</table>
+
+<h3>Recommended Pad Layout for Church Production</h3>
+<div class="card card-highlight">
+<h4>Bank E — Camera Selection & Presets</h4>
+<table>
+  <tr><th>Pad</th><th>Assignment</th><th>Purpose</th></tr>
+  <tr><td>1</td><td>Camera 1 Select</td><td>Select pulpit camera</td></tr>
+  <tr><td>2</td><td>Camera 2 Select</td><td>Select choir camera</td></tr>
+  <tr><td>3</td><td>Camera 3 Select</td><td>Select wide shot camera</td></tr>
+  <tr><td>4</td><td>Camera 4 Select</td><td>Select roaming/audience camera</td></tr>
+  <tr><td>5</td><td>Preset 1 Recall</td><td>Wide establishing shot</td></tr>
+  <tr><td>6</td><td>Preset 2 Recall</td><td>Medium pulpit shot</td></tr>
+  <tr><td>7</td><td>Preset 3 Recall</td><td>Tight close-up</td></tr>
+  <tr><td>8</td><td>Preset 4 Recall</td><td>Choir / special event shot</td></tr>
+</table>
+
+<h4>Bank F — Manual PTZ Control</h4>
+<table>
+  <tr><th>Pad</th><th>Assignment</th><th>Purpose</th></tr>
+  <tr><td>1</td><td>Pan Left</td><td>Manual pan left</td></tr>
+  <tr><td>2</td><td>Pan Right</td><td>Manual pan right</td></tr>
+  <tr><td>3</td><td>Tilt Up</td><td>Manual tilt up</td></tr>
+  <tr><td>4</td><td>Tilt Down</td><td>Manual tilt down</td></tr>
+  <tr><td>5</td><td>Zoom Tele (Slow)</td><td>Zoom in smooth</td></tr>
+  <tr><td>6</td><td>Zoom Wide (Slow)</td><td>Zoom out smooth</td></tr>
+  <tr><td>7</td><td>Auto Focus</td><td>Toggle AF</td></tr>
+  <tr><td>8</td><td>Camera Control Mode</td><td>Enable/disable PTZ mode</td></tr>
+</table>
+</div>
+
+<h3>How to Set Up Pads</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Press <strong>ASSIGNABLE PADS [SETUP]</strong> button</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Select the <strong>bank</strong> (A–H) using the cursor or hold [SETUP] + press pad [1]–[8] to switch banks</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Select the <strong>pad number</strong> to configure</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Set <strong>Category</strong> → <code>Camera Control</code></div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text">Set <strong>Function</strong> → Choose from the table above</div></div>
+  <div class="step"><span class="step-num">6</span><div class="step-text">Set <strong>Value</strong> → Configure specifics (which camera, which preset, etc.)</div></div>
+  <div class="step"><span class="step-num">7</span><div class="step-text">Press <strong>[EXIT]</strong> → Repeat for each pad</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 6: FULL PTZ CONTROLS -->
+<h2 id="ptz-controls">6. 🕹️ Full PTZ Control Parameters</h2>
+<p><span class="badge badge-page">Manual p.152 — Menu 26: Camera Control</span></p>
+
+<table>
+  <tr><th>Parameter</th><th>Values</th><th>How to Use</th></tr>
+  <tr><td><strong>Camera ID</strong></td><td>Camera 1–8</td><td>Select which camera to control</td></tr>
+  <tr><td><strong>Protocol</strong></td><td>N/A, JVC, Panasonic, Canon PTZ, VISCA over IP, PTZOptics, Avonic</td><td>Must match your camera brand</td></tr>
+  <tr><td><strong>IP Address</strong></td><td>e.g. 192.168.0.101</td><td>Camera's static IP on the network</td></tr>
+  <tr><td><strong>Login Name</strong></td><td>(text)</td><td>JVC cameras only</td></tr>
+  <tr><td><strong>Password</strong></td><td>(text)</td><td>JVC cameras only</td></tr>
+  <tr><td><strong>Pan</strong></td><td>Left / Right</td><td>Hold [VALUE] knob to pan continuously</td></tr>
+  <tr><td><strong>Tilt</strong></td><td>Down / Up</td><td>Hold [VALUE] knob to tilt continuously</td></tr>
+  <tr><td><strong>Pan/Tilt Speed</strong></td><td>1–24</td><td>Higher = faster movement. Start at 8–12 for smooth production moves</td></tr>
+  <tr><td><strong>Zoom</strong></td><td>Wide (Fast) / Wide (Slow) / Tele (Slow) / Tele (Fast)</td><td>Hold [VALUE] knob. Slow for live, Fast for repositioning</td></tr>
+  <tr><td><strong>Focus</strong></td><td>Near / Far</td><td>Only when Auto Focus is OFF. Hold [VALUE] knob.</td></tr>
+  <tr><td><strong>Auto Focus</strong></td><td>OFF / ON</td><td>ON = camera handles focus. Turn OFF for manual control.</td></tr>
+  <tr><td><strong>Auto Exposure</strong></td><td>OFF / ON</td><td>ON recommended for varying church lighting</td></tr>
+  <tr><td><strong>Camera Preset</strong></td><td>Preset 1–8</td><td>Select which preset to recall or store</td></tr>
+  <tr><td><strong>Recall</strong></td><td>Exec</td><td>Press [VALUE] to jump camera to selected preset</td></tr>
+  <tr><td><strong>All Cameras Recall</strong></td><td>OFF / ON</td><td>ON = all 8 cameras recall the same preset number simultaneously</td></tr>
+  <tr><td><strong>Store</strong></td><td>Exec</td><td>Press [VALUE] to save current position as preset</td></tr>
+  <tr><td><strong>Tally Channel</strong></td><td>HDMI 1–4, SDI 1–4, SRT In</td><td>Match to the input where camera video arrives. Tally light activates when live.</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- SECTION 7: SCENES -->
+<h2 id="scenes">7. 🎬 Scene Memories — 32 Total Snapshots</h2>
+<p><span class="badge badge-page">Manual p.76–80</span></p>
+
+<div class="card">
+<strong>What a scene saves:</strong> Video settings, audio settings, panel state, PinP positions, DSK settings, and more. Think of it as a "snapshot" of your entire board configuration.
+</div>
+
+<h3>Quick Save (Scenes 1–8)</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Press <strong>[MODE]</strong> until it shows "MEMORY"</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Long-press</strong> MEMORY button [1]–[8] to save</div></div>
+  <p style="margin-top:8px;color:var(--muted);">Blue = has saved data · Light blue = currently selected · Unlit = empty</p>
+</div>
+
+<h3>Quick Recall (Scenes 1–8)</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Press <strong>[MODE]</strong> → "MEMORY"</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Short-press</strong> MEMORY button [1]–[8] to recall</div></div>
+</div>
+
+<h3>Full Save/Recall (Scenes 1–32)</h3>
+<p><span class="menu-path">[MENU] → Scene Memory → Save/Load</span></p>
+<ul>
+  <li><strong>Save:</strong> Select "Save" → choose destination number → confirm OK</li>
+  <li><strong>Load:</strong> Select scene number → press [VALUE] to recall</li>
+  <li><strong>Initialize:</strong> Select "Initialize" → choose scene → confirm</li>
+  <li><strong>Name Edit:</strong> Rename scenes (up to 8 characters)</li>
+</ul>
+
+<h3>Scene Transition Effects</h3>
+<div class="card card-warn">
+<span class="menu-path">[MENU] → Scene Memory</span>
+<table>
+  <tr><th>Setting</th><th>What It Does</th></tr>
+  <tr><td><strong>Fade Time</strong></td><td>How long the transition takes when recalling a scene</td></tr>
+  <tr><td><strong>Mix/Wipe</strong> = ON</td><td>Apply transition effect between scenes</td></tr>
+  <tr><td><strong>PinP&Key</strong> = ON</td><td>Inset screen fades in smoothly</td></tr>
+  <tr><td><strong>DSK</strong> = ON</td><td>Graphics/captions fade in smoothly</td></tr>
+</table>
+</div>
+
+<h3>Expand to 24 Buttons</h3>
+<p><span class="menu-path">[MENU] → Scene Memory → Button Assign → Number of MEMORY Button → 24</span></p>
+<p>This maps PGM/A buttons [1]–[8] to scenes 9–16, and PST/B buttons [1]–[8] to scenes 17–24.</p>
+
+<hr class="divider">
+
+<!-- SECTION 8: MACROS -->
+<h2 id="macros">8. ⚡ Macros — 100 Automated Operations</h2>
+<p><span class="badge badge-page">Manual p.81–88</span></p>
+
+<div class="card card-success">
+<strong>A macro records up to 10 operations</strong> and replays them with one button press. You can chain macros within macros for complex sequences. Perfect for repeatable church service transitions.
+</div>
+
+<h3>What Can Be Recorded in a Macro</h3>
+<table>
+  <tr><th>Operation</th><th>Description</th></tr>
+  <tr><td>PGM Take</td><td>Switch the live output</td></tr>
+  <tr><td>PGM/PST Select</td><td>Select preview/program source</td></tr>
+  <tr><td>AUX Select</td><td>Switch AUX bus source</td></tr>
+  <tr><td>Input Assign</td><td>Reassign video inputs</td></tr>
+  <tr><td>Transition Time/Type</td><td>Change transition speed and style</td></tr>
+  <tr><td>PinP&Key On/Off/Source/Window/Cropping/View</td><td>Full PinP control</td></tr>
+  <tr><td>DSK On/Off/Source</td><td>Graphics overlay control</td></tr>
+  <tr><td>Split On/Off/Type/Position</td><td>Split screen control</td></tr>
+  <tr><td>Audio Input/Output Level/Mute</td><td>Audio adjustments</td></tr>
+  <tr><td>Audio/Video Player Control</td><td>Start/stop playback</td></tr>
+  <tr><td>Scene Memory</td><td>Recall a scene</td></tr>
+  <tr><td>Memory Fade Time/On/Off</td><td>Scene transition settings</td></tr>
+  <tr><td>Macro</td><td>Execute another macro (nesting!)</td></tr>
+  <tr><td>Output Fade</td><td>Fade final output in/out</td></tr>
+  <tr><td>External Rec Control</td><td>Start/stop external recorder</td></tr>
+  <tr><td>GPO One Shot/Alternate</td><td>Send control signals</td></tr>
+  <tr><td><strong>Camera Preset Recall</strong></td><td><strong>Move PTZ cameras to saved positions!</strong></td></tr>
+  <tr><td>Wait</td><td>Pause between operations</td></tr>
+</table>
+
+<h3>Creating a Macro</h3>
+<p><span class="menu-path">[MENU] → Macro → Edit</span></p>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Select the macro number to edit</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Select "Add Function" from the operation list</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Choose the operation (from table above)</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Set parameters for the operation</div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text">Set <strong>Timing</strong>: <code>After Previous</code> (sequential) or <code>Same As Previous</code> (simultaneous)</div></div>
+  <div class="step"><span class="step-num">6</span><div class="step-text">Repeat for up to 10 operations per macro</div></div>
+</div>
+
+<h3>🔴 Live Recording a Macro (Fastest Method)</h3>
+<div class="card card-highlight">
+  <div class="step"><span class="step-num">1</span><div class="step-text">Open the macro editing screen</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Select <strong>"Rec"</strong> → Press [VALUE]</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Perform the operations live</strong> on the board — each operation is automatically captured</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Select <strong>"Apply"</strong> to confirm</div></div>
+  <p style="margin-top:8px;color:var(--accent2);">💡 <strong>Shortcut:</strong> Long-press a MACRO button to start recording directly!</p>
+</div>
+
+<h3>Executing a Macro</h3>
+<ul>
+  <li><strong>Macros 1–8:</strong> Press [MODE] → "MACRO" → press MACRO button [1]–[8]</li>
+  <li><strong>Macros 1–100:</strong> <span class="menu-path">[MENU] → Macro → Execute</span> → select number</li>
+  <li><strong>Expand to 24 buttons:</strong> <span class="menu-path">[MENU] → Macro → Button Assign → Number of MACRO Button → 24</span></li>
+</ul>
+
+<h3>Church Production Macro Examples</h3>
+<div class="card card-warn">
+<h4>Macro 1: "Sermon Start"</h4>
+<ol>
+  <li>Camera Preset Recall → Pulpit close-up (Preset 2)</li>
+  <li>DSK On → Lower third "Pastor [Name]"</li>
+  <li>Audio Input Level → Boost pulpit mic</li>
+  <li>Wait → 5 seconds</li>
+  <li>DSK Off → Remove lower third</li>
+</ol>
+
+<h4>Macro 2: "Hymn Transition"</h4>
+<ol>
+  <li>Camera Preset Recall → Wide choir shot (Preset 4)</li>
+  <li>PGM Take → Switch to choir camera</li>
+  <li>Audio Input Level → Boost choir mics</li>
+  <li>Audio Input Mute → Mute pulpit mic</li>
+</ol>
+
+<h4>Macro 3: "Stream Safety"</h4>
+<ol>
+  <li>Output Fade → Fade to black</li>
+  <li>DSK Source → "We'll Be Right Back" still image</li>
+  <li>DSK On → Show holding card</li>
+  <li>Audio Output Mute → Mute all output</li>
+</ol>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 9: SEQUENCER -->
+<h2 id="sequencer">9. 📋 Sequencer — 1,000-Step Automation</h2>
+<p><span class="badge badge-page">Manual p.89–94</span></p>
+
+<div class="card">
+The sequencer chains <strong>scene memories, macros, and video switches</strong> into a linear timeline. Press [NEXT] to advance through each step — like a show cue list. Up to <strong>1,000 steps</strong>.
+</div>
+
+<h3>What You Can Sequence</h3>
+<table>
+  <tr><th>Function</th><th>Description</th></tr>
+  <tr><td>PGM Take</td><td>Switch the final output video</td></tr>
+  <tr><td>Scene Memory</td><td>Recall any of the 32 scenes</td></tr>
+  <tr><td>Macro</td><td>Execute any of the 100 macros</td></tr>
+</table>
+
+<h3>Running the Sequencer</h3>
+<div class="card">
+  <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Long-press SEQUENCER [ON]</strong> → Sequencer activates (button lights up)</div></div>
+  <div class="step"><span class="step-num">2</span><div class="step-text">Press <strong>[NEXT]</strong> → Executes first function. Button blinks during execution, stays lit when done.</div></div>
+  <div class="step"><span class="step-num">3</span><div class="step-text">Press <strong>[NEXT]</strong> again → Advances to next step</div></div>
+  <div class="step"><span class="step-num">4</span><div class="step-text">Press <strong>[PREVIOUS]</strong> → Go back one step</div></div>
+  <div class="step"><span class="step-num">5</span><div class="step-text"><strong>Long-press SEQUENCER [ON]</strong> again → Turn off</div></div>
+</div>
+
+<h3>Auto Sequence (Hands-Free)</h3>
+<p>Each step can have a timing value:</p>
+<table>
+  <tr><th>Value</th><th>Behavior</th></tr>
+  <tr><td><code>Pause</code></td><td>Pauses. Press [NEXT] to continue manually.</td></tr>
+  <tr><td><code>Auto</code></td><td>Immediately executes the next step</td></tr>
+  <tr><td><code>1–120sec</code></td><td>Waits X seconds, then auto-advances</td></tr>
+</table>
+
+<div class="card card-warn">
+<span class="badge badge-tip">TIP</span> Enable <strong>Repeat Execute</strong> (<span class="menu-path">[MENU] → Sequencer → Repeat Execute → ON</span>) to loop the sequence continuously — great for pre-service loops.
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 10: SWITCHING -->
+<h2 id="switching">10. 🔀 Video Switching Modes</h2>
+<p><span class="badge badge-page">Manual p.19–22</span></p>
+
+<table>
+  <tr><th>Mode</th><th>How It Works</th><th>Best For</th></tr>
+  <tr><td><strong>PGM/PST</strong></td><td>PGM/A bus = always live. PST/B = preview (next shot). Press [AUTO] or [CUT] to switch.</td><td>Church production (recommended)</td></tr>
+  <tr><td><strong>A/B</strong></td><td>Fader determines which bus is live. Slide fader to transition.</td><td>Smooth manual transitions</td></tr>
+  <tr><td><strong>Dissolve</strong></td><td>Select source → immediately outputs. Quick selection mode.</td><td>Fast one-man operation</td></tr>
+  <tr><td><strong>PGM/PST(16)</strong></td><td>All 16 buttons are PST/B cross-points. Maximum source access.</td><td>Complex multi-source shows</td></tr>
+</table>
+
+<p><span class="menu-path">[MENU] → System → Panel Operation</span> to change modes.</p>
+
+<h3>Transition Types</h3>
+<p><span class="menu-path">[MENU] → Mix/Wipe</span></p>
+<ul>
+  <li><strong>Mix (Dissolve):</strong> Smooth crossfade between sources</li>
+  <li><strong>Wipe:</strong> Various patterns (horizontal, vertical, diagonal, circle, etc.)</li>
+  <li><strong>Cut:</strong> Instant switch (press [CUT] button)</li>
+  <li><strong>Auto:</strong> Automated transition at set speed (press [AUTO] button)</li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 11: DSK -->
+<h2 id="dsk">11. 🎨 DSK — Downstream Keyer (Graphics Overlay)</h2>
+<p><span class="badge badge-page">Manual p.41–48</span></p>
+
+<div class="card">
+DSK overlays graphics (lower thirds, titles, logos, lyrics) <strong>on top of the final output</strong>. This is the key feature James mentioned — your primary graphics role.
+</div>
+
+<h3>Key Concepts</h3>
+<ul>
+  <li><strong>Source:</strong> What image/video gets overlaid (HDMI input, SDI input, still image, video player)</li>
+  <li><strong>Key Type:</strong> Luminance (bright parts show) or Chroma (color-based, like green screen)</li>
+  <li><strong>Still images with alpha:</strong> Load PNG images with transparency for clean overlays</li>
+  <li><strong>Graphics Presenter:</strong> Companion software that sends graphics via HDMI for DSK compositing</li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 12: PinP -->
+<h2 id="pinp">12. 🖼️ Picture-in-Picture (PinP)</h2>
+<p><span class="badge badge-page">Manual p.38–40</span></p>
+
+<ul>
+  <li><strong>2 independent PinP layers</strong> (PinP&Key 1 and PinP&Key 2)</li>
+  <li>Each can be positioned, sized, and cropped independently</li>
+  <li>Supports key compositing (transparency) on the inset screen</li>
+  <li>Source: Any HDMI/SDI input, still image, or video player</li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 13: AUDIO -->
+<h2 id="audio">13. 🔊 Audio Mixing — 28 Channels</h2>
+<p><span class="badge badge-page">Manual p.49–65</span></p>
+
+<div class="card">
+<strong>28-channel digital audio mixer built in.</strong> Includes: analog inputs, HDMI embedded audio, SDI embedded audio, USB audio, Bluetooth audio, and audio player.
+</div>
+
+<h3>Key Audio Features</h3>
+<table>
+  <tr><th>Feature</th><th>What It Does</th></tr>
+  <tr><td>Audio Follow</td><td>Automatically adjusts audio when you switch video sources</td></tr>
+  <tr><td>Auto Mixing</td><td>Auto-manages multiple mic volumes (great for panel discussions)</td></tr>
+  <tr><td>Echo Canceller</td><td>Removes echo from Zoom/web conference feeds</td></tr>
+  <tr><td>Anti-Feedback</td><td>Reduces PA system feedback</td></tr>
+  <tr><td>Voice Changer</td><td>Alter voice characteristics</td></tr>
+  <tr><td>Reverb</td><td>Add reverb effect</td></tr>
+  <tr><td>Adaptive Noise Reduction</td><td>AI-based noise cleanup</td></tr>
+  <tr><td>Loudness AGC</td><td>Auto-levels volume for comfortable listening</td></tr>
+  <tr><td>Compressor/Limiter</td><td>Prevents audio clipping</td></tr>
+  <tr><td>EQ (Per Channel)</td><td>Equalization for each input and output</td></tr>
+  <tr><td>HPF / De-Esser / Noise Gate</td><td>Per-channel audio cleanup</td></tr>
+  <tr><td>AUX Bus (2 independent)</td><td>Separate audio feeds (monitor mix, recording mix, etc.)</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- SECTION 14: STREAMING -->
+<h2 id="streaming">14. 📡 Live Streaming & Recording</h2>
+<p><span class="badge badge-page">Manual p.66–75</span></p>
+
+<h3>Built-In Streaming Support</h3>
+<ul>
+  <li><strong>YouTube Live</strong> — direct integration</li>
+  <li><strong>Facebook Live</strong> — direct integration</li>
+  <li><strong>Twitch</strong> — direct integration</li>
+  <li><strong>Custom RTMP</strong> — any streaming service</li>
+  <li><strong>SRT</strong> — low-latency professional streaming (input AND output)</li>
+  <li><strong>USB streaming</strong> — appears as webcam to computer (for Zoom, etc.)</li>
+</ul>
+
+<h3>Recording</h3>
+<ul>
+  <li>Direct recording to SD card or USB flash drive</li>
+  <li>Stream AND record simultaneously</li>
+  <li>External recorder control via HDMI (start/stop from the board)</li>
+  <li>Safety Delay feature to catch mistakes before they go live</li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 15: REMOTE CONTROL -->
+<h2 id="remote">15. 📱 Remote Control Options</h2>
+<p><span class="badge badge-page">Manual p.110</span></p>
+
+<table>
+  <tr><th>App/Method</th><th>Platform</th><th>Connection</th><th>Features</th></tr>
+  <tr><td><strong>V-80HD Remote</strong></td><td>iPad</td><td>Bluetooth, Wi-Fi, USB</td><td>Full switching, PTZ control, video monitoring</td></tr>
+  <tr><td><strong>V-80HD RCS</strong></td><td>Windows / Mac</td><td>Wi-Fi, USB, LAN, RS-232</td><td>Full board control from computer</td></tr>
+  <tr><td><strong>VenuSet</strong></td><td>iPadOS / Windows / macOS</td><td>LAN</td><td>Customizable control panels, scene recall</td></tr>
+  <tr><td><strong>LAN/RS-232 Commands</strong></td><td>Any device</td><td>LAN or RS-232</td><td>Full automation via command protocol</td></tr>
+  <tr><td><strong>MIDI</strong></td><td>Any MIDI controller</td><td>Various</td><td>Map any control to MIDI</td></tr>
+</table>
+
+<div class="card card-highlight">
+<span class="badge badge-tip">TIP</span> Download <strong>V-80HD Remote</strong> for iPad — it gives you touch-based PTZ control with live video monitoring. This is the best joystick replacement for smooth, real-time camera moves during live production.
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 16: TALLY -->
+<h2 id="tally">16. 💡 Smart Tally & GPIO</h2>
+<p><span class="badge badge-page">Manual p.103–107</span></p>
+
+<ul>
+  <li><strong>Smart Tally:</strong> Web-based tally via wireless LAN — any phone/tablet can show tally status</li>
+  <li><strong>Wired Tally:</strong> Via TALLY/GPIO connector (16 GPO outputs)</li>
+  <li><strong>PTZ Camera Tally:</strong> Set the Tally Channel for each camera — tally light activates automatically when that camera is the live output</li>
+</ul>
+
+<hr class="divider">
+
+<!-- SECTION 17: BACKUP -->
+<h2 id="backup">17. 💾 Backup & Restore</h2>
+<p><span class="badge badge-page">Manual p.95–96</span></p>
+
+<div class="card">
+<strong>Back up EVERYTHING</strong> to SD card or USB flash drive as a single <code>.v80</code> file. Includes all scenes, macros, sequencer, settings.
+<br><br>
+<span class="menu-path">[MENU] → SD Card/USB Flash Drive → Backup All Settings</span>
+<br><br>
+<span class="badge badge-key">DO THIS</span> Before every service. One file. 30 seconds. Complete peace of mind.
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 18: VIDEOS -->
+<h2 id="videos">18. 🎥 Video Resources & Manual Links</h2>
+
+<a class="video-link" href="https://youtube.com/watch?v=cibb1kOc6uI" target="_blank">
+  <div class="title">✅ Video 1 — Introducing Roland V-80HD (WATCHED)</div>
+  <div class="desc">Official Roland overview. Full feature set, inputs/outputs, 4K scaling.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=krykIcCkWM4" target="_blank">
+  <div class="title">✅ Video 2 — Corporate Event Setup (WATCHED)</div>
+  <div class="desc">Real-world setup. Camera routing, cuts, show management.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=NxHmlvchiMc" target="_blank">
+  <div class="title">🔴 Video 3 — DSK Graphics Overlay (V-8HD, same workflow)</div>
+  <div class="desc">How to add graphics using Downstream Keying. Your primary graphics role.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=kPv7k6OWbt4" target="_blank">
+  <div class="title">🔴 Video 4 — VenuSet App Tutorial (PTZ + Remote Control)</div>
+  <div class="desc">iPad/desktop app for remote control, scene recall, PTZ, audio mixing. CRITICAL for joystick replacement.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=8vyJd4D7lL8" target="_blank">
+  <div class="title">🔴 Video 5 — Graphics Presenter Tutorial</div>
+  <div class="desc">Overlays, still images, PNG alpha compositing with DSK.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=0oa1EHH-2yU" target="_blank">
+  <div class="title">🔴 Video 6 — Yamaha DM3 Integration</div>
+  <div class="desc">Audio mixer control from the V-80HD board. Macro triggers.</div>
+</a>
+
+<a class="video-link" href="https://youtube.com/watch?v=yLIwo-OQygs" target="_blank">
+  <div class="title">🔴 Video 7 — Compact Powerhouse (Third-party review)</div>
+  <div class="desc">Updated features overview from external reviewer.</div>
+</a>
+
+<h3>📄 Official Documentation</h3>
+<a class="video-link" href="https://proav.roland.com/global/support/by_product/v-80hd/owners_manuals/" target="_blank">
+  <div class="title">📕 V-80HD Reference Manual (Full PDF)</div>
+  <div class="desc">166 pages. The complete bible for every feature. Download this.</div>
+</a>
+
+<a class="video-link" href="https://proav.roland.com/global/support/by_product/v-80hd/support_documents/431c2433-5cbe-48e1-a427-2433ea7c1258" target="_blank">
+  <div class="title">📋 PTZ Camera Compatibility List</div>
+  <div class="desc">Official list of supported cameras by brand, model, and protocol.</div>
+</a>
+
+<a class="video-link" href="https://proav.roland.com/global/products/v-80hd" target="_blank">
+  <div class="title">🌐 V-80HD Product Page</div>
+  <div class="desc">Specs, downloads, app links, firmware updates.</div>
+</a>
+
+<hr class="divider">
+
+<!-- SECTION 19: CHEAT SHEET -->
+<h2 id="cheatsheet">19. ⚡ Quick Reference Cheat Sheet</h2>
+
+<div class="card card-success">
+<h3>Most Used Menu Paths</h3>
+<table>
+  <tr><th>Action</th><th>Menu Path</th></tr>
+  <tr><td>PTZ Camera Setup</td><td><span class="menu-path">[MENU] → Camera Control</span></td></tr>
+  <tr><td>Network/LAN Setup</td><td><span class="menu-path">[MENU] → Network → LAN Setup</span></td></tr>
+  <tr><td>Save Scene</td><td><span class="menu-path">[MODE] → MEMORY → Long-press [1]–[8]</span></td></tr>
+  <tr><td>Recall Scene</td><td><span class="menu-path">[MODE] → MEMORY → Press [1]–[8]</span></td></tr>
+  <tr><td>Edit Macro</td><td><span class="menu-path">[MENU] → Macro → Edit</span></td></tr>
+  <tr><td>Record Macro Live</td><td><span class="menu-path">Long-press MACRO button</span></td></tr>
+  <tr><td>Run Macro</td><td><span class="menu-path">[MODE] → MACRO → Press [1]–[8]</span></td></tr>
+  <tr><td>Sequencer On</td><td><span class="menu-path">Long-press SEQUENCER [ON]</span></td></tr>
+  <tr><td>Advance Sequencer</td><td><span class="menu-path">Press [NEXT]</span></td></tr>
+  <tr><td>Setup Pads</td><td><span class="menu-path">Press ASSIGNABLE PADS [SETUP]</span></td></tr>
+  <tr><td>Switch Pad Bank</td><td><span class="menu-path">Hold [SETUP] + Press pad [1]–[8]</span></td></tr>
+  <tr><td>DSK Toggle</td><td><span class="menu-path">[DSK] button on panel</span></td></tr>
+  <tr><td>Switching Mode</td><td><span class="menu-path">[MENU] → System → Panel Operation</span></td></tr>
+  <tr><td>Streaming Start</td><td><span class="menu-path">[MENU] → Stream&Record</span></td></tr>
+  <tr><td>Backup Everything</td><td><span class="menu-path">[MENU] → SD Card/USB → Backup All</span></td></tr>
+</table>
+</div>
+
+<div class="card card-warn">
+<h3>🔑 Key Shortcuts</h3>
+<ul>
+  <li><strong>[CUT]</strong> — Instant video switch</li>
+  <li><strong>[AUTO]</strong> — Transition with effect (mix/wipe)</li>
+  <li><strong>[MODE]</strong> — Cycle between MEMORY / MACRO / normal mode</li>
+  <li><strong>Long-press MACRO button</strong> — Start live macro recording</li>
+  <li><strong>Long-press MEMORY button</strong> — Save scene</li>
+  <li><strong>Long-press SEQUENCER [ON]</strong> — Toggle sequencer</li>
+  <li><strong>Hold [SETUP] + pad</strong> — Switch assignable pad bank</li>
+</ul>
+</div>
+
+<div class="card" style="text-align:center; margin-top:32px; padding:24px;">
+  <p style="font-size:1.1rem; color:var(--accent2);">⚡ Built by Pulse for Jon Isaac ⚡</p>
+  <p style="color:var(--muted); font-size:0.8rem;">Island Development Crew × CHAC AV System<br>Source: Roland V-80HD Reference Manual (Official, 166 pages)</p>
+</div>
+
+</body>
+</html>

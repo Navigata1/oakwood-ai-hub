@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI × Pathfinders — Oakwood Christian Crusaders</title>
+    <meta name="description" content="The next honor isn't in a book — it's in building the future. AI literacy for Oakwood Christian Crusaders Pathfinder Club.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1B2A4A;
+            --navy-deep: #0E1929;
+            --navy-mid: #2C4A7C;
+            --navy-light: #3D6098;
+            --gold: #D4A017;
+            --gold-light: #F5C24C;
+            --gold-soft: #FFF3D6;
+            --red: #C41E3A;
+            --red-soft: rgba(196,30,58,0.08);
+            --forest: #1B5E20;
+            --cream: #FEFCF6;
+            --warm-gray: #F5F3F0;
+            --mist: #FAFAF8;
+            --ink: #0A0A0A;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: var(--mist);
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ─── ANIMATIONS ────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.12s; }
+        .reveal-delay-2 { transition-delay: 0.24s; }
+        .reveal-delay-3 { transition-delay: 0.36s; }
+        .reveal-delay-4 { transition-delay: 0.48s; }
+        .reveal-delay-5 { transition-delay: 0.6s; }
+
+        .scale-reveal {
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-reveal.active { opacity: 1; transform: scale(1); }
+
+        /* ─── STICKY NAV ────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0.85rem 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+        }
+        .nav.scrolled {
+            background: rgba(250,250,248,0.88);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 0.6rem 0;
+        }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1120px; margin: 0 auto; padding: 0 2rem;
+        }
+        .nav-brand {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            color: white; letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .nav.scrolled .nav-brand { color: var(--navy); }
+        .nav-brand .shield-img { width: 26px; height: 26px; object-fit: contain; }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.82rem; font-weight: 500;
+            text-decoration: none; color: rgba(255,255,255,0.75);
+            transition: color 0.3s; letter-spacing: 0.3px;
+        }
+        .nav.scrolled .nav-links a { color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-cta {
+            font-size: 0.78rem !important; font-weight: 600 !important;
+            background: var(--gold) !important; color: var(--navy-deep) !important;
+            padding: 0.5rem 1.3rem; border-radius: 50px;
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover { background: var(--gold-light) !important; transform: scale(1.05); }
+
+        @media (max-width: 768px) { .nav-links { display: none; } }
+
+        /* ─── HERO ──────────────────────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            background: var(--navy-deep);
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('./hero-pathfinders.png') center/cover no-repeat;
+            opacity: 0.35; transform: scale(1.1);
+            will-change: transform;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg,
+                rgba(14,25,41,0.6) 0%,
+                rgba(27,42,74,0.5) 40%,
+                rgba(14,25,41,0.95) 100%
+            );
+        }
+        .hero-particles {
+            position: absolute; inset: 0; overflow: hidden;
+        }
+        .hero-particles span {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: float-particle 8s ease-in-out infinite;
+            opacity: 0;
+        }
+        @keyframes float-particle {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            50% { transform: translateY(-200px) scale(1); }
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center; padding: 2rem; max-width: 950px;
+        }
+
+        .hero-badge-group {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 1rem; margin-bottom: 2.5rem;
+        }
+        .hero-emblem {
+            width: 100px; height: 100px; border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(212,160,23,0.25);
+            animation: emblem-glow 4s ease-in-out infinite;
+        }
+        .hero-emblem img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+        @keyframes emblem-glow {
+            0%, 100% { box-shadow: 0 8px 40px rgba(212,160,23,0.25); }
+            50% { box-shadow: 0 8px 60px rgba(212,160,23,0.45); }
+        }
+
+        .hero-club-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(212,160,23,0.15);
+            border: 1px solid rgba(212,160,23,0.35);
+            border-radius: 50px; padding: 0.45rem 1.4rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.72rem; font-weight: 600;
+            color: var(--gold-light);
+            text-transform: uppercase; letter-spacing: 3px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 5px; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: ''; position: absolute; top: 50%;
+            width: 50px; height: 1px;
+        }
+        .hero-eyebrow::before {
+            right: calc(100% + 16px);
+            background: linear-gradient(to left, var(--gold), transparent);
+        }
+        .hero-eyebrow::after {
+            left: calc(100% + 16px);
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .hero h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.6rem, 6.5vw, 4.8rem);
+            font-weight: 800; color: white;
+            line-height: 1.08; letter-spacing: -0.035em;
+            margin-bottom: 1.75rem;
+        }
+        .hero h1 .thin { font-weight: 300; display: block; color: rgba(255,255,255,0.6); }
+        .hero h1 .gold-text {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), #E8A800);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400;
+            color: rgba(255,255,255,0.6); line-height: 1.75;
+            max-width: 640px; margin: 0 auto 3rem;
+        }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            padding: 0.95rem 2.4rem; border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; border: none;
+        }
+        .btn-gold {
+            background: var(--gold); color: var(--navy-deep);
+            box-shadow: 0 4px 28px rgba(212,160,23,0.3);
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 36px rgba(212,160,23,0.45);
+            background: var(--gold-light);
+        }
+        .btn-ghost {
+            background: transparent; color: white;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.35);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute; bottom: 2.5rem;
+            left: 50%; transform: translateX(-50%); z-index: 2;
+        }
+        .hero-scroll span {
+            display: block; width: 24px; height: 42px;
+            border: 2px solid rgba(255,255,255,0.25); border-radius: 12px;
+            position: relative;
+        }
+        .hero-scroll span::before {
+            content: ''; position: absolute; top: 6px;
+            left: 50%; transform: translateX(-50%);
+            width: 3px; height: 8px;
+            background: var(--gold); border-radius: 2px;
+            animation: scroll-dot 2.2s ease-in-out infinite;
+        }
+        @keyframes scroll-dot {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 22px; opacity: 0.2; }
+        }
+
+        /* ─── STATS RIBBON ──────────────────────────── */
+        .stats-ribbon {
+            background: var(--navy-deep);
+            padding: 3.5rem 0; position: relative; overflow: hidden;
+        }
+        .stats-ribbon::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('./abstract-shield.png') center/cover no-repeat;
+            opacity: 0.08;
+        }
+        .stats-inner {
+            position: relative; display: flex;
+            justify-content: center; gap: 5rem; flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.8rem; font-weight: 800;
+            color: var(--gold); line-height: 1;
+        }
+        .stat-label {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.78rem; font-weight: 500;
+            color: rgba(255,255,255,0.45); margin-top: 0.5rem;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+
+        /* ─── SECTION UTILITIES ─────────────────────── */
+        .overline {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 4px; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.5rem;
+        }
+        .section-heading {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800; letter-spacing: -0.035em;
+            line-height: 1.1; color: var(--text-primary); margin-bottom: 2rem;
+        }
+        .section-heading .muted { color: var(--text-secondary); font-weight: 300; }
+        .body-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.12rem; line-height: 1.85;
+            color: var(--text-secondary); max-width: 680px;
+            margin: 0 auto 2rem;
+        }
+        .body-text strong { color: var(--text-primary); }
+
+        /* ─── WHY AI SECTION ────────────────────────── */
+        .why-section {
+            padding: 10rem 0; background: var(--mist); text-align: center;
+        }
+        .quote-highlight {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 600; color: var(--navy);
+            max-width: 800px; margin: 3rem auto;
+            padding: 2rem 2.5rem;
+            background: var(--gold-soft);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 16px 16px 0;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .quote-highlight em { color: var(--red); font-style: normal; font-weight: 800; }
+
+        /* ─── ERA TIMELINE (Card-Based) ──────────── */
+        .era-timeline {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem; max-width: 960px; margin: 4rem auto 0;
+        }
+        @media (max-width: 768px) { .era-timeline { grid-template-columns: 1fr; gap: 1.25rem; } }
+
+        .era-card {
+            position: relative; border-radius: 20px; overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+        }
+        .era-card:hover { transform: translateY(-8px) scale(1.02); }
+
+        .era-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .era-card:hover img { transform: scale(1.08); }
+
+        .era-overlay {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-end;
+            padding: 1.5rem; text-align: center;
+        }
+        .era-card:nth-child(1) .era-overlay { background: linear-gradient(180deg, transparent 30%, rgba(14,25,41,0.92) 100%); }
+        .era-card:nth-child(2) .era-overlay { background: linear-gradient(180deg, transparent 30%, rgba(44,74,124,0.92) 100%); }
+        .era-card:nth-child(3) .era-overlay { background: linear-gradient(180deg, transparent 30%, rgba(212,160,23,0.85) 100%); }
+
+        .era-year {
+            font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 800;
+            color: white; line-height: 1; margin-bottom: 0.25rem;
+        }
+        .era-card:nth-child(3) .era-year { color: var(--navy-deep); }
+
+        .era-name {
+            font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
+            color: white; margin-bottom: 0.25rem;
+        }
+        .era-card:nth-child(3) .era-name { color: var(--navy-deep); }
+
+        .era-fear {
+            font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+            color: rgba(255,255,255,0.6); font-style: italic;
+        }
+        .era-card:nth-child(3) .era-fear { color: rgba(14,25,41,0.6); }
+
+        .era-connector {
+            display: none; /* hidden on mobile, visible on desktop as visual flow */
+        }
+        @media (min-width: 769px) {
+            .era-card { box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+            .era-card:nth-child(3) { box-shadow: 0 12px 40px rgba(212,160,23,0.3); }
+        }
+
+        /* ─── IMAGE BREAK ────────────────────────────── */
+        .image-break {
+            position: relative; height: 55vh; min-height: 380px; overflow: hidden;
+        }
+        .image-break img { width: 100%; height: 100%; object-fit: cover; }
+        .image-break .overlay-text {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: linear-gradient(180deg, rgba(14,25,41,0.2) 0%, rgba(27,42,74,0.7) 100%);
+            text-align: center; padding: 2rem;
+        }
+        .image-break .overlay-text h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 800; color: white; letter-spacing: -0.02em; max-width: 700px;
+        }
+        .image-break .overlay-text p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-top: 1rem; max-width: 500px;
+        }
+
+        /* ─── PATHFINDER PHILOSOPHY ──────────────────── */
+        .philosophy-section { padding: 8rem 0; background: var(--navy-deep); color: white; }
+        .phil-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 5rem; align-items: center;
+        }
+        @media (max-width: 768px) { .phil-grid { grid-template-columns: 1fr; } }
+
+        .phil-image {
+            border-radius: 24px; overflow: hidden;
+            box-shadow: 0 28px 72px rgba(0,0,0,0.3);
+        }
+        .phil-image img {
+            width: 100%; height: auto; display: block;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .phil-image:hover img { transform: scale(1.04); }
+
+        .phil-text .overline { color: var(--gold); }
+        .phil-text h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800; letter-spacing: -0.025em;
+            color: white; line-height: 1.15; margin-bottom: 1.5rem;
+        }
+        .phil-text p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.05rem; line-height: 1.8;
+            color: rgba(255,255,255,0.6); margin-bottom: 1rem;
+        }
+        .phil-text p strong { color: white; }
+
+        .tripod {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1rem; margin-top: 2rem;
+        }
+        @media (max-width: 600px) { .tripod { grid-template-columns: 1fr; } }
+        .tripod-item {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 1.25rem; text-align: center;
+            transition: all 0.3s;
+        }
+        .tripod-item:hover { border-color: var(--gold); background: rgba(212,160,23,0.05); }
+        .tripod-item .tripod-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            overflow: hidden; margin: 0 auto 0.5rem;
+        }
+        .tripod-item .tripod-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+        .tripod-item h4 {
+            font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+            color: var(--gold); margin-bottom: 0.25rem;
+        }
+        .tripod-item p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem; color: rgba(255,255,255,0.45); margin: 0;
+        }
+
+        /* ─── WHAT YOU'LL BUILD ──────────────────────── */
+        .build-section { padding: 8rem 0; background: white; }
+        .build-header { text-align: center; margin-bottom: 5rem; }
+
+        .build-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        @media (max-width: 768px) { .build-grid { grid-template-columns: 1fr; } }
+
+        .build-card {
+            background: var(--warm-gray); border-radius: 24px;
+            padding: 2.5rem 2rem 2rem; transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .build-card::before {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(to right, var(--navy), var(--gold));
+            transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
+        }
+        .build-card:hover::before { transform: scaleX(1); }
+        .build-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.08);
+            background: white;
+        }
+        .build-icon-wrap {
+            width: 72px; height: 72px; border-radius: 18px;
+            overflow: hidden; margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(27,42,74,0.15);
+        }
+        .build-icon-wrap img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 18px;
+        }
+        .build-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.12rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 0.75rem;
+        }
+        .build-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);
+        }
+        .build-tag {
+            display: inline-block; margin-top: 1rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.68rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            color: var(--navy); background: rgba(27,42,74,0.07);
+            padding: 0.3rem 0.85rem; border-radius: 50px;
+        }
+
+        /* ─── PROGRESSIVE CLASSES (HONORS) ──────────── */
+        .honors-section { padding: 8rem 0; background: var(--warm-gray); }
+        .honors-header { text-align: center; margin-bottom: 4rem; }
+
+        .honors-track {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+            max-width: 1000px; margin: 0 auto;
+        }
+        @media (max-width: 768px) { .honors-track { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .honors-track { grid-template-columns: 1fr; } }
+
+        .honor-card {
+            background: white; border-radius: 20px;
+            padding: 2rem 1.5rem; text-align: center;
+            position: relative; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid transparent;
+        }
+        .honor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 56px rgba(27,42,74,0.1);
+            border-color: var(--gold);
+        }
+
+        .honor-badge {
+            width: 72px; height: 72px; border-radius: 50%;
+            margin: 0 auto 1.25rem; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .honor-badge img { width: 100%; height: 100%; object-fit: cover; }
+        .honor-card:nth-child(4) .honor-badge { box-shadow: 0 0 24px rgba(212,160,23,0.3); }
+
+        .honor-card .class-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold); margin-bottom: 0.5rem;
+        }
+        .honor-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 0.75rem;
+        }
+        .honor-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem; line-height: 1.65; color: var(--text-secondary);
+        }
+        .honor-card .grade-tag {
+            display: inline-block; margin-top: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem; font-weight: 600;
+            padding: 0.25rem 0.75rem; border-radius: 50px;
+            background: rgba(27,42,74,0.05); color: var(--navy-mid);
+        }
+
+        /* ─── WHO IT'S FOR ──────────────────────────── */
+        .who-section { padding: 8rem 0; background: var(--navy-deep); color: white; }
+        .who-header { text-align: center; margin-bottom: 5rem; }
+        .who-header .section-heading { color: white; }
+
+        .who-tracks {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        @media (max-width: 768px) { .who-tracks { grid-template-columns: 1fr; } }
+
+        .who-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 2.5rem 2rem; text-align: center;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .who-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: var(--gold); transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(212,160,23,0.1);
+        }
+        .who-card-icon {
+            width: 100px; height: 100px; border-radius: 50%;
+            margin: 0 auto 1.5rem; overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .who-card-icon::before {
+            content: ''; position: absolute; inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--navy-mid), var(--gold));
+            z-index: 0;
+        }
+        .who-card-icon img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 50%; position: relative; z-index: 1;
+            border: 3px solid var(--navy-deep);
+        }
+        .who-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.15rem; font-weight: 700;
+        }
+        .who-card .age {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--gold); margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+        .who-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; line-height: 1.7;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* ─── SCHEDULE ──────────────────────────────── */
+        .schedule-section { padding: 8rem 0; background: white; }
+        .schedule-header { text-align: center; margin-bottom: 4rem; }
+        .schedule-header p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem; color: var(--text-secondary);
+        }
+
+        .schedule-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        }
+        .sched-card {
+            background: var(--warm-gray); border-radius: 24px;
+            padding: 2.5rem 2rem; position: relative; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .sched-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 56px rgba(0,0,0,0.07);
+            background: white;
+        }
+        .sched-card .accent-bar {
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        }
+        .sched-card:nth-child(1) .accent-bar { background: var(--navy); }
+        .sched-card:nth-child(2) .accent-bar { background: var(--gold); }
+        .sched-card:nth-child(3) .accent-bar { background: linear-gradient(to right, var(--navy), var(--gold)); }
+
+        .sched-day {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2.5px;
+            color: var(--gold); margin-bottom: 0.75rem;
+        }
+        .sched-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 0.75rem;
+        }
+        .sched-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);
+        }
+        .sched-time {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            margin-top: 1.25rem;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.82rem; font-weight: 600;
+            color: var(--navy); background: rgba(27,42,74,0.06);
+            padding: 0.4rem 1rem; border-radius: 50px;
+        }
+
+        /* ─── INSTRUCTOR ────────────────────────────── */
+        .instructor-section { padding: 8rem 0; background: var(--warm-gray); }
+        .instructor-layout {
+            display: grid; grid-template-columns: 200px 1fr; gap: 3.5rem;
+            align-items: start; max-width: 800px; margin: 0 auto;
+        }
+        @media (max-width: 600px) {
+            .instructor-layout { grid-template-columns: 1fr; text-align: center; }
+        }
+        .instructor-photo {
+            width: 200px; height: 200px; border-radius: 24px;
+            background: linear-gradient(135deg, var(--navy), var(--gold));
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 0.25rem;
+            box-shadow: 0 16px 48px rgba(27,42,74,0.2);
+        }
+        .instructor-photo .initials {
+            font-family: 'Sora', serif; font-size: 3.5rem; font-weight: 900;
+            color: white; line-height: 1;
+        }
+        .instructor-photo .mg-badge {
+            font-family: 'Sora', sans-serif; font-size: 0.55rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold-light);
+            background: rgba(0,0,0,0.3); padding: 0.2rem 0.6rem; border-radius: 50px;
+        }
+        .instructor-meta h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.8rem; font-weight: 800;
+            color: var(--text-primary); margin-bottom: 0.25rem;
+        }
+        .instructor-meta .title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.9rem; font-weight: 500;
+            color: var(--navy-mid); margin-bottom: 1.25rem;
+        }
+        .instructor-meta p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem; line-height: 1.75; color: var(--text-secondary);
+        }
+        .cred-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+        .cred-pill {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.68rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 0.35rem 0.85rem; border-radius: 50px;
+        }
+        .cred-pill-navy { background: rgba(27,42,74,0.07); color: var(--navy); }
+        .cred-pill-gold { background: var(--gold-soft); color: var(--navy-deep); }
+        .cred-pill-red { background: var(--red-soft); color: var(--red); }
+
+        /* ─── OATH SECTION ──────────────────────────── */
+        .oath-section {
+            padding: 6rem 0; background: var(--navy);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .oath-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('./abstract-shield.png') center/cover no-repeat;
+            opacity: 0.06;
+        }
+        .oath-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .oath-content .overline { color: var(--gold); }
+        .oath-text {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 600; color: white; line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .oath-text .highlight {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; font-weight: 800;
+        }
+        .oath-attrib {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+
+        /* ─── FINAL CTA ─────────────────────────────── */
+        .cta-section {
+            padding: 10rem 0; background: var(--ink);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('./cta-together.png') center/cover no-repeat;
+            opacity: 0.15;
+        }
+        .cta-section .container { position: relative; z-index: 1; }
+
+        .cta-section h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800; letter-spacing: -0.035em;
+            color: white; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .cta-section h2 .gold-text {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), #E8A800);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cta-section p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem; color: rgba(255,255,255,0.55);
+            max-width: 550px; margin: 0 auto 3rem; line-height: 1.75;
+        }
+        .cta-presented {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem; color: rgba(255,255,255,0.3);
+            margin-top: 2.5rem; line-height: 1.8;
+        }
+        .cta-presented strong { color: rgba(255,255,255,0.5); }
+
+        /* ─── FOOTER ────────────────────────────────── */
+        .footer {
+            background: var(--navy-deep); padding: 2.5rem 0; text-align: center;
+        }
+        .footer p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.7;
+        }
+        .footer a { color: var(--gold); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .stats-inner { gap: 2rem; }
+            .timeline-strip { flex-direction: column; gap: 1.5rem; }
+            .tl-node::after { display: none; }
+        }
+
+        /* ─── SIGNUP ───────────────────────────────── */
+        .signup-section { padding: 9rem 0; background: var(--mist); }
+        .signup-card {
+            background: white;
+            border-radius: 28px;
+            padding: 3.5rem 3rem;
+            box-shadow: 0 24px 80px rgba(27,42,74,0.12);
+            border: 1px solid rgba(27,42,74,0.08);
+        }
+        .signup-card h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        .signup-card p {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: 'DM Sans', sans-serif;
+            margin-bottom: 2.5rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem 1.6rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--navy);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.08);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            background: var(--warm-gray);
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .full { grid-column: 1 / -1; }
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.6rem;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--warm-gray);
+            border: 1px solid rgba(27,42,74,0.08);
+            padding: 0.6rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .submit-row { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .submit-btn {
+            background: var(--gold);
+            color: var(--navy-deep);
+            border: none;
+            padding: 0.95rem 2.4rem;
+            border-radius: 50px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 32px rgba(212,160,23,0.35);
+            transition: transform 0.25s ease;
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .spinner {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(14,25,41,0.2);
+            border-top-color: var(--navy-deep);
+            border-radius: 50%;
+            display: none;
+            animation: spin 0.8s linear infinite;
+        }
+        .form-status { font-size: 0.9rem; color: var(--navy); }
+        .form-success {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            background: rgba(27,42,74,0.08);
+            color: var(--navy-deep);
+            font-weight: 600;
+        }
+        .form-success.show { display: block; animation: pop 0.6s ease; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pop { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <div class="nav-brand">
+            <img src="./shield-logo.png" alt="OCC" class="shield-img">
+            Oakwood Christian Crusaders
+        </div>
+        <ul class="nav-links">
+            <li><a href="#why">Why AI</a></li>
+            <li><a href="#build">What You'll Build</a></li>
+            <li><a href="#path">The Pathway</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#signup">Register</a></li>
+            <li><a href="#contact" class="nav-cta">Join the Crusaders</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+        <div class="hero-badge-group reveal">
+            <div class="hero-emblem"><img src="./shield-logo.png" alt="Crusaders Shield"></div>
+            <div class="hero-club-badge">Oakwood Christian Crusaders · Pathfinder Club</div>
+        </div>
+        <p class="hero-eyebrow reveal reveal-delay-1">The Next Honor</p>
+        <h1 class="reveal reveal-delay-2">
+            <span class="thin">Build the fire. Tie the knot.</span>
+            <span class="gold-text">Code the future.</span>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-3">
+            Pathfinders have always been builders — of shelters, of character, of community.
+            Now it's time to build with the most powerful tool of our generation.
+            AI literacy for Crusaders. Hands on. Values first. Ship something real.
+        </p>
+        <div class="hero-buttons reveal reveal-delay-4">
+            <a href="#contact" class="btn btn-gold">Join the Program</a>
+            <a href="#why" class="btn btn-ghost">Learn More</a>
+        </div>
+    </div>
+    <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- STATS -->
+<section class="stats-ribbon">
+    <div class="container stats-inner">
+        <div class="stat-item reveal"><div class="stat-number">1950</div><div class="stat-label">Founded</div></div>
+        <div class="stat-item reveal reveal-delay-1"><div class="stat-number">1.5M+</div><div class="stat-label">Pathfinders Worldwide</div></div>
+        <div class="stat-item reveal reveal-delay-2"><div class="stat-number">150+</div><div class="stat-label">Countries</div></div>
+        <div class="stat-item reveal reveal-delay-3"><div class="stat-number">400+</div><div class="stat-label">Honors Available</div></div>
+    </div>
+</section>
+
+<!-- WHY AI -->
+<section class="why-section" id="why">
+    <div class="container">
+        <p class="overline reveal">The Moment We're In</p>
+        <h2 class="section-heading reveal">86% of students already use AI.<br><span class="muted">Who's teaching them how?</span></h2>
+        <p class="body-text reveal">
+            According to the Digital Education Council, the vast majority of students are already using AI in their learning — with or without guidance.
+            Usage surged from 66% in 2024 to 92% in just one year. The question isn't <strong>whether</strong> our Crusaders will use AI.
+            It's whether they'll learn to use it <strong>here</strong>, with values, with purpose, with a Master Guide by their side —
+            or figure it out alone on YouTube.
+        </p>
+
+        <div class="quote-highlight reveal">
+            "The parents who ban AI are not protecting their children.
+            They're <em>delaying</em> the inevitable — and their kids will learn it
+            without guidance, without values, and without the foundation to use it wisely."
+        </div>
+
+        <p class="body-text reveal">
+            Pathfinders have always met the moment. When the world needed young people who could <strong>build a fire from scratch</strong>,
+            we taught them. When it needed young people who could <strong>lead with integrity</strong>, we trained them.
+            Now the world needs young people who can <strong>direct intelligence rather than be directed by it.</strong>
+            That's not a tech problem. That's a Pathfinder problem.
+        </p>
+
+        <div class="era-timeline">
+            <div class="era-card reveal">
+                <img src="./era-calculator.png" alt="1975 Calculator Era">
+                <div class="era-overlay">
+                    <div class="era-year">1975</div>
+                    <div class="era-name">Calculators</div>
+                    <div class="era-fear">"They'll stop learning math"</div>
+                </div>
+            </div>
+            <div class="era-card reveal reveal-delay-1">
+                <img src="./era-internet.png" alt="1995 Internet Era">
+                <div class="era-overlay">
+                    <div class="era-year">1995</div>
+                    <div class="era-name">The Internet</div>
+                    <div class="era-fear">"They'll stop reading books"</div>
+                </div>
+            </div>
+            <div class="era-card reveal reveal-delay-2">
+                <img src="./era-ai.png" alt="2026 AI Era">
+                <div class="era-overlay">
+                    <div class="era-year">2026</div>
+                    <div class="era-name">Artificial Intelligence</div>
+                    <div class="era-fear">"They'll stop thinking"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="image-break scale-reveal">
+    <img src="./icon-camp-tech.png" alt="Where campfire meets code">
+    <div class="overlay-text">
+        <h2>Where campfire meets code.</h2>
+        <p>The same curiosity that earns a Fire Building honor can build an app that serves a community.</p>
+    </div>
+</div>
+
+<!-- PATHFINDER PHILOSOPHY -->
+<section class="philosophy-section">
+    <div class="container">
+        <div class="phil-grid">
+            <div class="phil-image scale-reveal">
+                <img src="./abstract-shield.png" alt="Pathfinder shield meets technology">
+            </div>
+            <div class="phil-text reveal">
+                <p class="overline">The Pathfinder Way</p>
+                <h2>Physical. Mental. Spiritual.<br>Now Digital.</h2>
+                <p>
+                    The Pathfinder philosophy has always been built on a <strong>tripod</strong>: physical development, mental growth, and spiritual grounding.
+                    AI doesn't break that tripod — it <strong>extends</strong> it.
+                </p>
+                <p>
+                    When a Crusader learns to <strong>specify a task precisely</strong> for an AI, they're practicing the same decomposition skills
+                    they use to plan a camp layout. When they <strong>evaluate AI output</strong> for accuracy, they're exercising the critical thinking
+                    we've always cultivated. When they <strong>build something that serves others</strong>, that's ministry through modern tools.
+                </p>
+                <p>
+                    <strong>We don't replace the foundation. We build on it.</strong> Fundamentals first — always. Then we add the AI exoskeleton
+                    that extends what they can do.
+                </p>
+
+                <div class="tripod">
+                    <div class="tripod-item">
+                        <div class="tripod-icon"><img src="./icon-physical.png" alt="Physical"></div>
+                        <h4>Physical</h4>
+                        <p>Hands build. Bodies move. Real world first.</p>
+                    </div>
+                    <div class="tripod-item">
+                        <div class="tripod-icon"><img src="./icon-mental.png" alt="Mental"></div>
+                        <h4>Mental</h4>
+                        <p>Think before you prompt. Evaluate every output.</p>
+                    </div>
+                    <div class="tripod-item">
+                        <div class="tripod-icon"><img src="./icon-spiritual.png" alt="Spiritual"></div>
+                        <h4>Spiritual</h4>
+                        <p>Values-driven. God's tools, God's purpose.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT YOU'LL BUILD -->
+<section class="build-section" id="build">
+    <div class="container">
+        <div class="build-header">
+            <p class="overline reveal">Not Theory. Projects.</p>
+            <h2 class="section-heading reveal">What Crusaders Will Actually Build</h2>
+            <p class="body-text reveal">Every session, every Crusader ships something real. No lectures. No slides. <strong>Build it, test it, deploy it.</strong></p>
+        </div>
+        <div class="build-grid">
+            <div class="build-card reveal">
+                <div class="build-icon-wrap"><img src="./icon-build.png" alt="Build Apps"></div>
+                <h3>Build Real Applications</h3>
+                <p>Mobile apps, web tools, community dashboards — from idea to deployed and live. A 10-year-old can vibe code a real app. We've seen it. She also does math by hand.</p>
+                <span class="build-tag">App Development</span>
+            </div>
+            <div class="build-card reveal reveal-delay-1">
+                <div class="build-icon-wrap"><img src="./icon-create.png" alt="Create Content"></div>
+                <h3>Create Compelling Content</h3>
+                <p>Marketing campaigns, church newsletters, fundraising copy, social media that actually converts. Crusaders write it, AI sharpens it, humans approve it.</p>
+                <span class="build-tag">Communication</span>
+            </div>
+            <div class="build-card reveal reveal-delay-2">
+                <div class="build-icon-wrap"><img src="./icon-lead.png" alt="Lead & Teach"></div>
+                <h3>Lead & Teach Others</h3>
+                <p>Older Crusaders mentor younger ones. High schoolers build curriculum and teach elementary. It's the TLT model — with modern tools. Leadership through service.</p>
+                <span class="build-tag">Leadership</span>
+            </div>
+            <div class="build-card reveal reveal-delay-1">
+                <div class="build-icon-wrap"><img src="./icon-explore.png" alt="Explore Nature + AI"></div>
+                <h3>Explore Nature with AI</h3>
+                <p>Plant identification, wildlife tracking, star mapping, weather prediction — AI doesn't replace the forest. It makes every hike a research expedition.</p>
+                <span class="build-tag">Nature & Science</span>
+            </div>
+            <div class="build-card reveal reveal-delay-2">
+                <div class="build-icon-wrap"><img src="./icon-serve.png" alt="Serve Community"></div>
+                <h3>Serve the Community</h3>
+                <p>Food bank logistics apps. Church event management tools. Outreach campaign websites. When Crusaders serve, they build tools that keep serving long after they leave.</p>
+                <span class="build-tag">Community Service</span>
+            </div>
+            <div class="build-card reveal reveal-delay-3">
+                <div class="build-icon-wrap"><img src="./icon-camp-tech.png" alt="Fuse Traditions"></div>
+                <h3>Fuse Tradition & Innovation</h3>
+                <p>Build a digital orienteering course. Create an AI-powered field guide for camporee. Design an honor tracking app for the whole club. The old skills aren't going anywhere — they're getting upgraded.</p>
+                <span class="build-tag">Pathfinder Innovation</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRESSIVE AI PATHWAY -->
+<section class="honors-section" id="path">
+    <div class="container">
+        <div class="honors-header">
+            <p class="overline reveal">Progressive AI Classes</p>
+            <h2 class="section-heading reveal">The AI Pathway</h2>
+            <p class="body-text reveal" style="text-align:center;">Mapped to the Pathfinder progressive class structure — from <strong>Friend</strong> to <strong>Master Guide</strong>. Build the brain first, then add the tools.</p>
+        </div>
+        <div class="honors-track">
+            <div class="honor-card reveal">
+                <div class="honor-badge"><img src="./badge-friend.png" alt="Friend"></div>
+                <div class="class-name">Friend & Companion</div>
+                <h3>AI Foundations</h3>
+                <p>What AI is and isn't. Critical thinking basics. How to evaluate information. Reading, writing, arithmetic — by hand first. Build the cognitive foundation.</p>
+                <div class="grade-tag">Ages 10–11 · Grades 5–6</div>
+            </div>
+            <div class="honor-card reveal reveal-delay-1">
+                <div class="honor-badge"><img src="./badge-explorer.png" alt="Explorer"></div>
+                <div class="class-name">Explorer & Ranger</div>
+                <h3>AI Builder</h3>
+                <p>Guided AI projects. Build a simple app. Write with AI assistance. Learn to specify tasks precisely. Start evaluating AI outputs against your own thinking.</p>
+                <div class="grade-tag">Ages 12–13 · Grades 7–8</div>
+            </div>
+            <div class="honor-card reveal reveal-delay-2">
+                <div class="honor-badge"><img src="./badge-voyager.png" alt="Voyager"></div>
+                <div class="class-name">Voyager & Guide</div>
+                <h3>AI Director</h3>
+                <p>Multi-step AI workflows. Complex project management. Agent-based tools. Mentor younger Crusaders. Build something the community actually uses.</p>
+                <div class="grade-tag">Ages 14–15 · TLT Track</div>
+            </div>
+            <div class="honor-card reveal reveal-delay-3">
+                <div class="honor-badge"><img src="./badge-master.png" alt="Master Guide"></div>
+                <div class="class-name">Master Guide</div>
+                <h3>AI Architect</h3>
+                <p>Design systems, not just use tools. Teach others. Build curriculum. Deploy solutions. Lead with wisdom. Once a Master Guide, always a Master Guide.</p>
+                <div class="grade-tag">Ages 16+ · Leadership</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OATH -->
+<section class="oath-section">
+    <div class="container">
+        <div class="oath-content">
+            <p class="overline reveal">The Pathfinder Pledge — Extended</p>
+            <p class="oath-text reveal">
+                "By the grace of God, I will be pure, kind, and true.
+                I will keep the Pathfinder Law. I will be a servant of God
+                and a friend to man."<br><br>
+                And I will use every tool He gives me — including this one —
+                to <span class="highlight">sharpen my mind, serve my community,
+                and build something that matters.</span>
+            </p>
+            <p class="oath-attrib reveal">— The Crusaders' AI Commitment</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who-section" id="who">
+    <div class="container">
+        <div class="who-header">
+            <p class="overline reveal">Every Crusader. Every Level.</p>
+            <h2 class="section-heading reveal">Built for the Whole Club</h2>
+        </div>
+        <div class="who-tracks">
+            <div class="who-card reveal">
+                <div class="who-card-icon"><img src="./icon-create.png" alt="Junior Crusaders"></div>
+                <h3>Junior Crusaders</h3>
+                <div class="age">Grades 5–6 · Ages 10–11</div>
+                <p>Introduction to AI through creative projects — art, stories, nature identification. Learn what AI can do, what it can't, and why thinking for yourself comes first. Always.</p>
+            </div>
+            <div class="who-card reveal reveal-delay-1">
+                <div class="who-card-icon"><img src="./icon-build.png" alt="Teen Crusaders"></div>
+                <h3>Teen Crusaders</h3>
+                <div class="age">Grades 7–8 · Ages 12–13</div>
+                <p>Build real projects — apps, websites, campaigns. Learn to specify, evaluate, and iterate. Start mentoring younger Crusaders. Ready for agents by this stage.</p>
+            </div>
+            <div class="who-card reveal reveal-delay-2">
+                <div class="who-card-icon"><img src="./icon-lead.png" alt="TLT & Leaders"></div>
+                <h3>TLT & Leaders</h3>
+                <div class="age">Grades 9–12 · Ages 14–18</div>
+                <p>Teen Leadership Training meets AI mastery. Design curriculum. Teach classes. Build tools the club actually uses. High schoolers teaching elementary — the Pathfinder way, amplified.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+    <div class="container">
+        <div class="schedule-header">
+            <p class="overline reveal">Fits the Pathfinder Calendar</p>
+            <h2 class="section-heading reveal">Proposed Sessions</h2>
+            <p class="reveal">Designed around Sabbath, school, and club schedules.</p>
+        </div>
+        <div class="schedule-cards">
+            <div class="sched-card reveal">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Sunday</div>
+                <h3>Pathfinder AI Lab</h3>
+                <p>Integrated directly into Oakwood Christian Crusaders Pathfinder hours. Project-based, hands-on, values-driven. Every Crusader who shows up builds something real before they leave.</p>
+                <div class="sched-time">During Pathfinder Hours</div>
+            </div>
+            <div class="sched-card reveal reveal-delay-1">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Saturday Evening</div>
+                <h3>Community Open Workshop</h3>
+                <p>After sunset — open to Crusaders, parents, church members, and the broader Huntsville community. Family-friendly. All ages. Come learn alongside your kids.</p>
+                <div class="sched-time">After Sunset · 7:00–8:30 PM</div>
+            </div>
+            <div class="sched-card reveal reveal-delay-2">
+                <div class="accent-bar"></div>
+                <div class="sched-day">Bi-Weekly Weekday</div>
+                <h3>TLT Advanced Track</h3>
+                <p>Deep dives for Teen Leadership Training candidates and adult staff. Advanced AI tools, curriculum design, and preparing to teach. Pairs with Ms. Kimberly Grace Trott's STEM presentations.</p>
+                <div class="sched-time">Every Other Friday · Time TBD</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INSTRUCTOR -->
+<section class="instructor-section">
+    <div class="container">
+        <div class="instructor-layout reveal">
+            <div class="instructor-photo">
+                <span class="initials">JI</span>
+                <span class="mg-badge">Master Guide</span>
+            </div>
+            <div class="instructor-meta">
+                <p class="overline">Your Instructor</p>
+                <h3>Jonathan Isaac</h3>
+                <p class="title">Master Guide · CEO, Island Development Crew · AI Systems Engineer</p>
+                <p>
+                    Not just a technologist — a Master Guide who earned his stripes in the field. As a TLT, Jon taught
+                    <strong>Axe & Hatchet, Fire Building, and Knots</strong> — the hands-on honors that build character before they build skill.
+                    Now he builds multi-agent AI systems professionally and is raising his daughter as a Crusader.
+                </p>
+                <p style="margin-top: 0.75rem;">
+                    His philosophy: <strong>build the foundation first.</strong> Math by hand before math by machine.
+                    Read real books before you summarize with AI. Think before you prompt. Then — and only then — add the tools that extend what you can do.
+                    Once a Master Guide, always a Master Guide.
+                </p>
+                <div class="cred-pills">
+                    <span class="cred-pill cred-pill-gold">Master Guide</span>
+                    <span class="cred-pill cred-pill-navy">AI Systems Architect</span>
+                    <span class="cred-pill cred-pill-navy">15+ Applications</span>
+                    <span class="cred-pill cred-pill-red">TLT Alumni</span>
+                    <span class="cred-pill cred-pill-gold">OAA Parent</span>
+                    <span class="cred-pill cred-pill-navy">Crusader Family</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SIGN UP -->
+<section class="signup-section" id="signup">
+    <div class="container">
+        <div class="signup-card reveal">
+            <h2>Join the Crusaders</h2>
+            <p>Sign up to receive details for the Pathfinder AI Lab and community sessions.</p>
+            <form id="signup-form">
+                <input type="hidden" name="source" value="occ">
+                <input type="hidden" name="tracks" value="">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input id="fullName" name="fullName" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input id="email" name="email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (optional)</label>
+                        <input id="phone" name="phone" type="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="ageGroup">Age Group</label>
+                        <select id="ageGroup" name="ageGroup">
+                            <option value="">Select...</option>
+                            <option>Under 12</option>
+                            <option>12-17</option>
+                            <option>18-25</option>
+                            <option>26-40</option>
+                            <option>41-60</option>
+                            <option>60+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role / Interest</label>
+                        <select id="role" name="role">
+                            <option value="">Select...</option>
+                            <option>Pathfinder (Youth)</option>
+                            <option>Parent/Guardian</option>
+                            <option>Master Guide/Leader</option>
+                            <option>Volunteer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Session Time</label>
+                        <select id="preferredTime" name="preferredTime">
+                            <option value="">Select...</option>
+                            <option>Sunday Pathfinder Hours</option>
+                            <option>Saturday Evening (After Sunset)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experience Level</label>
+                        <select id="experience" name="experience">
+                            <option value="">Select...</option>
+                            <option>Complete Beginner</option>
+                            <option>Some Exposure</option>
+                            <option>Regular User</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label>Track Interest</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Build Apps"> Build Apps</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Create Content"> Create Content</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Lead & Teach"> Lead & Teach</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Explore Nature with AI"> Explore Nature with AI</label>
+                            <label class="checkbox-item"><input type="checkbox" name="track" value="Community Service"> Community Service</label>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label for="hear">How did you hear about us? (optional)</label>
+                        <textarea id="hear" name="hear" placeholder="Pathfinder club, church, friend..."></textarea>
+                    </div>
+                </div>
+                <div class="submit-row">
+                    <button class="submit-btn" type="submit">Submit Interest <span class="spinner"></span></button>
+                    <span class="form-status" id="form-status"></span>
+                </div>
+                <div class="form-success" id="form-success">Thanks! We’ll reach out with next steps soon.</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="container">
+        <h2 class="reveal">The next honor isn't<br>in a book — it's in<br><span class="gold-text">building the future.</span></h2>
+        <p class="reveal">Our Crusaders have always led from the front. Camporees. Service projects. Leadership. This is the next frontier. Don't let them face it alone.</p>
+        <div class="hero-buttons reveal">
+            <a href="mailto:Jon-Isaac@islanddevcrew.com?subject=Oakwood%20Christian%20Crusaders%20AI%20Program" class="btn btn-gold">Get in Touch</a>
+            <a href="sms:+12566688248?body=Hi%20Jon%2C%20I%27m%20interested%20in%20the%20Crusaders%20AI%20program" class="btn btn-ghost">Send a Text</a>
+        </div>
+        <p class="cta-presented reveal">
+            <strong>Oakwood Christian Crusaders</strong> · Pathfinder Club<br>
+            Oakwood University Church · Huntsville, Alabama<br>
+            Taught by <strong>Jonathan Isaac</strong> · Master Guide · Island Development Crew<br>
+            <span style="margin-top: 0.5rem; display: inline-block;">Open to all Crusaders, families, and the broader Pathfinder community</span>
+        </p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>
+        AI Literacy Initiative · <strong>Oakwood Christian Crusaders</strong> Pathfinder Club<br>
+        <a href="https://oucsda.org" target="_blank">Oakwood University Church</a> · 5500 Adventist Blvd NW, Huntsville, AL 35896<br>
+        <span style="opacity: 0.6;">Powered by <strong>Island Development Crew</strong> · <a href="https://www.clubministries.org/pathfinders/" target="_blank">clubministries.org</a></span>
+    </p>
+</footer>
+
+<script>
+    // Reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal, .scale-reveal').forEach(el => revealObserver.observe(el));
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+        const bg = document.querySelector('.hero-bg');
+        if (bg) bg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.15}px)`;
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Signup form
+    const form = document.getElementById('signup-form');
+    if (form) {
+        const statusEl = document.getElementById('form-status');
+        const successEl = document.getElementById('form-success');
+        const spinner = form.querySelector('.spinner');
+        const submitBtn = form.querySelector('button');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            const tracks = Array.from(form.querySelectorAll('input[name="track"]:checked'))
+                .map(el => el.value)
+                .join(', ');
+            form.querySelector('input[name="tracks"]').value = tracks;
+
+            submitBtn.disabled = true;
+            if (spinner) spinner.style.display = 'inline-block';
+            if (statusEl) statusEl.textContent = 'Submitting...';
+
+            try {
+                const res = await fetch('https://script.google.com/macros/s/AKfycbys2NnSJO3hpo2FsqXM0-yhTDoKJpKQo3Q6Q_Yl9QsQHLNpQDtTJRmQpM2_kdilhw1W/exec', { method: 'POST', body: new FormData(form) });
+                const json = await res.json().catch(() => ({}));
+                if (!res.ok || json.success === false) throw new Error(json.error || 'Submission failed');
+                form.reset();
+                if (successEl) successEl.classList.add('show');
+                if (statusEl) statusEl.textContent = '';
+            } catch (err) {
+                if (statusEl) statusEl.textContent = 'Sorry, there was an error. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                if (spinner) spinner.style.display = 'none';
+            }
+        });
+    }
+
+    // Hero particles
+    const particleContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const span = document.createElement('span');
+        span.style.left = Math.random() * 100 + '%';
+        span.style.top = 60 + Math.random() * 40 + '%';
+        span.style.animationDelay = Math.random() * 8 + 's';
+        span.style.animationDuration = 6 + Math.random() * 6 + 's';
+        span.style.width = span.style.height = (1 + Math.random() * 3) + 'px';
+        particleContainer.appendChild(span);
+    }
+</script>
+
+</body>
+</html>

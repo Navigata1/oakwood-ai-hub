@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for the Community — Oakwood University Church IT Initiative</title>
+<style>
+  :root {
+    --navy: #1a2332;
+    --deep: #0f1724;
+    --gold: #c9a84c;
+    --gold-light: #e4c96a;
+    --gold-dim: rgba(201, 168, 76, 0.15);
+    --warm: #f5f0e8;
+    --cream: #faf7f2;
+    --text: #2c2c2c;
+    --text-light: #6b6b6b;
+    --text-inv: #e8e4dc;
+    --white: #ffffff;
+    --border: #e0dbd2;
+    --success: #4a7c59;
+    --accent: #8b5e3c;
+    --shadow: 0 2px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(26, 35, 50, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    padding: 0 2rem;
+  }
+
+  nav .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  nav .brand {
+    font-family: 'Georgia', serif;
+    color: var(--gold);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  nav .brand span { color: var(--text-inv); font-weight: 400; }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav a {
+    color: var(--text-inv);
+    text-decoration: none;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: all 0.3s;
+  }
+
+  nav a:hover { opacity: 1; color: var(--gold); }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(145deg, var(--deep) 0%, var(--navy) 50%, #1e2d42 100%);
+    color: var(--white);
+    padding: 10rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(201, 168, 76, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta .meta-item {
+    text-align: center;
+  }
+
+  .hero-meta .meta-value {
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+  }
+
+  .hero-meta .meta-label {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  section h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  section h2 em { font-style: italic; color: var(--accent); }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    max-width: 680px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* ── Agenda ── */
+  .agenda-timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .agenda-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.6rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--border));
+  }
+
+  .agenda-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding: 1.8rem 2rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 3px solid var(--gold);
+  }
+
+  .agenda-item::before {
+    content: '';
+    position: absolute;
+    left: -2.15rem;
+    top: 2rem;
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 3px solid var(--cream);
+  }
+
+  .agenda-phase {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .agenda-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .agenda-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+  }
+
+  .agenda-item ul {
+    margin-top: 0.8rem;
+    padding-left: 1.2rem;
+  }
+
+  .agenda-item li {
+    color: var(--text-light);
+    font-size: 0.92rem;
+    margin-bottom: 0.3rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* ── Curriculum Grid ── */
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .track-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .track-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .track-header {
+    padding: 1.8rem 2rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .track-number {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .track-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .track-header .tagline {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 0.92rem;
+  }
+
+  .track-weeks {
+    padding: 1.2rem 2rem 1.8rem;
+  }
+
+  .week-item {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .week-item:last-child { border-bottom: none; }
+
+  .week-num {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    min-width: 2rem;
+    padding-top: 0.15rem;
+    font-weight: 700;
+  }
+
+  .week-content h4 {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+
+  .week-content p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+  }
+
+  /* ── Dark Band ── */
+  .dark-band {
+    background: var(--navy);
+    color: var(--text-inv);
+    padding: 5rem 2rem;
+    margin: 0 -2rem;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .dark-band .band-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .dark-band .section-label { color: var(--gold); }
+
+  .dark-band h2 {
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .dark-band .section-intro {
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── Teaching Model ── */
+  .tandem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .tandem-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 10px;
+    padding: 2.2rem;
+  }
+
+  .tandem-card .role-name {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .tandem-card h3 {
+    color: var(--white);
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tandem-card .role-title {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.82rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .tandem-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tandem-card li {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.65);
+    padding: 0.4rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .tandem-card li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── Schedule ── */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .schedule-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 3px solid var(--gold);
+  }
+
+  .schedule-card .day {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .schedule-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .schedule-card .time {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .schedule-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+  }
+
+  /* ── Demo Arsenal ── */
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .demo-item {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-left: 3px solid var(--gold);
+  }
+
+  .demo-item h4 {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .demo-item p {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ── Content Strategy ── */
+  .content-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .content-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .content-box h3 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .content-box p {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ── Admin One-Pager ── */
+  .admin-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  .admin-section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0.8rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-grid dt {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 0.15rem;
+    font-weight: 700;
+  }
+
+  .admin-grid dd {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .admin-grid dd:last-child { border-bottom: none; }
+
+  .highlight-box {
+    background: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin-top: 1.5rem;
+  }
+
+  .highlight-box p {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .highlight-box strong { color: var(--accent); }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .checklist li {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.92rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--white);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 0.7rem;
+  }
+
+  /* ── Quote Block ── */
+  .quote-block {
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: var(--gold-dim);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote-block p {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--deep);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+
+  footer strong { color: var(--gold); }
+
+  footer .footer-line {
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .tandem-grid,
+    .content-split,
+    .schedule-grid { grid-template-columns: 1fr; }
+    .admin-grid { grid-template-columns: 1fr; }
+    .admin-grid dt { margin-bottom: -0.5rem; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .hero-meta { gap: 1.5rem; }
+    section { padding: 3rem 1.5rem; }
+    .agenda-timeline { padding-left: 2.2rem; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    nav { display: none; }
+    .hero { padding: 3rem 1rem; background: white; color: black; }
+    .hero h1 em { color: #8b5e3c; }
+    .hero-label { border-color: #999; color: #666; }
+    .hero .subtitle { color: #555; }
+    .hero-meta .meta-value { color: #8b5e3c; }
+    .hero-meta .meta-label { color: #888; }
+    .dark-band { background: #f5f5f5; color: #333; }
+    .dark-band h2 { color: #1a2332; }
+    .dark-band .section-intro { color: #666; }
+    .tandem-card { background: #f9f9f9; border-color: #ddd; }
+    .tandem-card h3 { color: #1a2332; }
+    .tandem-card .role-title { color: #888; }
+    .tandem-card li { color: #555; }
+    .content-box { background: #f9f9f9; border-color: #ddd; }
+    .content-box h3 { color: #1a2332; }
+    .content-box p { color: #555; }
+    section { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand">OUC <span>IT Department</span></div>
+    <ul>
+      <li><a href="#agenda">Agenda</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#admin">Admin</a></li>
+      <li><a href="#next">Next Steps</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-label">Internal Planning Document — March 10, 2026</div>
+  <h1>AI for the <em>Community</em></h1>
+  <p class="subtitle">A partnership between Oakwood University Church IT Department and Island Development Crew to bring AI literacy to every generation.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-value">12</span>
+      <span class="meta-label">Week Curriculum</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">3</span>
+      <span class="meta-label">Learning Tracks</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">$0</span>
+      <span class="meta-label">Cost to Church</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">All</span>
+      <span class="meta-label">Ages Welcome</span>
+    </div>
+  </div>
+</header>
+
+<!-- Tuesday Agenda -->
+<section id="agenda">
+  <span class="section-label">Tuesday March 10</span>
+  <h2>Meeting <em>Agenda</em></h2>
+  <p class="section-intro">A structured walk-through of the day — from equipment review to vision casting. Everything documented, nothing left to memory.</p>
+
+  <div class="agenda-timeline">
+    <div class="agenda-item">
+      <span class="agenda-phase">Phase 1 · 10:00 AM · Church</span>
+      <h3>Community Health Agency — Zoom Room Review</h3>
+      <p>Walk through James's AV proposal for the Community Health Actions Center Auditorium.</p>
+      <ul>
+        <li>3× SRG 840 Forex cameras — positioning and coverage</li>
+        <li>5× large monitors — layout around the room</li>
+        <li>VX80 video switcher — one-person operation requirement</li>
+        <li>Discuss AI-assisted camera switching and auto-transcription</li>
+        <li>Offer Fireflies integration for meeting capture</li>
+      </ul>
+    </div>
+
+    <div class="agenda-item">
+      <span class="agenda-phase">Phase 2 · Harvard</span>
+      <h3>Walk-Through</h3>
+      <p>Document the space. Photograph equipment and layout. Assess opportunities for technology integration.</p>
+    </div>
+
+    <div class="agenda-item">
+      <span class="agenda-phase">Phase 3 · The Track</span>
+      <h3>Assessment & Discovery</h3>
+      <p>See what's in place. Identify gaps. Map out how existing infrastructure can support the AI initiative.</p>
+    </div>
+
+    <div class="agenda-item">
+      <span class="agenda-phase">Phase 4 · The Pitch</span>
+      <h3>AI Education Initiative — Vision & Framework</h3>
+      <p>Present the full curriculum, tandem teaching model, content strategy, and administration one-pager. This is where the plan becomes real.</p>
+      <ul>
+        <li>Walk through 12-week curriculum framework</li>
+        <li>Define Jon + James tandem teaching model</li>
+        <li>Content ownership structure (church initiative + personal rights)</li>
+        <li>YouTube channel / passive income strategy</li>
+        <li>Sister church expansion plan</li>
+        <li>Administration approval pathway</li>
+      </ul>
+    </div>
+
+    <div class="agenda-item">
+      <span class="agenda-phase">Phase 5 · Private Session</span>
+      <h3>James's Private Project</h3>
+      <p>Review James's personal project. Assess scope, offer technical guidance, and map next steps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Curriculum -->
+<section id="curriculum">
+  <span class="section-label">12-Week Framework</span>
+  <h2>Curriculum <em>Tracks</em></h2>
+  <p class="section-intro">Three tracks, one philosophy: start with conversation, build through demonstration, sustain through community. Every session produces something tangible.</p>
+
+  <div class="quote-block">
+    <p>"What are your challenges? What interests you about AI? What scares you about it? Let's start there."</p>
+    <cite>— Teaching philosophy: meet people where they are</cite>
+  </div>
+
+  <div class="track-grid">
+    <!-- Track 1 -->
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Track 1 · Weeks 1–4</span>
+        <h3>AI Foundations</h3>
+        <span class="tagline">"What is this thing and why should I care?"</span>
+      </div>
+      <div class="track-weeks">
+        <div class="week-item">
+          <span class="week-num">WK 1</span>
+          <div class="week-content">
+            <h4>What AI Actually Is</h4>
+            <p>Not magic, not evil, not new. A tool. Everyone asks AI a personal question live.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 2</span>
+          <div class="week-content">
+            <h4>AI in Daily Life</h4>
+            <p>Health, finances, meal planning, family. Each person solves one real task with AI.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 3</span>
+          <div class="week-content">
+            <h4>AI for Communication</h4>
+            <p>Emails, resumes, proposals, grant writing. Live: write a grant proposal in 5 minutes.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 4</span>
+          <div class="week-content">
+            <h4>AI Safety & Ethics</h4>
+            <p>What to share, what not to, how to verify. Everyone tries to "break" AI — builds healthy skepticism.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track 2 -->
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Track 2 · Weeks 5–8</span>
+        <h3>Creators & Entrepreneurs</h3>
+        <span class="tagline">"Now let's build something."</span>
+      </div>
+      <div class="track-weeks">
+        <div class="week-item">
+          <span class="week-num">WK 5</span>
+          <div class="week-content">
+            <h4>AI for Business Ideas</h4>
+            <p>Market research, validation, business plans. Validate an idea in 10 minutes live.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 6</span>
+          <div class="week-content">
+            <h4>Building Without Code</h4>
+            <p>Websites, apps, landing pages. Build a site from scratch using Replit or Lovable.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 7</span>
+          <div class="week-content">
+            <h4>AI for Marketing</h4>
+            <p>Social media, branding, content. Create a real campaign for their church or business.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 8</span>
+          <div class="week-content">
+            <h4>Voice Agents & Automation</h4>
+            <p>Phone agents, workflows, CRM. Group project: build an agent for a local business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track 3 -->
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Track 3 · Weeks 9–12</span>
+        <h3>Ministry & Community</h3>
+        <span class="tagline">"How does this serve something bigger?"</span>
+      </div>
+      <div class="track-weeks">
+        <div class="week-item">
+          <span class="week-num">WK 9</span>
+          <div class="week-content">
+            <h4>AI for Sermon & Study Prep</h4>
+            <p>Research, outlines, cross-referencing. Prep a Bible study topic with AI assistance.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 10</span>
+          <div class="week-content">
+            <h4>AI for Outreach</h4>
+            <p>Event planning, volunteer coordination. Plan a real upcoming church event together.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 11</span>
+          <div class="week-content">
+            <h4>AI for Education</h4>
+            <p>Tutoring, study plans, career development. Students and parents build personalized plans.</p>
+          </div>
+        </div>
+        <div class="week-item">
+          <span class="week-num">WK 12</span>
+          <div class="week-content">
+            <h4>Showcase & Next Steps</h4>
+            <p>Community presents what they've built. Vote on what to learn next. The cycle continues.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaching Model -->
+<div class="dark-band" id="teaching">
+  <div class="band-inner">
+    <span class="section-label">Tandem Model</span>
+    <h2>Two Voices, <em style="color: var(--gold);">One Mission</em></h2>
+    <p class="section-intro">Neither lectures. Both facilitate. The dynamic creates something no solo presenter can — institutional trust meets cutting-edge practice.</p>
+
+    <div class="tandem-grid">
+      <div class="tandem-card">
+        <span class="role-name">Lead Instructor</span>
+        <h3>Jonathan Isaac</h3>
+        <span class="role-title">Island Development Crew LLC · AI Practitioner</span>
+        <ul>
+          <li>Live demonstrations and technical deep-dives</li>
+          <li>Curriculum design and real-time adaptation</li>
+          <li>Multi-domain expertise across 9 industries</li>
+          <li>15+ applications built with AI — speaks from experience</li>
+          <li>Content creation and recording for distribution</li>
+          <li>HSV.ai community connection and guest speakers</li>
+        </ul>
+      </div>
+
+      <div class="tandem-card">
+        <span class="role-name">Department Director</span>
+        <h3>James Wilson</h3>
+        <span class="role-title">Oakwood University Church · IT Department</span>
+        <ul>
+          <li>Institutional authority and credibility with administration</li>
+          <li>Infrastructure, AV setup, and venue coordination</li>
+          <li>Personal AI journey — sharing lived experience</li>
+          <li>Systems analyst background — understands cultural adoption</li>
+          <li>Admin liaison, scheduling, and church communications</li>
+          <li>Co-facilitator during sessions and discussion leader</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <span class="section-label">Content Ownership</span>
+      <h2 style="color: var(--white); font-size: 1.6rem; margin-bottom: 1rem;">Clean Split, <em style="color: var(--gold);">Mutual Benefit</em></h2>
+
+      <div class="content-split">
+        <div class="content-box">
+          <h3>🏛️ Oakwood IT Department</h3>
+          <p>Owns the initiative brand and church-facing program identity.</p>
+          <p>Sessions recorded and published on church YouTube channel.</p>
+          <p>Summaries distributed via church communications.</p>
+          <p>Attendance and community impact tracked for admin reporting.</p>
+          <p>Full authority over scheduling, venue, and church-side logistics.</p>
+        </div>
+        <div class="content-box">
+          <h3>⚡ Island Development Crew</h3>
+          <p>Jon retains personal presentation content and teaching materials.</p>
+          <p>Repurposable for PVD YouTube, IDC website, future workshops.</p>
+          <p>Cross-promotion: "As taught at Oakwood University Church."</p>
+          <p>Portfolio building for consulting and training engagements.</p>
+          <p>AI education IP remains with the creator.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule -->
+<section id="schedule">
+  <span class="section-label">Weekly Rhythm</span>
+  <h2>Session <em>Schedule</em></h2>
+  <p class="section-intro">Three touchpoints per week. Flexible enough to grow, structured enough for consistency. Sabbath-honoring timing built in.</p>
+
+  <div class="schedule-grid">
+    <div class="schedule-card">
+      <span class="day">Saturday Evening</span>
+      <h3>Community AI Workshop</h3>
+      <span class="time">After Sunset · 7:00–8:30 PM</span>
+      <p>Open to everyone — church members, surrounding congregations, and the greater Huntsville community. All ages, all skill levels. The main event.</p>
+    </div>
+
+    <div class="schedule-card">
+      <span class="day">Sunday</span>
+      <h3>Pathfinder AI Lab</h3>
+      <span class="time">During Pathfinder Hours</span>
+      <p>Integrated into Oakwood Christian Crusaders. Project-based, hands-on, values-driven. Youth who can't attend Saturday get AI literacy here.</p>
+    </div>
+
+    <div class="schedule-card">
+      <span class="day">Weekday · Bi-Weekly</span>
+      <h3>Focused Deep-Dives</h3>
+      <span class="time">Day & Time TBD</span>
+      <p>Advanced topics, one-on-one coaching, entrepreneurship workshops, ministry tooling, and specialized tracks. For those ready to go deeper.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Demos -->
+<section id="demos">
+  <span class="section-label">Tuesday Arsenal</span>
+  <h2>Live <em>Demonstrations</em></h2>
+  <p class="section-intro">Pre-loaded, tested, and ready. Each demo tells a story — and each story proves the point better than any slide deck ever could.</p>
+
+  <div class="demo-grid">
+    <div class="demo-item">
+      <h4>OpenClaw — Real-Time Edit</h4>
+      <p>Show the Jimmy→James name change. "I told my agent to update your name while we were on the phone. It's live." Pull it up, prove it.</p>
+    </div>
+    <div class="demo-item">
+      <h4>Voice Agent — Live Call</h4>
+      <p>Call the tire shop agent from the meeting. Five-minute conversation with a phone agent built in 30 minutes. Let James call it himself.</p>
+    </div>
+    <div class="demo-item">
+      <h4>Replit — Build on the Spot</h4>
+      <p>Have a blank project ready. Ask James: "What does the IT department need?" Build it live. Ship it before the meeting ends.</p>
+    </div>
+    <div class="demo-item">
+      <h4>Fireflies — Meta Demo</h4>
+      <p>Record Tuesday's meeting with Fireflies. The transcript becomes the demo. Show James the summary, action items, and searchability.</p>
+    </div>
+    <div class="demo-item">
+      <h4>GitHub → Vercel Pipeline</h4>
+      <p>Make a change to the OUC site. Commit. Push. Refresh. Show the deploy in real-time. "That's how fast things move now."</p>
+    </div>
+    <div class="demo-item">
+      <h4>The Three Sites</h4>
+      <p>Pull up OCC Pathfinders, OAA AI Flyer, OUC AI Program. "These were built in one day. From a conversation to a live website."</p>
+    </div>
+    <div class="demo-item">
+      <h4>Claude — Grant Proposal</h4>
+      <p>Write a real grant proposal for the AI education program in under 5 minutes. Perfect for the Week 3 curriculum preview.</p>
+    </div>
+    <div class="demo-item">
+      <h4>The Pastor Story</h4>
+      <p>Not a demo — a conversation piece. "Your colleague called AI satanic. Two weeks later he's selling AI sermon prep subscriptions." Resistance is temporary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Admin One-Pager -->
+<section id="admin">
+  <span class="section-label">For Administration</span>
+  <h2>Program <em>Overview</em></h2>
+  <p class="section-intro">A clean summary for James to present to church leadership. Everything they need to say yes — nothing they don't.</p>
+
+  <div class="admin-section">
+    <h3>AI for the Community — Program Summary</h3>
+
+    <dl class="admin-grid">
+      <dt>What</dt>
+      <dd>A community AI literacy program open to all ages — church members, surrounding SDA congregations, and the greater Huntsville community. Hands-on, values-grounded, practical education.</dd>
+
+      <dt>Why</dt>
+      <dd>AI is reshaping every industry, career, and daily task. The digital divide is growing. Our community leads — we don't follow. This program ensures no one is left behind while the world rewrites itself.</dd>
+
+      <dt>Who Teaches</dt>
+      <dd>Jonathan Isaac (Island Development Crew LLC) — AI practitioner, software developer, community member with 15+ applications across 9 domains. Partnership under the IT Department's direction.</dd>
+
+      <dt>Who Attends</dt>
+      <dd>Everyone. Youth through Pathfinder integration, college students, professionals, entrepreneurs, and elders. No prior experience required. Surrounding churches and community welcome.</dd>
+
+      <dt>Schedule</dt>
+      <dd>Saturday evenings (after sunset, 7:00–8:30 PM), Sundays during Pathfinder hours, and bi-weekly weekday deep-dives. Sabbath-honoring in all scheduling.</dd>
+
+      <dt>Cost</dt>
+      <dd><strong>$0 to the church.</strong> Instructor volunteers time. Uses existing church AV equipment. Attendees bring personal devices (phone is sufficient).</dd>
+
+      <dt>Revenue</dt>
+      <dd>YouTube content channel ("Oakwood IT Presents"), future course licensing opportunities, community partnerships, and eligibility for digital literacy grants.</dd>
+
+      <dt>Ownership</dt>
+      <dd>Church initiative owns the program brand and identity. Instructor retains rights to personal presentation content for educational use and distribution.</dd>
+    </dl>
+
+    <div class="highlight-box">
+      <p><strong>Bottom line:</strong> Zero cost. Immediate community impact. Passive revenue potential. Positions Oakwood as a leader in faith-based technology education. The only question is how fast we want to start.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Expansion -->
+<section>
+  <span class="section-label">Growth Path</span>
+  <h2>Expansion <em>Strategy</em></h2>
+  <p class="section-intro">This starts at Oakwood. It doesn't stay there.</p>
+
+  <div class="track-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Phase 1</span>
+        <h3>Oakwood Community</h3>
+      </div>
+      <div class="track-weeks" style="padding: 1.5rem 2rem;">
+        <p style="font-family: system-ui, sans-serif; font-size: 0.88rem; color: var(--text-light); line-height: 1.7;">Launch Saturday evening workshops. Build the core group. Document everything. Create the first YouTube content. Prove the model works.</p>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Phase 2</span>
+        <h3>Sister Churches</h3>
+      </div>
+      <div class="track-weeks" style="padding: 1.5rem 2rem;">
+        <p style="font-family: system-ui, sans-serif; font-size: 0.88rem; color: var(--text-light); line-height: 1.7;">Invite surrounding SDA congregations for joint sessions. Adventurer cross-church programs. "This is being taught at Oakwood — come learn with us."</p>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <span class="track-number">Phase 3</span>
+        <h3>Huntsville & Beyond</h3>
+      </div>
+      <div class="track-weeks" style="padding: 1.5rem 2rem;">
+        <p style="font-family: system-ui, sans-serif; font-size: 0.88rem; color: var(--text-light); line-height: 1.7;">HSV.ai community partnerships. School integration. Online reach via YouTube. Position Oakwood as the hub for faith-based AI education nationally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Next Steps -->
+<section id="next">
+  <span class="section-label">Action Items</span>
+  <h2>Next <em>Steps</em></h2>
+  <p class="section-intro">What needs to happen between Tuesday and launch day. Each item moves the ball forward.</p>
+
+  <ul class="checklist">
+    <li><span class="check-box">☐</span> James presents one-pager to church administration</li>
+    <li><span class="check-box">☐</span> Confirm room and AV setup for Saturday evening sessions</li>
+    <li><span class="check-box">☐</span> Set official start date (target: 2–4 weeks post-approval)</li>
+    <li><span class="check-box">☐</span> Create community sign-up form (can build live as a demo)</li>
+    <li><span class="check-box">☐</span> Draft formal invitation for sister churches</li>
+    <li><span class="check-box">☐</span> Coordinate with Marie / video team for session recording</li>
+    <li><span class="check-box">☐</span> Set up YouTube playlist and channel structure</li>
+    <li><span class="check-box">☐</span> Confirm existing equipment is sufficient (or identify gaps)</li>
+    <li><span class="check-box">☐</span> Promote via church bulletin, announcements, social media</li>
+    <li><span class="check-box">☐</span> Integrate Pathfinder AI Lab into Sunday schedule</li>
+    <li><span class="check-box">☐</span> Identify 2–3 IT department members for guest facilitation</li>
+    <li><span class="check-box">☐</span> Schedule first bi-weekly advanced session</li>
+  </ul>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-line"><strong>AI for the Community</strong></div>
+  <div class="footer-line">Oakwood University Church IT Department × Island Development Crew LLC</div>
+  <div class="footer-line">Under the direction of <strong>James Wilson</strong> · Taught by <strong>Jonathan Isaac</strong></div>
+  <div class="footer-line" style="margin-top: 1rem; opacity: 0.5;">Prepared March 6, 2026 · For internal planning use</div>
+  <div class="footer-line" style="opacity: 0.4; margin-top: 0.5rem;"><em>"Where there is no vision, the people perish."</em> — Proverbs 29:18</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12-Week AI Literacy Program — Oakwood AI Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+  .track-section { page-break-before: always; }
+  .track-section:first-of-type { page-break-before: avoid; }
+  .week-card { background: #f8f8f8 !important; border: 1px solid #ccc !important; box-shadow: none !important; }
+  nav, .hero { background: #1a2332 !important; }
+  .week-num { color: #b8941e !important; }
+  h1, h2, h3 { color: #111 !important; }
+  .gold { color: #b8941e !important; }
+  footer { background: #1a2332 !important; }
+}
+
+/* ============================================================
+   DESIGN TOKENS — exact match to pastoral hub
+   ============================================================ */
+:root {
+  --gold:          #C9A84C;
+  --gold-light:    #E4C47A;
+  --cream:         #F5EDD6;
+  --bg:            #0E0B07;
+  --surface:       #231A0E;
+  --surface-2:     #2E2210;
+  --border:        rgba(201, 168, 76, 0.2);
+  --border-strong: rgba(201, 168, 76, 0.45);
+  --text:          #E8DFC8;
+  --text-muted:    rgba(232, 223, 200, 0.55);
+  --navy:          #1a2332;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Subtle noise texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14, 11, 7, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-brand {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-brand span {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-back:hover { color: var(--gold); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.hero h1 .gold { color: var(--gold); }
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+
+/* Philosophy quote */
+.philosophy-block {
+  max-width: 680px;
+  margin: 0 auto;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.philosophy-block blockquote {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.philosophy-block cite {
+  font-size: 0.8rem;
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+section { margin-bottom: 4rem; }
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ============================================================
+   TRACK SECTION HEADERS
+   ============================================================ */
+.track-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.track-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.track-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: 0.15rem;
+}
+
+.track-header-text h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--cream);
+  letter-spacing: -0.015em;
+  margin-bottom: 0.2rem;
+}
+
+.track-header-text .track-tagline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================================
+   WEEK CARDS
+   ============================================================ */
+.weeks-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.week-card {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.week-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.08);
+}
+
+.week-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(201,168,76,0.1);
+  border-right: 1px solid var(--border);
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.week-num .wk-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.week-num .wk-n {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.week-body {
+  padding: 1rem 1.25rem;
+}
+
+.week-body h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+
+.week-body .week-summary {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.week-activity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+}
+
+.week-activity::before {
+  content: '⚡';
+  font-size: 0.7rem;
+}
+
+/* ============================================================
+   AUDIENCE SECTION
+   ============================================================ */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.audience-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.audience-card:hover { border-color: var(--border-strong); }
+
+.aud-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.audience-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+}
+
+.audience-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SCHEDULE SECTION
+   ============================================================ */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.sched-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.25rem 1rem;
+  border-left: 3px solid var(--gold);
+  transition: box-shadow 0.2s;
+}
+
+.sched-card:hover { box-shadow: 0 4px 20px rgba(201,168,76,0.08); }
+
+.sched-venue {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.sched-time {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.35rem;
+}
+
+.sched-detail {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   PRESENTERS
+   ============================================================ */
+.presenters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.presenter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.75rem;
+  text-align: center;
+  min-width: 220px;
+  flex: 1;
+  max-width: 340px;
+}
+
+.presenter-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.presenter-card p {
+  font-size: 0.82rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ============================================================
+   CTA BUTTON
+   ============================================================ */
+@keyframes goldPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 15px rgba(201,168,76,0.2); }
+  50% { box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 4px 20px rgba(201,168,76,0.35); }
+}
+
+.cta-btn-gold {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  text-align: center;
+  background: var(--gold);
+  color: #0E0B07;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  border: 2px solid rgba(201,168,76,0.6);
+  letter-spacing: 0.01em;
+  box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 15px rgba(201,168,76,0.2);
+  animation: goldPulse 2s ease-in-out infinite;
+  transition: all 0.2s;
+}
+
+.cta-btn-gold:hover {
+  background: var(--gold-light);
+  box-shadow: 0 0 40px rgba(201,168,76,0.6), 0 6px 25px rgba(201,168,76,0.4);
+  transform: translateY(-3px);
+  animation: none;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.footer-org {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+}
+
+.footer-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  nav { padding: 0 1rem; }
+  .hero { padding: 3rem 1rem 2rem; }
+  .philosophy-block { padding: 1.25rem 1.25rem; }
+  main { padding: 2rem 1rem 3rem; }
+  .week-card { grid-template-columns: 3rem 1fr; }
+  .week-num .wk-n { font-size: 1.2rem; }
+  .track-header { gap: 0.75rem; }
+  .presenters-row { flex-direction: column; align-items: center; }
+  .presenter-card { max-width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="no-print">
+  <a href="/pastoral/" class="nav-back">← Pastoral Hub</a>
+  <a class="nav-brand" href="#">12-Week Program <span>· Oakwood AI Initiative</span></a>
+  <button onclick="window.print()" style="
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  " onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--border-strong)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">
+    🖨️ Print
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<div class="hero">
+  <div class="hero-eyebrow">Oakwood AI Initiative</div>
+  <h1>12-Week <span class="gold">AI Literacy</span> Program</h1>
+  <p class="hero-desc">Three tracks. All ages. Zero cost to the church. Week-by-week curriculum built around your community's real needs.</p>
+
+  <div class="philosophy-block">
+    <blockquote>
+      "What are your challenges? What interests you about AI? What scares you about it? Let's start there."
+    </blockquote>
+    <cite>Teaching Philosophy — Meet People Where They Are</cite>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main>
+
+  <!-- ======================================================
+       TRACK 1 — AI FOUNDATIONS (Weeks 1–4)
+       ====================================================== -->
+  <section class="track-section">
+    <div class="track-header">
+      <div class="track-num">Track 1 · Wks 1–4</div>
+      <div class="track-header-text">
+        <h3>AI Foundations</h3>
+        <p class="track-tagline">"What is this thing and why should I care?"</p>
+      </div>
+    </div>
+
+    <div class="weeks-grid">
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">1</span>
+        </div>
+        <div class="week-body">
+          <h4>What AI Actually Is</h4>
+          <p class="week-summary">Not magic, not evil, not new. A tool. We strip away the hype and build an honest foundation — what AI can do, what it can't, and why it matters to you personally.</p>
+          <span class="week-activity">Live: Everyone asks AI a personal question</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">2</span>
+        </div>
+        <div class="week-body">
+          <h4>AI in Daily Life</h4>
+          <p class="week-summary">Health, finances, meal planning, family. AI isn't just for tech workers. We explore practical, everyday applications that save time and reduce stress.</p>
+          <span class="week-activity">Live: Each person solves one real task with AI</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">3</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Communication</h4>
+          <p class="week-summary">Emails, resumes, proposals, grant writing. Learn to express yourself more clearly and professionally — with AI as your writing partner.</p>
+          <span class="week-activity">Live: Write a grant proposal in 5 minutes</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">4</span>
+        </div>
+        <div class="week-body">
+          <h4>AI Safety &amp; Ethics</h4>
+          <p class="week-summary">What to share, what not to, and how to verify. We build healthy skepticism and critical thinking — not fear, but discernment.</p>
+          <span class="week-activity">Live: Everyone tries to "break" AI</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-bottom: 4rem;">
+
+  <!-- ======================================================
+       TRACK 2 — CREATORS & ENTREPRENEURS (Weeks 5–8)
+       ====================================================== -->
+  <section class="track-section">
+    <div class="track-header">
+      <div class="track-num">Track 2 · Wks 5–8</div>
+      <div class="track-header-text">
+        <h3>Creators &amp; Entrepreneurs</h3>
+        <p class="track-tagline">"Now let's build something."</p>
+      </div>
+    </div>
+
+    <div class="weeks-grid">
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">5</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Business Ideas</h4>
+          <p class="week-summary">Market research, validation, business plans. Whether you have one idea or ten, AI can help you test them fast and build with confidence.</p>
+          <span class="week-activity">Live: Validate an idea in 10 minutes</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">6</span>
+        </div>
+        <div class="week-body">
+          <h4>Building Without Code</h4>
+          <p class="week-summary">Websites, apps, landing pages — no computer science degree required. The barrier to entry has never been lower. We prove it live.</p>
+          <span class="week-activity">Live: Build a site from scratch using Replit or Lovable</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">7</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Marketing</h4>
+          <p class="week-summary">Social media, branding, content strategy. You don't need a marketing agency. You need a prompt and a plan.</p>
+          <span class="week-activity">Live: Create a real campaign for their church or business</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">8</span>
+        </div>
+        <div class="week-body">
+          <h4>Voice Agents &amp; Automation</h4>
+          <p class="week-summary">Phone agents, workflows, CRM. AI that works while you sleep — handling calls, scheduling, and follow-ups automatically.</p>
+          <span class="week-activity">Group project: Build an agent for a local business</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-bottom: 4rem;">
+
+  <!-- ======================================================
+       TRACK 3 — MINISTRY & COMMUNITY (Weeks 9–12)
+       ====================================================== -->
+  <section class="track-section">
+    <div class="track-header">
+      <div class="track-num">Track 3 · Wks 9–12</div>
+      <div class="track-header-text">
+        <h3>Ministry &amp; Community</h3>
+        <p class="track-tagline">"How does this serve something bigger?"</p>
+      </div>
+    </div>
+
+    <div class="weeks-grid">
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">9</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Sermon &amp; Study Prep</h4>
+          <p class="week-summary">Research, outlines, cross-referencing Scripture. AI can help pastors and Sabbath school leaders prepare deeper, richer content in less time.</p>
+          <span class="week-activity">Live: Prep a Bible study topic with AI assistance</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">10</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Outreach</h4>
+          <p class="week-summary">Event planning, volunteer coordination, communication campaigns. AI amplifies the reach and impact of every ministry effort.</p>
+          <span class="week-activity">Live: Plan a real upcoming church event together</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">11</span>
+        </div>
+        <div class="week-body">
+          <h4>AI for Education</h4>
+          <p class="week-summary">Tutoring, study plans, career development. From K–12 students to adults returning to school, AI becomes a personal academic coach.</p>
+          <span class="week-activity">Live: Students and parents build personalized plans</span>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-num">
+          <span class="wk-label">WK</span>
+          <span class="wk-n">12</span>
+        </div>
+        <div class="week-body">
+          <h4>Showcase &amp; Next Steps</h4>
+          <p class="week-summary">The community presents what they've built over 12 weeks. Celebrate wins, identify gaps, and vote on what to learn next. The cycle continues.</p>
+          <span class="week-activity">Community showcase + vote on the next cycle</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-bottom: 4rem;">
+
+  <!-- ======================================================
+       AUDIENCE SEGMENTS
+       ====================================================== -->
+  <section>
+    <span class="section-eyebrow">Who It Serves</span>
+    <h2 class="section-title">Audience Segments</h2>
+    <p class="section-desc">The program is designed to meet every person in the Oakwood community exactly where they are.</p>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="aud-badge">Students · K–12</div>
+        <h4>The Next Generation</h4>
+        <p>Age-appropriate curriculum with a mentoring model. Students learn AI skills that will define their academic and professional future.</p>
+      </div>
+      <div class="audience-card">
+        <div class="aud-badge">Professionals &amp; Adults</div>
+        <h4>Career &amp; Business Growth</h4>
+        <p>Practical tools for career advancement, business development, and entrepreneurship. Real skills for the modern workforce.</p>
+      </div>
+      <div class="audience-card">
+        <div class="aud-badge">Elders &amp; Community</div>
+        <h4>Daily Life &amp; Connection</h4>
+        <p>Accessible, practical applications for everyday life — health information, communication, and staying connected with family.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-bottom: 4rem;">
+
+  <!-- ======================================================
+       SCHEDULE
+       ====================================================== -->
+  <section>
+    <span class="section-eyebrow">When &amp; Where</span>
+    <h2 class="section-title">Proposed Schedule</h2>
+    <p class="section-desc">Sessions are integrated into existing church and school calendars — no new commitments required.</p>
+
+    <div class="schedule-grid">
+      <div class="sched-card">
+        <div class="sched-venue">OAA — Academy</div>
+        <div class="sched-time">Every Other Friday, 3:30–5:00 PM</div>
+        <div class="sched-detail">After school at the academy. Can pair with existing STEM presentations.</div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-venue">OUC — Church (Flagship)</div>
+        <div class="sched-time">Saturday After Sunset, 7:00–8:30 PM</div>
+        <div class="sched-detail">Open community workshop. All ages, all skill levels. The flagship session.</div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-venue">OCC — Pathfinders</div>
+        <div class="sched-time">Sunday During Pathfinder Hours</div>
+        <div class="sched-detail">Integrated into Oakwood Christian Crusaders. Project-based, values-driven.</div>
+      </div>
+      <div class="sched-card">
+        <div class="sched-venue">Deep-Dives</div>
+        <div class="sched-time">Bi-Weekly, Day TBD</div>
+        <div class="sched-detail">Advanced topics, 1-on-1 coaching, entrepreneurship workshops, ministry tooling.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-bottom: 4rem;">
+
+  <!-- ======================================================
+       PRESENTERS
+       ====================================================== -->
+  <section>
+    <span class="section-eyebrow">Instructors</span>
+    <h2 class="section-title">Program Presenters</h2>
+    <p class="section-desc">Curriculum developed and delivered by trusted community leaders with deep technology expertise.</p>
+
+    <div class="presenters-row">
+      <div class="presenter-card">
+        <h4>James Wilson</h4>
+        <p>IT Director, Oakwood University Church</p>
+      </div>
+      <div class="presenter-card">
+        <h4>Jonathan Isaac</h4>
+        <p>CEO, Island Development Crew LLC</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to hub -->
+  <div style="text-align:center; margin-top:1rem;">
+    <a href="/pastoral/" class="cta-btn-gold no-print">
+      ← Back to Pastoral Hub
+    </a>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <p class="footer-org">Oakwood University Church AI Literacy Program — March 2026</p>
+  <p class="footer-sub">Island Development Crew LLC × OUC IT Department</p>
+</footer>
+
+</body>
+</html>

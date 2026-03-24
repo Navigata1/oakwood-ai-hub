@@ -342,6 +342,37 @@ nav {
   transform: translateY(-2px);
 }
 
+@keyframes goldPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 15px rgba(201,168,76,0.2); }
+  50% { box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 4px 20px rgba(201,168,76,0.35); }
+}
+
+.cta-btn-gold {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  text-align: center;
+  background: var(--gold);
+  color: #0E0B07;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  border: 2px solid rgba(201,168,76,0.6);
+  letter-spacing: 0.01em;
+  box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 15px rgba(201,168,76,0.2);
+  animation: goldPulse 2s ease-in-out infinite;
+  transition: all 0.2s;
+}
+
+.cta-btn-gold:hover {
+  background: var(--gold-light);
+  box-shadow: 0 0 40px rgba(201,168,76,0.6), 0 6px 25px rgba(201,168,76,0.4);
+  transform: translateY(-3px);
+  animation: none;
+}
+
 /* TRACK CARDS */
 .tracks-grid {
   display: grid;
@@ -893,7 +924,7 @@ footer .footer-verse {
       <p class="big-text">
         Three tracks. All ages. <strong>Zero cost to the church.</strong> All technology, curriculum, and instruction provided by Island Development Crew.
       </p>
-      <a href="/church/" class="cta-btn">
+      <a href="/church/" class="cta-btn-gold">
         View Full Church Program Page →
       </a>
     </div>
@@ -990,6 +1021,12 @@ footer .footer-verse {
         <div class="sched-time">Bi-Weekly, Day TBD</div>
         <div class="sched-detail">Advanced topics, 1-on-1 coaching, entrepreneurship workshops, ministry tooling.</div>
       </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="/pastoral/program/" class="cta-btn-gold">
+        📋 View Full 12-Week Program Details →
+      </a>
     </div>
   </div>
 </section>

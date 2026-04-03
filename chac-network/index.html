@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAC Zoom Room -- Network Configuration Report</title>
+<style>
+:root{--bg:#0f172a;--surface:#1e293b;--surface2:#334155;--border:#475569;--text:#e2e8f0;--dim:#94a3b8;--accent:#38bdf8;--accent2:#818cf8;--green:#4ade80;--yellow:#fbbf24;--red:#f87171;--orange:#fb923c;--cyan:#22d3ee;--pink:#f472b6;--emerald:#10b981;--mono:'Cascadia Code','Fira Code','JetBrains Mono',monospace;--sans:'Segoe UI',system-ui,-apple-system,sans-serif;--radius:16px;--radius-sm:10px;--glow-accent:0 0 20px rgba(56,189,248,0.15);--glow-green:0 0 20px rgba(74,222,128,0.12);--glow-pink:0 0 20px rgba(244,114,182,0.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.reveal{opacity:0;transform:translateY(16px) scale(0.99);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}.reveal.v{opacity:1;transform:translateY(0) scale(1)}
+
+.hero{background:linear-gradient(135deg,#0c4a6e 0%,#1e1b4b 50%,#0f172a 100%);padding:clamp(2.5rem,6vw,4rem) clamp(1.5rem,4vw,3rem);border-bottom:2px solid var(--accent);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(56,189,248,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(129,140,248,.06) 0%,transparent 60%)}
+.hero-inner{max-width:1400px;margin:0 auto;position:relative}
+.hero h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:#fff}
+.hero h1 span{color:#10b981;-webkit-text-fill-color:#10b981}
+.hero .sub{font-size:1rem;color:var(--dim);margin-top:.5rem}
+.hero .meta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.hero .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.35rem .85rem;font-size:.8rem;color:var(--dim);backdrop-filter:blur(4px)}
+.hero .chip b{color:var(--accent)}
+
+.container{max-width:1400px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
+.section{padding:clamp(2rem,4vw,3rem) 0}.section+.section{border-top:1px solid var(--surface2)}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--surface2)}
+.sec-icon{width:32px;height:32px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.sec-head h2{font-size:1.35rem;font-weight:700;color:#fff;letter-spacing:-.01em}
+
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.cg .cc:last-child:nth-child(3n+1){grid-column:2}
+@media(max-width:1200px){.cg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.cg{grid-template-columns:1fr}}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;position:relative;overflow:hidden;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease}
+.cc:hover{transform:translateY(-2px);box-shadow:var(--glow-accent)}
+.cc:active{transform:translateY(0)}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.cc.bl::before{background:var(--accent)}.cc.pr::before{background:var(--accent2)}.cc.gr::before{background:var(--green)}.cc.or::before{background:var(--orange)}.cc.cy::before{background:var(--cyan)}.cc.pk::before{background:var(--pink)}.cc.yl::before{background:var(--yellow)}.cc.em::before{background:var(--emerald)}
+.cc h3{font-size:.95rem;color:#fff;margin-bottom:.85rem;display:flex;align-items:center;gap:8px}
+.tag{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border-radius:4px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.tag.g{background:rgba(74,222,128,.15);color:var(--green)}.tag.y{background:rgba(251,191,36,.15);color:var(--yellow)}.tag.r{background:rgba(248,113,113,.15);color:var(--red)}.tag.b{background:rgba(56,189,248,.15);color:var(--accent)}
+.cr{display:flex;justify-content:space-between;align-items:baseline;padding:.3rem 0}.cr+.cr{border-top:1px solid rgba(255,255,255,.04)}
+.cl{color:var(--dim);font-size:.82rem;flex-shrink:0}.cv{font-family:var(--mono);font-size:.82rem;color:#fff;text-align:right;max-width:58%;word-break:break-all}
+.cv.hi{color:var(--yellow);font-weight:600;background:rgba(251,191,36,.1);padding:1px 6px;border-radius:3px}
+.cv.gv{color:var(--green)}.cv.rv{color:var(--red)}
+
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;background:var(--surface)}
+thead th{background:var(--surface2);color:var(--accent);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:.7rem .85rem;text-align:left;white-space:nowrap}
+tbody td{padding:.55rem .85rem;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:top}
+tbody tr:hover{background:rgba(56,189,248,.03)}
+tbody tr:last-child td{border-bottom:none}
+.mono{font-family:var(--mono);font-size:.8rem}
+
+.st{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.st.al{background:rgba(74,222,128,.12);color:var(--green)}.st.bc{background:rgba(56,189,248,.12);color:var(--accent)}.st.sb{background:rgba(251,191,36,.12);color:var(--yellow)}.st.dn{background:rgba(248,113,113,.12);color:var(--red)}.st.nc{background:rgba(251,146,60,.12);color:var(--orange)}
+.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dt.g{background:var(--green);box-shadow:0 0 6px var(--green)}.dt.b{background:var(--accent);box-shadow:0 0 6px var(--accent)}.dt.y{background:var(--yellow);box-shadow:0 0 6px var(--yellow)}.dt.r{background:var(--red);box-shadow:0 0 6px var(--red)}.dt.o{background:var(--orange);box-shadow:0 0 6px var(--orange)}
+
+.topo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem}
+.topo svg{width:100%;max-width:960px;margin:0 auto;display:block}
+
+.fb{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:.6rem}
+.fl-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.75rem}
+.fl{display:flex;align-items:center;gap:.4rem;padding:.2rem 0;font-size:.82rem;flex-wrap:wrap}
+.fx{border:1px solid var(--border);border-radius:8px;padding:.2rem .6rem;white-space:nowrap;font-size:.8rem;background:var(--surface2)}
+.fx.s{border-color:var(--green);color:var(--green)}.fx.m{border-color:var(--accent2);color:var(--accent2)}.fx.d{border-color:var(--accent);color:var(--accent)}
+.fa{color:var(--dim);font-size:.75rem}
+
+.al{display:grid;gap:.6rem}
+.ai{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;display:flex;gap:.85rem;align-items:flex-start;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .3s ease}
+.ai:hover{transform:translateY(-1px);box-shadow:var(--glow-accent)}
+.ai:active{transform:translateY(0)}
+.ai.crit{border-left:3px solid var(--red)}.ai.ver{border-left:3px solid var(--yellow)}.ai.done{border-left:3px solid var(--green);opacity:.6}
+.an{width:1.7rem;height:1.7rem;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:.75rem;flex-shrink:0}
+.ai.crit .an{background:rgba(248,113,113,.15);color:var(--red)}.ai.ver .an{background:rgba(251,191,36,.15);color:var(--yellow)}.ai.done .an{background:rgba(74,222,128,.15);color:var(--green)}
+.at{font-weight:600;font-size:.9rem;color:#fff;margin-bottom:.2rem}.ad{font-size:.8rem;color:var(--dim);line-height:1.5;max-width:65ch}
+
+.lg{display:grid;gap:.4rem}
+.li{display:flex;gap:.65rem;padding:.45rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);align-items:baseline;transition:background .2s}
+.li:hover{background:var(--surface2)}
+.ln{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:700;min-width:1.2rem}
+.lt{font-size:.8rem;color:var(--dim);line-height:1.5}
+
+.note{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-radius:var(--radius-sm);padding:.85rem 1.1rem;margin:1.25rem 0;font-size:.8rem;color:var(--yellow);line-height:1.5}
+.note b{font-weight:700}
+
+.footer{text-align:left;color:#71717A;font-size:.8125rem;padding:2.5rem 0;border-top:1px solid var(--surface2);margin-top:2.5rem;font-family:'Satoshi',system-ui,-apple-system,sans-serif;line-height:1.65}
+.footer b{color:#18181B;font-weight:700;background:rgba(16,185,129,.12);padding:1px 6px;border-radius:3px}
+.footer .ft-title{font-size:.9rem;font-weight:700;color:#10b981;letter-spacing:-.01em;margin-bottom:.25rem}
+
+@media(max-width:768px){.cg{grid-template-columns:1fr}.hero .meta{flex-direction:column;gap:.4rem}.cr{flex-direction:column;gap:.1rem}.cv{text-align:left;max-width:100%}}
+@media print{body{background:#fff;color:#000}.reveal{opacity:1!important;transform:none!important}.cc,.fb,.topo,.ai,.li{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div id="auth-gate" style="position:fixed;inset:0;z-index:99999;background:#0E0B07;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="text-align:center;max-width:360px;padding:2rem;">
+    <div style="color:#c9a84c;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;">Oakwood AI Hub</div>
+    <h2 style="color:#F5EDD6;font-size:1.4rem;font-weight:600;margin-bottom:0.5rem;">Admin Access</h2>
+    <p style="color:rgba(245,237,214,0.5);font-size:0.85rem;margin-bottom:1.5rem;">Enter the admin password to continue.</p>
+    <input id="auth-input" type="password" placeholder="Password" autofocus
+      style="width:100%;padding:0.8rem 1rem;background:#231A0E;border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:#F5EDD6;font-size:0.95rem;outline:none;text-align:center;"
+      onkeydown="if(event.key==='Enter')checkAuth()">
+    <button onclick="checkAuth()"
+      style="width:100%;margin-top:0.8rem;padding:0.8rem;background:#c9a84c;color:#0E0B07;border:none;border-radius:6px;font-weight:700;font-size:0.9rem;cursor:pointer;">
+      Enter
+    </button>
+    <p id="auth-error" style="color:#e74c3c;font-size:0.8rem;margin-top:0.8rem;display:none;">Incorrect password</p>
+  </div>
+</div>
+<script>
+function checkAuth(){
+  if(sessionStorage.getItem('oakwood-admin')==='true'){document.getElementById('auth-gate').style.display='none';document.getElementById('admin-content').style.display='';return;}
+  var p=document.getElementById('auth-input').value;
+  if(p==='oakwood2026'){sessionStorage.setItem('oakwood-admin','true');document.getElementById('auth-gate').style.display='none';document.getElementById('admin-content').style.display='';}
+  else{var e=document.getElementById('auth-error');e.style.display='block';var i=document.getElementById('auth-input');i.style.border='1px solid #e74c3c';i.value='';i.style.animation='shake 0.5s';setTimeout(function(){i.style.animation='';i.style.border='1px solid rgba(201,168,76,0.3)';},600);}
+}
+if(sessionStorage.getItem('oakwood-admin')==='true'){document.getElementById('auth-gate').style.display='none';document.getElementById('admin-content').style.display='';}
+</script>
+<style>@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}</style>
+<div id="admin-content" style="display:none;">
+
+
+<div class="hero reveal">
+<div class="hero-inner">
+<h1><span>CHAC</span> Zoom Room<br>Network Handoff Report</h1>
+<div class="sub">Prepared for Jimmy Wilson / Digital Support Systems</div>
+<div class="meta">
+<div class="chip">&#128197; <b>April 2--3, 2026</b></div>
+<div class="chip">&#128340; Arrived <b>8:45 PM CT</b></div>
+<div class="chip">&#127760; Subnet <b>10.1.240.0/20</b></div>
+<div class="chip">&#128225; WiFi <b>CHAC-ZOOM-CONTROL</b></div>
+</div>
+</div>
+</div>
+
+<div class="container">
+
+<!-- CREDENTIALS -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(56,189,248,.12)">&#128273;</div><h2>Master Credentials &amp; Access</h2></div>
+<div class="cg">
+
+<div class="cc bl"><h3>&#127760; Network</h3>
+<div class="cr"><span class="cl">Subnet</span><span class="cv">10.1.240.0/20</span></div>
+<div class="cr"><span class="cl">Mask</span><span class="cv">255.255.240.0</span></div>
+<div class="cr"><span class="cl">Gateway</span><span class="cv">10.1.240.3</span></div>
+<div class="cr"><span class="cl">DNS</span><span class="cv">fc00:a:a::400 / 8.8.8.8 / 1.1.1.1</span></div>
+<div class="cr"><span class="cl">DHCP</span><span class="cv">Disabled (all static)</span></div>
+</div>
+
+<div class="cc cy"><h3>&#128225; WiFi -- CHAC-ZOOM-CONTROL <span class="tag g">LIVE</span></h3>
+<div class="cr"><span class="cl">SSID</span><span class="cv hi">CHAC-ZOOM-CONTROL</span></div>
+<div class="cr"><span class="cl">Password</span><span class="cv hi">ChAc9Zm$r</span></div>
+<div class="cr"><span class="cl">Security</span><span class="cv">WPA2 / WPA3</span></div>
+<div class="cr"><span class="cl">Bands</span><span class="cv">2.4 / 5 / 6 GHz (WiFi 7)</span></div>
+<div class="cr"><span class="cl">AP IP</span><span class="cv">10.1.240.5</span></div>
+<div class="cr"><span class="cl">AP MAC</span><span class="cv">a8:9c:6c:72:d9:24</span></div>
+<div class="cr"><span class="cl">Model</span><span class="cv">Ubiquiti U7-Pro</span></div>
+</div>
+
+<div class="cc pr"><h3>&#128421; UniFi Controller <span class="tag b">v9.0.108</span></h3>
+<div class="cr"><span class="cl">Local URL</span><span class="cv">https://localhost:8443</span></div>
+<div class="cr"><span class="cl">Network URL</span><span class="cv">https://10.1.240.40:8443</span></div>
+<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
+<div class="cr"><span class="cl">Password</span><span class="cv hi">Y&amp;U*i9o0p</span></div>
+<div class="cr"><span class="cl">Email</span><span class="cv">jwilson@digitalsupportsystems.com</span></div>
+<div class="cr"><span class="cl">Auto-Start</span><span class="cv gv">Enabled</span></div>
+</div>
+
+<div class="cc gr"><h3>&#128187; NUC -- Zoom Room Hub</h3>
+<div class="cr"><span class="cl">Hostname</span><span class="cv">NUCBOX_M2PRo_S</span></div>
+<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.40</span></div>
+<div class="cr"><span class="cl">MAC</span><span class="cv">e0:51:d8:1e:ed:fc</span></div>
+<div class="cr"><span class="cl">Adapter</span><span class="cv">Intel I226-V ("Ethernet 2")</span></div>
+<div class="cr"><span class="cl">OS</span><span class="cv">Windows 11 Pro</span></div>
+<div class="cr"><span class="cl">User</span><span class="cv">CHAC Admin</span></div>
+</div>
+
+<div class="cc or"><h3>&#127909; Sony Cameras (x3) <span class="tag g">HTTP 401</span></h3>
+<div class="cr"><span class="cl">Web UI</span><span class="cv">http://10.1.240.13 -- .15</span></div>
+<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
+<div class="cr"><span class="cl">Password</span><span class="cv hi">Admin_1234</span></div>
+<div class="cr"><span class="cl">Auth</span><span class="cv">Digest on port 80</span></div>
+</div>
+
+<div class="cc em"><h3>&#127918; Sony RM-IP10 Joystick <span class="tag g">ONLINE</span></h3>
+<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.12</span></div>
+<div class="cr"><span class="cl">MAC</span><span class="cv">88:c9:e8:e7:20:16</span></div>
+<div class="cr"><span class="cl">Switch Port</span><span class="cv">Main switch, port 3</span></div>
+<div class="cr"><span class="cl">DIP SW1</span><span class="cv">LAN mode (ON)</span></div>
+<div class="cr"><span class="cl">SN</span><span class="cv">1005988</span></div>
+</div>
+
+<div class="cc pk"><h3>&#9881;&#65039; Extron IPCP Pro 250 xi <span class="tag y">NEEDS TOOLBELT</span></h3>
+<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.10</span></div>
+<div class="cr"><span class="cl">MAC</span><span class="cv">00:60:01:80:50:db</span></div>
+<div class="cr"><span class="cl">Web UI</span><span class="cv rv">All ports closed</span></div>
+<div class="cr"><span class="cl">Config</span><span class="cv">Extron Toolbelt / Global Configurator</span></div>
+</div>
+
+<div class="cc yl"><h3>&#127916; Roland V-80HD <span class="tag g">PORT 80</span></h3>
+<div class="cr"><span class="cl">Web UI</span><span class="cv">http://10.1.240.6</span></div>
+<div class="cr"><span class="cl">MAC</span><span class="cv">00:40:ab:c1:0c:17</span></div>
+</div>
+
+<div class="cc bl"><h3>&#128250; Samsung Displays (x5) <span class="tag y">STANDBY</span></h3>
+<div class="cr"><span class="cl">Mgmt Port</span><span class="cv">8080 (Samsung MDC)</span></div>
+<div class="cr"><span class="cl">TV1 BDH981</span><span class="cv">.16 / 28:af:42:a7:dc:dc</span></div>
+<div class="cr"><span class="cl">TV2 BDH982</span><span class="cv">.17 / b8:a0:b8:a2:df:ac</span></div>
+<div class="cr"><span class="cl">TV3 BDH983</span><span class="cv">.18 / b8:a0:b8:a2:df:d7</span></div>
+<div class="cr"><span class="cl">TV4 BDH751</span><span class="cv">.19 / Configured statically</span></div>
+<div class="cr"><span class="cl">TV5 BDH984</span><span class="cv">.20 / b8:a0:b8:a2:de:57</span></div>
+</div>
+
+<div class="cc pr"><h3>&#128268; TP-Link Switch Mgmt</h3>
+<div class="cr"><span class="cl">Main Switch IP</span><span class="cv">192.168.0.4</span></div>
+<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
+<div class="cr"><span class="cl">Password</span><span class="cv hi">admin</span></div>
+<div class="cr"><span class="cl">Ports</span><span class="cv">80, 22, 23</span></div>
+<div class="cr"><span class="cl">Best Buy Switch</span><span class="cv">Unmanaged L2 (no IP)</span></div>
+</div>
+
+</div></div>
+
+<!-- INVENTORY -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(74,222,128,.12)">&#128421;</div><h2>Complete Device Inventory</h2></div>
+<div class="tw"><table>
+<thead><tr><th>IP</th><th>MAC</th><th>Device</th><th>Spec Label</th><th>Switch Port</th><th>Status</th><th>Access</th></tr></thead>
+<tbody>
+<tr><td class="mono">.3</td><td class="mono">f0:f7:55:be:2f:80</td><td>Gateway</td><td>--</td><td>--</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>--</td></tr>
+<tr><td class="mono">.5</td><td class="mono">a8:9c:6c:72:d9:24</td><td><b>Ubiquiti U7-Pro</b></td><td>WIFI-AP</td><td>Main switch</td><td><span class="st bc"><span class="dt b"></span>Broadcasting</span></td><td>:8443 via NUC</td></tr>
+<tr><td class="mono">.6</td><td class="mono">00:40:ab:c1:0c:17</td><td><b>Roland V-80HD</b></td><td>ROLAND-NET</td><td>Main switch</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td class="mono">http://.6</td></tr>
+<tr><td class="mono">.10</td><td class="mono">00:60:01:80:50:db</td><td><b>Extron IPCP Pro 250 xi</b></td><td>EXTRONIPCP-NET</td><td>TPLINK-POEB</td><td><span class="st nc"><span class="dt o"></span>Needs Config</span></td><td>Toolbelt</td></tr>
+<tr style="background:rgba(16,185,129,.06)"><td class="mono">.12</td><td class="mono">88:c9:e8:e7:20:16</td><td><b>Sony RM-IP10 Joystick</b></td><td>SONY-JOYSTICK</td><td>Main sw P3</td><td><span class="st al"><span class="dt g"></span>Online</span></td><td class="mono">http://.12</td></tr>
+<tr><td class="mono">.13</td><td class="mono">88:c9:e8:d6:bb:1b</td><td><b>Sony Camera 1</b></td><td>SRGA401-NET</td><td>Best Buy sw</td><td><span class="st al"><span class="dt g"></span>Stable</span></td><td class="mono">http://.13</td></tr>
+<tr><td class="mono">.14</td><td class="mono">88:c9:e8:d6:bb:1e</td><td><b>Sony Camera 2</b></td><td>SRGA402-NET</td><td>Best Buy sw</td><td><span class="st al"><span class="dt g"></span>Stable</span></td><td class="mono">http://.14</td></tr>
+<tr><td class="mono">.15</td><td class="mono">88:c9:e8:d6:bb:3f</td><td><b>Sony Camera 3</b></td><td>SRGA403-NET</td><td>Best Buy sw</td><td><span class="st al"><span class="dt g"></span>Stable</span></td><td class="mono">http://.15</td></tr>
+<tr><td class="mono">.16</td><td class="mono">28:af:42:a7:dc:dc</td><td>Samsung BED-H98 #1</td><td>BDH981-NET</td><td>TPLINK-POEC</td><td><span class="st sb"><span class="dt y"></span>Standby</span></td><td>:8080</td></tr>
+<tr><td class="mono">.17</td><td class="mono">b8:a0:b8:a2:df:ac</td><td>Samsung BED-H98 #2</td><td>BDH982-NET</td><td>TPLINK-POED</td><td><span class="st sb"><span class="dt y"></span>Standby</span></td><td>:8080</td></tr>
+<tr><td class="mono">.18</td><td class="mono">b8:a0:b8:a2:df:d7</td><td>Samsung BED-H98 #3</td><td>BDH983-NET</td><td>TPLINK-POEE</td><td><span class="st sb"><span class="dt y"></span>Standby</span></td><td>:8080</td></tr>
+<tr><td class="mono">.19</td><td class="mono">--</td><td><b>Samsung BED-H75</b></td><td>BDH751-NET</td><td>TPLINK-POEG</td><td><span class="st al"><span class="dt g"></span>Configured</span></td><td>:8080</td></tr>
+<tr><td class="mono">.20</td><td class="mono">b8:a0:b8:a2:de:57</td><td>Samsung BED-H98 #4</td><td>BDH984-NET</td><td>TPLINK-POEF</td><td><span class="st sb"><span class="dt y"></span>Standby</span></td><td>:8080</td></tr>
+<tr><td class="mono">.40</td><td class="mono">e0:51:d8:1e:ed:fc</td><td><b>Intel NUC</b></td><td>NUC</td><td>TPLINK-NET1</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>Local / RDP</td></tr>
+<tr><td class="mono">--</td><td class="mono">04:e4:b6:99:94:ea</td><td>TP-Link PoE (Best Buy)</td><td>--</td><td>Main P17/18</td><td><span class="st al"><span class="dt g"></span>Unmanaged L2</span></td><td>No IP (transparent)</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- TOPOLOGY -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(129,140,248,.12)">&#128268;</div><h2>Physical Switch Topology</h2></div>
+<div class="topo">
+<svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" fill="none">
+<rect x="370" y="8" width="220" height="36" rx="6" stroke="#38bdf8" stroke-width="1.5" fill="rgba(56,189,248,.08)"/>
+<text x="480" y="31" text-anchor="middle" fill="#38bdf8" font-size="12" font-family="monospace" font-weight="600">&#127760; Gateway 10.1.240.3</text>
+<line x1="480" y1="44" x2="480" y2="72" stroke="#475569" stroke-width="1.5"/>
+<rect x="80" y="72" width="800" height="44" rx="8" fill="#1e293b" stroke="#818cf8" stroke-width="2"/>
+<text x="480" y="98" text-anchor="middle" fill="#818cf8" font-size="13" font-family="Segoe UI,sans-serif" font-weight="700">Main 16-Port TP-Link PoE Switch (mgmt: 192.168.0.4)</text>
+<line x1="135" y1="116" x2="135" y2="160" stroke="#475569" stroke-width="1"/><line x1="235" y1="116" x2="235" y2="160" stroke="#475569" stroke-width="1"/><line x1="335" y1="116" x2="335" y2="160" stroke="#475569" stroke-width="1"/><line x1="435" y1="116" x2="435" y2="160" stroke="#475569" stroke-width="1"/><line x1="535" y1="116" x2="535" y2="160" stroke="#475569" stroke-width="1"/><line x1="680" y1="116" x2="680" y2="160" stroke="#475569" stroke-width="1"/>
+<line x1="810" y1="116" x2="810" y2="240" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="810" y1="240" x2="630" y2="240" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="5,3"/>
+<line x1="630" y1="240" x2="480" y2="280" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="135" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P1</text><text x="235" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P2</text><text x="335" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P3</text><text x="435" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P4+</text><text x="535" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P5+</text><text x="680" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P6+</text><text x="810" y="152" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">P17/18</text>
+
+<rect x="95" y="162" width="80" height="50" rx="8" fill="rgba(74,222,128,.08)" stroke="#4ade80" stroke-width="1.5"/><text x="135" y="183" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600">&#128187; NUC</text><text x="135" y="203" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.40</text>
+<rect x="195" y="162" width="80" height="50" rx="8" fill="rgba(56,189,248,.08)" stroke="#38bdf8" stroke-width="1.5"/><text x="235" y="183" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="600">&#128225; U7-Pro</text><text x="235" y="203" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.5</text>
+<rect x="295" y="162" width="80" height="50" rx="8" fill="rgba(251,191,36,.08)" stroke="#fbbf24" stroke-width="1.5"/><text x="335" y="180" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">&#127918; RM-IP10</text><text x="335" y="194" text-anchor="middle" fill="#fbbf24" font-size="9">Joystick</text><text x="335" y="206" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.12</text>
+<rect x="395" y="162" width="80" height="50" rx="8" fill="rgba(129,140,248,.06)" stroke="#818cf8" stroke-width="1"/><text x="435" y="180" text-anchor="middle" fill="#818cf8" font-size="10" font-weight="600">&#127916; Roland</text><text x="435" y="194" text-anchor="middle" fill="#64748b" font-size="9">V-80HD</text><text x="435" y="206" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.6</text>
+<rect x="495" y="162" width="80" height="50" rx="8" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="1"/><text x="535" y="183" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="600">&#9881;&#65039; Extron</text><text x="535" y="203" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.10</text>
+<rect x="600" y="162" width="160" height="50" rx="8" fill="rgba(56,189,248,.04)" stroke="#475569" stroke-width="1"/><text x="680" y="183" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600">&#128250; Samsung TVs (x5)</text><text x="680" y="203" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.16 .17 .18 .19 .20</text>
+
+<text x="830" y="235" fill="#f472b6" font-size="8" font-family="monospace">P17/18 Daisy Chain</text>
+<rect x="330" y="280" width="300" height="40" rx="8" fill="rgba(244,114,182,.06)" stroke="#f472b6" stroke-width="1.5"/><text x="480" y="305" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="600">6-Port TP-Link PoE (Best Buy) -- Unmanaged L2</text>
+<line x1="390" y1="320" x2="390" y2="355" stroke="#475569" stroke-width="1"/><line x1="480" y1="320" x2="480" y2="355" stroke="#475569" stroke-width="1"/><line x1="570" y1="320" x2="570" y2="355" stroke="#475569" stroke-width="1"/>
+<rect x="350" y="355" width="80" height="50" rx="8" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="1.5"/><text x="390" y="377" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">&#127909; CAM 1</text><text x="390" y="397" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.13</text>
+<rect x="440" y="355" width="80" height="50" rx="8" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="1.5"/><text x="480" y="377" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">&#127909; CAM 2</text><text x="480" y="397" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.14</text>
+<rect x="530" y="355" width="80" height="50" rx="8" fill="rgba(251,146,60,.08)" stroke="#fb923c" stroke-width="1.5"/><text x="570" y="377" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="600">&#127909; CAM 3</text><text x="570" y="397" text-anchor="middle" fill="#64748b" font-size="9" font-family="monospace">.15</text>
+<text x="390" y="422" text-anchor="middle" fill="#64748b" font-size="8">South Pillar</text><text x="480" y="422" text-anchor="middle" fill="#64748b" font-size="8">West Wall</text><text x="570" y="422" text-anchor="middle" fill="#64748b" font-size="8">North Pillar</text>
+</svg>
+</div></div>
+
+<!-- SIGNAL FLOW -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(251,191,36,.12)">&#9654;&#65039;</div><h2>Signal Flow</h2></div>
+<div class="fb"><div class="fl-label">Video -- Camera Inputs</div>
+<div class="fl"><span class="fx s">Camera 1 (.13)</span><span class="fa">--HDMI--&gt;</span><span class="fx d">Roland HDMI 1</span></div>
+<div class="fl"><span class="fx s">Camera 2 (.14)</span><span class="fa">--HDMI--&gt;</span><span class="fx d">Roland HDMI 2</span></div>
+<div class="fl"><span class="fx s">Camera 3 (.15)</span><span class="fa">--HDMI--&gt;</span><span class="fx d">Roland HDMI 3</span></div>
+<div class="fl"><span class="fx s">Dell Laptop</span><span class="fa">--HDMI--&gt;</span><span class="fx d">Roland HDMI 4</span></div>
+<div class="fl"><span class="fx s">NUC HDMI 2</span><span class="fa">--&gt;</span><span class="fx m">Blackmagic SDI 1</span><span class="fa">--&gt;</span><span class="fx d">Roland SDI 1</span></div>
+<div class="fl"><span class="fx s">House HDMI</span><span class="fa">--&gt;</span><span class="fx m">Blackmagic SDI 2</span><span class="fa">--&gt;</span><span class="fx d">Roland SDI 2</span></div>
+</div>
+<div class="fb"><div class="fl-label">Video -- Display Distribution</div>
+<div class="fl"><span class="fx s">Roland OUT 1</span><span class="fa">--&gt;</span><span class="fx m">Extron DA6 4K</span><span class="fa">--&gt;</span><span class="fx d">5x Samsung TVs</span></div>
+<div style="padding-left:1rem;font-size:.72rem;color:var(--dim);font-family:var(--mono);margin:.25rem 0">OUT1&gt;.16 | OUT2&gt;.17 | OUT3&gt;.18 | OUT4&gt;.20 | OUT5&gt;.19 (BDH751)</div>
+<div class="fl"><span class="fx s">Roland OUT 3</span><span class="fa">--&gt;</span><span class="fx m">Magewell Capture 4K</span><span class="fa">--USB--&gt;</span><span class="fx d">NUC USB 3 (Zoom)</span></div>
+</div>
+<div class="fb"><div class="fl-label">Audio</div>
+<div class="fl"><span class="fx s">House PA (XLR L+R)</span><span class="fa">--&gt;</span><span class="fx m">Focusrite 4i4</span><span class="fa">--USB--&gt;</span><span class="fx d">NUC USB 2</span></div>
+<div class="fl"><span class="fx s">Focusrite OUT 1+2</span><span class="fa">--&gt;</span><span class="fx d">Roland Audio IN</span></div>
+</div>
+<div class="fb"><div class="fl-label">Control</div>
+<div class="fl"><span class="fx s">RM-IP10 (.12)</span><span class="fa">--VISCA/IP--&gt;</span><span class="fx d">Cameras (.13-.15) PTZ</span></div>
+<div class="fl"><span class="fx s">Extron IPCP (.10)</span><span class="fa">--IP--&gt;</span><span class="fx d">Displays, Lift, Audio</span></div>
+</div>
+<div class="fb"><div class="fl-label">USB to NUC</div>
+<div class="fl"><span class="fx">USB 1 (Front)</span><span class="fa">--&gt;</span><span class="fx d">Logitech KB/Mouse</span></div>
+<div class="fl"><span class="fx">USB 2 (Front)</span><span class="fa">--&gt;</span><span class="fx d">Focusrite 4i4</span></div>
+<div class="fl"><span class="fx">USB 3 (Rear)</span><span class="fa">--&gt;</span><span class="fx d">Magewell Capture</span></div>
+<div class="fl"><span class="fx">HDMI 1</span><span class="fa">--&gt;</span><span class="fx d">ASUS Monitor (local)</span></div>
+</div></div>
+
+<!-- ACTION ITEMS -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(248,113,113,.12)">&#9888;&#65039;</div><h2>Priority Action Items for Jimmy</h2></div>
+<div class="al">
+<div class="ai crit"><div class="an">1</div><div><div class="at">Program Extron IPCP Pro 250 xi</div><div class="ad">Alive at .10 but all ports closed (80, 443, 22, 23). Needs full programming via Extron Toolbelt or Global Configurator -- display power, camera lift, audio routing.</div></div></div>
+<div class="ai ver"><div class="an">2</div><div><div class="at">Verify RM-IP10 camera-to-button assignments</div><div class="ad">Joystick at .12 (MAC match confirmed). Button 6 lit. Use RM-IP10 Setup Tool to verify: Slot 1=.13, Slot 2=.14, Slot 3=.15.</div></div></div>
+<div class="ai ver"><div class="an">3</div><div><div class="at">Power on Samsung TVs and verify MDC</div><div class="ad">All 5 TVs confirmed on HDMI1 showing camera signal. Verify Samsung MDC config on port 8080 for remote power management.</div></div></div>
+<div class="ai done"><div class="an">4</div><div><div class="at">&#10003; WiFi CHAC-ZOOM-CONTROL -- Broadcasting</div><div class="ad">U7-Pro adopted, tri-band 2.4/5/6 GHz. Password: ChAc9Zm$r. Controller: https://10.1.240.40:8443</div></div></div>
+<div class="ai done"><div class="an">5</div><div><div class="at">&#10003; UniFi auto-start -- Configured</div><div class="ad">Startup script in Windows Startup folder. Controller launches on NUC boot.</div></div></div>
+<div class="ai done"><div class="an">6</div><div><div class="at">&#10003; Joystick identified &amp; online</div><div class="ad">RM-IP10 at .12 confirmed via MAC label match. DIP SW1 in LAN mode. Connected to main switch port 3.</div></div></div>
+<div class="ai done"><div class="an">7</div><div><div class="at">&#10003; Windows Firewall re-enabled &amp; cleanup complete</div><div class="ad">All profiles active. Temporary IPs and routes removed. NUC clean on 10.1.240.40 only.</div></div></div>
+</div>
+<div class="note"><b>Future:</b> Consider VLAN segmentation to isolate Zoom room AV traffic from school network. Wall-mounted Extron touchpanel is the pre-existing kitchen system on the school network -- not part of this Zoom room spec.</div>
+</div>
+
+<!-- WORK LOG -->
+<div class="section reveal">
+<div class="sec-head"><div class="sec-icon" style="background:rgba(74,222,128,.12)">&#9989;</div><h2>Session Work Log -- April 2-3, 2026 / 8:45 PM - 3:15 AM CT</h2></div>
+<div class="lg">
+<div class="li"><span class="ln">01</span><span class="lt">Diagnosed cameras invisible on Angry IP Scanner -- factory default 192.168.0.100 vs production 10.1.240.x, compounded by ICMP disabled</span></div>
+<div class="li"><span class="ln">02</span><span class="lt">Bridged subnets via secondary IP routes; confirmed cameras via ARP discovery (Sony OUI 88:c9:e8)</span></div>
+<div class="li"><span class="ln">03</span><span class="lt">Confirmed 3 Sony cameras already configured at 10.1.240.13--15 with static IPs</span></div>
+<div class="li"><span class="ln">04</span><span class="lt">Discovered Ubiquiti U7-Pro WiFi 7 AP at 10.1.240.5 via UniFi L2 discovery (UDP 10001)</span></div>
+<div class="li"><span class="ln">05</span><span class="lt">Installed UniFi Network Controller v9.0.108 on NUC with bundled Java runtime</span></div>
+<div class="li"><span class="ln">06</span><span class="lt">Adopted U7-Pro; created SSID CHAC-ZOOM-CONTROL broadcasting 2.4/5/6 GHz</span></div>
+<div class="li"><span class="ln">07</span><span class="lt">Mapped 15+ devices with IPs, MACs, spec labels, switch ports, and roles</span></div>
+<div class="li"><span class="ln">08</span><span class="lt">Verified Extron IPCP Pro 250 xi alive at .10 -- all ports closed, needs Toolbelt programming</span></div>
+<div class="li"><span class="ln">09</span><span class="lt">Deep-verified all 3 camera web interfaces -- port 80 active, HTTP 401 secured</span></div>
+<div class="li"><span class="ln">10</span><span class="lt">Created UniFi auto-start script for NUC boot persistence</span></div>
+<div class="li"><span class="ln">11</span><span class="lt">Re-enabled Windows Firewall on all profiles (Domain, Private, Public)</span></div>
+<div class="li"><span class="ln">12</span><span class="lt">Cleaned up all temporary IPs (192.168.0.x, 192.168.1.x) and routes from NUC</span></div>
+<div class="li"><span class="ln">13</span><span class="lt">Identified wall-mounted Extron touchpanel as pre-existing kitchen system, not part of Zoom spec</span></div>
+<div class="li"><span class="ln">14</span><span class="lt">Identified Sony RM-IP10 Joystick at .12 via MAC label match (88:c9:e8:e7:20:16). DIP SW1 in LAN mode.</span></div>
+<div class="li"><span class="ln">15</span><span class="lt">Corrected inventory: 3 cameras (.13--.15) + 1 joystick (.12). Matches Jimmy's wiring spec.</span></div>
+<div class="li"><span class="ln">16</span><span class="lt">Discovered TP-Link switch management at 192.168.0.4 (admin/admin) -- Vitesse firmware</span></div>
+<div class="li"><span class="ln">17</span><span class="lt">Corrected NUC clock from UTC to Central Standard Time</span></div>
+<div class="li"><span class="ln">18</span><span class="lt">Confirmed Samsung BDH751 (H75) at .19 -- statically configured, all 5 TVs operational on HDMI1</span></div>
+<div class="li"><span class="ln">19</span><span class="lt">Confirmed Best Buy TP-Link 6-port switch is unmanaged Layer 2 -- no IP address, transparent bridge</span></div>
+</div></div>
+
+<div class="footer"><div class="ft-title">CHAC Zoom Room -- Network Configuration Report</div>Generated April 3, 2026 at 3:30 AM CT<br>NUC: NUCBOX_M2PRo_S / 10.1.240.0/20 / Gateway 10.1.240.3<br>Prepared by Jon Isaac -- Powered by Island Dev Crew</div>
+</div>
+
+<script>
+const o=new IntersectionObserver((e)=>{e.forEach((x,i)=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('v'),i*80);o.unobserve(x.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>o.observe(el));
+</script>
+</div><!-- /admin-content -->
+</body>
+</html>

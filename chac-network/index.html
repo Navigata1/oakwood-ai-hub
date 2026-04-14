@@ -3,90 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHAC Video Production &amp; Zoom Room -- Network Configuration Report v2</title>
+<title>CHAC Video Production &amp; Zoom Room — Network Configuration Report v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f172a;--surface:#1e293b;--surface2:#334155;--border:#475569;--text:#e2e8f0;--dim:#94a3b8;--accent:#38bdf8;--accent2:#818cf8;--green:#4ade80;--yellow:#fbbf24;--red:#f87171;--orange:#fb923c;--cyan:#22d3ee;--pink:#f472b6;--emerald:#10b981;--mono:'Cascadia Code','Fira Code','JetBrains Mono',monospace;--sans:'Segoe UI',system-ui,-apple-system,sans-serif;--radius:16px;--radius-sm:10px;--glow-accent:0 0 20px rgba(56,189,248,0.15);--glow-green:0 0 20px rgba(74,222,128,0.12);--glow-pink:0 0 20px rgba(244,114,182,0.12)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:#0E0B07;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-
-.reveal{opacity:0;transform:translateY(16px) scale(0.99);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}.reveal.v{opacity:1;transform:translateY(0) scale(1)}
-
-.hero{background:linear-gradient(135deg,#0c4a6e 0%,#1e1b4b 50%,#0f172a 100%);padding:clamp(2.5rem,6vw,4rem) clamp(1.5rem,4vw,3rem);border-bottom:2px solid var(--accent);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(56,189,248,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(129,140,248,.06) 0%,transparent 60%)}
-.hero-inner{max-width:1400px;margin:0 auto;position:relative}
-.hero h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:#fff}
-.hero h1 span{color:#10b981;-webkit-text-fill-color:#10b981}
-.hero .sub{font-size:1rem;color:var(--dim);margin-top:.5rem}.hero .meta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}.hero .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.35rem .85rem;font-size:.8rem;color:var(--dim);backdrop-filter:blur(4px)}.hero .chip b{color:var(--accent)}
-
-.container{max-width:1400px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
-.section{padding:clamp(2rem,4vw,3rem) 0}.section+.section{border-top:1px solid var(--surface2)}
-.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--surface2)}
-.sec-icon{width:32px;height:32px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.sec-head h2{font-size:1.35rem;font-weight:700;color:#fff;letter-spacing:-.01em}
-
-.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.cg .cc:last-child:nth-child(3n+1){grid-column:2}
-@media(max-width:1200px){.cg{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.cg{grid-template-columns:1fr}}
-.cc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;position:relative;overflow:hidden;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease}
-.cc:hover{transform:translateY(-2px);box-shadow:var(--glow-accent)}
-.cc:active{transform:translateY(0)}
-.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.cc.bl::before{background:var(--accent)}.cc.pr::before{background:var(--accent2)}.cc.gr::before{background:var(--green)}.cc.or::before{background:var(--orange)}.cc.cy::before{background:var(--cyan)}.cc.pk::before{background:var(--pink)}.cc.yl::before{background:var(--yellow)}.cc.em::before{background:var(--emerald)}
-.cc h3{font-size:.95rem;color:#fff;margin-bottom:.85rem;display:flex;align-items:center;gap:8px}
-.tag{font-family:var(--mono);font-size:.6rem;padding:2px 7px;border-radius:4px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.tag.g{background:rgba(74,222,128,.15);color:var(--green)}.tag.y{background:rgba(251,191,36,.15);color:var(--yellow)}.tag.r{background:rgba(248,113,113,.15);color:var(--red)}.tag.b{background:rgba(56,189,248,.15);color:var(--accent)}
-.cr{display:flex;justify-content:space-between;align-items:baseline;padding:.3rem 0}.cr+.cr{border-top:1px solid rgba(255,255,255,.04)}
-.cl{color:var(--dim);font-size:.82rem;flex-shrink:0}.cv{font-family:var(--mono);font-size:.82rem;color:#fff;text-align:right;max-width:58%;word-break:break-all}
-.cv.hi{color:var(--yellow);font-weight:600;background:rgba(251,191,36,.1);padding:1px 6px;border-radius:3px}
-.cv.gv{color:var(--green)}.cv.rv{color:var(--red)}
-
-.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius)}
-table{width:100%;border-collapse:collapse;background:var(--surface)}
-thead th{background:var(--surface2);color:var(--accent);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:.7rem .85rem;text-align:left;white-space:nowrap}
-tbody td{padding:.55rem .85rem;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:top}
-tbody tr:hover{background:rgba(56,189,248,.03)}
-tbody tr:last-child td{border-bottom:none}
-.mono{font-family:var(--mono);font-size:.8rem}
-
-.st{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:600;white-space:nowrap}
-.st.al{background:rgba(74,222,128,.12);color:var(--green)}.st.bc{background:rgba(56,189,248,.12);color:var(--accent)}.st.sb{background:rgba(251,191,36,.12);color:var(--yellow)}.st.dn{background:rgba(248,113,113,.12);color:var(--red)}.st.nc{background:rgba(251,146,60,.12);color:var(--orange)}
-.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.dt.g{background:var(--green);box-shadow:0 0 6px var(--green)}.dt.b{background:var(--accent);box-shadow:0 0 6px var(--accent)}.dt.y{background:var(--yellow);box-shadow:0 0 6px var(--yellow)}.dt.r{background:var(--red);box-shadow:0 0 6px var(--red)}.dt.o{background:var(--orange);box-shadow:0 0 6px var(--orange)}
-
-.topo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem}
-.topo svg{width:100%;max-width:960px;margin:0 auto;display:block}
-
-.fb{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:.6rem}
-.fl-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.75rem}
-.fl{display:flex;align-items:center;gap:.4rem;padding:.2rem 0;font-size:.82rem;flex-wrap:wrap}
-.fx{border:1px solid var(--border);border-radius:8px;padding:.2rem .6rem;white-space:nowrap;font-size:.8rem;background:var(--surface2)}
-.fx.s{border-color:var(--green);color:var(--green)}.fx.m{border-color:var(--accent2);color:var(--accent2)}.fx.d{border-color:var(--accent);color:var(--accent)}
-.fa{color:var(--dim);font-size:.75rem}
-
-.al{display:grid;gap:.6rem}
-.ai{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;display:flex;gap:.85rem;align-items:flex-start;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .3s ease}
-.ai:hover{transform:translateY(-1px);box-shadow:var(--glow-accent)}
-.ai:active{transform:translateY(0)}
-.ai.crit{border-left:3px solid var(--red)}.ai.ver{border-left:3px solid var(--yellow)}.ai.done{border-left:3px solid var(--green);opacity:.6}
-.an{width:1.7rem;height:1.7rem;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:.75rem;flex-shrink:0}
-.ai.crit .an{background:rgba(248,113,113,.15);color:var(--red)}.ai.ver .an{background:rgba(251,191,36,.15);color:var(--yellow)}.ai.done .an{background:rgba(74,222,128,.15);color:var(--green)}
-.at{font-weight:600;font-size:.9rem;color:#fff;margin-bottom:.2rem}.ad{font-size:.8rem;color:var(--dim);line-height:1.5;max-width:65ch}
-
-.lg{display:grid;gap:.4rem}
-.li{display:flex;gap:.65rem;padding:.45rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);align-items:baseline;transition:background .2s}
-.li:hover{background:var(--surface2)}
-.ln{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-weight:700;min-width:1.2rem}
-.lt{font-size:.8rem;color:var(--dim);line-height:1.5}
-
-.note{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-radius:var(--radius-sm);padding:.85rem 1.1rem;margin:1.25rem 0;font-size:.8rem;color:var(--yellow);line-height:1.5}
-.note b{font-weight:700}
-.note.red{background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.25);color:var(--red)}
-
-.footer{text-align:left;color:#71717A;font-size:.8125rem;padding:2.5rem 0;border-top:1px solid var(--surface2);margin-top:2.5rem;font-family:'Satoshi',system-ui,-apple-system,sans-serif;line-height:1.65}.footer b{color:#18181B;font-weight:700;background:rgba(16,185,129,.12);padding:1px 6px;border-radius:3px}.footer .ft-title{font-size:.9rem;font-weight:700;color:#10b981;letter-spacing:-.01em;margin-bottom:.25rem}
-
-@media(max-width:768px){.cg{grid-template-columns:1fr}.hero .meta{flex-direction:column;gap:.4rem}.cr{flex-direction:column;gap:.1rem}.cv{text-align:left;max-width:100%}}
-@media print{body{background:#fff;color:#000}.reveal{opacity:1!important;transform:none!important}.cc,.fb,.topo,.ai,.li{box-shadow:none;break-inside:avoid}}
+:root {
+ --bg: #0a0e14;
+ --bg-soft: #0f131a;
+ --bg-elev: #141921;
+ --bg-glass: rgba(20, 25, 33, 0.55);
+ --bg-glass-hi: rgba(26, 32, 41, 0.78);
+ --border: rgba(201, 168, 76, 0.18);
+ --border-soft: rgba(240, 237, 232, 0.06);
+ --text: #f0ede8;
+ --text-dim: #a8a499;
+ --text-faint: #6b6960;
+ --gold: #c9a84c;
+ --gold-bright: #e0c060;
+ --gold-soft: rgba(201, 168, 76, 0.5);
+ --gold-glow: rgba(201, 168, 76, 0.2);
+ --green: #5ec27a;
+ --red: #d96565;
+ --amber: #e0a050;
+ --blue: #6a9fd6;
+ --purple: #a57fc4;
+ --cyan: #6ac4c4;
+ --font-display: 'Outfit', system-ui, sans-serif;
+ --font-body: 'DM Sans', system-ui, sans-serif;
+ --font-mono: 'JetBrains Mono', monospace;
+ --radius: 16px;
+ --radius-sm: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+ font-family: var(--font-body);
+ background: var(--bg);
+ color: var(--text);
+ -webkit-font-smoothing: antialiased;
+ line-height: 1.6;
+ background-image:
+ radial-gradient(ellipse 80% 50% at 20% 0%, rgba(201, 168, 76, 0.09) 0%, transparent 55%),
+ radial-gradient(ellipse 60% 40% at 80% 100%, rgba(106, 159, 214, 0.04) 0%, transparent 50%);
+}
+body::before {
+ content: ''; position: fixed; inset: 0; pointer-events: none;
+ opacity: 0.025; z-index: 1;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.v { opacity: 1; transform: translateY(0); }
+.hero { position: relative; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--border); overflow: hidden; z-index: 2; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 40%, rgba(201,168,76,0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(106,159,214,0.05) 0%, transparent 55%); }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-soft), transparent); }
+.hero-inner { max-width: 1400px; margin: 0 auto; position: relative; }
+.hero-mark { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.85rem; display: inline-flex; align-items: center; gap: 0.75rem; }
+.hero-mark::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 600; line-height: 0.95; letter-spacing: -0.03em; color: var(--text); max-width: 24ch; margin-bottom: 1.25rem; }
+.hero h1 .light { display: block; font-weight: 300; color: var(--text-dim); font-size: 0.7em; margin-top: 0.25rem; letter-spacing: -0.02em; }
+.hero .sub { font-size: 1rem; color: var(--text-dim); max-width: 60ch; margin-bottom: 1.75rem; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.chip { background: var(--bg-glass); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--border-soft); border-radius: 6px; padding: 0.4rem 0.9rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); }
+.chip b { color: var(--gold); font-weight: 500; }
+.ver-pill { position: absolute; top: clamp(1.5rem, 3vw, 2.5rem); right: clamp(1.5rem, 4vw, 3rem); background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05)); border: 1px solid var(--gold-soft); border-radius: 20px; padding: 0.4rem 1rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); position: relative; z-index: 2; }
+.section { padding: clamp(2.5rem, 5vw, 4rem) 0; border-bottom: 1px solid var(--border-soft); }
+.section:last-of-type { border-bottom: none; }
+.sec-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-soft); }
+.sec-num { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); padding: 0.3rem 0.65rem; border: 1px solid var(--gold-soft); border-radius: 4px; flex-shrink: 0; }
+.sec-head h2 { font-family: var(--font-display); font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 500; letter-spacing: -0.015em; color: var(--text); }
+.sec-head .sec-desc { margin-left: auto; font-size: 0.8rem; color: var(--text-faint); font-family: var(--font-mono); text-align: right; max-width: 30ch; }
+.cg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 1100px) { .cg { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .cg { grid-template-columns: 1fr; } }
+.cc { background: var(--bg-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.35rem 1.55rem; position: relative; overflow: hidden; transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s; }
+.cc:hover { transform: translateY(-2px); border-color: var(--gold-soft); }
+.cc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); opacity: 0.6; }
+.cc.bl::before { background: var(--blue); } .cc.gr::before { background: var(--green); } .cc.am::before { background: var(--amber); } .cc.rd::before { background: var(--red); } .cc.pr::before { background: var(--purple); } .cc.cy::before { background: var(--cyan); }
+.cc h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.cc h3 .badge { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.badge.live { background: rgba(94,194,122,0.12); color: var(--green); border: 1px solid rgba(94,194,122,0.3); } .badge.new { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid var(--gold-soft); } .badge.done { background: rgba(94,194,122,0.08); color: var(--green); } .badge.warn { background: rgba(224,160,80,0.12); color: var(--amber); } .badge.issue { background: rgba(217,101,101,0.12); color: var(--red); }
+.cc .row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.35rem 0; font-size: 0.78rem; }
+.cc .row + .row { border-top: 1px solid var(--border-soft); }
+.cc .row .k { color: var(--text-dim); font-size: 0.75rem; flex-shrink: 0; }
+.cc .row .v { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text); text-align: right; word-break: break-all; max-width: 60%; }
+.cc .row .v.hi { color: var(--gold); background: rgba(201,168,76,0.08); padding: 1px 6px; border-radius: 3px; }
+.cc .row .v.gv { color: var(--green); } .cc .row .v.rv { color: var(--red); } .cc .row .v.wv { color: var(--amber); }
+.timeline { display: flex; flex-direction: column; gap: 0.75rem; position: relative; padding-left: 1.5rem; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(180deg, var(--gold-soft), transparent); }
+.tl-item { position: relative; background: var(--bg-glass); border: 1px solid var(--border-soft); border-radius: 10px; padding: 0.9rem 1.25rem; }
+.tl-item::before { content: ''; position: absolute; left: -1.37rem; top: 1.15rem; width: 13px; height: 13px; border-radius: 50%; background: var(--bg); border: 2px solid var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+.tl-item.major::before { background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+.tl-num { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gold); font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase; }
+.tl-title { font-family: var(--font-display); font-size: 0.92rem; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+.tl-body { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+.tw { overflow-x: auto; background: var(--bg-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-soft); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; }
+thead th { background: var(--bg-glass-hi); color: var(--gold); font-family: var(--font-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; padding: 0.85rem 1rem; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
+tbody td { padding: 0.65rem 1rem; font-size: 0.78rem; border-bottom: 1px solid rgba(240,237,232,0.03); vertical-align: middle; }
+tbody tr:hover { background: rgba(201,168,76,0.03); } tbody tr:last-child td { border-bottom: none; }
+.mono { font-family: var(--font-mono); font-size: 0.74rem; }
+.st { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.18rem 0.55rem; border-radius: 20px; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; white-space: nowrap; }
+.st .dt { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.st.al { background: rgba(94,194,122,0.1); color: var(--green); } .st.al .dt { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.st.dn { background: rgba(217,101,101,0.1); color: var(--red); } .st.dn .dt { background: var(--red); box-shadow: 0 0 6px var(--red); }
+.st.sb { background: rgba(224,160,80,0.1); color: var(--amber); } .st.sb .dt { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+.fb { background: var(--bg-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.35rem 1.5rem; margin-bottom: 0.75rem; }
+.fl-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.85rem; text-transform: uppercase; }
+.fl { display: flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0; font-size: 0.8rem; flex-wrap: wrap; }
+.fx { border: 1px solid var(--border-soft); border-radius: 6px; padding: 0.25rem 0.65rem; white-space: nowrap; font-size: 0.78rem; background: var(--bg-elev); font-family: var(--font-body); }
+.fx.s { border-color: rgba(94,194,122,0.4); color: var(--green); } .fx.m { border-color: rgba(106,159,214,0.4); color: var(--blue); } .fx.d { border-color: var(--gold-soft); color: var(--gold); } .fx.r { border-color: rgba(217,101,101,0.4); color: var(--red); }
+.fa { color: var(--text-faint); font-size: 0.72rem; font-family: var(--font-mono); }
+.note { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-left: 3px solid var(--gold); border-radius: var(--radius-sm); padding: 0.9rem 1.2rem; margin: 1.25rem 0; font-size: 0.82rem; color: var(--text-dim); line-height: 1.65; }
+.note b { color: var(--gold); font-weight: 500; }
+.note.red { background: rgba(217,101,101,0.05); border-color: rgba(217,101,101,0.25); border-left-color: var(--red); } .note.red b { color: var(--red); }
+.callout { background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.02) 100%); border: 1px solid var(--gold-soft); border-radius: var(--radius); padding: 1.75rem 2rem; margin: 2rem 0; position: relative; }
+.callout .label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem; }
+.callout .title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; }
+.callout .body { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; }
+.callout code { background: var(--bg-elev); color: var(--gold); padding: 2px 6px; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem; }
+pre.code { background: var(--bg); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); padding: 1.1rem 1.3rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text); overflow-x: auto; line-height: 1.7; margin: 0.75rem 0; }
+pre.code .cmt { color: var(--text-faint); } pre.code .gold { color: var(--gold); } pre.code .green { color: var(--green); }
+.toc { background: var(--bg-glass); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0 3rem; }
+.toc-title { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.toc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem 2rem; }
+@media (max-width: 900px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .toc-grid { grid-template-columns: 1fr; } }
+.toc-item { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.4rem 0; font-family: var(--font-body); font-size: 0.85rem; color: var(--text-dim); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+.toc-item:hover { color: var(--gold); border-bottom-color: var(--gold-soft); }
+.toc-item .n { font-family: var(--font-mono); font-size: 0.68rem; color: var(--gold); opacity: 0.7; min-width: 28px; }
+footer { margin-top: 4rem; padding: 3rem clamp(1.5rem, 4vw, 3rem); background: var(--bg-soft); border-top: 1px solid var(--border); position: relative; z-index: 2; }
+.footer-row { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+.footer-mark { display: flex; flex-direction: column; gap: 0.4rem; }
+.footer-mark .label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-faint); letter-spacing: 0.18em; text-transform: uppercase; }
+.footer-mark .name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--gold); }
+.footer-mark .scripture { font-family: var(--font-display); font-size: 0.82rem; color: var(--text-faint); font-style: italic; margin-top: 0.75rem; max-width: 40ch; }
+.footer-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint); text-align: right; line-height: 1.8; }
+.footer-meta b { color: var(--gold); font-weight: 500; }
+@media print { body { background: #fff; color: #000; } body::before { display: none; } .reveal { opacity: 1 !important; transform: none !important; } .cc, .tl-item, .fb, .tw, .callout, .panel { break-inside: avoid; } }
+@media (max-width: 640px) { .hero .meta { flex-direction: column; align-items: flex-start; } .cc .row { flex-direction: column; gap: 0.15rem; } .cc .row .v { text-align: left; max-width: 100%; } .sec-head .sec-desc { display: none; } }
 </style>
 </head>
 <body>
@@ -95,13 +151,8 @@ tbody tr:last-child td{border-bottom:none}
     <div style="color:#c9a84c;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;">Oakwood AI Hub</div>
     <h2 style="color:#F5EDD6;font-size:1.4rem;font-weight:600;margin-bottom:0.5rem;">Admin Access</h2>
     <p style="color:rgba(245,237,214,0.5);font-size:0.85rem;margin-bottom:1.5rem;">Enter the admin password to continue.</p>
-    <input id="auth-input" type="password" placeholder="Password" autofocus
-      style="width:100%;padding:0.8rem 1rem;background:#231A0E;border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:#F5EDD6;font-size:0.95rem;outline:none;text-align:center;"
-      onkeydown="if(event.key==='Enter')checkAuth()">
-    <button onclick="checkAuth()"
-      style="width:100%;margin-top:0.8rem;padding:0.8rem;background:#c9a84c;color:#0E0B07;border:none;border-radius:6px;font-weight:700;font-size:0.9rem;cursor:pointer;">
-      Enter
-    </button>
+    <input id="auth-input" type="password" placeholder="Password" autofocus style="width:100%;padding:0.8rem 1rem;background:#231A0E;border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:#F5EDD6;font-size:0.95rem;outline:none;text-align:center;" onkeydown="if(event.key==='Enter')checkAuth()">
+    <button onclick="checkAuth()" style="width:100%;margin-top:0.8rem;padding:0.8rem;background:#c9a84c;color:#0E0B07;border:none;border-radius:6px;font-weight:700;font-size:0.9rem;cursor:pointer;">Enter</button>
     <p id="auth-error" style="color:#e74c3c;font-size:0.8rem;margin-top:0.8rem;display:none;">Incorrect password</p>
   </div>
 </div>
@@ -111,279 +162,116 @@ if(sessionStorage.getItem('oakwood-admin')==='true'){document.getElementById('au
 </script>
 <style>@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}</style>
 <div id="admin-content" style="display:none;">
-
-<div class="hero reveal">
-<div class="hero-inner">
-<h1><span>CHAC</span> Video Production &amp; Zoom Room<br>Network Configuration Report</h1>
-<div class="sub">Prepared for Jimmy Wilson / Digital Support Systems &mdash; Oakwood University</div>
-<div class="meta">
-<div class="chip">&#128197; <b>April 2&ndash;3 &amp; April 7&ndash;8, 2026</b></div>
-<div class="chip">&#128340; Last scan <b>April 8, 2026 ~7:00 PM CT</b></div>
-<div class="chip">&#127760; Subnet <b>10.1.240.0/20</b></div>
-<div class="chip">&#128225; WiFi <b>CHAC-ZOOM-CONTROL</b></div>
-<div class="chip">&#128308; HDCP Blocker <b>ZV Pro @ .4</b></div>
-</div>
-</div>
-</div>
-
+<section class="hero reveal">
+ <div class="ver-pill">V3 · MISSION MODE</div>
+ <div class="hero-inner">
+ <div class="hero-mark">CHAC // DISPLAY OPERATIONS // V3.0.0</div>
+ <h1>Network Configuration<br>&amp; Display Control Report<span class="light">From cold discovery to full programmatic control.</span></h1>
+ <div class="sub">Complete network handoff for the CHAC Video Production &amp; Zoom Room, including the new Samsung BED-H display control system built during the April 13 overnight session. Prepared for Jimmy Wilson / Digital Support Systems — Oakwood University.</div>
+ <div class="meta">
+ <div class="chip">📅 Sessions <b>Apr 2 · Apr 7–8 · Apr 13–14, 2026</b></div>
+ <div class="chip">🕰 Last scan <b>Apr 14, 2026 ~03:30 CT</b></div>
+ <div class="chip">🌐 Subnet <b>10.1.240.0/20</b></div>
+ <div class="chip">📡 WiFi <b>CHAC-ZOOM-CONTROL</b></div>
+ <div class="chip">📺 Displays <b>5 / 5 under programmatic control</b></div>
+ </div>
+ </div>
+</section>
 <div class="container">
+ <div class="toc reveal">
+ <div class="toc-title">Contents</div>
+ <div class="toc-grid">
+ <a class="toc-item" href="#executive"><span class="n">00</span>Executive Summary</a>
+ <a class="toc-item" href="#credentials"><span class="n">01</span>Master Credentials &amp; Access</a>
+ <a class="toc-item" href="#inventory"><span class="n">02</span>Device Inventory</a>
+ <a class="toc-item" href="#display-control"><span class="n">03</span>Display Control System</a>
+ <a class="toc-item" href="#protocol-stack"><span class="n">04</span>Protocol Stack</a>
+ <a class="toc-item" href="#signal-flow"><span class="n">05</span>Signal Flow</a>
+ <a class="toc-item" href="#hdcp"><span class="n">06</span>HDCP Issue</a>
+ <a class="toc-item" href="#flags"><span class="n">07</span>Flags &amp; Discrepancies</a>
+ <a class="toc-item" href="#actions"><span class="n">08</span>Action Items</a>
+ <a class="toc-item" href="#apr13"><span class="n">09</span>Apr 13 Session</a>
+ <a class="toc-item" href="#previous"><span class="n">10</span>Prior Session Log</a>
+ <a class="toc-item" href="#deliverables"><span class="n">11</span>Deliverables</a>
+ </div>
+ </div>
+ <section class="section reveal" id="executive">
+ <div class="sec-head"><div class="sec-num">00</div><h2>Executive Summary</h2><div class="sec-desc">What's new in v3</div></div>
+ <div class="callout"><div class="label">The Headline</div><div class="title">All 5 Samsung displays are now under full programmatic control</div><div class="body">On April 13–14, the MDC integration puzzle was solved. The BED-H series displays are <b>Samsung Tizen Pro TVs</b>, not signage displays — they do not implement the MDC binary protocol. Instead they use the <b>Samsung Smart TV WebSocket API</b> on port 8002 with token-based pairing. A multi-protocol controller combining Wake-on-LAN, EXLINK on TCP 1516, and WebSocket KEY_POWER now gives the NUC full on/off/status control over every display. Persistent tokens are stored and a 17-scenario test harness runs on a production-grade job system with SQLite persistence and cron scheduling.</div></div>
+ <div class="cg">
+ <div class="cc gr"><h3>✓ Fully Resolved <span class="badge done">v3</span></h3><div class="row"><span class="k">Display Control</span><span class="v gv">5 / 5 paired</span></div><div class="row"><span class="k">WiFi CHAC-ZOOM-CONTROL</span><span class="v gv">Broadcasting</span></div><div class="row"><span class="k">UniFi Auto-Start</span><span class="v gv">Configured</span></div><div class="row"><span class="k">RM-IP10 Joystick</span><span class="v gv">Configured</span></div><div class="row"><span class="k">Roland Video Out</span><span class="v gv">Working</span></div><div class="row"><span class="k">Cycle Test</span><span class="v gv">ON → 30s → OFF PASSED</span></div></div>
+ <div class="cc am"><h3>⚠ Still Open <span class="badge warn">carried from v2</span></h3><div class="row"><span class="k">ZV Pro (.4)</span><span class="v wv">Offline + HDCP</span></div><div class="row"><span class="k">Extron IPCP (.10)</span><span class="v wv">Offline, needs program</span></div><div class="row"><span class="k">Extron Tablet (.11)</span><span class="v wv">Offline</span></div><div class="row"><span class="k">Roland Audio Out</span><span class="v wv">Routing lost</span></div><div class="row"><span class="k">iPad MAC swap</span><span class="v wv">.6 / .7 reconcile</span></div><div class="row"><span class="k">TV MAC reconcile</span><span class="v wv">See §07</span></div></div>
+ <div class="cc bl"><h3>🎁 New Deliverables <span class="badge new">v3</span></h3><div class="row"><span class="k">mdc.py</span><span class="v hi">CLI controller</span></div><div class="row"><span class="k">Controller v2</span><span class="v hi">Job system + UI</span></div><div class="row"><span class="k">chac_tokens.json</span><span class="v hi">5 paired tokens</span></div><div class="row"><span class="k">SQLite DB</span><span class="v hi">Run history + schedules</span></div><div class="row"><span class="k">Cron scheduler</span><span class="v hi">Automated jobs</span></div><div class="row"><span class="k">17 test scenarios</span><span class="v hi">Full test harness</span></div></div>
+ </div>
+ </section>
+ <section class="section reveal" id="credentials">
+ <div class="sec-head"><div class="sec-num">01</div><h2>Master Credentials &amp; Access</h2><div class="sec-desc">Carry-over from v2 — verified Apr 14</div></div>
+ <div class="cg">
+ <div class="cc"><h3>🌐 Network Core</h3><div class="row"><span class="k">Subnet</span><span class="v">10.1.240.0/20</span></div><div class="row"><span class="k">Mask</span><span class="v">255.255.240.0</span></div><div class="row"><span class="k">Gateway</span><span class="v">10.1.240.3</span></div><div class="row"><span class="k">Gateway MAC</span><span class="v">f0:f7:55:be:2f:80</span></div><div class="row"><span class="k">DNS</span><span class="v">8.8.8.8 / 1.1.1.1</span></div><div class="row"><span class="k">DHCP</span><span class="v">Disabled (static)</span></div></div>
+ <div class="cc cy"><h3>📡 WiFi CHAC-ZOOM-CONTROL <span class="badge live">LIVE</span></h3><div class="row"><span class="k">SSID</span><span class="v hi">CHAC-ZOOM-CONTROL</span></div><div class="row"><span class="k">Password</span><span class="v hi">ChAc9Zm$r</span></div><div class="row"><span class="k">Security</span><span class="v">WPA2 / WPA3</span></div><div class="row"><span class="k">Bands</span><span class="v">2.4 / 5 / 6 GHz</span></div><div class="row"><span class="k">AP</span><span class="v">Ubiquiti U7-Pro · .5</span></div></div>
+ <div class="cc pr"><h3>🖥 UniFi Controller <span class="badge live">v9.0.108</span></h3><div class="row"><span class="k">Network URL</span><span class="v">https://10.1.240.40:8443</span></div><div class="row"><span class="k">Username</span><span class="v hi">admin</span></div><div class="row"><span class="k">Password</span><span class="v hi">Y&amp;U*i9o0p</span></div><div class="row"><span class="k">Auto-Start</span><span class="v gv">Enabled</span></div></div>
+ <div class="cc gr"><h3>💻 NUC — Zoom Room Hub</h3><div class="row"><span class="k">Hostname</span><span class="v">NUCBOX_M2PRo_S</span></div><div class="row"><span class="k">IP</span><span class="v">10.1.240.40</span></div><div class="row"><span class="k">MAC</span><span class="v">e0:51:d8:1e:ed:fc</span></div><div class="row"><span class="k">OS</span><span class="v">Win 11 Pro</span></div><div class="row"><span class="k">User</span><span class="v">CHAC Admin</span></div></div>
+ <div class="cc am"><h3>🎥 Sony Cameras (x3) <span class="badge live">HTTP 401</span></h3><div class="row"><span class="k">Web UI</span><span class="v">http://10.1.240.13–.15</span></div><div class="row"><span class="k">Username</span><span class="v hi">admin</span></div><div class="row"><span class="k">Password</span><span class="v hi">Admin_1234</span></div><div class="row"><span class="k">Auth</span><span class="v">Digest on port 80</span></div></div>
+ <div class="cc gr"><h3>🎮 Sony RM-IP10 Joystick <span class="badge done">CONFIGURED</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.12</span></div><div class="row"><span class="k">MAC</span><span class="v">88:c9:e8:e7:20:16</span></div><div class="row"><span class="k">DIP SW1</span><span class="v">LAN mode</span></div><div class="row"><span class="k">SN</span><span class="v">1005988</span></div></div>
+ <div class="cc rd"><h3>⚙ Extron IPCP Pro 250 xi <span class="badge warn">NEEDS PROGRAM</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.10</span></div><div class="row"><span class="k">MAC</span><span class="v">00:05:a8:1f:86:55</span></div><div class="row"><span class="k">Status</span><span class="v rv">Offline Apr 8 &amp; 14</span></div></div>
+ <div class="cc am"><h3>🎛 Roland V-80HD <span class="badge live">WEB UI OPEN</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.9</span></div><div class="row"><span class="k">MAC</span><span class="v">00:40:ab:c1:0c:17</span></div><div class="row"><span class="k">Web UI</span><span class="v">http://10.1.240.9 (401)</span></div><div class="row"><span class="k">Role</span><span class="v">Video Switcher</span></div></div>
+ <div class="cc bl"><h3>📺 Samsung Displays (x5) <span class="badge new">NEW: PAIRED</span></h3><div class="row"><span class="k">Model</span><span class="v">LH98/75BEDHLGFXGO</span></div><div class="row"><span class="k">Platform</span><span class="v">Tizen 9.0 / Pro TV</span></div><div class="row"><span class="k">Primary Port</span><span class="v">8002 (WebSocket)</span></div><div class="row"><span class="k">Fallback Port</span><span class="v">1516 (EXLINK)</span></div><div class="row"><span class="k">Control</span><span class="v gv">5 / 5 paired</span></div></div>
+ <div class="cc pr"><h3>🔌 TP-Link Switch Mgmt</h3><div class="row"><span class="k">Main Switch IP</span><span class="v">192.168.0.4</span></div><div class="row"><span class="k">Username</span><span class="v hi">admin</span></div><div class="row"><span class="k">Password</span><span class="v hi">admin</span></div><div class="row"><span class="k">POE (Best Buy)</span><span class="v">Unmanaged L2</span></div></div>
+ <div class="cc rd"><h3>📺 ZeeVee ZV Pro <span class="badge issue">HDCP + OFFLINE</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.4</span></div><div class="row"><span class="k">MAC</span><span class="v">00:1c:d5:68:22:e5</span></div><div class="row"><span class="k">Status</span><span class="v rv">Needs HDCP splitter</span></div></div>
+ <div class="cc bl"><h3>📱 iPad Zoom Controllers</h3><div class="row"><span class="k">Zoom Controller</span><span class="v">.6</span></div><div class="row"><span class="k">Wall-Mount</span><span class="v">.7</span></div><div class="row"><span class="k">Status</span><span class="v gv">Both alive</span></div><div class="row"><span class="k">MAC swap</span><span class="v wv">See §07</span></div></div>
+ </div></section>
+ <section class="section reveal" id="inventory"><div class="sec-head"><div class="sec-num">02</div><h2>Complete Device Inventory</h2><div class="sec-desc">Live scan — April 14, 2026</div></div><div class="tw"><table><thead><tr><th>#</th><th>Device</th><th>IP</th><th>MAC</th><th>State</th><th>Ports</th><th>Role</th></tr></thead><tbody><tr><td>1</td><td>Gateway</td><td class="mono">.3</td><td class="mono">f0:f7:55:be:2f:80</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>—</td><td>Network gateway</td></tr><tr><td>2</td><td>ZeeVee ZV Pro</td><td class="mono">.4</td><td class="mono">00:1c:d5:68:22:e5</td><td><span class="st dn"><span class="dt"></span>Down</span></td><td>none</td><td>QAM Broadcaster (HDCP blocked)</td></tr><tr><td>3</td><td>Ubiquiti U7-Pro</td><td class="mono">.5</td><td class="mono">a8:9c:6c:72:d9:24</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>—</td><td>WiFi AP</td></tr><tr><td>4</td><td>iPad Zoom Controller</td><td class="mono">.6</td><td class="mono">00:60:01:80:50:db</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>—</td><td>Controller tablet</td></tr><tr><td>5</td><td>Wall-Mount iPad</td><td class="mono">.7</td><td class="mono">62:ca:70:65:a9:75</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>—</td><td>Scheduler display</td></tr><tr><td>6</td><td>Roland V-80HD</td><td class="mono">.9</td><td class="mono">00:40:ab:c1:0c:17</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>80</td><td>Core video switcher</td></tr><tr><td>7</td><td>Extron IPCP 250</td><td class="mono">.10</td><td class="mono">00:05:a8:1f:86:55</td><td><span class="st dn"><span class="dt"></span>Down</span></td><td>none</td><td>Control processor</td></tr><tr><td>8</td><td>Extron Tablet</td><td class="mono">.11</td><td class="mono">fa:cd:19:ff:de:f4</td><td><span class="st dn"><span class="dt"></span>Down</span></td><td>none</td><td>Extron UI tablet</td></tr><tr><td>9</td><td>Sony RM-IP10 Joystick</td><td class="mono">.12</td><td class="mono">88:c9:e8:e7:20:16</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>—</td><td>PTZ camera controller</td></tr><tr><td>10</td><td>Sony SRG-X40 CAM1</td><td class="mono">.13</td><td class="mono">88:c9:e8:d6:bb:1b</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>80</td><td>PTZ camera 1</td></tr><tr><td>11</td><td>Sony SRG-X40 CAM2</td><td class="mono">.14</td><td class="mono">88:c9:e8:d6:bb:1e</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>80</td><td>PTZ camera 2</td></tr><tr><td>12</td><td>Sony SRG-X40 CAM3</td><td class="mono">.15</td><td class="mono">88:c9:e8:d6:bb:3f</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>80</td><td>PTZ camera 3</td></tr><tr style="background:rgba(201,168,76,0.04)"><td>13</td><td><b>CHAC-Display:1</b> (98" BED-H)</td><td class="mono">.16</td><td class="mono">28:af:42:a7:dc:dc</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td class="mono">1516, 8001, 8002, 8080</td><td><b>Paired · Token 15849496</b></td></tr><tr style="background:rgba(201,168,76,0.04)"><td>14</td><td><b>CHAC-Display:2</b> (98" BED-H)</td><td class="mono">.17</td><td class="mono">88:60:88:a2:0f:ac</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td class="mono">1516, 8001, 8002, 8080</td><td><b>Paired · Token 12944181</b></td></tr><tr style="background:rgba(201,168,76,0.04)"><td>15</td><td><b>CHAC-Display:3</b> (98" BED-H)</td><td class="mono">.18</td><td class="mono">88:60:80:62:0f:07</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td class="mono">1516, 8001, 8002, 8080</td><td><b>Paired · Token 84754295</b></td></tr><tr style="background:rgba(201,168,76,0.04)"><td>16</td><td><b>CHAC-Display:4</b> (75" BED-H)</td><td class="mono">.19</td><td class="mono">d4:e4:09:10:04:e4</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td class="mono">1516, 8001, 8002, 8080</td><td><b>Paired · Token 71785463</b></td></tr><tr style="background:rgba(201,168,76,0.04)"><td>17</td><td><b>CHAC-Display:5</b> (98" BED-H)</td><td class="mono">.20</td><td class="mono">88:A0:B8:A2:0E:57</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td class="mono">1516, 8001, 8002, 8080</td><td><b>Paired · Token 12437418</b></td></tr><tr><td>18</td><td>Intel NUC (this host)</td><td class="mono">.40</td><td class="mono">e0:51:d8:1e:ed:fc</td><td><span class="st al"><span class="dt"></span>Alive</span></td><td>8443, 8888</td><td>Zoom Hub + UniFi + Controller</td></tr></tbody></table></div></section>
+ <section class="section reveal" id="display-control"><div class="sec-head"><div class="sec-num">03</div><h2>Display Control System</h2><div class="sec-desc">The new integration built Apr 13–14</div></div><div class="callout"><div class="label">Root Cause Discovery</div><div class="title">BED-H is a Pro TV, not a signage display</div><div class="body">The Samsung <b>LH98BEDHLGFXGO</b> (and 75" counterpart <b>LH75BEDHLGFXGO</b>) are branded as commercial "Business TVs" but run <b>Samsung Tizen 9.0</b> and use the consumer Smart TV API stack, not the binary MDC protocol used by QM/QH/DB signage displays. That's why Samsung's MDC Unified software connects (TCP handshake succeeds on port 1516) but reports zero detected devices — the displays aren't speaking the MDC dialect. Solution: control them the same way a Samsung Smart View / SmartThings client does — via the <b>WebSocket KEY_POWER</b> endpoint on port 8002 with token-based pairing.</div></div>
+ <div class="cg"><div class="cc gr"><h3>Control Flow — Power ON</h3><div class="row"><span class="k">Step 1</span><span class="v">Wake-on-LAN UDP:9</span></div><div class="row"><span class="k">Step 2</span><span class="v">Wait 3s</span></div><div class="row"><span class="k">Step 3</span><span class="v">EXLINK TCP 1516</span></div><div class="row"><span class="k">Step 4</span><span class="v">WS KEY_POWER (if off)</span></div><div class="row"><span class="k">Step 5</span><span class="v">Verify via HTTP 8001</span></div></div><div class="cc am"><h3>Control Flow — Power OFF</h3><div class="row"><span class="k">Step 1</span><span class="v">Query HTTP 8001</span></div><div class="row"><span class="k">Step 2</span><span class="v">If on → WS KEY_POWER</span></div><div class="row"><span class="k">Step 3</span><span class="v">EXLINK TCP 1516</span></div><div class="row"><span class="k">Step 4</span><span class="v">Verify via HTTP 8001</span></div></div><div class="cc bl"><h3>Pairing Sequence</h3><div class="row"><span class="k">Step 1</span><span class="v">Open wss 8002</span></div><div class="row"><span class="k">Step 2</span><span class="v">Send device name</span></div><div class="row"><span class="k">Step 3</span><span class="v">Await connect event</span></div><div class="row"><span class="k">Step 4</span><span class="v">Capture token</span></div><div class="row"><span class="k">Step 5</span><span class="v">Persist JSON</span></div></div></div>
+ <div class="callout" style="background:linear-gradient(135deg,rgba(94,194,122,0.08),rgba(94,194,122,0.02));border-color:rgba(94,194,122,0.3);"><div class="label" style="color:var(--green);">The One Setting That Made Everything Work</div><div class="title">Access Notification → Always Allow</div><div class="body">On Tizen 9 firmware 2115, the Device Connect Manager moved from <code>General → External Device Manager</code> to <code>All Settings → Connection → Device Manager</code>. The key setting is <code>Access Notification</code> — if it's anything other than <b>Always Allow</b>, unknown devices get silently rejected with <code>ms.channel.timeOut</code> and no pairing popup is ever shown. Setting it to Always Allow on all 5 displays was the unlock.</div></div>
+ <div class="cg"><div class="cc"><h3>📺 CHAC-Display:1 (98")</h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.16</span></div><div class="row"><span class="k">MAC</span><span class="v">28-AF-42-A7-DC-DC</span></div><div class="row"><span class="k">Model</span><span class="v">LH98BEDHLGFXGO</span></div><div class="row"><span class="k">Firmware</span><span class="v">2115 (Tizen 9.0)</span></div><div class="row"><span class="k">Token</span><span class="v hi">15849496</span></div><div class="row"><span class="k">Status</span><span class="v gv">Paired + verified</span></div></div><div class="cc"><h3>📺 CHAC-Display:2 (98")</h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.17</span></div><div class="row"><span class="k">MAC</span><span class="v">88-60-88-A2-0F-AC</span></div><div class="row"><span class="k">Model</span><span class="v">LH98BEDHLGFXGO</span></div><div class="row"><span class="k">Firmware</span><span class="v">2115 (Tizen 9.0)</span></div><div class="row"><span class="k">Token</span><span class="v hi">12944181</span></div><div class="row"><span class="k">Status</span><span class="v gv">Paired + verified</span></div></div><div class="cc"><h3>📺 CHAC-Display:3 (98")</h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.18</span></div><div class="row"><span class="k">MAC</span><span class="v">88-60-80-62-0F-07</span></div><div class="row"><span class="k">Model</span><span class="v">LH98BEDHLGFXGO</span></div><div class="row"><span class="k">Firmware</span><span class="v">2115 (Tizen 9.0)</span></div><div class="row"><span class="k">Token</span><span class="v hi">84754295</span></div><div class="row"><span class="k">Status</span><span class="v gv">Paired + verified</span></div></div><div class="cc"><h3>📺 CHAC-Display:4 (75")</h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.19</span></div><div class="row"><span class="k">MAC</span><span class="v">D4-E4-09-10-04-E4</span></div><div class="row"><span class="k">Model</span><span class="v">LH75BEDHLGFXGO</span></div><div class="row"><span class="k">Firmware</span><span class="v">2115 (Tizen 9.0)</span></div><div class="row"><span class="k">Token</span><span class="v hi">71785463</span></div><div class="row"><span class="k">Status</span><span class="v gv">Paired + verified</span></div></div><div class="cc"><h3>📺 CHAC-Display:5 (98")</h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.20</span></div><div class="row"><span class="k">MAC</span><span class="v">88-A0-B8-A2-0E-57</span></div><div class="row"><span class="k">Model</span><span class="v">LH98BEDHLGFXGO</span></div><div class="row"><span class="k">Firmware</span><span class="v">2115 (Tizen 9.0)</span></div><div class="row"><span class="k">Token</span><span class="v hi">12437418</span></div><div class="row"><span class="k">Status</span><span class="v gv">Paired + verified</span></div></div><div class="cc gr"><h3>✓ Cycle Test Result</h3><div class="row"><span class="k">Phase 0 (ON baseline)</span><span class="v gv">5/5 ON</span></div><div class="row"><span class="k">Phase 1 (30s hold)</span><span class="v gv">Passed</span></div><div class="row"><span class="k">Phase 2 (OFF)</span><span class="v gv">5/5 OFF</span></div><div class="row"><span class="k">Phase 3 (restore ON)</span><span class="v gv">5/5 ON</span></div><div class="row"><span class="k">Verified</span><span class="v gv">Apr 14 03:30 CT</span></div></div></div></section>
+ <section class="section reveal" id="protocol-stack"><div class="sec-head"><div class="sec-num">04</div><h2>Protocol Stack</h2><div class="sec-desc">Multi-layer control reference</div></div><div class="fb"><div class="fl-label">Primary — Samsung Smart TV WebSocket</div><div class="fl"><span class="fx s">NUC Controller</span><span class="fa">— wss 8002 —&gt;</span><span class="fx m">/api/v2/channels/samsung.remote.control</span><span class="fa">— KEY_POWER —&gt;</span><span class="fx d">TV Tizen</span></div><div style="font-size:0.72rem;color:var(--text-faint);font-family:var(--font-mono);margin-top:0.75rem;line-height:1.7;">Token-based auth, persistent per TV. First connection triggers "Access Notification"<br>popup on the TV — one-time approval, then token is saved for all future calls.</div></div><div class="fb"><div class="fl-label">Fallback — EXLINK on TCP 1516</div><div class="fl"><span class="fx s">NUC Controller</span><span class="fa">— TCP 1516 —&gt;</span><span class="fx m">Raw bytes</span><span class="fa">— 7-byte command —&gt;</span><span class="fx d">TV legacy daemon</span></div><pre class="code"><span class="cmt"># Power ON</span>
+<span class="gold">0x08 0x22 0x00 0x00 0x00 0x02 0xD4</span>
 
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(56,189,248,.12)">&#128273;</div><h2>Master Credentials &amp; Access</h2></div>
-<div class="cg">
-<div class="cc bl"><h3>&#127760; Network</h3>
-<div class="cr"><span class="cl">Subnet</span><span class="cv">10.1.240.0/20</span></div>
-<div class="cr"><span class="cl">Mask</span><span class="cv">255.255.240.0</span></div>
-<div class="cr"><span class="cl">Gateway</span><span class="cv">10.1.240.3</span></div>
-<div class="cr"><span class="cl">Gateway MAC</span><span class="cv">f0:f7:55:be:2f:80</span></div>
-<div class="cr"><span class="cl">DNS</span><span class="cv">fc00:a:a::400 / 8.8.8.8 / 1.1.1.1</span></div>
-<div class="cr"><span class="cl">DHCP</span><span class="cv">Disabled (all static)</span></div>
-</div>
-<div class="cc cy"><h3>&#128225; WiFi &mdash; CHAC-ZOOM-CONTROL <span class="tag g">LIVE</span></h3>
-<div class="cr"><span class="cl">SSID</span><span class="cv hi">CHAC-ZOOM-CONTROL</span></div>
-<div class="cr"><span class="cl">Password</span><span class="cv hi">ChAc9Zm$r</span></div>
-<div class="cr"><span class="cl">Security</span><span class="cv">WPA2 / WPA3</span></div>
-<div class="cr"><span class="cl">Bands</span><span class="cv">2.4 / 5 / 6 GHz (WiFi 7)</span></div>
-<div class="cr"><span class="cl">AP IP</span><span class="cv">10.1.240.5</span></div>
-<div class="cr"><span class="cl">AP MAC</span><span class="cv">a8:9c:6c:72:d9:24</span></div>
-<div class="cr"><span class="cl">Model</span><span class="cv">Ubiquiti U7-Pro</span></div>
-</div>
-<div class="cc pr"><h3>&#128421; UniFi Controller <span class="tag b">v9.0.108</span></h3>
-<div class="cr"><span class="cl">Local URL</span><span class="cv">https://localhost:8443</span></div>
-<div class="cr"><span class="cl">Network URL</span><span class="cv">https://10.1.240.40:8443</span></div>
-<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
-<div class="cr"><span class="cl">Password</span><span class="cv hi">Y&amp;U*i9o0p</span></div>
-<div class="cr"><span class="cl">Email</span><span class="cv">[email protected]</span></div>
-<div class="cr"><span class="cl">Auto-Start</span><span class="cv gv">Enabled</span></div>
-</div>
-<div class="cc gr"><h3>&#128187; NUC &mdash; Zoom Room Hub</h3>
-<div class="cr"><span class="cl">Hostname</span><span class="cv">NUCBOX_M2PRo_S</span></div>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.40</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">e0:51:d8:1e:ed:fc</span></div>
-<div class="cr"><span class="cl">Adapter</span><span class="cv">Intel I226-V ("Ethernet 2")</span></div>
-<div class="cr"><span class="cl">OS</span><span class="cv">Windows 11 Pro</span></div>
-<div class="cr"><span class="cl">User</span><span class="cv">CHAC Admin</span></div>
-</div>
-<div class="cc or"><h3>&#127909; Sony Cameras (x3) <span class="tag g">HTTP 401</span></h3>
-<div class="cr"><span class="cl">Web UI</span><span class="cv">http://10.1.240.13 &ndash; .15</span></div>
-<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
-<div class="cr"><span class="cl">Password</span><span class="cv hi">Admin_1234</span></div>
-<div class="cr"><span class="cl">Auth</span><span class="cv">Digest on port 80</span></div>
-</div>
-<div class="cc em"><h3>&#127918; Sony RM-IP10 Joystick <span class="tag g">CONFIGURED</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.12</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">88:c9:e8:e7:20:16</span></div>
-<div class="cr"><span class="cl">Switch Port</span><span class="cv">Main switch, port 3</span></div>
-<div class="cr"><span class="cl">DIP SW1</span><span class="cv">LAN mode (ON)</span></div>
-<div class="cr"><span class="cl">SN</span><span class="cv">1005988</span></div>
-<div class="cr"><span class="cl">Status</span><span class="cv gv">Jimmy configured &mdash; Apr 7</span></div>
-</div>
-<div class="cc pk"><h3>&#9881;&#65039; Extron IPCP Pro 250 xi <span class="tag y">NEEDS TOOLBELT</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.10</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">00:05:a8:1f:86:55</span></div>
-<div class="cr"><span class="cl">Ping</span><span class="cv rv">DOWN (Apr 8 scan)</span></div>
-<div class="cr"><span class="cl">Web UI</span><span class="cv rv">All ports closed</span></div>
-<div class="cr"><span class="cl">Config</span><span class="cv">Extron Toolbelt / Global Configurator</span></div>
-</div>
-<div class="cc yl"><h3>&#127916; Roland V-80HD <span class="tag g">PORT 80 OPEN</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.9</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">00:40:ab:c1:0c:17</span></div>
-<div class="cr"><span class="cl">Web UI</span><span class="cv">http://10.1.240.9 (401 Auth)</span></div>
-<div class="cr"><span class="cl">Role</span><span class="cv">Core Video Production Switcher</span></div>
-</div>
-<div class="cc bl"><h3>&#128250; Samsung Displays (x5) <span class="tag g">MDC 8080 OPEN</span></h3>
-<div class="cr"><span class="cl">Mgmt Port</span><span class="cv">8080 (Samsung MDC) &mdash; ALL OPEN</span></div>
-<div class="cr"><span class="cl">TV1 BH851</span><span class="cv">.16 / 28:af:42:a7:dc:dc</span></div>
-<div class="cr"><span class="cl">TV2 BH851</span><span class="cv">.17 / b8:a0:b8:a2:df:ac</span></div>
-<div class="cr"><span class="cl">TV3 BH851</span><span class="cv">.18 / b8:a0:b8:a2:df:d7</span></div>
-<div class="cr"><span class="cl">TV4 BH851</span><span class="cv">.19 / 04:e4:b6:99:94:ea</span></div>
-<div class="cr"><span class="cl">TV5 BH751</span><span class="cv">.20 / b8:a0:b8:a2:de:57</span></div>
-</div>
-<div class="cc pr"><h3>&#128268; TP-Link Switch Mgmt</h3>
-<div class="cr"><span class="cl">Main Switch IP</span><span class="cv">192.168.0.4</span></div>
-<div class="cr"><span class="cl">Username</span><span class="cv hi">admin</span></div>
-<div class="cr"><span class="cl">Password</span><span class="cv hi">admin</span></div>
-<div class="cr"><span class="cl">Ports</span><span class="cv">80, 22, 23</span></div>
-<div class="cr"><span class="cl">Best Buy Switch</span><span class="cv">Unmanaged L2 (no IP)</span></div>
-<div class="cr"><span class="cl">POE Switch MAC</span><span class="cv">78:29:7e:24:cb:51</span></div>
-</div>
-<div class="cc or"><h3>&#128250; ZeeVee ZV Pro <span class="tag r">HDCP BLOCKED</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.4</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">00:1c:d5:68:22:e5</span></div>
-<div class="cr"><span class="cl">Ping</span><span class="cv rv">DOWN (Apr 8)</span></div>
-<div class="cr"><span class="cl">All Ports</span><span class="cv rv">Closed</span></div>
-<div class="cr"><span class="cl">Issue</span><span class="cv rv">HDCP on input &mdash; needs splitter</span></div>
-</div>
-<div class="cc em"><h3>&#128241; iPad Zoom Controller</h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.6</span></div>
-<div class="cr"><span class="cl">MAC (ARP)</span><span class="cv">62:ca:70:65:a9:75</span></div>
-<div class="cr"><span class="cl">MAC (Spec)</span><span class="cv">00:60:01:80:50:db</span></div>
-<div class="cr"><span class="cl">Ping</span><span class="cv gv">ALIVE</span></div>
-<div class="cr"><span class="cl">Note</span><span class="cv hi">ARP MAC mismatch &mdash; see flags</span></div>
-</div>
-<div class="cc cy"><h3>&#128241; Extron Tablet <span class="tag y">VERIFY</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.11</span></div>
-<div class="cr"><span class="cl">MAC</span><span class="cv">fa:cd:19:ff:de:f4</span></div>
-<div class="cr"><span class="cl">Ping</span><span class="cv rv">DOWN (Apr 8)</span></div>
-<div class="cr"><span class="cl">Desc</span><span class="cv">Extron TP-LINK tablet</span></div>
-</div>
-<div class="cc bl"><h3>&#128241; Wall-Mount iPad <span class="tag g">ALIVE</span></h3>
-<div class="cr"><span class="cl">IP</span><span class="cv">10.1.240.7</span></div>
-<div class="cr"><span class="cl">MAC (ARP)</span><span class="cv">00:60:01:80:50:db</span></div>
-<div class="cr"><span class="cl">MAC (Spec)</span><span class="cv">62:ca:70:65:a9:75</span></div>
-<div class="cr"><span class="cl">Ping</span><span class="cv gv">ALIVE</span></div>
-<div class="cr"><span class="cl">Desc</span><span class="cv">Wallmount iPad Scheduler</span></div>
-<div class="cr"><span class="cl">Note</span><span class="cv hi">ARP MAC mismatch &mdash; see flags</span></div>
-</div>
-</div></div>
+<span class="cmt"># Power OFF</span>
+<span class="gold">0x08 0x22 0x00 0x00 0x00 0x01 0xD5</span></pre><div style="font-size:0.72rem;color:var(--text-faint);font-family:var(--font-mono);line-height:1.7;">Older Samsung control protocol. Works regardless of pairing. Useful when TV is in a state<br>where WebSocket is unresponsive. No ACK from TV — fire and forget.</div></div><div class="fb"><div class="fl-label">Wake — Wake-on-LAN</div><div class="fl"><span class="fx s">NUC Controller</span><span class="fa">— UDP 9 —&gt;</span><span class="fx m">Magic packet</span><span class="fa">— 6× FF + 16× MAC —&gt;</span><span class="fx d">TV NIC</span></div><div style="font-size:0.72rem;color:var(--text-faint);font-family:var(--font-mono);margin-top:0.75rem;line-height:1.7;">Sent to broadcast 10.1.240.255 AND direct IP. Wakes the TV from deep standby<br>so subsequent EXLINK / WS commands can land.</div></div><div class="fb"><div class="fl-label">Status — Samsung Smart TV HTTP API</div><div class="fl"><span class="fx s">NUC Controller</span><span class="fa">— HTTP GET —&gt;</span><span class="fx m">http://[IP]:8001/api/v2/</span><span class="fa">— JSON —&gt;</span><span class="fx d">device.PowerState</span></div><pre class="code">{
+ "device": {
+ "modelName": <span class="green">"LH98BEDHLGFXGO"</span>,
+ "PowerState": <span class="green">"on"</span>,
+ "networkType": <span class="green">"wired"</span>,
+ "TokenAuthSupport": <span class="green">"true"</span>,
+ "OS": <span class="green">"Tizen"</span>
+ }
+}</pre></div></section>
+ <section class="section reveal" id="signal-flow"><div class="sec-head"><div class="sec-num">05</div><h2>Signal Flow</h2><div class="sec-desc">Updated Apr 14 — control layer added</div></div><div class="fb"><div class="fl-label">Video — Roland V-80HD Inputs</div><div class="fl"><span class="fx s">1 — Sharelink</span><span class="fa">→ HDMI</span><span class="fx d">Roland IN 1</span></div><div class="fl"><span class="fx s">Media Player 1</span><span class="fa">→</span><span class="fx d">Roland IN 3</span><span class="fa">(CHAC logo)</span></div><div class="fl"><span class="fx s">Media Player 2</span><span class="fa">→</span><span class="fx d">Roland IN 4</span><span class="fa">(CHAC logo)</span></div><div class="fl"><span class="fx s">CAM 1 (.13)</span><span class="fa">→ HDMI</span><span class="fx d">Roland IN 5</span></div><div class="fl"><span class="fx s">CAM 2 (.14)</span><span class="fa">→ HDMI</span><span class="fx d">Roland IN 6</span></div><div class="fl"><span class="fx s">CAM 3 (.15)</span><span class="fa">→ HDMI</span><span class="fx d">Roland IN 7</span></div></div><div class="fb"><div class="fl-label">Video — Display Distribution</div><div class="fl"><span class="fx s">Roland OUT 1</span><span class="fa">→</span><span class="fx m">Extron DA6 4K</span><span class="fa">→</span><span class="fx d">5x Samsung BED-H</span></div><div style="padding-left:1rem;font-size:0.72rem;color:var(--text-faint);font-family:var(--font-mono);margin:0.4rem 0;">OUT1→.16 | OUT2→.17 | OUT3→.18 | OUT4→.20 | OUT5→.19 (75")</div><div class="fl"><span class="fx s">Roland OUT 3</span><span class="fa">→</span><span class="fx m">Magewell Capture</span><span class="fa">→ USB</span><span class="fx d">NUC USB 3 (Zoom)</span></div></div><div class="fb"><div class="fl-label">Control — New Display Power Layer</div><div class="fl"><span class="fx s">NUC Controller</span><span class="fa">→ WoL+EXLINK+WS →</span><span class="fx d">5× BED-H TVs</span></div><div class="fl"><span class="fx s">Web UI localhost:8888</span><span class="fa">→ HTTP →</span><span class="fx m">Job Executor</span><span class="fa">→</span><span class="fx d">Multi-protocol dispatcher</span></div><div class="fl"><span class="fx s">Scheduler</span><span class="fa">→ cron tick →</span><span class="fx m">SQLite</span><span class="fa">→</span><span class="fx d">Queued job runs</span></div></div><div class="fb"><div class="fl-label">Audio — Current State (Apr 8 regression)</div><div class="fl"><span class="fx s">House PA Mixer</span><span class="fa">→ XLR L+R</span><span class="fx d">Roland Audio IN</span></div><div class="fl"><span class="fx s">Roland Audio OUT</span><span class="fa">→</span><span class="fx r">House — SIGNAL LOST</span></div><div class="note red"><b>Audio regression:</b> Roland → house routing was working Apr 7 but settings weren't saved. Currently only the mixer-to-Roland direction works. See Action Items.</div></div></section>
+ <section class="section reveal" id="hdcp"><div class="sec-head"><div class="sec-num">06</div><h2>HDCP Issue — ZV Pro Broadcast Blocker</h2><div class="sec-desc">Carried from v2 — still unresolved</div></div><div class="fb"><div class="fl-label">Problem</div><p style="font-size:0.85rem;margin-bottom:0.5rem;color:var(--text-dim);">ZeeVee ZV Pro at <b style="color:var(--gold)">10.1.240.4</b> reports "No Video" because the HDMI source is HDCP-encrypted. The ZV Pro can't pass HDCP content. Verified: same HDMI signal displays correctly on a standard monitor.</p></div><div class="fb"><div class="fl-label">Proven Fix (from Jimmy's church install)</div><div class="fl"><span class="fx s">Source</span><span class="fa">→ HDMI →</span><span class="fx m" style="border-color:rgba(94,194,122,0.4);color:var(--green);">HDCP-Stripping Splitter</span><span class="fa">→ Clean HDMI →</span><span class="fx d">ZV Pro</span></div><p style="font-size:0.78rem;color:var(--text-faint);margin-top:0.75rem;">Order 2–3 powered 1x2 HDMI splitters: ViewHD VHD-1X2MN3D (~$18), OREI HD-102 (~$15), HDFury Integral 2 (premium).</p></div></section>
+ <section class="section reveal" id="flags"><div class="sec-head"><div class="sec-num">07</div><h2>Flags &amp; Discrepancies</h2><div class="sec-desc">Known issues to reconcile</div></div><div class="cg"><div class="cc rd"><h3>iPad / Wall-Mount MAC swap <span class="badge issue">OPEN</span></h3><div class="row"><span class="k">.6 spec</span><span class="v">00:60:01:80:50:db</span></div><div class="row"><span class="k">.6 ARP</span><span class="v wv">62:ca:70:65:a9:75</span></div><div class="row"><span class="k">.7 spec</span><span class="v">62:ca:70:65:a9:75</span></div><div class="row"><span class="k">.7 ARP</span><span class="v wv">00:60:01:80:50:db</span></div><div class="row"><span class="k">Resolution</span><span class="v">Physical re-cable OR update spec</span></div></div><div class="cc rd"><h3>Samsung MAC reconcile <span class="badge issue">OPEN</span></h3><div class="row"><span class="k">Note</span><span class="v">v2 spec had mismatches</span></div><div class="row"><span class="k">v3 source</span><span class="v">MDC UI + WS API</span></div><div class="row"><span class="k">Effect</span><span class="v">MACs are authoritative for WoL</span></div><div class="row"><span class="k">Action</span><span class="v">Physical label verification</span></div></div><div class="cc am"><h3>Extron IPCP offline <span class="badge warn">VERIFY</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.10</span></div><div class="row"><span class="k">Status</span><span class="v wv">Down Apr 8 &amp; 14</span></div><div class="row"><span class="k">Ports</span><span class="v wv">None open</span></div><div class="row"><span class="k">Likely</span><span class="v">Power / cable</span></div></div><div class="cc am"><h3>ZV Pro offline <span class="badge warn">VERIFY</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.4</span></div><div class="row"><span class="k">Status</span><span class="v wv">No ping, no ports</span></div><div class="row"><span class="k">Needs</span><span class="v">Physical check + HDCP splitter</span></div></div><div class="cc am"><h3>Extron Tablet offline <span class="badge warn">VERIFY</span></h3><div class="row"><span class="k">IP</span><span class="v">10.1.240.11</span></div><div class="row"><span class="k">MAC</span><span class="v">fa:cd:19:ff:de:f4</span></div><div class="row"><span class="k">Status</span><span class="v wv">Not on network</span></div></div><div class="cc gr"><h3>Samsung MDC Unified (gray out) <span class="badge done">KNOWN</span></h3><div class="row"><span class="k">Observed</span><span class="v">Port field locked 1515</span></div><div class="row"><span class="k">Cause</span><span class="v">MDC UI is for signage</span></div><div class="row"><span class="k">Solution</span><span class="v gv">Use CHAC Controller v2</span></div></div></div></section>
+ <section class="section reveal" id="actions"><div class="sec-head"><div class="sec-num">08</div><h2>Priority Action Items</h2><div class="sec-desc">Sorted by urgency</div></div><div style="display:flex;flex-direction:column;gap:0.75rem;"><div class="cc rd"><h3>[1] AUDIO: Recover Roland V-80HD audio output to house</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Settings from Apr 7 night session not saved. Roland output routing lost. Currently only house mixer → Roland direction works (input only, no output). Check Roland AUDIO OUTPUT menu — verify bus assignment, levels, and whether output is "Program" or specific bus.</p></div><div class="cc rd"><h3>[2] Acquire HDCP-stripping splitter for ZV Pro</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Order 2-3 powered 1x2 HDMI splitters. Insert between source and ZV Pro. Proven at Jimmy's church install for 2+ years.</p></div><div class="cc rd"><h3>[3] Get ZV Pro (.4) back online</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Not responding to ping. Check power, Ethernet cable, switch port. Needs to be network-reachable before HDCP fix.</p></div><div class="cc am"><h3>[4] Program Extron IPCP Pro 250 xi (.10)</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Completely unresponsive Apr 8 &amp; 14. Check power/connectivity first. Program via Extron Toolbelt / Global Configurator for display power, camera lift, audio routing. Display power control is now <b>redundant</b> — the CHAC Display Controller handles that via WS KEY_POWER.</p></div><div class="cc am"><h3>[5] Reconcile iPad / TV MAC swaps (§07)</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Physical verification at the switch ports. Update spec to match reality.</p></div><div class="cc"><h3>[6] Integrate CHAC Display Controller into Zoom Room startup</h3><p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">Add a cron schedule like <code style="background:var(--bg);color:var(--gold);padding:1px 5px;border-radius:3px;">0 8 1-5</code> to auto power-on displays weekday mornings, or create a Windows Scheduled Task to launch the controller at boot so the Web UI is always available.</p></div></div></section>
+ <section class="section reveal" id="apr13"><div class="sec-head"><div class="sec-num">09</div><h2>Session 3 — April 13–14, 2026</h2><div class="sec-desc">~7:45 PM → 04:00 AM CT</div></div><div class="timeline"><div class="tl-item major"><div class="tl-num">01 · 20:30</div><div class="tl-title">Initial diagnosis — MDC Unified grayed out</div><div class="tl-body">Jimmy tried MDC Unified to control displays. All 5 TVs added but showed "Network connection failed". Port field grayed out at 1515. MDC UI wasn't speaking the right protocol.</div></div><div class="tl-item"><div class="tl-num">02 · 20:50</div><div class="tl-title">Port scan — 1515 closed, 1516 open</div><div class="tl-body">TCP scan of all 5 TVs showed port 1515 refused, port 1516 accepting connections. Updated Python script and MDC database to use 1516 — commands now reach the TVs.</div></div><div class="tl-item"><div class="tl-num">03 · 21:20</div><div class="tl-title">MDC database edit — unlock hardcoded port</div><div class="tl-body">MDC Unified stores connections in <code>LFDStates.mdb</code> (MS Access). Modified the <code>LFDConnectionData</code> table directly via pyodbc: port 1515→1516, SET ID range 0-10→0-224, SecurityType 3→0. MDC UI then showed all 5 as "Connected" with MAC addresses.</div></div><div class="tl-item"><div class="tl-num">04 · 22:10</div><div class="tl-title">Key realization — these are Pro TVs, not signage</div><div class="tl-body">Even after DB fix, power commands had no effect. Discovered model <code>24_PTM_UHD_BZ_T09</code>, OS Tizen, and active Smart TV API on port 8001. BED-H is a Pro TV, not a commercial signage display. The MDC binary protocol doesn't apply — we need the Samsung Smart TV stack.</div></div><div class="tl-item"><div class="tl-num">05 · 22:30</div><div class="tl-title">EXLINK protocol discovery</div><div class="tl-body">Pro TVs support the EXLINK byte sequence on port 1516: <code>08 22 00 00 00 02 D4</code> (on) / <code>08 22 00 00 00 01 D5</code> (off). Worked on TVs .18 and .19 but not on .16, .17, .20 due to firmware differences.</div></div><div class="tl-item major"><div class="tl-num">06 · 23:10</div><div class="tl-title">WebSocket KEY_POWER — the primary control path</div><div class="tl-body">Tried the Samsung Smart TV WebSocket API on port 8002. TV .17 auto-paired on the second connection attempt and returned token <code>16892096</code>. KEY_POWER command via the paired WebSocket physically turned off the display. First confirmed working path.</div></div><div class="tl-item"><div class="tl-num">07 · 23:45</div><div class="tl-title">Access Notification hunt — firmware 2115 menu changes</div><div class="tl-body">TVs .16 and .20 refused pairing with immediate <code>ms.channel.timeOut</code>. Confirmed that Tizen 9.0 moved Device Connect Manager from <code>General → External Device Manager</code> to <code>All Settings → Connection → Device Manager</code>. External Device Manager on v9 now only shows Anynet+ / HDMI settings.</div></div><div class="tl-item major"><div class="tl-num">08 · 00:40</div><div class="tl-title">"Always Allow" — the unlock setting</div><div class="tl-body">Discovered that Access Notification has three values: Off, First Time Only, Always Allow. Only "Always Allow" lets new devices pair without manual popup approval. Set it on all 5 TVs.</div></div><div class="tl-item major"><div class="tl-num">09 · 01:15</div><div class="tl-title">All 5 displays paired — tokens captured</div><div class="tl-body">Sequential pairing connections to each TV's <code>wss://IP:8002</code> endpoint returned <code>ms.channel.connect</code> events with unique tokens. Persisted to <code>chac_tokens.json</code>: .16=15849496, .17=12944181, .18=84754295, .19=71785463, .20=12437418.</div></div><div class="tl-item major"><div class="tl-num">10 · 01:45</div><div class="tl-title">Full cycle test — ON → 30s → OFF → ON</div><div class="tl-body">Baseline: 5/5 ON. Held 30 seconds. Sent WS KEY_POWER to all: 5/5 OFF confirmed via HTTP API. Waited 5s. WoL burst + EXLINK + WS → 5/5 back ON. Full programmatic cycle verified end-to-end.</div></div><div class="tl-item"><div class="tl-num">11 · 02:15</div><div class="tl-title">CLI script — mdc.py multi-protocol</div><div class="tl-body">Updated <code>C:\Users\CHAC Admin\mdc.py</code> with WoL + EXLINK + WebSocket KEY_POWER + token persistence. Commands: <code>on</code>, <code>off</code>, <code>status</code>, <code>pair</code>.</div></div><div class="tl-item"><div class="tl-num">12 · 02:40</div><div class="tl-title">Web app v1 — 14 tests + Iron Canvas UI</div><div class="tl-body">Built <code>CHAC_Display_Controller.py</code> — single-file HTTP server with embedded Iron Canvas dashboard UI, 14 test scenarios, live fleet status, per-TV controls, live run console with progress.</div></div><div class="tl-item major"><div class="tl-num">13 · 03:15</div><div class="tl-title">Controller v2 — production job system</div><div class="tl-body">Built <code>CHAC_Display_Controller_v2.py</code> with SQLite-backed run history, cron scheduler, job queue with retry support, Server-Sent Events for real-time push, 17 test scenarios organized by category, and full tabbed UI (Dashboard / Test Runner / Schedules / History / System). Single-file Python 3 deployment.</div></div><div class="tl-item major"><div class="tl-num">14 · 04:00</div><div class="tl-title">Network Report v3 — this document</div><div class="tl-body">Regenerated the handoff with Iron Canvas mission-mode styling (gold #c9a84c on OLED black #0a0e14, Outfit + DM Sans), preserving all v2 findings while adding the new Display Control System section.</div></div></div></section>
+ <section class="section reveal" id="previous"><div class="sec-head"><div class="sec-num">10</div><h2>Prior Session Log</h2><div class="sec-desc">Sessions 1 &amp; 2 from v2</div></div><div class="timeline"><div class="tl-item"><div class="tl-num">S1 · Apr 2-3</div><div class="tl-title">Initial network discovery</div><div class="tl-body">Cameras discovered via ARP (Sony OUI 88:c9:e8). Subnet bridging for factory-default 192.168.0.100 vs production 10.1.240.x. All 3 Sony SRG-X40 cameras confirmed at .13-.15.</div></div><div class="tl-item"><div class="tl-num">S1 · Apr 2-3</div><div class="tl-title">UniFi + WiFi deployment</div><div class="tl-body">U7-Pro adopted via L2 discovery UDP 10001. SSID CHAC-ZOOM-CONTROL broadcasting 2.4/5/6 GHz. Installed UniFi Controller v9.0.108 on NUC with auto-start script.</div></div><div class="tl-item"><div class="tl-num">S1 · Apr 2-3</div><div class="tl-title">Device inventory</div><div class="tl-body">Mapped 15+ devices with IPs, MACs, labels, switch ports. Identified RM-IP10 joystick at .12. Confirmed Samsung BH751 at .19. Confirmed Best Buy TP-Link switch is unmanaged L2.</div></div><div class="tl-item"><div class="tl-num">S1 · Apr 2-3</div><div class="tl-title">Cleanup &amp; hardening</div><div class="tl-body">Re-enabled Windows Firewall on all profiles. Removed all temporary 192.168.x IPs and routes. Corrected NUC clock from UTC to CST.</div></div><div class="tl-item"><div class="tl-num">S2 · Apr 7-8</div><div class="tl-title">RM-IP10 joystick configured</div><div class="tl-body">Jimmy set up camera-to-button assignments on the RM-IP10. Operational.</div></div><div class="tl-item"><div class="tl-num">S2 · Apr 7-8</div><div class="tl-title">Roland video + audio (Apr 7 night)</div><div class="tl-body">Video output to house TVs confirmed working via Extron DA6 4K. Audio routing to house configured and working — but settings not saved. Audio output regression by Apr 8.</div></div><div class="tl-item"><div class="tl-num">S2 · Apr 7-8</div><div class="tl-title">Roland IP correction</div><div class="tl-body">Corrected from erroneous .6 / 10.240.240.9 to authoritative 10.1.240.9.</div></div><div class="tl-item"><div class="tl-num">S2 · Apr 7-8</div><div class="tl-title">Full rescan</div><div class="tl-body">14 of 18 assigned IPs alive. Down: ZV Pro (.4), Extron IPCP (.10), Extron Tablet (.11). Discovered iPad/Wall-Mount MAC swap and TV4/TV5 MAC swap via ARP comparison.</div></div></div></section>
+ <section class="section reveal" id="deliverables"><div class="sec-head"><div class="sec-num">11</div><h2>Deliverables &amp; File Locations</h2><div class="sec-desc">What lives where</div></div><div class="cg"><div class="cc"><h3>🛠 CLI Controller</h3><div class="row"><span class="k">File</span><span class="v">C:\Users\CHAC Admin\mdc.py</span></div><div class="row"><span class="k">Purpose</span><span class="v">Terminal-based control</span></div><div class="row"><span class="k">Commands</span><span class="v">on · off · status · pair</span></div><div class="row"><span class="k">Dependencies</span><span class="v">websocket-client</span></div></div><div class="cc"><h3>🖥 Web App v1</h3><div class="row"><span class="k">File</span><span class="v">Desktop\CHAC_Display_Controller.py</span></div><div class="row"><span class="k">Purpose</span><span class="v">Simple HTTP dashboard</span></div><div class="row"><span class="k">Tests</span><span class="v">14 scenarios</span></div><div class="row"><span class="k">Launch</span><span class="v">py CHAC_Display_Controller.py</span></div></div><div class="cc gr"><h3>🏛 Web App v2 — Job System <span class="badge new">RECOMMENDED</span></h3><div class="row"><span class="k">File</span><span class="v">Desktop\CHAC_Display_Controller_v2.py</span></div><div class="row"><span class="k">Features</span><span class="v">SQLite + cron + SSE + retry</span></div><div class="row"><span class="k">Tests</span><span class="v">17 scenarios, 5 categories</span></div><div class="row"><span class="k">DB</span><span class="v">chac_controller.db (auto)</span></div><div class="row"><span class="k">Tokens</span><span class="v">chac_tokens.json</span></div><div class="row"><span class="k">Launch</span><span class="v hi">py CHAC_Display_Controller_v2.py</span></div><div class="row"><span class="k">URL</span><span class="v hi">http://localhost:8888</span></div></div><div class="cc"><h3>🔑 Token Store</h3><div class="row"><span class="k">File</span><span class="v">chac_tokens.json</span></div><div class="row"><span class="k">Location</span><span class="v">Desktop + ~/</span></div><div class="row"><span class="k">Content</span><span class="v">5 TV pairing tokens</span></div><div class="row"><span class="k">Backup</span><span class="v wv">Keep a copy!</span></div></div><div class="cc"><h3>🗄 Run Database</h3><div class="row"><span class="k">File</span><span class="v">chac_controller.db</span></div><div class="row"><span class="k">Engine</span><span class="v">SQLite 3 (WAL)</span></div><div class="row"><span class="k">Tables</span><span class="v">runs, run_logs, schedules, retries, settings</span></div><div class="row"><span class="k">Persistence</span><span class="v gv">Survives restarts</span></div></div><div class="cc"><h3>📄 Reports</h3><div class="row"><span class="k">v1</span><span class="v">CHAC_Network_Report.html</span></div><div class="row"><span class="k">v2</span><span class="v">CHAC_Network_Report_v2.html</span></div><div class="row"><span class="k">v3 (this)</span><span class="v hi">CHAC_Network_Report_v3.html</span></div><div class="row"><span class="k">Archive</span><span class="v">Keep all three for history</span></div></div></div><div class="callout"><div class="label">Quick Reference — Common Commands</div><pre class="code"><span class="cmt"># Check all 5 TV states</span>
+<span class="gold">py</span> C:\Users\CHAC Admin\mdc.py <span class="green">status</span>
 
-<div class="section reveal"><div class="sec-head"><div class="sec-icon" style="background:rgba(74,222,128,.12)">&#128421;</div><h2>Complete Device Inventory &mdash; Live Scan April 8, 2026</h2></div><div class="tw"><table>
-<thead><tr><th>#</th><th>Device</th><th>IP</th><th>MAC (Spec)</th><th>MAC (ARP)</th><th>Ping</th><th>Ports Open</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>1</td><td>Gateway</td><td class="mono">.3</td><td class="mono">&mdash;</td><td class="mono">f0:f7:55:be:2f:80</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>&mdash;</td><td>Network gateway</td></tr>
-<tr><td>2</td><td><b>ZeeVee ZV Pro</b></td><td class="mono">.4</td><td class="mono">00:1c:d5:68:22:e5</td><td class="mono">&mdash;</td><td><span class="st dn"><span class="dt r"></span>Down</span></td><td>None</td><td style="color:var(--red);font-weight:600">HDCP BLOCKER &mdash; Not online</td></tr>
-<tr><td>3</td><td><b>Ubiquiti U7-Pro</b></td><td class="mono">.5</td><td class="mono">a8:9c:6c:72:d9:24</td><td class="mono">a8:9c:6c:72:d9:24</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>&mdash;</td><td>WiFi AP &mdash; Broadcasting</td></tr>
-<tr><td>4</td><td><b>iPad Zoom Controller</b></td><td class="mono">.6</td><td class="mono">00:60:01:80:50:db</td><td class="mono" style="color:var(--yellow)">62:ca:70:65:a9:75</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>None</td><td style="color:var(--yellow)">ARP MAC mismatch &mdash; see flags</td></tr>
-<tr><td>5</td><td><b>Wall-Mount iPad</b></td><td class="mono">.7</td><td class="mono">62:ca:70:65:a9:75</td><td class="mono" style="color:var(--yellow)">00:60:01:80:50:db</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>None</td><td style="color:var(--yellow)">ARP MAC = iPad-Zoom spec MAC</td></tr>
-<tr><td>6</td><td><b>Roland V-80HD</b></td><td class="mono">.9</td><td class="mono">00:40:ab:c1:0c:17</td><td class="mono">00:40:ab:c1:0c:17</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>80</td><td>Core switcher &mdash; Web UI (401)</td></tr>
-<tr><td>7</td><td><b>Extron IPCP 250</b></td><td class="mono">.10</td><td class="mono">00:05:a8:1f:86:55</td><td class="mono">&mdash;</td><td><span class="st dn"><span class="dt r"></span>Down</span></td><td>None</td><td>Needs Toolbelt programming</td></tr>
-<tr><td>8</td><td><b>Extron Tablet</b></td><td class="mono">.11</td><td class="mono">fa:cd:19:ff:de:f4</td><td class="mono">&mdash;</td><td><span class="st dn"><span class="dt r"></span>Down</span></td><td>None</td><td>TP-LINK tablet &mdash; not on network</td></tr>
-<tr style="background:rgba(16,185,129,.06)"><td>9</td><td><b>Sony RM-IP10 Joystick</b></td><td class="mono">.12</td><td class="mono">88:c9:e8:e7:20:16</td><td class="mono">88:c9:e8:e7:20:16</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>&mdash;</td><td>Configured by Jimmy &mdash; Apr 7</td></tr>
-<tr><td>10</td><td><b>Sony SRG-X40 CAM1</b></td><td class="mono">.13</td><td class="mono">88:c9:e8:96:bb:1b</td><td class="mono" style="color:var(--yellow)">88:c9:e8:d6:bb:1b</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>80</td><td style="color:var(--yellow)">MAC 4th octet: spec 96 vs ARP d6</td></tr>
-<tr><td>11</td><td><b>Sony SRG-X40 CAM2</b></td><td class="mono">.14</td><td class="mono">88:c9:e8:d6:bb:1e</td><td class="mono">88:c9:e8:d6:bb:1e</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>80</td><td>Stable</td></tr>
-<tr><td>12</td><td><b>Sony SRG-X40 CAM3</b></td><td class="mono">.15</td><td class="mono">88:c9:e8:d6:bb:3f</td><td class="mono">88:c9:e8:d6:bb:3f</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>80</td><td>Stable</td></tr>
-<tr><td>13</td><td>Samsung BH851 TV1</td><td class="mono">.16</td><td class="mono">28:af:42:a7:dc:dc</td><td class="mono">28:af:42:a7:dc:dc</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>8080</td><td>MDC active</td></tr>
-<tr><td>14</td><td>Samsung BH851 TV2</td><td class="mono">.17</td><td class="mono">b8:a0:b8:a2:df:ac</td><td class="mono">b8:a0:b8:a2:df:ac</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>8080</td><td>MDC active</td></tr>
-<tr><td>15</td><td>Samsung BH851 TV3</td><td class="mono">.18</td><td class="mono">b8:a0:b8:a2:df:d7</td><td class="mono">b8:a0:b8:a2:df:d7</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>8080</td><td>MDC active</td></tr>
-<tr><td>16</td><td>Samsung BH851 TV4</td><td class="mono">.19</td><td class="mono">b8:a0:b8:a2:de:57</td><td class="mono" style="color:var(--yellow)">04:e4:b6:99:94:ea</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>8080</td><td style="color:var(--yellow)">ARP MAC mismatch &mdash; see flags</td></tr>
-<tr><td>17</td><td>Samsung BH751 TV5</td><td class="mono">.20</td><td class="mono">04:e4:b6:99:94:ea</td><td class="mono" style="color:var(--yellow)">b8:a0:b8:a2:de:57</td><td><span class="st al"><span class="dt g"></span>Alive</span></td><td>8080</td><td style="color:var(--yellow)">ARP MAC = TV4 spec MAC &mdash; SWAPPED?</td></tr>
-<tr><td>18</td><td><b>Intel NUC</b></td><td class="mono">.40</td><td class="mono">e0:51:d8:1e:ed:fc</td><td class="mono">&mdash;</td><td><span class="st al"><span class="dt g"></span>This host</span></td><td>8443+</td><td>Zoom Room Hub / UniFi Controller</td></tr>
-<tr><td>19</td><td>TP-Link PoE (Best Buy)</td><td class="mono">&mdash;</td><td class="mono">78:29:7e:24:cb:51</td><td class="mono">&mdash;</td><td><span class="st al"><span class="dt g"></span>L2</span></td><td>&mdash;</td><td>Unmanaged &mdash; transparent bridge</td></tr>
-<tr><td>20</td><td>Laptop (Remote Presenter)</td><td class="mono">&mdash;</td><td class="mono">&mdash;</td><td class="mono">&mdash;</td><td><span class="st nc"><span class="dt o"></span>N/A</span></td><td>&mdash;</td><td>Connected via HDMI to Roland</td></tr>
-</tbody></table></div>
-</div>
+<span class="cmt"># Power ON everything</span>
+<span class="gold">py</span> C:\Users\CHAC Admin\mdc.py <span class="green">on</span>
 
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(251,191,36,.12)">&#9654;&#65039;</div><h2>Signal Flow &mdash; Updated April 8, 2026</h2></div>
-<div class="fb"><div class="fl-label">Video &mdash; Roland V-80HD Inputs (from multiview)</div>
-<div class="fl"><span class="fx s">1 &mdash; Sharelink</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx d">Roland Input 1</span></div>
-<div class="fl"><span class="fx s">2 &mdash; HDMI 2</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx d">Roland Input 2</span><span class="fa">(dark/no signal)</span></div>
-<div class="fl"><span class="fx s">Media Player 1</span><span class="fa">&mdash;&gt;</span><span class="fx d">Roland Input 3</span><span class="fa">(CHAC logo)</span></div>
-<div class="fl"><span class="fx s">Media Player 2</span><span class="fa">&mdash;&gt;</span><span class="fx d">Roland Input 4</span><span class="fa">(CHAC logo)</span></div>
-<div class="fl"><span class="fx s">5 &mdash; Camera 1 (.13)</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx d">Roland Input 5</span><span class="fa">(dark)</span></div>
-<div class="fl"><span class="fx s">6 &mdash; Camera 2 (.14)</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx d">Roland Input 6</span><span class="fa">(dark)</span></div>
-<div class="fl"><span class="fx s">7 &mdash; Camera 3 (.15)</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx d">Roland Input 7</span><span class="fa">(dark)</span></div>
-<div class="fl"><span class="fx s">8 &mdash; SDI B</span><span class="fa">&mdash;SDI&mdash;&gt;</span><span class="fx d">Roland Input 8</span><span class="fa">(dark)</span></div>
-</div>
-<div class="fb"><div class="fl-label">Video &mdash; Display Distribution</div>
-<div class="fl"><span class="fx s">Roland OUT 1</span><span class="fa">&mdash;&gt;</span><span class="fx m">Extron DA6 4K</span><span class="fa">&mdash;&gt;</span><span class="fx d">5x Samsung TVs</span></div>
-<div style="padding-left:1rem;font-size:.72rem;color:var(--dim);font-family:var(--mono);margin:.25rem 0">OUT1&gt;.16 | OUT2&gt;.17 | OUT3&gt;.18 | OUT4&gt;.20 | OUT5&gt;.19 (BH751)</div>
-<div class="fl"><span class="fx s">Roland OUT 3</span><span class="fa">&mdash;&gt;</span><span class="fx m">Magewell Capture 4K</span><span class="fa">&mdash;USB&mdash;&gt;</span><span class="fx d">NUC USB 3 (Zoom)</span></div>
-</div>
-<div class="fb"><div class="fl-label">Audio &mdash; CURRENT ISSUE (April 8)</div>
-<div class="fl"><span class="fx s">House PA Mixer (XLR L+R)</span><span class="fa">&mdash;&gt;</span><span class="fx m">Roland Audio IN</span><span class="fa">(line connection)</span></div>
-<div class="fl"><span class="fx s">Roland Audio OUT</span><span class="fa">&mdash;&gt;</span><span class="fx d" style="border-color:var(--red);color:var(--red)">House Mixer? &mdash; SIGNAL LOST</span></div>
-<div class="fl"><span class="fx s">Laptop</span><span class="fa">&mdash;&gt;</span><span class="fx m">House Mixer</span><span class="fa">&mdash;line&mdash;&gt;</span><span class="fx d">Roland Audio IN (workaround)</span></div>
-<div class="note red"><b>AUDIO ISSUE:</b> Settings from last night's session were not saved. The Roland was outputting audio to the house but that configuration is lost. Currently the house mixer line connection into the Roland is the only working audio path. The Roland can capture/record from the mixer input but cannot send its output back to the house speakers. Recent settings changes may have further altered the audio routing. See Action Items below.</div>
-</div>
-<div class="fb"><div class="fl-label">Audio &mdash; Original Design (reference)</div>
-<div class="fl"><span class="fx s">House PA (XLR L+R)</span><span class="fa">&mdash;&gt;</span><span class="fx m">Focusrite 4i4</span><span class="fa">&mdash;USB&mdash;&gt;</span><span class="fx d">NUC USB 2</span></div>
-<div class="fl"><span class="fx s">Focusrite OUT 1+2</span><span class="fa">&mdash;&gt;</span><span class="fx d">Roland Audio IN</span></div>
-</div>
-<div class="fb"><div class="fl-label">Control</div>
-<div class="fl"><span class="fx s">RM-IP10 (.12)</span><span class="fa">&mdash;VISCA/IP&mdash;&gt;</span><span class="fx d">Cameras (.13-.15) PTZ</span></div>
-<div class="fl"><span class="fx s">Extron IPCP (.10)</span><span class="fa">&mdash;IP&mdash;&gt;</span><span class="fx d">Displays, Lift, Audio (when programmed)</span></div>
-</div>
-<div class="fb"><div class="fl-label">USB to NUC</div>
-<div class="fl"><span class="fx">USB 1 (Front)</span><span class="fa">&mdash;&gt;</span><span class="fx d">Logitech KB/Mouse</span></div>
-<div class="fl"><span class="fx">USB 2 (Front)</span><span class="fa">&mdash;&gt;</span><span class="fx d">Focusrite 4i4</span></div>
-<div class="fl"><span class="fx">USB 3 (Rear)</span><span class="fa">&mdash;&gt;</span><span class="fx d">Magewell Capture</span></div>
-<div class="fl"><span class="fx">HDMI 1</span><span class="fa">&mdash;&gt;</span><span class="fx d">ASUS Monitor (local)</span></div>
-</div></div>
+<span class="cmt"># Power OFF everything</span>
+<span class="gold">py</span> C:\Users\CHAC Admin\mdc.py <span class="green">off</span>
 
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(248,113,113,.12)">&#128308;</div><h2>HDCP Issue &mdash; ZV Pro Broadcast Blocker</h2></div>
-<div class="fb"><div class="fl-label">Problem</div><p style="font-size:.85rem;color:var(--text);margin-bottom:.5rem">The ZeeVee ZV Pro QAM Broadcaster at <b>10.1.240.4</b> reports <b>"No Video"</b> because the HDMI source signal is HDCP-encrypted. The ZV Pro cannot process HDCP-protected content. Verified: same HDMI signal displays correctly on a standard monitor.</p></div>
-<div class="fb"><div class="fl-label">Proven Fix (Jimmy's church install)</div><div class="fl"><span class="fx s">Source</span><span class="fa">&mdash;HDMI&mdash;&gt;</span><span class="fx m" style="border-color:var(--emerald);color:var(--emerald)">HDCP-Stripping Splitter</span><span class="fa">&mdash;HDMI (clean)&mdash;&gt;</span><span class="fx d">ZV Pro (.4)</span></div><p style="font-size:.82rem;color:var(--dim);margin-top:.5rem">Order 2&ndash;3 powered 1x2 HDMI splitters and test. Same approach working at church installation for 2+ years. Recommended: ViewHD VHD-1X2MN3D, OREI HD-102, EZCOO 1x2 4K, or HDFury Integral 2 (premium).</p></div>
-</div>
+<span class="cmt"># Launch the web job system</span>
+<span class="gold">py</span> "C:\Users\CHAC Admin\Desktop\CHAC_Display_Controller_v2.py"
+<span class="cmt"># → open http://localhost:8888</span>
 
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(248,113,113,.12)">&#9873;&#65039;</div><h2>Flags &amp; Discrepancies Requiring Attention</h2></div>
-<div class="al">
-<div class="ai crit"><div class="an">!</div><div><div class="at">iPad .6 / Wall-Mount iPad .7 &mdash; MACs are SWAPPED</div><div class="ad">ARP scan shows .6 responding with MAC 62:ca:70:65:a9:75 (the Wall-Mount iPad spec MAC), and .7 responding with MAC 00:60:01:80:50:db (the iPad-Zoom spec MAC). <b>The devices appear to be physically plugged into each other's IP assignments</b>, or the spec sheet MACs are swapped. Either re-cable or update the spec sheet to match reality.</div></div></div>
-<div class="ai crit"><div class="an">!</div><div><div class="at">TV4 (.19) / TV5 (.20) &mdash; MACs are SWAPPED</div><div class="ad">ARP shows .19 = 04:e4:b6:99:94:ea and .20 = b8:a0:b8:a2:de:57. The spec sheet has these reversed. TV4 and TV5 may be physically swapped on the switch, or the spec MACs need updating.</div></div></div>
-<div class="ai ver"><div class="an">?</div><div><div class="at">CAM1 (.13) &mdash; MAC 4th octet discrepancy</div><div class="ad">Spec: 88:c9:e8:<b>96</b>:bb:1b. ARP: 88:c9:e8:<b>d6</b>:bb:1b. The ARP value is likely correct (matches the live network). The spec sheet may have a transcription error.</div></div></div>
-<div class="ai ver"><div class="an">?</div><div><div class="at">Extron IPCP (.10) &mdash; Not responding to ping or any port</div><div class="ad">Was alive during April 2-3 session but is completely unresponsive now. May be powered off, unplugged, or needs hard reset. All 10 ports scanned (including Extron-specific 41794-41796) returned closed.</div></div></div>
-<div class="ai ver"><div class="an">?</div><div><div class="at">ZV Pro (.4) &mdash; Completely offline</div><div class="ad">No ping response, no open ports. Either powered off or not connected to the network. Even before HDCP fix, it should be reachable on the network for configuration.</div></div></div>
-<div class="ai ver"><div class="an">?</div><div><div class="at">Extron Tablet (.11) &mdash; Not on network</div><div class="ad">No ping response. MAC in spec is fa:cd:19:ff:de:f4. May not be connected or powered.</div></div></div>
+<span class="cmt"># Re-pair a TV (if token gets invalidated)</span>
+<span class="gold">py</span> C:\Users\CHAC Admin\mdc.py <span class="green">pair</span></pre></div></section>
 </div>
-</div>
-
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(248,113,113,.12)">&#9888;&#65039;</div><h2>Priority Action Items</h2></div>
-<div class="al">
-<div class="ai crit"><div class="an">1</div><div><div class="at">AUDIO: Recover Roland V-80HD audio output to house</div><div class="ad">Settings from last night were not saved. The Roland was successfully sending audio to the house but that config is lost. Currently using a workaround: laptop &rarr; house mixer &rarr; line &rarr; Roland input. Need to restore the Roland's audio output routing so the Roland can feed audio back to the house mixer/speakers. Check Roland menu: AUDIO OUTPUT settings &mdash; verify output assignment, volume levels, and whether output is set to "Program" or a specific bus. Recent settings changes may have also altered the input routing.</div></div></div>
-<div class="ai crit"><div class="an">2</div><div><div class="at">AUDIO: Document the correct Roland audio signal chain</div><div class="ad">The original design shows Focusrite 4i4 as the audio interface. Current setup bypasses the Focusrite and uses direct line from house mixer to Roland. Need to decide: is the Focusrite still in the chain, or has the design changed to direct mixer&harr;Roland? Once determined, document the authoritative audio signal path.</div></div></div>
-<div class="ai crit"><div class="an">3</div><div><div class="at">Acquire HDCP-stripping HDMI splitter for ZV Pro</div><div class="ad">Order 2-3 powered 1x2 HDMI splitters. Insert between source and ZV Pro. Test each until one passes clean signal. Recommended models: ViewHD VHD-1X2MN3D (~$18), OREI HD-102 (~$15), HDFury Integral 2 (~$150 premium).</div></div></div>
-<div class="ai crit"><div class="an">4</div><div><div class="at">Get ZV Pro (.4) back online</div><div class="ad">Currently not responding to ping or any port. Check physical: power, Ethernet cable, switch port. Even before HDCP fix, it needs to be network-reachable for configuration.</div></div></div>
-<div class="ai crit"><div class="an">5</div><div><div class="at">Program Extron IPCP Pro 250 xi (.10)</div><div class="ad">Completely unresponsive on Apr 8 scan (was alive Apr 2-3). Check power/connectivity first. When online: all ports closed, needs full programming via Extron Toolbelt or Global Configurator for display power, camera lift, audio routing.</div></div></div>
-<div class="ai ver"><div class="an">6</div><div><div class="at">Resolve iPad/Wall-Mount MAC swap at .6 / .7</div><div class="ad">The ARP MACs are swapped vs the spec sheet. Either the devices are on each other's ports, or the spec MACs need updating. Physically verify which device is at which port.</div></div></div>
-<div class="ai ver"><div class="an">7</div><div><div class="at">Resolve TV4/TV5 MAC swap at .19 / .20</div><div class="ad">ARP MACs are reversed vs spec. Either the TVs are on swapped switch ports or spec needs updating.</div></div></div>
-<div class="ai ver"><div class="an">8</div><div><div class="at">Correct CAM1 MAC in spec sheet</div><div class="ad">Spec says 88:c9:e8:96:bb:1b but ARP confirms 88:c9:e8:d6:bb:1b. Update spec to match live network.</div></div></div>
-<div class="ai ver"><div class="an">9</div><div><div class="at">Verify Samsung MDC remote power management</div><div class="ad">All 5 TVs have port 8080 open and responding. Verify Samsung MDC config for remote power on/off control.</div></div></div>
-<div class="ai done"><div class="an">&#10003;</div><div><div class="at">RM-IP10 Joystick &mdash; Configured by Jimmy</div><div class="ad">Joystick at .12 configured and operational. Camera-to-button assignments set up Apr 7.</div></div></div>
-<div class="ai done"><div class="an">&#10003;</div><div><div class="at">WiFi CHAC-ZOOM-CONTROL &mdash; Broadcasting</div><div class="ad">U7-Pro adopted, tri-band 2.4/5/6 GHz. Controller: https://10.1.240.40:8443</div></div></div>
-<div class="ai done"><div class="an">&#10003;</div><div><div class="at">UniFi auto-start &mdash; Configured</div><div class="ad">Startup script in Windows Startup folder. Controller launches on NUC boot.</div></div></div>
-<div class="ai done"><div class="an">&#10003;</div><div><div class="at">Roland V-80HD video output to house displays &mdash; Working</div><div class="ad">Signal going out to house TVs confirmed as of Apr 7 night session. Roland OUT 1 &rarr; Extron DA6 &rarr; 5x Samsung TVs.</div></div></div>
-<div class="ai done"><div class="an">&#10003;</div><div><div class="at">Windows Firewall re-enabled &amp; cleanup complete</div><div class="ad">All profiles active. Temporary IPs and routes removed.</div></div></div>
-</div>
-<div class="note"><b>Future:</b> Consider VLAN segmentation to isolate Zoom room AV traffic from school network. Wall-mounted Extron touchpanel is the pre-existing kitchen system on the school network &mdash; not part of this Zoom room spec.</div>
-</div>
-
-<div class="section reveal">
-<div class="sec-head"><div class="sec-icon" style="background:rgba(74,222,128,.12)">&#9989;</div><h2>Session Work Log</h2></div>
-<div style="font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:.75rem">Session 1: April 2-3, 2026 / 8:45 PM &ndash; 3:15 AM CT</div>
-<div class="lg">
-<div class="li"><span class="ln">01</span><span class="lt">Diagnosed cameras invisible on Angry IP Scanner &mdash; factory default 192.168.0.100 vs production 10.1.240.x, compounded by ICMP disabled</span></div>
-<div class="li"><span class="ln">02</span><span class="lt">Bridged subnets via secondary IP routes; confirmed cameras via ARP discovery (Sony OUI 88:c9:e8)</span></div>
-<div class="li"><span class="ln">03</span><span class="lt">Confirmed 3 Sony cameras already configured at 10.1.240.13-15 with static IPs</span></div>
-<div class="li"><span class="ln">04</span><span class="lt">Discovered Ubiquiti U7-Pro WiFi 7 AP at 10.1.240.5 via UniFi L2 discovery (UDP 10001)</span></div>
-<div class="li"><span class="ln">05</span><span class="lt">Installed UniFi Network Controller v9.0.108 on NUC with bundled Java runtime</span></div>
-<div class="li"><span class="ln">06</span><span class="lt">Adopted U7-Pro; created SSID CHAC-ZOOM-CONTROL broadcasting 2.4/5/6 GHz</span></div>
-<div class="li"><span class="ln">07</span><span class="lt">Mapped 15+ devices with IPs, MACs, spec labels, switch ports, and roles</span></div>
-<div class="li"><span class="ln">08</span><span class="lt">Verified Extron IPCP Pro 250 xi alive at .10 &mdash; all ports closed, needs Toolbelt programming</span></div>
-<div class="li"><span class="ln">09</span><span class="lt">Deep-verified all 3 camera web interfaces &mdash; port 80 active, HTTP 401 secured</span></div>
-<div class="li"><span class="ln">10</span><span class="lt">Created UniFi auto-start script for NUC boot persistence</span></div>
-<div class="li"><span class="ln">11</span><span class="lt">Re-enabled Windows Firewall on all profiles (Domain, Private, Public)</span></div>
-<div class="li"><span class="ln">12</span><span class="lt">Cleaned up all temporary IPs (192.168.0.x, 192.168.1.x) and routes from NUC</span></div>
-<div class="li"><span class="ln">13</span><span class="lt">Identified wall-mounted Extron touchpanel as pre-existing kitchen system, not part of Zoom spec</span></div>
-<div class="li"><span class="ln">14</span><span class="lt">Identified Sony RM-IP10 Joystick at .12 via MAC label match. DIP SW1 in LAN mode.</span></div>
-<div class="li"><span class="ln">15</span><span class="lt">Corrected inventory: 3 cameras (.13-.15) + 1 joystick (.12). Matches Jimmy's wiring spec.</span></div>
-<div class="li"><span class="ln">16</span><span class="lt">Discovered TP-Link switch management at 192.168.0.4 (admin/admin) &mdash; Vitesse firmware</span></div>
-<div class="li"><span class="ln">17</span><span class="lt">Corrected NUC clock from UTC to Central Standard Time</span></div>
-<div class="li"><span class="ln">18</span><span class="lt">Confirmed Samsung BDH751 (H75) at .19 &mdash; statically configured, all 5 TVs operational on HDMI1</span></div>
-<div class="li"><span class="ln">19</span><span class="lt">Confirmed Best Buy TP-Link 6-port switch is unmanaged Layer 2 &mdash; no IP address, transparent bridge</span></div>
-</div>
-<div style="font-size:.82rem;color:var(--accent);font-weight:600;margin:1.25rem 0 .75rem">Session 2: April 7-8, 2026</div>
-<div class="lg">
-<div class="li"><span class="ln">20</span><span class="lt">Jimmy configured RM-IP10 joystick camera-to-button assignments</span></div>
-<div class="li"><span class="ln">21</span><span class="lt">Roland V-80HD video output to house displays confirmed working (Apr 7 night)</span></div>
-<div class="li"><span class="ln">22</span><span class="lt">Roland V-80HD audio output to house mixer configured and working (Apr 7 night) &mdash; SETTINGS NOT SAVED</span></div>
-<div class="li"><span class="ln">23</span><span class="lt">Roland V-80HD IP corrected to 10.1.240.9 (was incorrectly documented as 10.1.240.6 / 10.240.240.9)</span></div>
-<div class="li"><span class="ln">24</span><span class="lt">Extron IPCP MAC corrected to 00:05:a8:1f:86:55 (v1 report had iPad MAC 00:60:01:80:50:db in error)</span></div>
-<div class="li"><span class="ln">25</span><span class="lt">Added 6 previously missing devices to inventory: ZV Pro (.4), iPad-Zoom (.6), Extron Tablet (.11), Wall-Mount iPad (.7), POE Switch, Laptop</span></div>
-<div class="li"><span class="ln">26</span><span class="lt">Full network scan from NUC: 14 of 18 assigned IPs alive. Down: .4 (ZV Pro), .10 (Extron), .11 (Extron Tablet)</span></div>
-<div class="li"><span class="ln">27</span><span class="lt">Port scan: Roland .9 port 80 open (401), all 3 cameras port 80 open, all 5 TVs port 8080 open (MDC)</span></div>
-<div class="li"><span class="ln">28</span><span class="lt">Discovered iPad/Wall-Mount MAC swap (.6/.7) and TV4/TV5 MAC swap (.19/.20) via ARP vs spec comparison</span></div>
-<div class="li"><span class="ln">29</span><span class="lt">Identified CAM1 MAC discrepancy: spec 4th octet 96 vs ARP d6. ARP value likely correct.</span></div>
-<div class="li"><span class="ln">30</span><span class="lt">Audio routing regression: Roland output to house lost after settings not saved. Currently using mixer line-in workaround only.</span></div>
-<div class="li"><span class="ln">31</span><span class="lt">Extron Tablet MAC updated in spec from 04:e4:b6:99:94:ea to fa:cd:19:ff:de:f4</span></div>
-</div>
-</div>
-
-<div class="footer"><div class="ft-title">CHAC Video Production &amp; Zoom Room &mdash; Network Configuration Report v2</div>Generated April 8, 2026<br>NUC: NUCBOX_M2PRo_S / 10.1.240.0/20 / Gateway 10.1.240.3<br>Prepared by Jon Isaac &mdash; Powered by Island Dev Crew<br>v2 reconciliation by Claude AI &mdash; April 8, 2026</div>
-</div>
-<script>document.querySelectorAll('.reveal').forEach(el => el.classList.add('v'));</script>
+<footer><div class="footer-row"><div class="footer-mark"><div class="label">Designed &amp; Developed By</div><div class="name">Island Development Crew</div><div class="scripture">"Where there is no vision, the people perish." — Proverbs 29:18 (KJV)</div></div><div class="footer-meta"><b>CHAC Video Production &amp; Zoom Room — Network Configuration Report v3</b><br>Iron Canvas v4.1 · Mission Mode<br>Generated April 14, 2026<br>NUC: NUCBOX_M2PRo_S / 10.1.240.0/20 / Gateway 10.1.240.3<br>Prepared by Jon Isaac with Claude · © 2026</div></div></footer>
+<script>
+ const o = new IntersectionObserver((entries) => {
+ entries.forEach((x, i) => {
+ if (x.isIntersecting) {
+ setTimeout(() => x.target.classList.add('v'), i * 60);
+ o.unobserve(x.target);
+ }
+ });
+ }, { threshold: 0.08 });
+ document.querySelectorAll('.reveal').forEach(el => o.observe(el));
+</script>
 </div><!-- /admin-content -->
 </body>
 </html>

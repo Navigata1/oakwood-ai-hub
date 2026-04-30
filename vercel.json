@@ -2,5 +2,15 @@
   "trailingSlash": true,
   "redirects": [
     { "source": "/", "destination": "/pastoral/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/strategic-assessment/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet, noimageindex" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+      ]
+    }
   ]
 }

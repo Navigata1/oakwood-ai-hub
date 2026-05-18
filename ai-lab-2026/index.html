@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oakwood AI Innovation Lab | IDC Briefing</title>
+  <meta name="description" content="A meeting-ready hardware, curriculum, and governance briefing for an Oakwood University AI Innovation Lab.">
+  <style>
+    :root {
+      --ink: #12140f;
+      --muted: #5a6256;
+      --paper: #f7f5ed;
+      --white: #fffdf7;
+      --green: #0e5135;
+      --green-2: #163f31;
+      --gold: #c99a2e;
+      --brick: #9f4633;
+      --line: rgba(18, 20, 15, .14);
+      --shadow: 0 18px 50px rgba(18, 20, 15, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 12px clamp(18px, 4vw, 54px);
+      border-bottom: 1px solid rgba(255,255,255,.22);
+      background: rgba(14, 81, 53, .92);
+      color: white;
+      backdrop-filter: blur(14px);
+    }
+    .brand { font-weight: 760; line-height: 1.05; }
+    .brand span { display: block; color: #f3d17a; font-size: .78rem; font-weight: 650; }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: .82rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.28);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+    }
+    .hero {
+      min-height: 86vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: #0f1b16;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4, 18, 12, .86), rgba(4, 18, 12, .52) 44%, rgba(4, 18, 12, .18));
+      z-index: -1;
+    }
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: saturate(.95) contrast(1.02);
+    }
+    .hero-content {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 110px 0 64px;
+      color: white;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-size: .82rem;
+      font-weight: 760;
+      text-transform: uppercase;
+      color: #f2d68a;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: #f2d68a;
+    }
+    h1 {
+      max-width: 940px;
+      margin: 0;
+      font-size: clamp(3.2rem, 8vw, 7.2rem);
+      line-height: .88;
+      letter-spacing: 0;
+    }
+    .hero p {
+      max-width: 760px;
+      margin: 24px 0 0;
+      font-size: clamp(1.02rem, 2vw, 1.34rem);
+      line-height: 1.45;
+      color: rgba(255,255,255,.88);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .button {
+      min-height: 42px;
+      border-radius: 999px;
+      padding: 11px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 750;
+      border: 1px solid rgba(255,255,255,.28);
+      background: var(--gold);
+      color: #171204;
+    }
+    .button.secondary {
+      background: rgba(255,255,255,.12);
+      color: white;
+    }
+    section {
+      padding: clamp(58px, 8vw, 104px) clamp(18px, 4vw, 54px);
+    }
+    .wrap {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(260px, .5fr);
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4.4vw, 4rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    .section-head p, .lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 1.02rem;
+    }
+    .band-green {
+      background: var(--green);
+      color: white;
+    }
+    .band-green .section-head p,
+    .band-green .lead,
+    .band-green .muted,
+    .band-green .item p,
+    .band-green .tile p { color: rgba(255,255,255,.78); }
+    .band-green .item,
+    .band-green .tile,
+    .band-green .budget {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .item, .tile, .budget {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 158px;
+      box-shadow: 0 1px 0 rgba(18,20,15,.03);
+    }
+    .item h3, .tile h3, .budget h3 {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+      line-height: 1.2;
+    }
+    .item p, .tile p, .budget p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: .94rem;
+    }
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+    .visual-row {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 24px;
+    }
+    .visual {
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #161a15;
+      box-shadow: var(--shadow);
+      min-height: 360px;
+    }
+    .visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+    }
+    .budget {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      min-height: 310px;
+    }
+    .price {
+      color: var(--green);
+      font-size: 2.05rem;
+      line-height: 1;
+      font-weight: 850;
+    }
+    .band-green .price { color: #f3d17a; }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+    .band-green ul { color: rgba(255,255,255,.78); }
+    li + li { margin-top: 7px; }
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: .92rem;
+      line-height: 1.38;
+    }
+    th {
+      background: var(--green-2);
+      color: white;
+      font-size: .82rem;
+      text-transform: uppercase;
+    }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { font-weight: 780; color: var(--green-2); }
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+    .week {
+      font-weight: 850;
+      color: var(--brick);
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    .step h3 { margin: 0 0 7px; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.48; }
+    .quote {
+      padding: clamp(26px, 5vw, 54px);
+      background: var(--green-2);
+      color: white;
+      border-radius: 8px;
+      font-size: clamp(1.45rem, 3vw, 2.8rem);
+      line-height: 1.08;
+      font-weight: 820;
+      box-shadow: var(--shadow);
+    }
+    .quote span {
+      display: block;
+      margin-top: 18px;
+      color: #f3d17a;
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 650;
+    }
+    .sources {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+    .footer {
+      padding: 34px clamp(18px, 4vw, 54px);
+      background: #10140f;
+      color: rgba(255,255,255,.78);
+      font-size: .92rem;
+    }
+    .footer strong { color: white; }
+    @media (max-width: 900px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      .section-head, .visual-row { grid-template-columns: 1fr; }
+      .grid, .grid.two, .grid.four { grid-template-columns: 1fr; }
+      .hero { min-height: 82vh; }
+      .step { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media print {
+      .nav { position: static; }
+      section { page-break-inside: avoid; }
+      .hero { min-height: 700px; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Oakwood AI Innovation Lab <span>IDC briefing for Dr. Shoshana Smith and Oakwood leadership</span></div>
+    <div class="nav-links">
+      <a href="#why">Why Now</a>
+      <a href="#budgets">Budgets</a>
+      <a href="#layout">Layout</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+  </nav>
+  <header class="hero">
+    <img src="assets/lab-hero.jpg" alt="Modern Oakwood AI lab concept with students and faculty">
+    <div class="hero-content">
+      <div class="eyebrow">Meeting Brief · May 18, 2026</div>
+      <h1>Build the lab where Oakwood students learn AI by shipping.</h1>
+      <p>A hardware, curriculum, and governance concept for a 10-seat AI lab that lets students use AI, build with AI, understand local models, practice security, and present real portfolio outcomes.</p>
+      <div class="hero-actions">
+        <a class="button" href="#budgets">View Budget Options</a>
+        <a class="button secondary" href="#presentation">Use Meeting Flow</a>
+      </div>
+    </div>
+  </header>
+  <section id="references">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What We Already Know</h2>
+        <p>Workspace references confirm this is not a random idea. It has been sitting in the Oakwood opportunity lane since May 13.</p>
+      </div>
+      <div class="grid">
+        <article class="item"><span class="number">1</span><h3>Direct Oakwood note</h3><p>Obsidian contains “Oakwood University — Ms. Smith & AI Lab,” dated May 13, tagged school, Oakwood, OU Campus, AI lab, and Ms. Smith.</p></article>
+        <article class="item"><span class="number">2</span><h3>Known ask</h3><p>The note says Ms. Smith runs computer science, wants computer labs upgraded, has funding, and needs guidance on what will be useful.</p></article>
+        <article class="item"><span class="number">3</span><h3>Prior action items</h3><p>The May 13 priority map says to share OU Campus Companion and prepare a short memo covering lab setup, model/tool stack, governance, training, and student outcomes.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="why" class="band-green">
+    <div class="wrap">
+      <div class="section-head"><h2>The Strategic Thesis</h2><p>Oakwood does not need a room full of ordinary computers with ChatGPT bookmarks. The strongest move is a visible AI production studio where students can move from curiosity to deployable work.</p></div>
+      <div class="grid four">
+        <article class="tile"><h3>Use AI</h3><p>Students learn practical prompting, research, writing, analysis, design, coding, and presentation workflows with clear academic integrity rules.</p></article>
+        <article class="tile"><h3>Build AI</h3><p>Students build apps, agents, automations, retrieval systems, voice tools, dashboards, and campus-facing prototypes.</p></article>
+        <article class="tile"><h3>Run AI Locally</h3><p>The lab demonstrates local models, privacy tradeoffs, GPU constraints, inference speed, fine-tuning, and cloud-to-edge deployment.</p></article>
+        <article class="tile"><h3>Govern AI</h3><p>Students practice security, data handling, evaluation, bias testing, policy writing, audit trails, and responsible deployment.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="budgets">
+    <div class="wrap">
+      <div class="section-head"><h2>Four Budget Paths</h2><p>Each option supports a 10-seat lab. The difference is how much local AI compute, production polish, and advanced experimentation Oakwood wants on day one.</p></div>
+      <div class="grid four">
+        <article class="budget"><h3>Starter Pod</h3><div class="price">$20K</div><p>Best for an immediate pilot and proof of student outcomes.</p><ul><li>10 capable mini-desktop or laptop seats with 32-64GB RAM.</li><li>1 shared local AI node, ideally DGX Spark-class or Framework AI Max-class.</li><li>10 displays, keyboard/mouse kits, AV display, basic NAS, and managed networking.</li><li>Focus: AI literacy, coding assistants, app prototyping, portfolio projects.</li></ul></article>
+        <article class="budget"><h3>Applied Builder Lab</h3><div class="price">$50K</div><p>Best default if the goal is serious student production across all 10 seats.</p><ul><li>10 Framework Desktop AI Max 128GB-class seats or similar compact AI PCs.</li><li>1-2 DGX Spark-class shared systems for local LLM demos and model labs.</li><li>Large presentation wall, instructor station, NAS, 10GbE core, capture gear.</li><li>Focus: local inference, RAG, agents, data apps, deployment, demo days.</li></ul></article>
+        <article class="budget"><h3>Research Studio</h3><div class="price">$100K</div><p>Best for a lab that can credibly support faculty research and advanced AI courses.</p><ul><li>10 premium workstations: Mac Studio M4 Max/M3 Ultra-class or RTX 5090-class PCs.</li><li>2-3 DGX Spark-class nodes plus one shared GPU server for heavier workloads.</li><li>Podcast/demo studio, robotics/vision bench, 25GbE uplink, backup and MDM.</li><li>Focus: fine-tuning, evaluation, model serving, cybersecurity, capstones.</li></ul></article>
+        <article class="budget"><h3>Flagship AI Center</h3><div class="price">$200K</div><p>Best for a signature HBCU AI lab that can recruit, train, and host partners.</p><ul><li>10 elite seats with RTX PRO 6000 Blackwell/Mac Studio Ultra-class capability.</li><li>4 DGX Spark-class units with paired high-speed networking for larger models.</li><li>Dedicated GPU server, edge AI/robotics kits, AV studio, security appliance, NAS.</li><li>Focus: institutional AI leadership, external demos, grants, workforce pipeline.</li></ul></article>
+      </div>
+      <p class="lead" style="margin-top:18px;">Procurement note: final SKUs should be quoted before purchase. The strategic split is more important than brand loyalty: 10 reliable seats, shared local AI compute, serious networking/storage, and a visible demo environment.</p>
+    </div>
+  </section>
+  <section id="layout" class="band-green">
+    <div class="wrap">
+      <div class="section-head"><h2>10-Seat Lab Layout</h2><p>The room should signal “AI production” the moment someone walks in: not a computer classroom, not a generic lab, but a space where students build and present.</p></div>
+      <div class="visual-row">
+        <figure class="visual"><img src="assets/lab-floorplan.jpg" alt="Isometric rendering of proposed AI lab zones"></figure>
+        <div class="grid">
+          <article class="tile"><h3>Student Build Zone</h3><p>Ten seats arranged for pair work, code reviews, and rapid workshop transitions.</p></article>
+          <article class="tile"><h3>Local Model Bench</h3><p>Shared machines for running Ollama/vLLM, testing model sizes, and comparing latency.</p></article>
+          <article class="tile"><h3>Demo Wall</h3><p>Large display for live builds, student presentations, model evals, and visiting donors.</p></article>
+          <article class="tile"><h3>Studio Corner</h3><p>Camera, mic, lights, and capture station so students can publish what they build.</p></article>
+          <article class="tile"><h3>Security Table</h3><p>Governance exercises: red-team prompts, privacy tiers, prompt injection, audit logs.</p></article>
+          <article class="tile"><h3>Edge AI Bench</h3><p>Robotics, vision, sensors, Jetson-class devices, and physical AI demonstrations.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="hardware">
+    <div class="wrap">
+      <div class="section-head"><h2>Hardware Map</h2><p>Use a mixed architecture. Students need daily-driver machines, local model systems, GPU horsepower, and cloud literacy. One machine type cannot teach the whole field.</p></div>
+      <table class="matrix">
+        <thead><tr><th>Layer</th><th>What It Teaches</th><th>Good Fit</th><th>Where It Lands</th></tr></thead>
+        <tbody>
+          <tr><td>Student seats</td><td>AI-assisted coding, design, notebooks, data work, app builds, presentations.</td><td>Framework Desktop AI Max, Mac Studio M4 Max, or RTX 5070/5080-class PCs.</td><td>Every budget.</td></tr>
+          <tr><td>Local AI node</td><td>Local LLM inference, privacy, quantization, context limits, model serving.</td><td>DGX Spark-class GB10 128GB unified memory systems or equivalent high-memory AI mini-workstations.</td><td>$20K and up.</td></tr>
+          <tr><td>Shared GPU server</td><td>Fine-tuning, batch inference, computer vision, evaluation harnesses, team jobs.</td><td>RTX 5090/RTX PRO 6000 Blackwell-class server depending on budget and vendor quote.</td><td>$100K and up.</td></tr>
+          <tr><td>Edge AI</td><td>Robotics, cameras, physical AI, sensors, low-latency inference.</td><td>Jetson Thor/Orin-class kits, webcams, depth cameras, small robotics kits.</td><td>$50K and up.</td></tr>
+          <tr><td>Network/storage</td><td>Model storage, dataset governance, backup, MLOps basics, shared project access.</td><td>10GbE minimum, 25GbE for advanced builds, NAS with snapshots, access control.</td><td>Every budget.</td></tr>
+        </tbody>
+      </table>
+      <div class="visual-row">
+        <figure class="visual"><img src="assets/lab-hardware-wall.jpg" alt="AI lab hardware wall concept"></figure>
+        <div class="quote">Do not sell this as hardware. Sell it as capability students can prove.<span>The output should be demos, portfolios, internships, research artifacts, grant credibility, and institutional momentum.</span></div>
+      </div>
+    </div>
+  </section>
+  <section id="curriculum" class="band-green">
+    <div class="wrap">
+      <div class="section-head"><h2>Curriculum Spine</h2><p>This can become a course, certificate, club lab, summer bridge, or faculty development track. The same spine supports multiple formats.</p></div>
+      <div class="grid four">
+        <article class="tile"><h3>AI Fluency</h3><p>Prompting, research, study workflows, academic honesty, source checking, multimodal tools.</p></article>
+        <article class="tile"><h3>Build Week</h3><p>Students ship simple apps with AI-assisted coding, GitHub, Vercel, databases, and auth basics.</p></article>
+        <article class="tile"><h3>Local Models</h3><p>Ollama, LM Studio, vLLM, quantization, embeddings, RAG, benchmarking, model selection.</p></article>
+        <article class="tile"><h3>Agents & Automation</h3><p>Tool calling, workflows, browser agents, scheduled tasks, memory, approval gates.</p></article>
+        <article class="tile"><h3>AI Security</h3><p>Prompt injection, data leakage, permissions, evaluation, audit logs, policy templates.</p></article>
+        <article class="tile"><h3>Data & Dashboards</h3><p>Clean data, analyze with notebooks, build dashboards, explain uncertainty and limits.</p></article>
+        <article class="tile"><h3>Voice, Vision, Media</h3><p>Speech, image generation, video workflows, accessibility, storytelling, presentation design.</p></article>
+        <article class="tile"><h3>Capstone Studio</h3><p>Teams solve campus/community problems and publish demo sites, videos, and technical briefs.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="inspiration">
+    <div class="wrap">
+      <div class="section-head"><h2>Student Inspiration Hooks</h2><p>The videos Jon provided all point to the same message: young builders are no longer waiting for permission, credentials, or perfect conditions.</p></div>
+      <div class="grid two">
+        <article class="item"><h3>Design quality is now a student skill</h3><p>The Kimi/Claude website video shows a workflow where one person can produce agency-level web experiences quickly by combining the right models, references, and deployment tools.</p></article>
+        <article class="item"><h3>Teen builders are creating real companies</h3><p>The Zach Yadegari/Cal AI interviews show the new ceiling: students who learn fast, ship early, and solve simple painful problems can reach market traction before age 20.</p></article>
+        <article class="item"><h3>AI websites are not the product</h3><p>The Carson Reed video argues for selling business outcomes and AI systems, not just pages. That maps directly to Oakwood students learning practical client-ready solutions.</p></article>
+        <article class="item"><h3>Oakwood can make this local</h3><p>The lab can turn this energy into structured opportunity: HBCU students building AI apps, governance models, media, research, and community tools with faculty support.</p></article>
+      </div>
+      <div class="visual-row">
+        <figure class="visual"><img src="assets/lab-demo-day.jpg" alt="Students presenting AI projects in an HBCU lab"></figure>
+        <div class="quote">The message to students: you are not preparing for the AI future. You are already late to the starting line, and this lab helps you catch up fast.<span>That urgency should feel empowering, not frightening. The goal is disciplined confidence.</span></div>
+      </div>
+    </div>
+  </section>
+  <section id="governance" class="band-green">
+    <div class="wrap">
+      <div class="section-head"><h2>Governance Built In</h2><p>The lab should make responsible AI a practice, not a poster. Students should learn to build powerful systems with clear boundaries.</p></div>
+      <div class="grid">
+        <article class="tile"><h3>Data Classification</h3><p>Public, internal, sensitive, and restricted data rules for projects, prompts, uploads, and model storage.</p></article>
+        <article class="tile"><h3>Human Approval Gates</h3><p>Policies for email, public posts, student data, financial data, medical data, and administrative actions.</p></article>
+        <article class="tile"><h3>Evaluation Habit</h3><p>Students test hallucination, bias, privacy risk, prompt injection, jailbreaks, and measurable task quality.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="section-head"><h2>90-Day Launch Roadmap</h2><p>The best version starts small enough to ship, but designed with enough ambition that donors and students can see where it is going.</p></div>
+      <div class="timeline">
+        <article class="step"><div class="week">Weeks 1-2</div><div><h3>Discovery and room plan</h3><p>Confirm budget, room dimensions, network constraints, purchasing rules, faculty champions, and initial course/club format.</p></div></article>
+        <article class="step"><div class="week">Weeks 3-4</div><div><h3>Procurement and governance</h3><p>Finalize SKUs, vendor quotes, access policies, data tiers, local model stack, and student account structure.</p></div></article>
+        <article class="step"><div class="week">Weeks 5-7</div><div><h3>Install and baseline stack</h3><p>Deploy seats, network, NAS, display wall, local model server, GitHub/Vercel workflow, and lab dashboard.</p></div></article>
+        <article class="step"><div class="week">Weeks 8-10</div><div><h3>Faculty/student pilot</h3><p>Run a sprint where students ship one AI-assisted app, one local model demo, and one responsible AI evaluation artifact.</p></div></article>
+        <article class="step"><div class="week">Weeks 11-12</div><div><h3>Demo day and next funding ask</h3><p>Show student work, publish a polished recap, identify internships/partners, and use outcomes to justify the next tier.</p></div></article>
+      </div>
+    </div>
+  </section>
+  <section id="presentation" class="band-green">
+    <div class="wrap">
+      <div class="section-head"><h2>Suggested Meeting Flow</h2><p>Keep the conversation grounded in outcomes first, hardware second.</p></div>
+      <div class="grid">
+        <article class="tile"><h3>1. Open with Oakwood’s moment</h3><p>AI is compressing the distance between idea and implementation. Oakwood can give students a serious seat at that table now.</p></article>
+        <article class="tile"><h3>2. Show the 10-seat concept</h3><p>Walk through the zones: student seats, local models, demo wall, studio corner, security table, edge AI bench.</p></article>
+        <article class="tile"><h3>3. Ask for budget reality</h3><p>Present the four price tiers, then ask which one matches the funding source, procurement timeline, and room constraints.</p></article>
+        <article class="tile"><h3>4. Offer the next deliverable</h3><p>IDC can convert the preferred tier into a procurement memo, room diagram, rollout plan, and 8-week pilot curriculum.</p></article>
+        <article class="tile"><h3>5. Connect OU Campus Companion</h3><p>Use it as proof that Jon can move from idea to deployable experience quickly and can mentor students through the same motion.</p></article>
+        <article class="tile"><h3>6. Close on student outcomes</h3><p>The lab should produce public demos, internships, portfolios, grant narratives, and faculty-ready AI literacy.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="sources">
+    <div class="wrap">
+      <div class="section-head"><h2>Research Notes</h2><p>Quick source trail used for the meeting version.</p></div>
+      <div class="sources">
+        <p><strong>Internal references:</strong> Obsidian note “Oakwood University — Ms. Smith & AI Lab” dated 2026-05-13; projects/jon-priority-reset-2026-05-13/priority-map.md; memory/2026-05-13.md; active Telegram draft capture from 2026-05-18.</p>
+        <p><strong>Hardware source trail:</strong> NVIDIA DGX Spark official page lists GB10 Grace Blackwell, up to 1 petaFLOP FP4, 128GB unified memory, local models up to 200B parameters, and paired systems up to 405B models. NVIDIA Jetson Thor official page lists Blackwell edge AI, 2070 FP4 TFLOPS, and 128GB memory. Apple Mac Studio official specs list M4 Max/M3 Ultra options, up to 512GB unified memory, and Thunderbolt 5. Framework Desktop public listings show AMD Ryzen AI Max configurations up to 128GB memory; final pricing should be quote-verified.</p>
+        <p><strong>Video references:</strong> 03IhVSEiICA, t0U3UREdjmo, 5fQ-JyHggBI, and 8FysaFHj79U were used for inspiration around student builders, AI-assisted design, monetizable apps, and business-outcome framing.</p>
+        <p><strong>Generated visuals:</strong> Concept images generated for this briefing with Gemini image generation through OpenClaw. They are illustrative room concepts, not architectural drawings.</p>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><div class="wrap"><strong>Prepared by Island Development Crew.</strong> Meeting artifact for discussion with Oakwood University Math & Computer Sciences leadership. Final budgets require vendor quotes, room measurements, IT/security review, and procurement approval.</div></footer>
+</body>
+</html>

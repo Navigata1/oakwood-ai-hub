@@ -21,7 +21,7 @@
       --shadow: 0 28px 90px rgba(0, 0, 0, .42);
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: var(--bg); }
+    html { scroll-behavior: smooth; background: var(--bg); overflow-x: hidden; }
     body {
       margin: 0;
       color: var(--ink);
@@ -31,6 +31,7 @@
         linear-gradient(180deg, #071019 0%, #0a1420 42%, #08111b 100%);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       letter-spacing: 0;
+      overflow-x: hidden;
     }
     img { max-width: 100%; display: block; }
     a { color: inherit; }
@@ -103,7 +104,7 @@
       filter: saturate(.98) contrast(1.04);
     }
     .hero-content, .wrap {
-      width: min(1180px, calc(100% - 36px));
+      width: min(1180px, calc(100vw - 36px));
       margin: 0 auto;
     }
     .hero-content {
@@ -351,14 +352,50 @@
     }
     .footer strong { color: var(--ink); }
     @media (max-width: 940px) {
-      .nav { align-items: flex-start; flex-direction: column; }
-      .navlinks { justify-content: flex-start; }
+      .nav { align-items: flex-start; flex-direction: column; width: 100%; overflow: hidden; }
+      .brand { max-width: 100%; }
+      .brand span { white-space: normal; }
+      .navlinks {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 3px;
+        scrollbar-width: none;
+      }
+      .navlinks::-webkit-scrollbar { display: none; }
+      .navlinks a { flex: 0 0 auto; }
       .section-head, .showcase { grid-template-columns: 1fr; }
       .grid, .grid.two, .grid.four { grid-template-columns: 1fr; }
       .hero { min-height: 86vh; }
       .step { grid-template-columns: 1fr; }
       .visual, .visual img { min-height: 260px; }
       table { display: block; overflow-x: auto; }
+    }
+    @media (max-width: 520px) {
+      .nav { gap: 12px; padding: 12px 18px; }
+      .brand { width: min(320px, calc(100vw - 36px)); }
+      .brand span { max-width: 100%; font-size: .68rem; line-height: 1.25; }
+      .navlinks a, .pill-link { padding: 8px 10px; }
+      .hero { min-height: 760px; align-items: end; }
+      .hero::before { background: linear-gradient(90deg, rgba(7,16,25,.95), rgba(7,16,25,.76)); }
+      .hero-content, .wrap {
+        width: min(320px, calc(100vw - 40px)) !important;
+        max-width: min(320px, calc(100vw - 40px)) !important;
+        margin-left: 18px;
+        margin-right: auto;
+      }
+      .hero-content { padding: 84px 0 50px; }
+      h1 {
+        max-width: 100%;
+        font-size: clamp(2rem, 9.5vw, 2.45rem);
+        line-height: .96;
+      }
+      h2 { font-size: clamp(1.8rem, 8.5vw, 2.2rem); line-height: 1; }
+      .hero-copy { font-size: 1rem; line-height: 1.48; }
+      .hero-copy, .section-head p, .card p, .budget p, .download-card p, .step p { max-width: 100%; overflow-wrap: break-word; }
+      .button { width: 100%; }
+      section { padding-inline: 18px; }
     }
     @media print {
       .nav { position: static; }
@@ -373,10 +410,11 @@
     <div class="brand">Oakwood AI Innovation Lab <span>Final strategic package for Dr. Shushannah Smith and Oakwood leadership</span></div>
     <div class="navlinks">
       <a href="#package">Package</a>
+      <a href="#context">Context</a>
       <a href="#thesis">Thesis</a>
       <a href="#budgets">Budgets</a>
       <a href="#architecture">Architecture</a>
-      <a href="#roadmap">Roadmap</a>
+      <a href="#flow">Flow</a>
     </div>
   </nav>
 
@@ -424,6 +462,32 @@
             <p>Best if Dr. Smith or the department wants to edit, reorder, or reuse slides for an internal meeting.</p>
           </div>
           <a class="pill-link" href="Oakwood_AI_Lab_Final_Briefing.pptx">Open PPTX</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="context">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Start from what is already clear.</h2>
+        <p>The original web briefing carried useful grounding that belongs in the final package: who this is for, what the chair appears to need, and how the conversation should stay anchored in student outcomes before hardware.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="num">Signal 01</div>
+          <h3>Department leadership</h3>
+          <p>Dr. Shushannah Smith is the chair and associate professor connected to Oakwood's Mathematics and Computer Science department. The final package should speak to a practical department decision, not a generic technology pitch.</p>
+        </article>
+        <article class="card">
+          <div class="num">Signal 02</div>
+          <h3>Funding window</h3>
+          <p>The proposal should be ready for several budget realities, from a lean pilot to a donor-visible AI center, because the confirmed funding amount may change the first build.</p>
+        </article>
+        <article class="card">
+          <div class="num">Signal 03</div>
+          <h3>Useful guidance</h3>
+          <p>The strongest contribution is helping Oakwood avoid buying ordinary computers when the real opportunity is local AI capability, governance practice, and student portfolio production.</p>
         </article>
       </div>
     </div>
@@ -555,18 +619,34 @@
     </div>
   </section>
 
+  <section id="flow">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Use this as the meeting path.</h2>
+        <p>The strongest delivery order from the first pushed version still holds: outcomes first, hardware second, budget third, next action last.</p>
+      </div>
+      <div class="grid four">
+        <article class="card"><div class="num">01</div><h3>Open with the student</h3><p>Frame the lab around students graduating with visible AI projects, technical confidence, and market-ready proof of work.</p></article>
+        <article class="card"><div class="num">02</div><h3>Show the room concept</h3><p>Explain the zones: build seats, local model node, demo wall, studio corner, security/governance table, and edge AI bench.</p></article>
+        <article class="card"><div class="num">03</div><h3>Choose the budget lane</h3><p>Present the four tiers as strategic choices and ask which one matches the funding source, procurement deadline, and room constraints.</p></article>
+        <article class="card"><div class="num">04</div><h3>Offer the next deliverable</h3><p>Turn the selected tier into a procurement memo, room diagram, rollout plan, and eight-week pilot curriculum.</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="quality">
     <div class="wrap">
       <div class="section-head">
-        <h2>Quality control before sending.</h2>
-        <p>The fused version keeps the energy and design ambition while avoiding claims that could weaken credibility if challenged.</p>
+        <h2>Fusion decisions before sending.</h2>
+        <p>The package now uses the dark site as the foundation while restoring the best structure from the first pushed version and keeping the safest parts of the PowerPoint/PDF research package.</p>
       </div>
       <div class="grid">
-        <article class="card"><h3>Kept</h3><p>Kimi's executive structure, budget ladder, roadmap, risk/sustainment framing, and premium institutional tone.</p></article>
-        <article class="card"><h3>Fused</h3><p>Prior dark web visuals, stronger student-outcome language, local AI architecture, governance, and meeting-ready narrative.</p></article>
+        <article class="card"><h3>Kept from the dark site</h3><p>The immersive visual direction, direct download package, executive tone, student-outcome thesis, and clean room-facing experience.</p></article>
+        <article class="card"><h3>Restored from the first push</h3><p>The context grounding, 10-seat lab logic, curriculum spine, governance emphasis, meeting flow, and source-discipline language.</p></article>
+        <article class="card"><h3>Kept from Kimi/PPT</h3><p>The executive structure, budget ladder, roadmap, risk/sustainment framing, and premium institutional packaging.</p></article>
         <article class="card"><h3>Softened</h3><p>Unverified grant-portal language, volatile exact pricing claims, and any claim that should be quote-verified before procurement.</p></article>
       </div>
-      <p class="source-note">Final procurement numbers should be treated as planning ranges until Oakwood confirms the funding source, room, vendor quotes, institutional discounts, IT constraints, and procurement rules.</p>
+      <p class="source-note">Source discipline: final procurement numbers should be treated as planning ranges until Oakwood confirms the funding source, room, vendor quotes, institutional discounts, IT constraints, and procurement rules. Hardware claims should be refreshed against vendor quotes before any purchase order.</p>
     </div>
   </section>
 

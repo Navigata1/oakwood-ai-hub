@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oakwood AI Innovation Lab — Meeting Briefing & Implementation Companion</title>
+<style>
+:root {
+  --paper: #f6eddc;
+  --paper-soft: #efe1cb;
+  --paper-deep: #e6d2b6;
+  --ink: #17110b;
+  --ink-soft: #4c4034;
+  --muted: #6f6254;
+  --copper: #b9653f;
+  --copper-dark: #7b3b24;
+  --copper-soft: #dfb086;
+  --line: rgba(23, 17, 11, 0.18);
+  --dark: #17100b;
+  --dark-2: #24170f;
+  --cream: #fff9ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #24170f;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.35;
+}
+
+@page {
+  size: letter portrait;
+  margin: 0;
+}
+
+.page {
+  position: relative;
+  width: 8.5in;
+  min-height: 11in;
+  padding: 0.54in 0.6in 0.72in;
+  background:
+    linear-gradient(90deg, rgba(185, 101, 63, 0.08), transparent 34%),
+    var(--paper);
+  break-after: page;
+}
+
+.page:last-child {
+  break-after: auto;
+}
+
+.cover {
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 76% 18%, rgba(185, 101, 63, 0.28), transparent 33%),
+    linear-gradient(145deg, #100b08 0%, #21140d 58%, #3a2114 100%);
+}
+
+.cover::before,
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0.22in;
+  border: 1px solid rgba(185, 101, 63, 0.32);
+  pointer-events: none;
+}
+
+.page:not(.cover)::before {
+  border-color: rgba(123, 59, 36, 0.22);
+}
+
+.kicker,
+.folio,
+.small-label,
+th,
+.tag {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 7.6pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.kicker {
+  color: var(--copper-dark);
+  margin: 0 0 0.12in;
+}
+
+.cover .kicker {
+  color: var(--copper-soft);
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 34pt;
+  line-height: 0.98;
+  max-width: 6.6in;
+}
+
+h2 {
+  margin: 0 0 0.18in;
+  font-size: 23pt;
+  line-height: 1.04;
+  color: var(--ink);
+}
+
+h3 {
+  margin: 0 0 0.08in;
+  font-size: 14pt;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+p {
+  margin: 0 0 0.12in;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 0.18in;
+}
+
+li {
+  margin: 0 0 0.055in;
+}
+
+.rule {
+  height: 1px;
+  margin: 0.22in 0;
+  background: var(--line);
+}
+
+.cover .rule {
+  background: rgba(246, 237, 220, 0.2);
+}
+
+.mast {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.25in;
+  margin-bottom: 0.48in;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 11pt;
+}
+
+.meta {
+  text-align: right;
+  color: rgba(255, 249, 237, 0.72);
+  font-size: 8.3pt;
+}
+
+.cover-title {
+  margin-top: 0.22in;
+}
+
+.cover-subtitle {
+  margin-top: 0.26in;
+  max-width: 5.9in;
+  color: rgba(255, 249, 237, 0.83);
+  font-size: 13pt;
+  line-height: 1.35;
+}
+
+.thesis {
+  margin-top: 0.42in;
+  padding: 0.25in 0.28in;
+  border-left: 0.08in solid var(--copper-soft);
+  background: rgba(255, 249, 237, 0.08);
+}
+
+.thesis strong {
+  color: #fff7e8;
+}
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.08in;
+  margin-top: 0.38in;
+}
+
+.fact {
+  min-height: 0.78in;
+  padding: 0.14in;
+  border: 1px solid rgba(255, 249, 237, 0.18);
+  background: rgba(255, 249, 237, 0.055);
+}
+
+.fact b {
+  display: block;
+  margin-bottom: 0.03in;
+  color: var(--copper-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19pt;
+  font-weight: 500;
+}
+
+.cover-foot {
+  position: absolute;
+  left: 0.6in;
+  right: 0.6in;
+  bottom: 0.54in;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 249, 237, 0.68);
+  font-size: 8.3pt;
+}
+
+.page-head {
+  display: grid;
+  grid-template-columns: 0.5in 1fr;
+  gap: 0.18in;
+  align-items: start;
+  margin-bottom: 0.22in;
+}
+
+.num {
+  color: var(--copper-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25pt;
+  line-height: 1;
+}
+
+.lede {
+  max-width: 6.55in;
+  color: var(--ink-soft);
+  font-size: 11.2pt;
+  line-height: 1.38;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.13in;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.11in;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.09in;
+}
+
+.card,
+.callout,
+.metric,
+.tier-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 249, 237, 0.58);
+}
+
+.card {
+  padding: 0.15in;
+}
+
+.card.dark {
+  color: var(--cream);
+  background: linear-gradient(160deg, var(--dark), var(--dark-2));
+  border-color: rgba(185, 101, 63, 0.42);
+}
+
+.card.dark h3,
+.card.dark p {
+  color: var(--cream);
+}
+
+.card.dark .small-label {
+  color: var(--copper-soft);
+}
+
+.small-label {
+  color: var(--copper-dark);
+  margin-bottom: 0.055in;
+}
+
+.callout {
+  padding: 0.16in 0.18in;
+  border-left: 0.075in solid var(--copper);
+}
+
+.callout strong {
+  color: var(--copper-dark);
+}
+
+.compact p {
+  margin-bottom: 0.065in;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.9pt;
+}
+
+th {
+  padding: 0.075in 0.08in;
+  color: var(--cream);
+  text-align: left;
+  background: var(--dark);
+  border: 1px solid var(--dark);
+}
+
+td {
+  padding: 0.072in 0.08in;
+  vertical-align: top;
+  border: 1px solid rgba(23, 17, 11, 0.16);
+  background: rgba(255, 249, 237, 0.5);
+}
+
+td:first-child {
+  font-weight: 700;
+  color: var(--copper-dark);
+}
+
+.table-note {
+  margin-top: 0.08in;
+  color: var(--muted);
+  font-size: 8.6pt;
+}
+
+.pillars {
+  margin-top: 0.1in;
+}
+
+.pillar {
+  min-height: 1.42in;
+  padding: 0.13in;
+  color: var(--cream);
+  border: 1px solid rgba(185, 101, 63, 0.42);
+  border-radius: 8px;
+  background: linear-gradient(160deg, #170f0a, #2a190f);
+}
+
+.pillar .verb {
+  color: var(--copper-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18pt;
+  line-height: 1;
+}
+
+.pillar h3 {
+  margin-top: 0.08in;
+  color: var(--cream);
+  font-size: 12.5pt;
+}
+
+.pillar p {
+  color: rgba(255, 249, 237, 0.78);
+  font-size: 8.8pt;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.08in;
+  margin-top: 0.14in;
+}
+
+.phase {
+  position: relative;
+  min-height: 2.5in;
+  padding: 0.16in 0.13in;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 249, 237, 0.56);
+}
+
+.phase::before {
+  content: "";
+  display: block;
+  width: 0.12in;
+  height: 0.12in;
+  margin-bottom: 0.11in;
+  border-radius: 50%;
+  background: var(--copper);
+}
+
+.phase h3 {
+  font-size: 12.2pt;
+}
+
+.phase p {
+  font-size: 8.7pt;
+}
+
+.tag {
+  color: var(--copper-dark);
+}
+
+.footer {
+  position: absolute;
+  left: 0.6in;
+  right: 0.6in;
+  bottom: 0.34in;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.08in;
+  border-top: 1px solid rgba(23, 17, 11, 0.18);
+  color: var(--muted);
+  font-size: 8pt;
+}
+
+.cover .footer {
+  border-top-color: rgba(255, 249, 237, 0.18);
+  color: rgba(255, 249, 237, 0.68);
+}
+
+.avoid-break {
+  break-inside: avoid;
+}
+
+.tight {
+  margin-bottom: 0.08in;
+}
+
+.mt {
+  margin-top: 0.16in;
+}
+
+.summary-strip {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1fr;
+  gap: 0.1in;
+  margin-top: 0.18in;
+}
+
+.metric {
+  padding: 0.14in;
+}
+
+.metric b {
+  display: block;
+  color: var(--copper-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18pt;
+  font-weight: 500;
+}
+
+.metric span {
+  color: var(--ink-soft);
+  font-size: 8.7pt;
+}
+
+.tier-card {
+  padding: 0.14in;
+}
+
+.tier-card.featured {
+  border-width: 2px;
+  border-color: var(--copper);
+  background: #fff4df;
+}
+
+.tier-card .price {
+  color: var(--copper-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20pt;
+  line-height: 1;
+}
+
+.tier-card p {
+  font-size: 8.7pt;
+}
+
+.deliverables {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.1in;
+}
+
+.decision-list li {
+  padding-left: 0.02in;
+}
+
+.risk-table td:nth-child(2) {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+@media print {
+  body {
+    background: var(--paper);
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+@media screen {
+  .page {
+    margin: 0.25in auto;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+  }
+}
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="mast">
+    <div>
+      <div class="brand">Oakwood AI Innovation Lab</div>
+      <div class="kicker">Meeting Briefing & Implementation Companion</div>
+    </div>
+    <div class="meta">Prepared for Dr. Shushannah Smith<br>Oakwood University · May 2026</div>
+  </div>
+
+  <div class="cover-title">
+    <h1>Oakwood AI Innovation Lab — Meeting Briefing & Implementation Companion</h1>
+    <p class="cover-subtitle">A polished decision brief for a 10-seat AI production studio where Math & Computer Science students learn modern AI by building, evaluating, shipping, and presenting real work.</p>
+  </div>
+
+  <div class="thesis">
+    <p><strong>Executive thesis.</strong> Oakwood does not need another ordinary computer lab. It needs a visible AI production studio: a room with capable student seats, shared local model infrastructure, a demo wall, governance habits, and a 90-day path to the first public proof.</p>
+  </div>
+
+  <div class="fact-grid">
+    <div class="fact"><b>10</b>student builder seats</div>
+    <div class="fact"><b>4</b>budget paths</div>
+    <div class="fact"><b>90</b>day launch runway</div>
+    <div class="fact"><b>AI</b>local plus cloud model</div>
+  </div>
+
+  <div class="cover-foot">
+    <span>Student outcomes first · Hardware in service of shipped work</span>
+    <span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">01</div>
+    <div>
+      <div class="kicker">Executive Thesis</div>
+      <h2>The lab is a production studio, not a row of upgraded machines.</h2>
+      <p class="lede">The center of the proposal is a student outcome: every participant leaves with visible artifacts that can be shown to faculty, recruiters, grant reviewers, and community partners.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card dark avoid-break">
+      <div class="small-label">Core Position</div>
+      <h3>Build the room around shipping.</h3>
+      <p>The lab should be designed for weekly progress: app prototypes, local model demos, responsible-AI artifacts, short demo videos, and public showcases. Hardware matters because it makes that cadence real.</p>
+    </div>
+    <div class="card avoid-break">
+      <div class="small-label">Decision Frame</div>
+      <h3>Choose the smallest tier that can produce proof.</h3>
+      <p>The $50K Applied Builder path is the most balanced starting point. The $20K pod proves the thesis faster, while the $100K and $200K paths support research, recruitment, and grant visibility from launch.</p>
+    </div>
+  </div>
+
+  <div class="summary-strip">
+    <div class="metric"><b>Use</b><span>AI fluency, research, analysis, coding, and presentation.</span></div>
+    <div class="metric"><b>Build</b><span>Apps, agents, automations, dashboards, voice, and vision tools.</span></div>
+    <div class="metric"><b>Govern</b><span>Evaluation, data handling, approval gates, audits, and policy drafts.</span></div>
+  </div>
+
+  <div class="callout mt">
+    <p><strong>Meeting objective.</strong> Confirm the available funding range, the room constraints, the program format, the Year 1 faculty lead, and the first measurable definition of success. Those five answers determine the next procurement memo and pilot curriculum.</p>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>01</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">02</div>
+    <div>
+      <div class="kicker">Why Now</div>
+      <h2>AI has moved from a topic students study to a production skill employers expect.</h2>
+      <p class="lede">The advantage in 2026 is not generic exposure to tools. It is the ability to build a useful system, explain its limits, evaluate its behavior, and ship it with care.</p>
+    </div>
+  </div>
+
+  <table class="avoid-break">
+    <thead>
+      <tr><th>Pressure</th><th>Lab response</th><th>Student evidence</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>AI velocity</td><td>Weekly build cadence with modern coding, model, and deployment tools.</td><td>Live apps, GitHub history, demo recordings, and technical briefs.</td></tr>
+      <tr><td>Workforce demand</td><td>Local inference, cloud workflows, data discipline, and evaluation practice.</td><td>Portfolio projects aligned to internships, research, and Huntsville industry needs.</td></tr>
+      <tr><td>Equity of access</td><td>Shared high-memory nodes and reliable seats, so capability does not depend on a student’s personal machine.</td><td>A transparent cohort process and consistent access to serious compute.</td></tr>
+      <tr><td>Trust and safety</td><td>Governance taught as a craft, not a warning slide.</td><td>Data labels, approval gates, test reports, red-team notes, and audit trails.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid-3 mt">
+    <div class="card compact">
+      <div class="small-label">HBCU Leadership</div>
+      <p>Oakwood can frame the lab as leadership, not catch-up: a visible place where students become builders of the systems shaping their communities.</p>
+    </div>
+    <div class="card compact">
+      <div class="small-label">Huntsville Fit</div>
+      <p>Defense, aerospace, health, biotech, and civic employers increasingly need graduates who can pair technical skill with judgment.</p>
+    </div>
+    <div class="card compact">
+      <div class="small-label">Timing</div>
+      <p>A first cohort, demo day, and follow-on grant narrative can all be produced inside one semester if the room and program format are chosen now.</p>
+    </div>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>02</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">03</div>
+    <div>
+      <div class="kicker">Context & Department Fit</div>
+      <h2>Dr. Smith’s ask is practical: what will actually be useful?</h2>
+      <p class="lede">The brief should respect the department’s need for usable guidance, not a catalog of machines. Start with outcomes, then map the room, hardware, governance, and curriculum to those outcomes.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card avoid-break">
+      <div class="small-label">Known Direction</div>
+      <ul>
+        <li>The department is considering computer-lab upgrades with an AI focus.</li>
+        <li>Funding has been identified and needs a defensible recommendation.</li>
+        <li>The useful answer is a complete model: room, stack, governance, training, and student outcomes.</li>
+        <li>The conversation should confirm scope before locking a tier.</li>
+      </ul>
+    </div>
+    <div class="card avoid-break">
+      <div class="small-label">Fit For Dr. Smith & Math/CS</div>
+      <ul>
+        <li>Mission-aligned STEM access and HBCU excellence.</li>
+        <li>Rigor without jargon: every technical claim should translate to student value.</li>
+        <li>Faculty time reality: a bridge week and mentor model reduce launch friction.</li>
+        <li>Responsible AI as a department strength, not an afterthought.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout mt">
+    <p><strong>Conversation posture.</strong> Listen first. Confirm what success looks like for the department, then use the briefing to narrow choices. The best outcome is agreement on a tier or agreement on the next diagnostic deliverable.</p>
+  </div>
+
+  <div class="grid-3 mt">
+    <div class="metric"><b>Room</b><span>Dimensions, power, HVAC, network, AV, furniture, and security constraints.</span></div>
+    <div class="metric"><b>Format</b><span>Course, certificate, club, summer bridge, faculty development, or combined model.</span></div>
+    <div class="metric"><b>Proof</b><span>Portfolios, internships, demo day, grant leverage, retention, and faculty confidence.</span></div>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>03</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">04</div>
+    <div>
+      <div class="kicker">Lab Model</div>
+      <h2>Four capabilities organize the lab and keep the equipment tied to learning.</h2>
+      <p class="lede">Every student should move through the same progression: use AI well, build with it, run models directly, and govern what they ship.</p>
+    </div>
+  </div>
+
+  <div class="grid-4 pillars">
+    <div class="pillar"><div class="verb">Use</div><h3>AI fluency</h3><p>Prompting, research, analysis, source checking, design, coding assistance, and presentations.</p></div>
+    <div class="pillar"><div class="verb">Build</div><h3>Creation</h3><p>Apps, agents, automations, RAG systems, dashboards, voice, vision, and campus tools.</p></div>
+    <div class="pillar"><div class="verb">Run</div><h3>Infrastructure</h3><p>Ollama, LM Studio, vLLM, embeddings, quantization, latency, privacy, and cost tradeoffs.</p></div>
+    <div class="pillar"><div class="verb">Govern</div><h3>Responsibility</h3><p>Evaluation, red-teaming, prompt-injection defense, bias checks, policy drafts, and audits.</p></div>
+  </div>
+
+  <div class="grid-2 mt">
+    <div class="card compact">
+      <div class="small-label">Eight-Module Spine</div>
+      <p>1. AI fluency</p>
+      <p>2. Build week</p>
+      <p>3. Local models</p>
+      <p>4. Agents and automation</p>
+      <p>5. AI security and governance</p>
+      <p>6. Data, dashboards, and story</p>
+      <p>7. Voice, vision, and media</p>
+      <p>8. Capstone studio</p>
+    </div>
+    <div class="card compact">
+      <div class="small-label">Room Zones</div>
+      <p><strong>Student Build Zone:</strong> ten seats for pair work, reviews, and daily production.</p>
+      <p><strong>Local Model Bench:</strong> shared high-memory nodes for frontier open models.</p>
+      <p><strong>Demo Wall:</strong> weekly showcases, visitor presentations, and critique.</p>
+      <p><strong>Studio Corner:</strong> camera, lighting, and mics for portfolio-ready demos.</p>
+      <p><strong>Edge AI Bench:</strong> Jetson devices, sensors, robotics kits, and physical AI.</p>
+    </div>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>04</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">05</div>
+    <div>
+      <div class="kicker">Hardware Tiers</div>
+      <h2>The hardware model is modular: reliable seats, shared local AI, storage, studio output, and edge devices.</h2>
+      <p class="lede">The lab should be quoted as a system. Final procurement should use current education pricing and a facilities check before purchase.</p>
+    </div>
+  </div>
+
+  <table class="avoid-break">
+    <thead>
+      <tr><th>Component</th><th>Role in the lab</th><th>Planning guidance</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Student seats</td><td>Daily workstations for coding, AI-assisted build work, design, data, and demo production.</td><td>Prioritize reliability, 64-128 GB memory where possible, fast storage, and standard x86 compatibility for broad tooling.</td></tr>
+      <tr><td>DGX Spark-class node</td><td>Shared high-memory local inference, model serving, evaluation, and local-model teaching.</td><td>Use as a shared bench. Arm-based tooling is strong, but keep student seats compatible with common desktop workflows.</td></tr>
+      <tr><td>Framework Desktop AI Max+ class</td><td>High-memory daily AI workstation with strong local-model economics.</td><td>Most defensible for the recommended 10-seat Applied Builder tier.</td></tr>
+      <tr><td>Mac Studio class</td><td>Media, voice, vision, creative pipelines, and premium studio work.</td><td>Best in hybrid or higher tiers when Apple workflows matter.</td></tr>
+      <tr><td>Jetson AGX / edge kits</td><td>Robotics, vision sensors, low-latency inference, and physical AI demonstrations.</td><td>Adds a visible hardware hook and broadens student interest beyond software.</td></tr>
+      <tr><td>Network, NAS, backup</td><td>Shared datasets, model weights, snapshots, access control, and demo-day reliability.</td><td>10 GbE minimum; 25 GbE+ for higher tiers. Include backup and device management from day one.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout mt">
+    <p><strong>Procurement note.</strong> Planning prices in the source material are mid-May 2026 estimates. Memory, GPU, and education pricing can move quickly; every tier should be re-quoted before approval.</p>
+  </div>
+
+  <div class="grid-3 mt">
+    <div class="metric"><b>Local</b><span>Teaches privacy-bounded work, model serving, latency, quantization, and predictable inference economics.</span></div>
+    <div class="metric"><b>Cloud</b><span>Handles occasional fine-tuning, larger batch jobs, and credits-backed experiments beyond the room.</span></div>
+    <div class="metric"><b>Hybrid</b><span>Gives the department a practical mix instead of forcing one vendor ecosystem.</span></div>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>05</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">06</div>
+    <div>
+      <div class="kicker">Budget Paths</div>
+      <h2>Four paths scale ambition without changing the identity of the lab.</h2>
+      <p class="lede">Each tier should still produce a student build space, a local model experience, a demo surface, and a governance workflow. The difference is depth and durability.</p>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <div class="tier-card">
+      <div class="small-label">Starter Pod</div>
+      <div class="price">$20K</div>
+      <p><strong>Pilot fast.</strong> Ten capable seats, one shared local AI node, 10 GbE, NAS, demo display, and basic capture gear.</p>
+      <p>Best for proving the thesis inside one semester.</p>
+    </div>
+    <div class="tier-card featured">
+      <div class="small-label">Applied Builder · Recommended</div>
+      <div class="price">$50K</div>
+      <p><strong>Balanced launch.</strong> Ten 128 GB Framework-class seats, one to two DGX Spark-class nodes, stronger storage, demo wall, studio kit, and edge starters.</p>
+      <p>Best blend of student access and credible local AI.</p>
+    </div>
+    <div class="tier-card">
+      <div class="small-label">Research Studio</div>
+      <div class="price">$100K</div>
+      <p><strong>Grant credible.</strong> Premium seats, multiple local nodes, shared GPU server, 25 GbE backbone, enterprise NAS, expanded AV, and Jetson AGX class devices.</p>
+      <p>Best for capstones and faculty research.</p>
+    </div>
+    <div class="tier-card">
+      <div class="small-label">Flagship Center</div>
+      <div class="price">$200K</div>
+      <p><strong>Signature hub.</strong> Elite seats, DGX cluster, dedicated GPU server, 100 GbE backbone, all-flash storage, full studio AV, edge fleet, and security logging.</p>
+      <p>Best for recruitment, grants, and partnerships.</p>
+    </div>
+  </div>
+
+  <table class="mt avoid-break">
+    <thead>
+      <tr><th>Decision</th><th>Use this path when...</th><th>Next step</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>$20K</td><td>The department needs a fast proof before a larger purchase.</td><td>Define a one-semester pilot and schedule the first demo day now.</td></tr>
+      <tr><td>$50K</td><td>The goal is a serious 10-seat launch with local AI and production-grade demos.</td><td>Prepare line-item vendor quotes and an 8-week pilot curriculum.</td></tr>
+      <tr><td>$100K</td><td>The lab must support capstones, faculty projects, and a stronger grant narrative.</td><td>Add facilities review, enterprise storage, and research workflow design.</td></tr>
+      <tr><td>$200K</td><td>The university wants a signature center that can recruit, host partners, and anchor press-worthy demonstrations.</td><td>Run a full room, procurement, security, AV, and sustainability plan.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="table-note">All paths should include a 10-15% contingency for shipping, cabling, peripherals, installation, and quote movement.</p>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>06</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">07</div>
+    <div>
+      <div class="kicker">Implementation Architecture</div>
+      <h2>The lab should operate as a simple, teachable system.</h2>
+      <p class="lede">Student workstations handle daily creation. Shared nodes run larger local models. Cloud credits cover overflow. Storage, backup, and policy make the work repeatable.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card compact">
+      <div class="small-label">Operating Stack</div>
+      <p><strong>Build:</strong> GitHub, VS Code/Cursor-class editors, Python, JavaScript/TypeScript, containers, Vercel, Cloudflare, Supabase or equivalent.</p>
+      <p><strong>Model work:</strong> Ollama, LM Studio, vLLM, Hugging Face, embeddings, RAG, evaluation harnesses, and model cards.</p>
+      <p><strong>Governance:</strong> dataset labels, project briefs, approval gates, test logs, prompt-injection checks, and demo review.</p>
+      <p><strong>Publication:</strong> demo wall, short videos, one-page technical briefs, and portfolio pages.</p>
+    </div>
+    <div class="card compact">
+      <div class="small-label">Launch Rhythm</div>
+      <p><strong>Faculty bridge:</strong> one week before cohort launch, focused on vocabulary, tools, classroom boundaries, and evaluation rubrics.</p>
+      <p><strong>Student cohort:</strong> first cohort selected with a transparent rubric across class years and backgrounds.</p>
+      <p><strong>Peer mentors:</strong> students help operate the lab by month three.</p>
+      <p><strong>Weekly ritual:</strong> build review, responsible-AI check, demo recording, and next sprint plan.</p>
+    </div>
+  </div>
+
+  <div class="callout mt">
+    <p><strong>Recommended default.</strong> Local-first for student and campus-sensitive work; cloud-burst for experiments that exceed the local memory or training budget. This keeps costs predictable while still giving students modern cloud fluency.</p>
+  </div>
+
+  <table class="mt avoid-break">
+    <thead>
+      <tr><th>Infrastructure item</th><th>Minimum</th><th>Higher-tier target</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Switching</td><td>10 GbE access for lab systems.</td><td>25 GbE or 100 GbE backbone for shared model and storage traffic.</td></tr>
+      <tr><td>Storage</td><td>NAS with snapshots and student project folders.</td><td>Enterprise NAS with cache, access control, backups, and dataset versioning.</td></tr>
+      <tr><td>Power/HVAC</td><td>Confirm outlets, circuits, and thermal headroom before purchase.</td><td>Facilities review for 4-5 kW peak loads in research or flagship tiers.</td></tr>
+      <tr><td>Security</td><td>Named accounts, backups, and device management.</td><td>SSO, audit logs, security appliance, and formal incident workflow.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>07</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">08</div>
+    <div>
+      <div class="kicker">Governance & Measurement</div>
+      <h2>Responsibility is part of the product students learn to build.</h2>
+      <p class="lede">The lab should make responsible AI visible in the workflow: every project has a data posture, evaluation plan, human review point, and record of what changed.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card avoid-break">
+      <div class="small-label">Governance Practices</div>
+      <ul>
+        <li>Classify datasets before they touch a model.</li>
+        <li>Keep human approval for sensitive actions such as email, database writes, payments, and publication.</li>
+        <li>Run hallucination, bias, safety, and prompt-injection checks before demos.</li>
+        <li>Document model choice, known limits, data sources, and evaluation results.</li>
+        <li>Create a student-data handling policy before the first cohort begins.</li>
+      </ul>
+    </div>
+    <div class="card avoid-break">
+      <div class="small-label">Success Metrics</div>
+      <ul>
+        <li>Number of shipped student artifacts per cohort.</li>
+        <li>Demo-day attendance and partner follow-up.</li>
+        <li>Internship and portfolio outcomes that cite the lab.</li>
+        <li>Faculty confidence before and after the bridge.</li>
+        <li>Grant, sponsor, and partnership leads created from the pilot.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-3 mt">
+    <div class="metric"><b>Policy</b><span>Lab use policy, data taxonomy, approval gates, and incident workflow.</span></div>
+    <div class="metric"><b>Artifacts</b><span>Model cards, evaluation notes, demo scripts, technical briefs, and repositories.</span></div>
+    <div class="metric"><b>Reporting</b><span>A semester dashboard that turns activity into follow-on funding evidence.</span></div>
+  </div>
+
+  <div class="callout mt">
+    <p><strong>Why this matters at an HBCU.</strong> Oakwood graduates will build and evaluate systems that affect health, education, finance, civic services, and community life. Teaching governance as a craft is both a competitive advantage and a moral one.</p>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>08</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">09</div>
+    <div>
+      <div class="kicker">Meeting Questions & Decision Points</div>
+      <h2>Leave the conversation with enough clarity to write the next memo.</h2>
+      <p class="lede">The meeting should narrow uncertainty. The strongest close is not a broad promise; it is a dated next deliverable tied to the tier and format Dr. Smith prefers.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card avoid-break">
+      <div class="small-label">Five Questions To Confirm</div>
+      <ol class="decision-list">
+        <li>What funding range is available, what source funds it, and is there a use-by date?</li>
+        <li>Which room is likely, and what are its power, network, HVAC, furniture, and security constraints?</li>
+        <li>What format should the lab support first: course, certificate, club, summer bridge, or faculty development?</li>
+        <li>Who will provide Year 1 faculty oversight, and who could become a second campus champion?</li>
+        <li>How should success be measured after the first semester?</li>
+      </ol>
+    </div>
+    <div class="card avoid-break">
+      <div class="small-label">Decision Points</div>
+      <ul>
+        <li>Pick a target tier or request a room-and-procurement diagnostic.</li>
+        <li>Choose whether the first cohort is credit-bearing or pilot-based.</li>
+        <li>Decide how much local AI is required on day one.</li>
+        <li>Approve a governance baseline before student projects begin.</li>
+        <li>Set the next deliverable date before the meeting ends.</li>
+      </ul>
+    </div>
+  </div>
+
+  <table class="mt avoid-break">
+    <thead>
+      <tr><th>If she asks...</th><th>Useful answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Can we start smaller?</td><td>Yes. The $20K Starter Pod proves the model in one semester, then demo-day proof supports the $50K or $100K expansion.</td></tr>
+      <tr><td>Why not only cloud?</td><td>Cloud is useful for overflow. Local AI teaches privacy-bounded handling, predictable inference costs, and real model operations.</td></tr>
+      <tr><td>Who maintains this?</td><td>Use standard tools, vendor support, device management, backups, and a student peer-mentor model by month three.</td></tr>
+      <tr><td>How will faculty keep up?</td><td>Start with a faculty bridge and a curriculum where faculty guide projects rather than having to be expert operators on day one.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>09</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">10</div>
+    <div>
+      <div class="kicker">Risk Mitigations</div>
+      <h2>Most launch risks are manageable if they are named before procurement.</h2>
+      <p class="lede">The purpose of the next memo is not only to price hardware. It should reduce operational risk for the department and make the pilot easier to defend.</p>
+    </div>
+  </div>
+
+  <table class="risk-table avoid-break">
+    <thead>
+      <tr><th>Risk</th><th>Mitigation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Procurement timing</td><td>Start with a tier that can land inside one semester. Pre-stage vendor quotes and education pricing paths.</td></tr>
+      <tr><td>Price volatility</td><td>Treat hardware numbers as planning figures until quote lock. Add contingency for memory, shipping, cabling, and install movement.</td></tr>
+      <tr><td>Arm vs x86 fragmentation</td><td>Use DGX Spark-class hardware as a shared node while keeping daily student seats broadly compatible.</td></tr>
+      <tr><td>Faculty adoption</td><td>Run a one-week faculty bridge, identify a second campus champion, and keep the first cohort focused on guided build modules.</td></tr>
+      <tr><td>Power and HVAC</td><td>Require a room electrical and cooling review for $100K+ tiers and confirm 30-40 A circuit needs before ordering.</td></tr>
+      <tr><td>Weak measurement</td><td>Define pilot KPIs before the first cohort starts and report them in a semester dashboard.</td></tr>
+      <tr><td>Branding drift</td><td>Name and present the lab as Oakwood’s from the beginning. Outside support should enable the department, not become the story.</td></tr>
+      <tr><td>Limited seats</td><td>Create a transparent first-cohort rubric across class year, readiness, major interest, and mentoring potential.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout mt">
+    <p><strong>Risk posture.</strong> The lab does not need to solve every AI use case on day one. It needs a well-scoped first cohort, dependable tools, clear rules, and a demo day that proves the next investment is earned.</p>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>10</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">11</div>
+    <div>
+      <div class="kicker">90-Day Roadmap</div>
+      <h2>A first proof can arrive before the funding conversation cools.</h2>
+      <p class="lede">The launch plan is calibrated for visible progress: diagnostic clarity, procurement readiness, baseline policy, installation, first build, and a public demo cadence.</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="phase">
+      <div class="tag">Weeks 1-2</div>
+      <h3>Discovery</h3>
+      <p>Confirm budget, room, network, purchasing, faculty leads, program format, and success metrics.</p>
+    </div>
+    <div class="phase">
+      <div class="tag">Weeks 3-4</div>
+      <h3>Procure & Policy</h3>
+      <p>Pull quotes, choose the tier, draft lab use rules, create account structures, and set the first-cohort plan.</p>
+    </div>
+    <div class="phase">
+      <div class="tag">Weeks 5-7</div>
+      <h3>Install & Baseline</h3>
+      <p>Set up workstations, shared model nodes, NAS, demo wall, backups, repositories, and first local model benchmarks.</p>
+    </div>
+    <div class="phase">
+      <div class="tag">Weeks 8-10</div>
+      <h3>Pilot Sprint</h3>
+      <p>First cohort ships an AI-assisted app, local-model demo, evaluation report, and short portfolio recording.</p>
+    </div>
+    <div class="phase">
+      <div class="tag">Weeks 11-12</div>
+      <h3>Demo Day</h3>
+      <p>Host the showcase, publish recap artifacts, record metrics, and identify grant, partner, and expansion opportunities.</p>
+    </div>
+  </div>
+
+  <div class="grid-3 mt">
+    <div class="metric"><b>30</b><span>days: decision memo, quotes, room plan, policy draft, cohort format.</span></div>
+    <div class="metric"><b>60</b><span>days: installed baseline, accounts, storage, first local models, faculty bridge.</span></div>
+    <div class="metric"><b>90</b><span>days: pilot sprint artifacts, demo day, metrics dashboard, next funding narrative.</span></div>
+  </div>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>11</span></div>
+</section>
+
+<section class="page">
+  <div class="page-head">
+    <div class="num">12</div>
+    <div>
+      <div class="kicker">Next Deliverables</div>
+      <h2>End the meeting with a concrete deliverable and date.</h2>
+      <p class="lede">The next artifact should remove uncertainty for Oakwood leadership and give the department something practical to approve, revise, or take into a funding conversation.</p>
+    </div>
+  </div>
+
+  <div class="deliverables">
+    <div class="card compact"><div class="small-label">Procurement Memo</div><p>Line-item vendor quotes for the selected tier, including education pricing, warranty, shipping, installation, and contingency.</p></div>
+    <div class="card compact"><div class="small-label">Scaled Room Layout</div><p>Room plan with seat placement, power, network, AV, storage, demo wall, and zone-by-zone occupancy.</p></div>
+    <div class="card compact"><div class="small-label">8-Week Pilot Curriculum</div><p>Weekly module outline, deliverables, assessment rubric, faculty time estimate, and student application draft.</p></div>
+    <div class="card compact"><div class="small-label">Governance Templates</div><p>Lab use policy, data classification taxonomy, approval gates, prompt-injection playbook, and audit-log spec.</p></div>
+    <div class="card compact"><div class="small-label">Success Dashboard</div><p>KPI definitions, baseline targets, reporting cadence, and a template for semester-one evidence.</p></div>
+    <div class="card compact"><div class="small-label">Grant & Partner Narrative</div><p>A concise expansion story for NSF, NVIDIA, Microsoft, Apple education channels, Huntsville employers, and private foundations.</p></div>
+  </div>
+
+  <div class="callout mt">
+    <p><strong>Recommended immediate close.</strong> If the $50K path resonates, send a procurement memo and 8-week pilot curriculum first. If the room is uncertain, send the room layout and facilities checklist first.</p>
+  </div>
+
+  <div class="rule"></div>
+  <p class="serif" style="font-size: 16pt; line-height: 1.2; margin: 0;">Oakwood has the students, the mission, and the moment. The lab turns that into a room where students build work they can point to for the rest of their careers.</p>
+
+  <div class="footer"><span>Oakwood AI Innovation Lab · Meeting Briefing · May 2026</span><span>12</span></div>
+</section>
+
+</body>
+</html>

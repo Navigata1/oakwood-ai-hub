@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oakwood University AI Studio + Engineering Lab — IDC Proposal & Invoice</title>
+<style>
+  :root{ --ink:#17202b; --muted:#637083; --line:#cfd7df; --paper:#fff; --soft:#f7fafb; --cream:#fbfaf5; --teal:#087b74; --deep:#123747; --aqua:#0c9eb6; --gold:#c48b19; --coral:#df654d; }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#eef1f3;color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-size:10.4px;line-height:1.34}
+  a{color:var(--aqua);text-decoration:none;font-weight:700}
+  .page{width:8.5in;min-height:11in;margin:24px auto;background:var(--paper);padding:.55in .6in .5in;box-shadow:0 12px 42px rgba(23,32,43,.12);position:relative}
+  .brand-head{display:grid;grid-template-columns:84px 1fr 215px;gap:16px;align-items:center}
+  .logo{width:80px;height:80px;border-radius:6px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(145deg,#08151d,#174257)}
+  .logo img{width:100%;height:100%;object-fit:cover}
+  .kicker{color:var(--teal);font-weight:800;text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px;font-size:10px}
+  h1{margin:0;font-weight:500;color:var(--ink);font-size:27px;line-height:1.03}
+  .subtitle{margin-top:7px;color:var(--muted);font-size:11.4px;line-height:1.34;max-width:520px}
+  .meta{text-align:right;color:var(--muted);line-height:1.32;font-size:9.6px}
+  .meta strong{color:var(--ink)}
+  .accent-rule{height:5px;background:linear-gradient(90deg,var(--teal),var(--aqua),var(--coral),var(--gold));margin:16px 0 14px}
+  .callout{border:1px solid var(--line);border-left:4px solid var(--teal);background:#f7fbfb;padding:10px 12px;margin-bottom:12px}
+  .pills{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 12px}
+  .pill{border:1px solid #d2d6c9;border-radius:999px;background:#fffdf8;color:var(--teal);padding:4px 10px;font-size:9px;white-space:nowrap}
+  .pill:nth-child(3),.pill:nth-child(7){color:var(--coral)} .pill:nth-child(4),.pill:nth-child(8){color:var(--gold)}
+  .price-panel{display:grid;grid-template-columns:1.1fr 1fr;border-radius:13px;overflow:hidden;margin-bottom:16px;border:1px solid #e1d9ca}
+  .price-main{background:radial-gradient(circle at 100% 15%,rgba(12,158,182,.25),transparent 30%),linear-gradient(100deg,#123747,#087b74);color:#fff;padding:18px 22px}
+  .price-main .label{text-transform:uppercase;letter-spacing:.05em;font-size:11px}
+  .price-main .amount{font-size:36px;line-height:1;margin-top:4px;font-weight:300}
+  .price-main .note{color:rgba(255,255,255,.88);margin-top:7px;font-size:9.6px}
+  .price-side{background:radial-gradient(circle at 100% 20%,rgba(223,101,77,.28),transparent 40%),linear-gradient(90deg,#fff,#fbfaf5);padding:15px 18px}
+  .pay-box{margin:8px 0 9px;padding:9px 11px;border:1px solid #d8dde4;border-radius:8px;background:#fff;overflow-wrap:anywhere}
+  h2{color:var(--deep);font-size:15px;font-weight:600;margin:17px 0 8px;padding-bottom:5px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,var(--teal),var(--aqua),var(--coral),var(--gold)) 1}
+  h3{margin:10px 0 5px;color:var(--deep);font-size:10.8px}
+  p{margin:0 0 6px} ul{margin:5px 0 6px 15px;padding:0} li{margin:0 0 3px}
+  table{width:100%;border-collapse:collapse;margin:0 0 11px}
+  td,th{border:1px solid #d4d1c9;padding:5px 7px;vertical-align:top;font-size:9.4px}
+  th{color:#fff;background:var(--deep);text-align:left;font-weight:600}
+  td.num,th.num{text-align:right;white-space:nowrap}
+  tr.subtotal td{background:#eef5f4;font-weight:700}
+  tr.total td{background:#123747;color:#fff;font-weight:700;font-size:11px}
+  tr.lane td{background:#fbf6ea;font-weight:700;color:var(--deep)}
+  .two-grid,.three-grid{display:grid;gap:9px;margin-bottom:11px}
+  .two-grid{grid-template-columns:1fr 1fr} .three-grid{grid-template-columns:repeat(3,1fr)}
+  .card{border:1px solid var(--line);background:#fff;padding:9px 10px}
+  .card.top-teal{border-top:3px solid var(--teal)} .card.top-gold{border-top:3px solid var(--gold)} .card.top-coral{border-top:3px solid var(--coral)}
+  .section-note{background:var(--cream);border:1px solid #ddd4bf;padding:8px 10px;margin:8px 0 11px}
+  .exgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0}
+  .ex{border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#fff}
+  .ex img{width:100%;height:128px;object-fit:cover;display:block}
+  .ex .cap{padding:5px 7px;font-size:8.6px;color:var(--muted)} .ex .cap b{color:var(--ink)}
+  .quote{font-style:italic;color:var(--deep);border-left:3px solid var(--gold);padding:2px 0 2px 9px;margin:4px 0}
+  .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:12px}
+  .sig{min-height:96px;border:1px solid var(--line);padding:11px;background:#fff}
+  .line{margin-top:24px;border-top:1px solid var(--ink);padding-top:4px;color:var(--muted)}
+  .footer{color:var(--muted);font-size:8.6px;border-top:1px solid #d7d1c1;margin-top:14px;padding-top:6px;display:flex;justify-content:space-between;gap:12px}
+  .muted{color:var(--muted)} .small{font-size:9px}
+  @media print{ @page{size:Letter;margin:0} html,body{background:#fff} .page{width:8.5in;min-height:11in;margin:0;box-shadow:none;page-break-after:always} .page:last-child{page-break-after:auto} }
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 — COVER ===================== -->
+<section class="page">
+  <header class="brand-head">
+    <div class="logo"><img src="palm-logo.png" alt="Island Dev Crew"/></div>
+    <div>
+      <div class="kicker">Island Dev Crew Consulting · General Contracting &amp; AI Systems</div>
+      <h1>Oakwood University AI Studio<br/>&amp; Engineering Lab</h1>
+      <p class="subtitle">Turnkey proposal &amp; execute-ready estimate for a 10-seat AI production studio, a hands-on engineering/soldering makerspace, and the department-wide power, network, camera, and access-control infrastructure that protects the investment — orchestrated end-to-end by Island Development Crew.</p>
+    </div>
+    <div class="meta">
+      <strong>Prepared:</strong> June 2026<br/>
+      <strong>Client:</strong> Dr. Shushannah Smith<br/>
+      Chair, Mathematics &amp; Computer Science<br/>
+      Oakwood University · Cooper Complex Bldg B<br/>
+      Huntsville, AL · ssmith@oakwood.edu<br/>
+      <strong>Provider:</strong> Jonathan Isaac<br/>
+      Island Development Crew LLC<br/>
+      256-668-8248 · jon-isaac@islanddevcrew.com
+    </div>
+  </header>
+
+  <div class="accent-rule"></div>
+
+  <div class="callout">
+    <strong>What this is.</strong> A planning-grade, audit-aware General-Contractor proposal built from an on-site walkthrough (May 26, 2026), 16 verified site photographs, and current June-2026 vendor pricing with named Huntsville subcontractors. IDC orchestrates every trade under one accountable point of contact, one transparent fee, and one progress dashboard. <em>Figures are planning ranges; each line is re-quoted to a sealed vendor/sub bid before purchase.</em>
+  </div>
+
+  <div class="pills">
+    <span class="pill">10-Seat AI Studio · Rm 409</span>
+    <span class="pill">Soldering/Math Lab · Rm 407</span>
+    <span class="pill">Engineering · Rm 305 + 310</span>
+    <span class="pill">UniFi + pfSense Network</span>
+    <span class="pill">UniFi Protect Cameras</span>
+    <span class="pill">Multi-Door Access</span>
+    <span class="pill">≥4 Bambu Lab Printers</span>
+    <span class="pill">2084 / Lennox Curriculum</span>
+  </div>
+
+  <section class="price-panel">
+    <div class="price-main">
+      <div class="label">Recommended Execution — All-In (IDC-Orchestrated)</div>
+      <div class="amount">$172,000</div>
+      <div class="note">Range $170,625 – $198,498. Includes equipment, subbed facility work, GC coordination, contingency, and the 10% IDC orchestration fee. Title&nbsp;III grant-eligible portion ≈ $93.5K; facility/capital portion ≈ $60.1K.</div>
+    </div>
+    <div class="price-side">
+      <p><strong>Mobilization deposit</strong> initiates procurement &amp; sub scheduling (see Payment Schedule, p.7).</p>
+      <div class="pay-box"><strong>Secure payment:</strong> <a href="STRIPE_PAYMENT_LINK">Island Dev Crew Stripe payment link</a> <span class="muted">(insert IDC Stripe link / Payment Link)</span></div>
+      <p><strong>Signing:</strong> signature-ready PDF with direct blocks (p.7); DocuSign / SignWell / Dropbox Sign accepted.</p>
+      <p class="muted small">Department-Wide Vision (full robust build incl. dept cabling, dept cameras, Room-405 bathroom &amp; raised floor) is presented on p.10 as the donor / naming-gift envelope at <strong>$245K–$330K</strong>.</p>
+    </div>
+  </section>
+
+  <div class="two-grid">
+    <div class="card top-teal"><h3>The opportunity</h3><p>Oakwood does not need another computer lab. It needs an <strong>AI production studio</strong> where Math &amp; Computer Science students <em>ship</em> AI — apps, agents, fabricated hardware, and research artifacts — backed by reliable power, network, and security. As the only Seventh-day Adventist HBCU, Oakwood can also give students a credible <strong>responsible-AI ethics</strong> voice (curriculum, p.9).</p></div>
+    <div class="card top-gold"><h3>Why IDC as GC</h3><p>One orchestrator manages every vendor and Huntsville subcontractor (electrical, low-voltage, access, GC), holds a single <strong>3–7% coordination markup</strong> on subbed facility work and a transparent <strong>10% orchestration fee</strong>, and keeps faculty &amp; administration informed through a live progress dashboard with weekly/monthly reports.</p></div>
+  </div>
+
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com · 256-668-8248</span><span>Oakwood AI Lab Proposal · Page 1</span></footer>
+</section>
+
+<!-- ===================== PAGE 2 — EXECUTIVE SUMMARY ===================== -->
+<section class="page">
+  <h2>1 · Executive Summary &amp; How to Read This</h2>
+  <p>This package separates the project into the three quote families requested, because each draws on <strong>different funding</strong>. Selling all three as one grant line will be clawed back at audit.</p>
+  <table>
+    <tr><th style="width:24%">Track</th><th>Scope</th><th class="num" style="width:20%">Planning range</th><th style="width:22%">Funding lane</th></tr>
+    <tr><td><strong>Quote 1 — AI Studio + Engineering</strong></td><td>Compute, Bambu fleet, soldering/CNC, AV + 3 boards, furniture, consumables, software</td><td class="num">$88.2K–$98.8K</td><td>Mostly <strong>Title III grant-eligible</strong></td></tr>
+    <tr><td><strong>Quote 2 — Power / Electrical</strong></td><td>Subpanel, dedicated circuits, raceway, raised floor, permits</td><td class="num">$54.4K–$61.0K</td><td><strong>Facility — NOT grant</strong> (capital / donor)</td></tr>
+    <tr><td><strong>Quote 3 — Network + Cameras + Access</strong></td><td>UniFi + pfSense, Protect cameras, 4-door Access; + structured cabling labor</td><td class="num">Equip in Q1·Q3; cabling facility</td><td><strong>Mixed</strong> (electronics grant / cabling facility)</td></tr>
+  </table>
+
+  <h2>2 · Two Tiers — Recommended vs. Vision</h2>
+  <div class="two-grid">
+    <div class="card top-teal"><h3>Recommended Execution — ~$172,000 all-in</h3><p>Studio/lean compute, lab-focused facility scope (power + cabling to the labs + MDF; raised floor in the AI Studio only; <em>no</em> Room-405 bathroom). This is the number to commit to — it sits at the top of the $150–175K band you targeted and is what the execute-ready invoice (p.7) bills.</p><p class="muted small">Sub-$170K lever: a single-lab camera pilot or 2-door access pulls the point toward $160–165K (your call).</p></div>
+    <div class="card top-gold"><h3>Department-Wide Vision — $245K–$330K</h3><p>The full robust transformation: pooled compute (RTX&nbsp;PRO 6000), dept-wide cabling (80 drops + fiber), dept-wide cameras, full electrical, raised floor <em>plus</em> the Room-405 bathroom and dept room-mod, 5-door access. This is the <strong>donor / naming-gift</strong> envelope (p.10) — not an execution commitment today.</p></div>
+  </div>
+
+  <h2>3 · The Funding Firewall (critical)</h2>
+  <p><strong>Title III</strong> covers <strong>supplies (&lt;$2,000/unit)</strong> and <strong>equipment (≥$2,000/unit)</strong> tied to the academic mission, with an audit trail and a <strong>June&nbsp;30</strong> spend pressure. It does <strong>not</strong> cover <strong>facilities</strong> — electrical service, structural cabling labor, raised floor, construction, HVAC, the bathroom. Quote&nbsp;2 in full and the cabling-labor / door-install portions of Quote&nbsp;3 must come from <strong>capital, physical-plant, donor, or match funds</strong>. (The grant-tag of each invoice line is shown on p.7.)</p>
+
+  <h2>4 · Sequencing — two hard dependencies + 90-day plan</h2>
+  <ul>
+    <li><strong>No compute energizes before Quote&nbsp;2 circuits.</strong> The RTX workstation (575–600W) and DGX nodes need the dedicated 20A/30A circuits first.</li>
+    <li><strong>The studio is unusable before Quote&nbsp;3 drops.</strong> Room 409 currently has <em>one</em> data drop; the 10GbE backbone + new drops come before deployment.</li>
+  </ul>
+  <table>
+    <tr><th style="width:22%">Phase</th><th>Actions</th></tr>
+    <tr><td><strong>Now → June 30</strong> (grant window)</td><td>Lock education-priced POs for Quote 1 (quotes expire 14–30 days); commission the licensed-electrician load study; get the campus-IT vendor ruling (UniFi vs. Aruba/Cisco); confirm tax-exempt status + line-by-line grant eligibility.</td></tr>
+    <tr><td><strong>30 days</strong></td><td>Sealed sub bids (3 each: electrical, low-voltage, access, GC); permits; cabling + raised-floor design; finalize room dimensions &amp; seat count.</td></tr>
+    <tr><td><strong>90 days</strong></td><td>Install <strong>power → cabling/network → compute → cameras/access → demo day.</strong> Display boards + dashboard go live; first cohort onboards.</td></tr>
+  </table>
+
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 2</span></footer>
+</section>
+
+<!-- ===================== PAGE 3 — ASSESSMENT ===================== -->
+<section class="page">
+  <h2>5 · Existing-Conditions Assessment (Walkthrough, May 26 2026)</h2>
+  <p>A true on-site assessment was performed with Dr. Smith. The conditions below — confirmed in the 16 verified photographs on p.4 — are what the three quotes resolve. Room → lab mapping:</p>
+  <table>
+    <tr><th style="width:18%">Room</th><th style="width:24%">Becomes</th><th>Condition found (drives scope)</th></tr>
+    <tr><td><strong>409</strong></td><td>AI Studio (10–13 seats)</td><td>Dr. Smith's preferred room. <strong>One data drop</strong>; breakers trip on space heaters; keep the dual smartboards (one Wacom) + 2 projectors; fire-egress concern.</td></tr>
+    <tr><td><strong>407</strong></td><td>Math &amp; Soldering Lab</td><td>Convertible; <strong>empty built-in cabinetry</strong> stores the soldering bench; an "L-bend" fits a fume extractor; shared CS-circuitry + engineering.</td></tr>
+    <tr><td><strong>305 + 310</strong></td><td>Engineering Lab</td><td>305 = project room w/ benches, packing tables, a donated 3D printer. 310 downstairs = the "good room" with <strong>existing NVIDIA-GPU desktops to repurpose for AI hosting</strong> (saves the engineering budget).</td></tr>
+    <tr><td><strong>MDF closet</strong></td><td>Network core</td><td>"Frankenstein" — switch <em>and</em> fuse box in one closet (not to code); drops out ~monthly; breakers too old. The leverage point to fix infrastructure.</td></tr>
+    <tr><td><strong>405</strong></td><td>(Vision only)</td><td>Borrow space for a small unisex bathroom — <em>facility/donor scope, excluded from the recommended tier.</em></td></tr>
+  </table>
+  <div class="section-note"><strong>Whole-complex conditions:</strong> no 90° angles (slanted walls/floors); 15 "Frankensteined" AC units; all windows need resealing; bare cinderblock, no insulation. These raise facility labor and are why the load study + sealed bids precede commitment.</div>
+  <h3>In Dr. Smith's words</h3>
+  <p class="quote">"I've only got the one data drop right there." — <span class="muted">(asked: in the entire room?)</span> — "Yes, that's it right there."</p>
+  <p class="quote">"These electrical units, they can't handle nothing… I got portable heaters… Boom." → "That means your breakers need to be updated."</p>
+  <p class="quote">"I know this is not to code. We're not supposed to have a closet next to the fuse box."</p>
+  <p class="quote">"The main objective: secure and always changing… nobody could copy it or retain that information." <span class="muted">(access control)</span></p>
+  <p class="quote">"We want AI. We need power. Power is the number one thing you invest in."</p>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 3</span></footer>
+</section>
+
+<!-- ===================== PAGE 4 — PHOTO EXHIBITS ===================== -->
+<section class="page">
+  <h2>6 · Photo Exhibit Addendum (verified on-site)</h2>
+  <p class="muted small">Each photograph was individually reviewed; captions describe what is actually in frame. Full-resolution files in <code>/exhibits</code>.</p>
+  <div class="exgrid">
+    <div class="ex"><img src="exhibits/EX-01_single-power-data-teaching-cart.jpg"/><div class="cap"><b>EX-01 · Rm 409:</b> Teaching cart labeled "…MATH &amp; COMP" fed by a <b>single surface-run outlet on bare cinderblock</b> — the core power/data need.</div></div>
+    <div class="ex"><img src="exhibits/EX-03_damaged-lowvoltage-plate.jpg"/><div class="cap"><b>EX-03:</b> Damaged low-voltage plate with <b>bare blue/yellow data wires hanging to the floor</b> — existing cabling is inadequate.</div></div>
+    <div class="ex"><img src="exhibits/EX-09_existing-3dprinters-cluttered-corner.jpg"/><div class="cap"><b>EX-09 · Rm 305:</b> The department <b>already 3D-prints</b> (MakerBot-class) in a cluttered, unventilated corner — justifies the Bambu fleet + fume extraction.</div></div>
+    <div class="ex"><img src="exhibits/EX-07_reusable-blue-engineering-benches.jpg"/><div class="cap"><b>EX-07:</b> Reusable <b>blue engineering benches + pegboard</b>; this room already has a ceiling-cassette AC + projector. Trims furniture cost.</div></div>
+    <div class="ex"><img src="exhibits/EX-05_interactive-panel-exposed-AV.jpg"/><div class="cap"><b>EX-05:</b> Interactive panel on bare block with <b>exposed AV cabling</b>; a reusable blue cabinet at left.</div></div>
+    <div class="ex"><img src="exhibits/EX-04_dated-onoff-control-plate.jpg"/><div class="cap"><b>EX-04:</b> Dated 2-toggle ON/OFF control plate — the "confusing, unlabeled controls" finding.</div></div>
+    <div class="ex"><img src="exhibits/EX-06_window-seal-failure.jpg"/><div class="cap"><b>EX-06:</b> Fogged / seal-failed window — envelope &amp; HVAC weakness; supports supplemental cooling for GPU heat.</div></div>
+    <div class="ex"><img src="exhibits/EX-02_single-low-duplex-outlet.jpg"/><div class="cap"><b>EX-02:</b> A single low duplex outlet serving a classroom zone — extension-cord dependence.</div></div>
+    <div class="ex"><img src="exhibits/EX-12_student-research-posters.jpg"/><div class="cap"><b>EX-12:</b> Real Oakwood student research (prosthetic mitral valve; cancer-screening "DACS") — the program already produces serious work.</div></div>
+    <div class="ex"><img src="exhibits/EX-08_reusable-steel-storage-cabinet.jpg"/><div class="cap"><b>EX-08:</b> Reusable steel storage cabinet — supports the "separate machines from supplies / lockable storage" plan.</div></div>
+    <div class="ex"><img src="exhibits/EX-14_classroom-door-vision-panel.jpg"/><div class="cap"><b>EX-14:</b> Classroom door + lockset — the multi-door access-control + labeling retrofit.</div></div>
+    <div class="ex"><img src="exhibits/EX-13_hvac-diffuser-on-block.jpg"/><div class="cap"><b>EX-13:</b> HVAC diffuser on bare block — part of the 15-unit "Frankensteined" system.</div></div>
+  </div>
+  <p class="muted small">Additional verified exhibits in <code>/exhibits</code>: EX-10 lecture seating to reconfigure · EX-11 building access corridor · EX-15 "Graduates" pride board · EX-16 lab counter with a single outlet. 27 of 71 photos were blocked from download; re-share to add more.</p>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 4</span></footer>
+</section>
+
+<!-- ===================== PAGE 5 — QUOTE 1 ===================== -->
+<section class="page">
+  <h2>7 · Quote 1 — AI Studio + Engineering Lab <span class="muted small">(Title III grant-eligible)</span></h2>
+  <div class="three-grid">
+    <div class="card top-teal"><h3>AI Studio · Rm 409</h3><p class="small">10–13 high-memory seats so students run local models: <strong>6× Framework Desktop 128GB</strong> (~$2,851) + <strong>4× Mac Studio M4 Max 64GB</strong> (~$2,600) + <strong>1× DGX Spark</strong> ($4,699) + an <strong>RTX 5090 workstation</strong> + <strong>Jetson AGX Thor</strong> + Orin Nano kits + Synology NAS + rack UPS + an <strong>85″ demo wall</strong>. Keep the dual smartboards/2 projectors.</p></div>
+    <div class="card top-gold"><h3>Math &amp; Soldering · Rm 407</h3><p class="small"><strong>5–10× Hakko FX-888DX</strong> soldering stations + recirculating <strong>BOFA 3D PrintPRO</strong>-class fume/VOC extraction in the cabinetry/L-bend; bench instruments; an enclosed <strong>Carbide Nomad 3</strong> CNC. Reuses the empty built-in cabinets.</p></div>
+    <div class="card top-coral"><h3>Engineering · Rm 305 + 310</h3><p class="small"><strong>≥4 Bambu Lab printers</strong>: <strong>H2D</strong> large-format + <strong>X1E</strong> enterprise + <strong>3× P1S + AMS</strong>, enclosures, filament. <strong>Repurpose the existing NVIDIA-GPU desktops</strong> in 310 for AI hosting (10GbE NICs, RAM, IP-KVM) — engineering compute for near-zero new spend.</p></div>
+  </div>
+  <table>
+    <tr><th>Division</th><th>Representative real SKUs (June 2026)</th><th class="num">Planning range</th></tr>
+    <tr><td>AI Studio compute (lean)</td><td>Framework Desktop 128GB · Mac Studio M4 Max 64GB · DGX Spark · RTX 5090 WS · Jetson Thor/Orin · Synology DS1825+ · rack UPS</td><td class="num">$30,000–$33,000</td></tr>
+    <tr><td>Engineering Bambu fleet + GPU repurposing</td><td>Bambu H2D AMS Combo ~$2,199 · X1E ~$2,649 · 3× P1S+AMS ~$799 · BOFA PrintPRO 3 · Intel X550-T2 NICs · PiKVM V4</td><td class="num">$16,900–$18,500</td></tr>
+    <tr><td>Soldering bench + CNC</td><td>5–10× Hakko FX-888DX (~$135) · bench fume extraction · Carbide Nomad 3 ~$2,800</td><td class="num">$8,000–$9,000</td></tr>
+    <tr><td>AV: 3 hallway display boards + 85″ studio demo wall</td><td>3× ~50″ commercial displays + UniFi Connect signage/media players + mounts · 85″ commercial demo wall ~$4,600</td><td class="num">$8,250–$9,120</td></tr>
+    <tr><td>Furniture (movable) · Consumables/safety · Software/warranty</td><td>Movable benches/chairs · filament/resin/PPE/flammables cabinet/ABC+Class-D extinguishers · licenses + extended warranty</td><td class="num">$9,800–$11,900</td></tr>
+    <tr class="subtotal"><td colspan="2">Quote 1 grant-eligible subtotal (equipment + supplies)</td><td class="num">$88,242–$98,820</td></tr>
+  </table>
+  <div class="section-note small"><strong>Display / project boards (your spec):</strong> a board outside <em>each</em> of the three labs (409 / 407 / 305-310), auto-fed from in-room activity via UniFi Connect — "you see AI happening before you enter the room." <strong>Per-semester access</strong> + the <strong>85″ demo wall</strong> make the studio look intentional and impressive. <strong>Grant tag:</strong> items ≥$2,000/unit are EQUIPMENT; the many &lt;$2,000 items (Orin Nano, P1S, Hakko, cameras, NAS, UPS, switches) are SUPPLIES — confirm with the grants officer whether rack components aggregate to a capitalized system.</div>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 5</span></footer>
+</section>
+
+<!-- ===================== PAGE 6 — QUOTES 2 & 3 ===================== -->
+<section class="page">
+  <h2>8 · Quote 2 — Power / Electrical <span class="muted small">(Facility · NOT grant · subbed + GC-managed)</span></h2>
+  <table>
+    <tr><th>Scope (lab-focused)</th><th class="num">Planning range</th></tr>
+    <tr><td>100A lab subpanel · 14 dedicated 20A circuits · 2× 30A L5-30 UPS circuits · conduit/raceway on cinderblock · lab touch-ups · permits</td><td class="num">$34,000–$37,000</td></tr>
+  </table>
+  <p class="small"><strong>Load calc (electrician verifies):</strong> ~7–9kW continuous / ~12kW peak (~60–75A @120V) → a dedicated 100A subpanel is the floor (NEC 125% continuous derating; resolve 120/240V vs 208V; size the CNC circuit for inrush). <strong>Named Huntsville subs to bid:</strong> Madison Electric, Pro Electric, Lee Company, Blake Brothers, Urban Electric.</p>
+
+  <h2>9 · Quote 3 — Network + Wi-Fi + Cameras + Access <span class="muted small">(Mixed: electronics grant / cabling facility)</span></h2>
+  <table>
+    <tr><th>Division</th><th>Real SKUs (June 2026)</th><th class="num">Range</th><th style="width:14%">Lane</th></tr>
+    <tr><td>UniFi core + pfSense</td><td>UniFi EnterpriseXG-24 ($1,299) · 2× USW-Pro-Max-24-PoE ($799) · UDM-Pro-Max ($599) · <strong>Netgate 6100 MAX pfSense</strong> ($999) · 42U rack</td><td class="num">$3,837–$4,500</td><td>Grant (equip)</td></tr>
+    <tr><td>UniFi Protect cameras</td><td>UNVR-Pro ($499) + 8TB surveillance HDDs · 10–12× G5/G6 Turret/Bullet ($129–$199) · AI Pro ($499) for the print room</td><td class="num">$3,055–$3,800</td><td>Grant (equip)</td></tr>
+    <tr><td>UniFi Access — 4 doors, rotating credentials</td><td>4–5× UA-Hub-Door ($199) · G3 Reader Pro ($379) at entry + G3 Readers ($159) · fail-safe HES strikes/maglock + REX + DPS + install</td><td class="num">$8,400–$9,000</td><td>Equip + install</td></tr>
+    <tr><td>Structured cabling — lab-focused (SUBBED)</td><td>Cat6A drops + patch panel + MDF rack rebuild (cabling labor = facility)</td><td class="num">$12,000–$14,000</td><td>Facility</td></tr>
+  </table>
+  <p class="small"><strong>Per-semester rotating credentials</strong> are native to UniFi Access (PIN expiry windows, NFC card deactivation, mobile/Wallet revoke — create a "Fall-2026" group, set term dates, deactivate at end → every credential dies at once). <strong>Everything in one pane</strong> (UniFi OS) replaces the antiquated MDF. <strong>Named Huntsville subs:</strong> low-voltage — Travel Tech (256.970.4558), Interweave (256-837-2300), Heart Technologies (256-859-4000), State Systems; access — AAC Systems, Clear Link, LOCKTEC (256-881-9300), Tri-State Electrical.</p>
+  <div class="section-note small"><strong>ADA / egress &amp; code:</strong> all locks specified <strong>fail-safe</strong> (release on power loss); maglocks tie to the fire panel with REX + marked push-to-exit; Huntsville AHJ sign-off required. A distinct low-voltage permit + fire/egress coordination is carried in Permits.</div>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 6</span></footer>
+</section>
+
+<!-- ===================== PAGE 7 — INVOICE ===================== -->
+<section class="page">
+  <h2>10 · Execute-Ready Invoice — Recommended Execution</h2>
+  <p class="muted small">Invoice basis: IDC (Jonathan Isaac) as General Contractor. Grant-eligible lines may be procured under Title III; facility lines are subbed and carry GC coordination. Re-quote each line to a sealed bid before purchase.</p>
+  <table>
+    <tr><th style="width:6%">#</th><th>Line item</th><th class="num" style="width:24%">Amount (range)</th></tr>
+    <tr class="lane"><td colspan="3">I · Grant-Eligible Equipment &amp; Supplies (Title III)</td></tr>
+    <tr><td>1</td><td>AI Studio compute — studio/lean tier</td><td class="num">$30,000–$33,000</td></tr>
+    <tr><td>2</td><td>Engineering Bambu fleet + GPU-PC repurposing</td><td class="num">$16,900–$18,500</td></tr>
+    <tr><td>3</td><td>Soldering bench + CNC</td><td class="num">$8,000–$9,000</td></tr>
+    <tr><td>4</td><td>Consumables / safety / storage</td><td class="num">$3,000–$3,800</td></tr>
+    <tr><td>5</td><td>AV — 3 hallway display boards + 85″ studio demo wall</td><td class="num">$8,250–$9,120</td></tr>
+    <tr><td>6</td><td>UniFi network core + pfSense edge</td><td class="num">$3,837–$4,500</td></tr>
+    <tr><td>7</td><td>UniFi Protect cameras — priority labs + key hallway</td><td class="num">$3,055–$3,800</td></tr>
+    <tr><td>8</td><td>UniFi Access — 4 doors, per-semester rotating credentials</td><td class="num">$8,400–$9,000</td></tr>
+    <tr><td>9</td><td>Furniture (movable lab/studio)</td><td class="num">$5,000–$5,800</td></tr>
+    <tr><td>10</td><td>Software / licensing / extended warranty</td><td class="num">$1,800–$2,300</td></tr>
+    <tr class="subtotal"><td colspan="2">Grant-eligible subtotal</td><td class="num">$88,242–$98,820</td></tr>
+    <tr class="lane"><td colspan="3">II · Facility — Capital / Donor (NOT grant-eligible · SUBBED)</td></tr>
+    <tr><td>11</td><td>Power / electrical — lab-focused (subpanel, circuits, raceway, permits)</td><td class="num">$34,000–$37,000</td></tr>
+    <tr><td>12</td><td>Structured cabling — lab-focused (Cat6A drops, patch, MDF rebuild)</td><td class="num">$12,000–$14,000</td></tr>
+    <tr><td>13</td><td>Raised access floor — AI Studio only (~300–400 sqft) + light room mod</td><td class="num">$8,000–$10,000</td></tr>
+    <tr><td>14</td><td>Permits / insurance / freight</td><td class="num">$2,400–$2,800</td></tr>
+    <tr class="subtotal"><td colspan="2">Facility subtotal</td><td class="num">$56,400–$63,800</td></tr>
+    <tr class="subtotal"><td colspan="2">Direct cost (I + II)</td><td class="num">$144,642–$162,620</td></tr>
+    <tr class="lane"><td colspan="3">III · GC Coordination, Contingency &amp; IDC Fee</td></tr>
+    <tr><td>15</td><td>GC coordination markup — 3–7% on the subbed facility base only</td><td class="num">$1,692–$4,466</td></tr>
+    <tr><td>16</td><td>Contingency — 6–8% on (direct + markup); 2026 memory-price volatility</td><td class="num">$8,780–$13,367</td></tr>
+    <tr><td>17</td><td><strong>IDC Orchestration Fee — 10% of pre-fee subtotal</strong></td><td class="num">$15,511–$18,045</td></tr>
+    <tr class="total"><td colspan="2">ALL-IN TOTAL · Recommended commitment <strong>$172,000</strong></td><td class="num">$170,625–$198,498</td></tr>
+  </table>
+  <div class="two-grid">
+    <div class="card top-teal"><h3>Payment schedule (proposed)</h3><ul class="small"><li><strong>25% mobilization</strong> — on signature; initiates procurement &amp; sub scheduling.</li><li><strong>50% progress</strong> — at equipment delivery + electrical/cabling rough-in.</li><li><strong>25% completion</strong> — at commissioning, demo day, &amp; closeout docs.</li></ul><div class="pay-box small"><strong>Pay deposit:</strong> <a href="STRIPE_PAYMENT_LINK">IDC Stripe payment link</a> <span class="muted">(insert link)</span></div></div>
+    <div class="card top-gold"><h3>Acceptance &amp; signatures</h3><p class="small">Signature-ready; DocuSign / SignWell / Adobe / print-scan accepted.</p>
+      <div class="sig-grid">
+        <div class="sig"><strong>Provider</strong><p class="muted small">Jonathan Isaac<br/>Island Development Crew LLC<br/>jon-isaac@islanddevcrew.com</p><div class="line">Signature / Date</div></div>
+        <div class="sig"><strong>Client</strong><p class="muted small">Dr. Shushannah Smith<br/>Oakwood University · Math &amp; CS<br/>ssmith@oakwood.edu</p><div class="line">Signature / Date</div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com · 256-668-8248</span><span>Oakwood AI Lab Invoice · Page 7</span></footer>
+</section>
+
+<!-- ===================== PAGE 8 — CURRICULUM ===================== -->
+<section class="page">
+  <h2>11 · Curriculum Spine — <em>2084</em> / John Lennox <span class="muted small">(responsible-AI ethics for an Adventist HBCU)</span></h2>
+  <p>Textbook: <strong>"2084 and the AI Revolution"</strong> (Updated &amp; Expanded Ed., John C. Lennox, Zondervan Reflective 2024, ISBN 9780310166641, ~$24–28) — chosen over the 2020 original because it engages the generative-AI/LLM era. Companion: the <em>2084</em> 13-session Video Study for a flipped classroom. Two interleaved courses share one ethics spine; every 1–2 weeks ships one of <strong>8 portfolio projects</strong> ("students don't study AI — they ship it").</p>
+  <table>
+    <tr><th style="width:6%">Wk</th><th style="width:26%">Ethics seminar (Lennox)</th><th>AI Engineering (Rm 409/310)</th><th>Project shipped</th></tr>
+    <tr><td>1</td><td>Ch.1 Mapping the territory</td><td>Onboarding; Python/Git; local vs cloud LLM</td><td>— setup</td></tr>
+    <tr><td>2</td><td>Ch.2–3 Origins / surveillance</td><td>RAG chatbot on a local model (Rm 310 GPUs)</td><td><strong>P1 Local RAG assistant</strong></td></tr>
+    <tr><td>3–4</td><td>Ch.4–5 Narrow AI: promise &amp; bias</td><td>CV classifier + bias/fairness audit; model cards</td><td><strong>P2 CV model + bias audit</strong></td></tr>
+    <tr><td>5</td><td>Ch.6 Upgrading humans</td><td>Voice agent; assistive-tech use case + fabricate device</td><td><strong>P3 Assistive-tech AI device</strong></td></tr>
+    <tr><td>6–7</td><td>Ch.7–8 AGI risk / personhood</td><td>Agentic workflow + guardrails; multimodal app deploy</td><td><strong>P4 Agentic app w/ guardrails</strong></td></tr>
+    <tr><td>8–9</td><td>Ch.9 Origin of moral sense</td><td>Eval harness; red-team; responsible-AI write-up</td><td><strong>P5–P6 Eval + governance memo</strong></td></tr>
+    <tr><td>10–12</td><td>Ch.10–13 Homo Deus / Revelation</td><td>Capstone: ship a campus tool (à la Campus Companion)</td><td><strong>P7–P8 Capstone + demo day</strong></td></tr>
+  </table>
+  <div class="two-grid">
+    <div class="card top-teal"><h3>Pricing model</h3><ul class="small"><li><strong>Digital Pass — $250–$350 / student:</strong> lab access, the local-AI toolchain, project templates, the eval harness, demo-board publishing, and a portfolio site.</li><li><strong>Textbook — ~$35:</strong> <em>2084 and the AI Revolution</em> (bulk/ministry discounts via 10ofThose).</li><li>Two new courses: <strong>AI Engineering</strong> + <strong>hands-on Machining/CNC</strong> — reduces required external co-op hours.</li></ul></div>
+    <div class="card top-gold"><h3>Why it lands at Oakwood</h3><p class="small">As the only SDA HBCU, Oakwood can teach AI with a <strong>worldview-grounded ethics voice</strong> secular schools struggle to articulate — data dignity, human-in-the-loop, Sabbath as a model for digital rest. Graduates leave with a portfolio <em>and</em> a point of view.</p></div>
+  </div>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 8</span></footer>
+</section>
+
+<!-- ===================== PAGE 9 — FUNDRAISING / VISION ===================== -->
+<section class="page">
+  <h2>12 · Fundraising, Match Funds &amp; the Naming Opportunity</h2>
+  <div class="two-grid">
+    <div class="card top-teal"><h3>Grant &amp; corporate funding</h3><ul class="small"><li><strong>Federal HBCU + AI:</strong> NSF ExpandAI, NSF HBCU-EiR, NSF HBCU-UP, Dept of Ed Title III Part B (Oakwood is an active recipient).</li><li><strong>Compute/hardware programs:</strong> NVIDIA Academic Grant, AMD University Program, Google.org / UNCF.</li><li><strong>Mission-fit philanthropy:</strong> John Templeton Foundation ("Religion, Science &amp; Society — Intelligence"), Lilly Endowment (faith &amp; AI), Mellon ("Unruly Intelligences").</li><li><strong>Corporate matching-gift</strong> programs for employee donations.</li></ul></div>
+    <div class="card top-gold"><h3>Notoriety &amp; the naming track</h3><ul class="small"><li><strong>Voices to engage:</strong> Dr. James Tour, John Lennox, Wesley Huff — credible on AI + faith + science.</li><li><strong>Channels:</strong> Modern Wisdom, Valuetainment, Diary of a CEO — to spotlight an HBCU building responsible AI.</li><li><strong>Naming opportunity:</strong> "<strong>The John Lennox AI Innovation Lab</strong>" (pending Oakwood approval) — pairs the <em>2084</em> curriculum with a named-gift envelope that funds the grant-ineligible facility scope.</li></ul></div>
+  </div>
+  <h2>13 · Department-Wide Vision <span class="muted small">(donor / naming ask · $245K–$330K)</span></h2>
+  <p class="small">The full robust transformation — the envelope to put in front of a donor or match funder, since it carries the facility scope Title III cannot.</p>
+  <table>
+    <tr><th>Division (full scope)</th><th class="num">Range</th><th>Division (full scope)</th><th class="num">Range</th></tr>
+    <tr><td>AI Studio compute (pooled · RTX PRO 6000)</td><td class="num">$42K–$50K</td><td>Power / electrical (full dept)</td><td class="num">$34K–$48K</td></tr>
+    <tr><td>Engineering Bambu fleet (full)</td><td class="num">$20K–$23.9K</td><td>Structured cabling (80 drops + fiber)</td><td class="num">$24K–$36K</td></tr>
+    <tr><td>Soldering + CNC (full)</td><td class="num">$11K–$14K</td><td>Raised floor + Room-405 bathroom + room mod</td><td class="num">$45.6K–$62K</td></tr>
+    <tr><td>Cameras (dept-wide) + Access (5 doors)</td><td class="num">$15K–$19K</td><td>Network core, AV, furniture, software, permits</td><td class="num">$24K–$30K</td></tr>
+    <tr class="total"><td colspan="3">Department-Wide Vision — all-in (incl. GC markup + 10% IDC fee)</td><td class="num">$245,000–$330,000</td></tr>
+  </table>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com</span><span>Oakwood AI Lab Proposal · Page 9</span></footer>
+</section>
+
+<!-- ===================== PAGE 10 — CLOSE ===================== -->
+<section class="page">
+  <h2>14 · Orchestration, Reporting &amp; Next Steps</h2>
+  <div class="three-grid">
+    <div class="card top-teal"><h3>Single point of accountability</h3><p class="small">IDC engages and schedules every vendor &amp; Huntsville sub, manages the grant vs. facility funding lanes, and owns the timeline. One markup, one fee, one invoice.</p></div>
+    <div class="card top-gold"><h3>Live progress &amp; reporting</h3><p class="small">A live HTML <strong>progress dashboard</strong> link is attached to the project email; <strong>weekly &amp; monthly</strong> progress reports keep faculty &amp; administration abreast through commissioning.</p></div>
+    <div class="card top-coral"><h3>Protected investment</h3><p class="small">Department cameras + per-semester rotating access control + cabling/power done to code mean the equipment is controlled, managed, and protected from day one.</p></div>
+  </div>
+  <h2>Open items to confirm before sealed bids</h2>
+  <ul class="small">
+    <li>Final room dimensions &amp; seat count (Rm 409 measured pass) — required for the raised-floor quote.</li>
+    <li>Campus-IT vendor ruling: UniFi/pfSense allowed, or map to Aruba/Cisco/Extreme? Does access tie to the campus card?</li>
+    <li>Oakwood tax-exempt status + grant eligibility ruling (setup labor, software/SaaS, networking hardware, cabling labor, access hardware).</li>
+    <li>Tier to commit: Recommended ~$172K vs. a sub-$170K trim (single-lab cameras / 2-door access).</li>
+    <li>Stripe Payment Link + DocuSign send authorization; Gmail authorization for automated progress emails.</li>
+  </ul>
+  <div class="section-note"><strong>Recommended next step.</strong> Approve the Recommended Execution tier (~$172,000 all-in), release the mobilization deposit, and authorize IDC to (1) commission the licensed-electrician load study and (2) issue the same scope to three sealed sub bids per trade. IDC returns firm, signed numbers within ~10 business days and begins the 90-day build.</div>
+  <p class="muted small">Live reference hub: oakwood-ai-hub.vercel.app/ai-lab-final · Prepared by Island Development Crew LLC. Planning-grade; not a fixed bid until sealed sub quotes and the electrician load study are returned. Hardware prices are June-2026 and time-sensitive (2026 memory market) — re-quote within 14–30 days.</p>
+  <div class="sig-grid">
+    <div class="sig"><strong>Authorized to proceed — Provider</strong><p class="muted small">Jonathan Isaac · Island Development Crew LLC</p><div class="line">Signature / Date</div></div>
+    <div class="sig"><strong>Authorized to proceed — Client</strong><p class="muted small">Dr. Shushannah Smith · Oakwood University</p><div class="line">Signature / Date</div></div>
+  </div>
+  <footer class="footer"><span>Island Dev Crew Consulting · jon-isaac@islanddevcrew.com · 256-668-8248</span><span>Oakwood AI Lab Proposal · Page 10</span></footer>
+</section>
+
+</body>
+</html>

@@ -20,7 +20,7 @@
   a{color:inherit;text-decoration:none}
   /* ---- living background layers ---- */
   #bg{position:fixed;inset:0;z-index:-3;width:100%;height:100%;display:block}
-  .scrim{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(6,12,16,.30),rgba(6,12,16,.52) 55%,rgba(6,12,16,.66));pointer-events:none}
+  .scrim{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(6,14,20,.10),rgba(6,12,16,.36) 60%,rgba(6,12,16,.52));pointer-events:none}
   .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   .noscroll-fallback{position:fixed;inset:0;z-index:-3;display:none;background:
@@ -205,20 +205,20 @@
   '  float t=u_time*0.028;',
   '  vec2 q=vec2(fbm(p*1.4+t), fbm(p*1.4+vec2(3.1,1.7)-t));',
   '  float f=fbm(p*2.0+1.7*q+t*0.6);',
-  '  vec3 A=vec3(0.035,0.106,0.145);',   // deep navy
-  '  vec3 B=vec3(0.039,0.482,0.451);',   // teal
-  '  vec3 C=vec3(0.070,0.640,0.740);',   // aqua
-  '  vec3 D=vec3(0.906,0.435,0.345);',   // coral
-  '  vec3 E=vec3(0.855,0.615,0.180);',   // gold
+  '  vec3 A=vec3(0.055,0.150,0.205);',   // deep navy
+  '  vec3 B=vec3(0.043,0.560,0.520);',   // teal
+  '  vec3 C=vec3(0.090,0.720,0.820);',   // aqua
+  '  vec3 D=vec3(0.960,0.470,0.370);',   // coral
+  '  vec3 E=vec3(0.920,0.680,0.230);',   // gold
   '  float s=clamp(u_scroll,0.0,1.0)*4.0;',
-  '  vec3 base;',
-  '  if(s<1.0) base=mix(A,B,smoothstep(0.0,1.0,s));',
-  '  else if(s<2.0) base=mix(B,C,smoothstep(0.0,1.0,s-1.0));',
-  '  else if(s<3.0) base=mix(C,D,smoothstep(0.0,1.0,s-2.0));',
-  '  else base=mix(D,E,smoothstep(0.0,1.0,s-3.0));',
-  '  vec3 col=base*(0.45+0.75*f);',
-  '  col+=0.12*vec3(0.85,0.95,1.0)*pow(f,3.0);',
-  '  col*=smoothstep(1.35,0.15,length(p));',
+  '  vec3 base; vec3 acc;',
+  '  if(s<1.0){ base=mix(A,B,smoothstep(0.0,1.0,s)); acc=C; }',
+  '  else if(s<2.0){ base=mix(B,C,smoothstep(0.0,1.0,s-1.0)); acc=vec3(0.60,0.95,1.0); }',
+  '  else if(s<3.0){ base=mix(C,D,smoothstep(0.0,1.0,s-2.0)); acc=vec3(1.0,0.78,0.55); }',
+  '  else { base=mix(D,E,smoothstep(0.0,1.0,s-3.0)); acc=vec3(1.0,0.86,0.45); }',
+  '  vec3 col=base*(0.62+0.62*f);',
+  '  col+=acc*pow(f,2.2)*0.42;',
+  '  col*=smoothstep(1.75,0.05,length(p));',
   '  col+=(hash(gl_FragCoord.xy)-0.5)*0.018;',
   '  gl_FragColor=vec4(col,1.0);',
   '}'].join('\n');

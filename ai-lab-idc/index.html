@@ -4,76 +4,254 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Oakwood AI Lab — IDC Proposal Package</title>
+<meta name="description" content="Island Development Crew — Oakwood University AI Studio + Engineering Lab proposal package."/>
 <style>
-  :root{ --ink:#17202b; --muted:#637083; --teal:#087b74; --deep:#123747; --aqua:#0c9eb6; --gold:#c48b19; --coral:#df654d; }
-  *{box-sizing:border-box} body{margin:0;background:#eef1f3;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
-  .wrap{max-width:980px;margin:0 auto;padding:26px}
-  .head{display:flex;gap:16px;align-items:center;background:linear-gradient(100deg,#123747,#087b74);color:#fff;border-radius:16px;padding:22px 26px}
-  .head img{width:70px;height:70px;border-radius:10px;object-fit:cover;background:#08151d}
-  .head h1{margin:0;font-size:24px;font-weight:500} .head .sub{opacity:.9;font-size:13px;margin-top:4px}
-  .accent{height:6px;background:linear-gradient(90deg,var(--teal),var(--aqua),var(--coral),var(--gold));border-radius:4px;margin:16px 0}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .card{background:#fff;border:1px solid #cfd7df;border-radius:14px;padding:20px 22px;box-shadow:0 8px 26px rgba(23,32,43,.07);display:flex;flex-direction:column}
-  .card.top-teal{border-top:4px solid var(--teal)} .card.top-gold{border-top:4px solid var(--gold)} .card.top-coral{border-top:4px solid var(--coral)} .card.top-aqua{border-top:4px solid var(--aqua)}
-  .card h2{margin:0 0 6px;font-size:17px;color:var(--deep)} .card p{margin:0 0 14px;color:var(--muted);font-size:13px}
-  a.btn{display:inline-block;background:var(--deep);color:#fff;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:9px;font-size:14px;text-align:center}
-  a.btn.teal{background:var(--teal)} a.btn.gold{background:var(--gold)} a.btn.ghost{background:#fff;color:var(--deep);border:1px solid #cfd7df}
-  .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px} .btnrow a.btn{width:100%}
-  .btncenter{display:flex;justify-content:center;margin-top:10px} .btncenter a.btn{min-width:220px}
-  .dl{margin-top:12px;font-size:13px} .dl a{color:var(--aqua);font-weight:700;text-decoration:none;margin-right:14px}
-  .price{font-size:30px;font-weight:300;color:var(--deep);line-height:1} .pill{display:inline-block;border:1px solid #d2d6c9;border-radius:999px;background:#fffdf8;color:var(--teal);padding:3px 11px;font-size:11px;margin:3px 4px 0 0}
-  .foot{color:var(--muted);font-size:12px;text-align:center;margin:22px 0 6px}
-  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  :root{
+    --ink:#0c1116; --teal:#0a9b8f; --deep:#123747; --aqua:#12b0c8; --gold:#e0a83a; --coral:#f0795e;
+    --cream:#eef4f5; --muted:rgba(232,241,243,.62);
+    --glass:rgba(10,20,28,.52); --glass-2:rgba(12,26,34,.62); --edge:rgba(255,255,255,.14);
+    --shadow:0 18px 50px rgba(0,0,0,.38);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#08121a;color:var(--cream);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  /* ---- living background layers ---- */
+  #bg{position:fixed;inset:0;z-index:-3;width:100%;height:100%;display:block}
+  .scrim{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(6,12,16,.30),rgba(6,12,16,.52) 55%,rgba(6,12,16,.66));pointer-events:none}
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .noscroll-fallback{position:fixed;inset:0;z-index:-3;display:none;background:
+    radial-gradient(1200px 700px at 20% 0%,rgba(18,176,200,.30),transparent 60%),
+    radial-gradient(1000px 800px at 90% 100%,rgba(224,168,58,.24),transparent 60%),
+    linear-gradient(160deg,#0a2230,#0b1620 55%,#0a1a20)}
+  /* ---- nav ---- */
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 22px;background:rgba(8,16,22,.55);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--edge)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.01em}
+  .brand img{width:34px;height:34px;border-radius:8px;object-fit:cover;background:#08151d;box-shadow:0 0 0 1px var(--edge)}
+  .brand small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .navlinks{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .navlinks a{font-size:12.5px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:8px;transition:.2s;letter-spacing:.02em}
+  .navlinks a:hover{color:#fff;background:rgba(255,255,255,.08)}
+  .navlinks a.home{color:var(--cream);border:1px solid var(--edge)}
+  .navlinks a.pay{color:#06232b;background:linear-gradient(120deg,var(--teal),var(--aqua));border:0}
+  @media(max-width:720px){ .navlinks a.sec{display:none} .brand small{display:none} }
+  /* ---- layout ---- */
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  section{position:relative;z-index:1}
+  .hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:64px 0 40px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--aqua);
+    border:1px solid var(--edge);border-radius:999px;padding:7px 14px;background:rgba(10,20,28,.4);width:max-content}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal);animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.5;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.5rem,6.4vw,5rem);line-height:1.02;letter-spacing:-.02em;margin:20px 0 0;max-width:16ch}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin:20px 0 0;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--muted);max-width:60ch;line-height:1.6}
+  .heroactions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;padding:13px 22px;border-radius:11px;transition:transform .18s,box-shadow .18s,background .2s;border:1px solid transparent;cursor:pointer}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:linear-gradient(120deg,var(--gold),#f0b74e);color:#2a1c02;box-shadow:0 12px 30px rgba(224,168,58,.28)}
+  .btn.teal{background:linear-gradient(120deg,var(--teal),var(--aqua));color:#04222a;box-shadow:0 12px 30px rgba(18,176,200,.26)}
+  .btn.ghost{background:rgba(255,255,255,.05);color:var(--cream);border-color:var(--edge)}
+  .btn.ghost:hover{background:rgba(255,255,255,.12)}
+  .metaline{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;font-size:12.5px;color:var(--muted)}
+  .metaline b{color:var(--cream);font-weight:700}
+  .scrollcue{margin-top:44px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+  .scrollcue .bar{width:34px;height:1px;background:linear-gradient(90deg,var(--aqua),transparent);position:relative;overflow:hidden}
+  .scrollcue .bar::after{content:"";position:absolute;inset:0;width:12px;background:var(--aqua);animation:slide 1.9s ease-in-out infinite}
+  @keyframes slide{0%{transform:translateX(-14px)}100%{transform:translateX(40px)}}
+  /* ---- glass card system ---- */
+  .glass{background:var(--glass);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);border:1px solid var(--edge);border-radius:18px;box-shadow:var(--shadow)}
+  .price-band{margin:0 0 30px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .price-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .price-v{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;margin-top:4px;color:#fff}
+  .price-sub{color:var(--muted);font-size:13px;margin-top:8px}
+  .pills{display:flex;flex-wrap:wrap;gap:7px;max-width:420px}
+  .pill{border:1px solid var(--edge);border-radius:999px;background:rgba(255,255,255,.04);color:var(--cream);padding:5px 12px;font-size:11.5px}
+  .sectlabel{display:flex;align-items:center;gap:14px;margin:0 0 22px}
+  .sectlabel h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,3vw,2.1rem);margin:0;letter-spacing:-.01em}
+  .sectlabel .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--edge),transparent)}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{padding:24px 24px 22px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;height:100%;width:4px;background:var(--teal);opacity:.9}
+  .card.g::before{background:var(--gold)} .card.a::before{background:var(--aqua)} .card.c::before{background:var(--coral)}
+  .card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.28);box-shadow:0 26px 60px rgba(0,0,0,.5)}
+  .card h3{margin:0 0 8px;font-size:18px;color:#fff;letter-spacing:-.01em}
+  .card p{margin:0 0 16px;color:var(--muted);font-size:13.5px}
+  .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px} .btnrow .btn{width:100%;justify-content:center;padding:12px 14px}
+  .btncenter{display:flex;justify-content:center;margin-top:11px}
+  .dl{margin-top:14px;font-size:13px;color:var(--muted)} .dl a{color:var(--aqua);font-weight:700;margin-right:16px} .dl a:hover{color:#fff}
+  .mt{margin-top:auto}
+  /* ---- phase rows ---- */
+  .phases{padding:30px 0 10px}
+  .phase{display:grid;grid-template-columns:70px 1fr;gap:22px;align-items:start;padding:26px 0;border-top:1px solid rgba(255,255,255,.08);
+    opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  .phase.in{opacity:1;transform:none}
+  .phase .num{font-family:var(--serif);font-size:2.2rem;color:var(--gold);line-height:1;opacity:.85}
+  .phase h4{margin:0 0 6px;font-size:17px;color:#fff}
+  .phase p{margin:0;color:var(--muted);font-size:13.5px;max-width:66ch}
+  .phase .tag{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--aqua);border:1px solid var(--edge);border-radius:999px;padding:3px 11px}
+  .foot{padding:46px 0 40px;text-align:center;color:var(--muted);font-size:12.5px;border-top:1px solid rgba(255,255,255,.08);margin-top:24px}
+  .foot a{color:var(--aqua);font-weight:700}
+  .backrow{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  @media(max-width:760px){ .cards{grid-template-columns:1fr} .phase{grid-template-columns:44px 1fr;gap:14px} .price-band{flex-direction:column;align-items:flex-start} }
+  @media (prefers-reduced-motion: reduce){ *{animation:none!important} html{scroll-behavior:auto} .phase{opacity:1;transform:none} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="head">
-    <img src="palm-logo.png" alt="IDC"/>
-    <div>
-      <h1>Oakwood AI Studio + Engineering Lab</h1>
-      <div class="sub">IDC Proposal Package · Island Development Crew · prepared for Dr. Shushannah Smith, Math &amp; Computer Science</div>
-    </div>
-  </div>
-  <div class="accent"></div>
+<canvas id="bg"></canvas>
+<div class="noscroll-fallback" id="fallback"></div>
+<div class="scrim"></div>
+<div class="grain"></div>
 
-  <div class="card top-teal" style="margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px">
-      <div><div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Recommended execution — all-in</div><div class="price">$172,000</div><div style="color:var(--muted);font-size:13px">range $170,625–$198,498 · Title III grant-eligible ≈ $93.5K · facility/capital ≈ $60.1K</div></div>
-      <div>
-        <span class="pill">10-seat AI Studio</span><span class="pill">Soldering/Math lab</span><span class="pill">Engineering + GPU reuse</span><span class="pill">UniFi + pfSense</span><span class="pill">Cameras + Access</span><span class="pill">≥4 Bambu printers</span>
-      </div>
-    </div>
+<nav>
+  <a class="brand" href="#top"><img src="palm-logo.png" alt="IDC"/><span>Island Dev Crew<small>Oakwood AI Lab · Package</small></span></a>
+  <div class="navlinks">
+    <a class="sec" href="#package">Package</a>
+    <a class="sec" href="#inside">Inside</a>
+    <a class="home" href="/ai-lab-final/">◀ AI Lab Home</a>
+    <a class="sec" href="/">Oakwood AI Hub</a>
+    <a class="pay" href="https://buy.stripe.com/7sYbJ3doRftQ2NodvI0VO03">Pay deposit</a>
+  </div>
+</nav>
+
+<span id="top"></span>
+<section class="hero"><div class="wrap">
+  <span class="eyebrow"><span class="dot"></span>Proposal Package · Island Development Crew</span>
+  <h1>Oakwood AI Studio <em>&amp;</em> Engineering Lab</h1>
+  <p class="lede">A turnkey, GC-orchestrated build for a 10-seat AI production studio, a hands-on engineering/soldering makerspace, and the power, network, camera &amp; access infrastructure that protects it — prepared for Dr. Shushannah Smith, Mathematics &amp; Computer Science.</p>
+  <div class="heroactions">
+    <a class="btn primary" href="proposal.html">View the proposal &rarr;</a>
+    <a class="btn ghost" href="Oakwood_AI_Lab_IDC_Proposal_Invoice.pdf">Download PDF</a>
+    <a class="btn teal" href="https://buy.stripe.com/7sYbJ3doRftQ2NodvI0VO03">Pay $68K deposit</a>
+  </div>
+  <div class="metaline"><span><b>$172,000</b> all-in (recommended)</span><span><b>~$93.5K</b> Title III grant-eligible</span><span><b>~$60.1K</b> facility / capital</span><span><b>71</b> site photos</span><span><b>13-page</b> proposal + invoice</span></div>
+  <div class="scrollcue">Scroll to explore<span class="bar"></span></div>
+</div></section>
+
+<section id="package"><div class="wrap">
+  <div class="glass price-band">
+    <div><div class="price-k">Recommended execution — all-in</div><div class="price-v">$172,000</div><div class="price-sub">range $170,625–$198,498 · Dept-Wide Vision $245K–$330K (donor / naming envelope)</div></div>
+    <div class="pills"><span class="pill">10-seat AI Studio</span><span class="pill">Soldering / Math lab</span><span class="pill">Engineering + GPU reuse</span><span class="pill">UniFi + pfSense</span><span class="pill">Cameras + Access</span><span class="pill">≥4 Bambu printers</span><span class="pill">FPE panel replacement</span></div>
   </div>
 
-  <div class="grid">
-    <div class="card top-gold">
-      <h2>📄 Proposal &amp; Execute-Ready Invoice</h2>
-      <p>The full 12-page proposal: assessment, three quotes, 17-line invoice, 20 photo exhibits, curriculum, fundraising, and source references.</p>
-      <div class="btnrow">
-        <a class="btn gold" href="proposal.html">View proposal</a>
-        <a class="btn ghost" href="Oakwood_AI_Lab_IDC_Proposal_Invoice.pdf">Download PDF</a>
-      </div>
+  <div class="sectlabel"><h2>The package</h2><div class="rule"></div></div>
+  <div class="cards">
+    <div class="glass card g">
+      <h3>📄 Proposal &amp; Execute-Ready Invoice</h3>
+      <p>The full 13-page proposal: assessment, three quote ranges, a 17-line invoice, 16 verified photo exhibits, curriculum &amp; fundraising, and every source reference.</p>
+      <div class="btnrow mt"><a class="btn primary" href="proposal.html">View proposal</a><a class="btn ghost" href="Oakwood_AI_Lab_IDC_Proposal_Invoice.pdf">Download PDF</a></div>
       <div class="btncenter"><a class="btn teal" href="https://buy.stripe.com/7sYbJ3doRftQ2NodvI0VO03">Pay $68K deposit</a></div>
-      <div class="dl">Also: <a href="Oakwood_AI_Lab_IDC_Proposal.docx">Word .docx</a> <a href="Oakwood_AI_Lab_Chair_Deck.pptx">Chair deck .pptx</a></div>
+      <div class="dl">Also: <a href="Oakwood_AI_Lab_IDC_Proposal.docx">Word .docx</a><a href="Oakwood_AI_Lab_Chair_Deck.pptx">Chair deck .pptx</a></div>
     </div>
-    <div class="card top-aqua">
-      <h2>📊 Live Project Dashboard</h2>
-      <p>Real-time build status, 90-day timeline, and budget tracker — updated weekly/monthly during the build.</p>
-      <div class="btnrow"><a class="btn teal" href="dashboard.html">Open dashboard</a><a class="btn ghost" href="resources.html">Photos + references</a></div>
+    <div class="glass card a">
+      <h3>📊 Live Project Dashboard</h3>
+      <p>Real-time build status, the 90-day timeline, and a budget tracker — updated weekly/monthly through commissioning.</p>
+      <div class="btnrow mt"><a class="btn teal" href="dashboard.html">Open dashboard</a><a class="btn ghost" href="resources.html">Photos + references</a></div>
     </div>
-    <div class="card top-coral">
-      <h2>🏗️ What it covers</h2>
-      <p>IDC as GC: AI studio compute, Bambu fleet + GPU repurposing, soldering/CNC, 3 display boards, dept-wide UniFi network + Protect cameras + 4-door rotating access, power (incl. FPE-panel replacement) &amp; cabling — with named Huntsville subs.</p>
+    <div class="glass card c">
+      <h3>🏗️ What it covers</h3>
+      <p>IDC as General Contractor: AI-studio compute, the Bambu fleet + GPU repurposing, soldering/CNC, three display boards, dept-wide UniFi network + Protect cameras + 4-door rotating access, and power (incl. FPE-panel replacement) &amp; cabling — with named Huntsville subcontractors.</p>
+      <div class="btncenter mt"><a class="btn ghost" href="#inside">See what's inside &darr;</a></div>
     </div>
-    <div class="card top-teal">
-      <h2>🎓 Curriculum &amp; Vision</h2>
-      <p>A 12-week, 8-project curriculum on John Lennox's <em>2084</em> ($300–$350/student all-in); plus the Department-Wide Vision ($245K–$330K) and naming/fundraising track ("The John Lennox AI Innovation Lab").</p>
-      <div class="btncenter" style="justify-content:flex-start"><a class="btn ghost" href="proposal.html">See curriculum (pp. 9-10)</a></div>
+    <div class="glass card">
+      <h3>🎓 Curriculum &amp; Vision</h3>
+      <p>A 12-week, 8-product curriculum on John Lennox's <em>2084</em> ($300–$350/student all-in, full AI toolchain) — plus the Department-Wide Vision ($245K–$330K) and the "John Lennox AI Innovation Lab" naming track.</p>
+      <div class="btncenter mt"><a class="btn ghost" href="proposal.html">See curriculum (pp. 9–10)</a></div>
     </div>
   </div>
+</div></section>
 
-  <div class="foot">Island Development Crew LLC · Jonathan Isaac · 256-668-8248 · jon-isaac@islanddevcrew.com — planning-grade; re-quoted to sealed bids before purchase.</div>
-</div>
+<section id="inside"><div class="wrap phases">
+  <div class="sectlabel"><h2>Inside the proposal</h2><div class="rule"></div></div>
+  <div class="phase"><div class="num">01</div><div><h4>On-site assessment — 71 verified photographs</h4><p>A true walkthrough with Dr. Smith, documented photo-by-photo. Surfaced a <b>Federal Pacific (FPE) panel</b> in the MDF closet — a documented fire-hazard panel type — now carried as a priority safety item.</p><span class="tag">Rooms 409 · 407 · 305 · 310 · MDF</span></div></div>
+  <div class="phase"><div class="num">02</div><div><h4>Quote 1 — AI Studio + Engineering ($88.2K–$98.8K)</h4><p>10–13 high-memory seats (Framework 128GB + Mac Studio + DGX Spark + RTX 5090), a ≥4-printer Bambu fleet with fume/VOC extraction, soldering + CNC, and three auto-fed hallway display boards. Mostly Title III grant-eligible.</p><span class="tag">Grant-eligible equipment &amp; supplies</span></div></div>
+  <div class="phase"><div class="num">03</div><div><h4>Quote 2 — Power / Electrical ($34K–$37K)</h4><p>FPE-panel replacement, a 100A lab subpanel, 14 dedicated circuits, raceway, and permits — with a load-calc narrative and named Huntsville electrical subs. Facility / capital, the gating dependency for all compute.</p><span class="tag">Facility · not grant-funded</span></div></div>
+  <div class="phase"><div class="num">04</div><div><h4>Quote 3 — Network + Cameras + Access</h4><p>UniFi + pfSense core, UNVR-Pro + G5/G6 Protect cameras, and 4-door UniFi Access with per-semester rotating credentials — plus structured Cat6A cabling. Mixed grant (electronics) / facility (cabling labor).</p><span class="tag">Managed · controlled · protected</span></div></div>
+  <div class="phase"><div class="num">05</div><div><h4>Curriculum — <em>2084</em> / John Lennox</h4><p>Twice-weekly, ~2 chapters/week across the whole book over 12 weeks, interleaved with an AI-Engineering build track. A per-student toolchain (ChatGPT + Claude + Gemini + Grok + OpenRouter + Vercel + Supabase) at $300–350 all-in — every student ships 8 finished products.</p><span class="tag">8 products by graduation</span></div></div>
+  <div class="phase"><div class="num">06</div><div><h4>Fundraising, Match &amp; Naming</h4><p>NSF / Title III / NVIDIA / AMD / Google.org paths, mission-fit philanthropy (Templeton, Lilly, Mellon), and a naming track — "The John Lennox AI Innovation Lab" — to fund the grant-ineligible facility scope.</p><span class="tag">Donor / naming envelope $245K–$330K</span></div></div>
+
+  <div class="foot">
+    <div class="backrow">
+      <a class="btn ghost" href="/ai-lab-final/">◀ Back to AI Lab Home</a>
+      <a class="btn ghost" href="/">Oakwood AI Hub</a>
+      <a class="btn primary" href="proposal.html">Open the proposal &rarr;</a>
+    </div>
+    Island Development Crew LLC · Jonathan Isaac · 256-668-8248 · <a href="mailto:jon-isaac@islanddevcrew.com">jon-isaac@islanddevcrew.com</a><br/>
+    <span style="opacity:.7">Planning-grade; each line re-quoted to sealed sub bids before purchase.</span>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('bg');
+  var gl = cv.getContext('webgl') || cv.getContext('experimental-webgl');
+  if(!gl){ document.getElementById('fallback') && (document.getElementById('fallback').style.display='block'); return; }
+  var vs = 'attribute vec2 a; void main(){ gl_Position = vec4(a,0.0,1.0); }';
+  var fs = [
+  'precision highp float;',
+  'uniform vec2 u_res; uniform float u_time; uniform float u_scroll;',
+  'float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123); }',
+  'float noise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); f=f*f*(3.0-2.0*f);',
+  '  float a=hash(i), b=hash(i+vec2(1.,0.)), c=hash(i+vec2(0.,1.)), d=hash(i+vec2(1.,1.));',
+  '  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y); }',
+  'float fbm(vec2 p){ float s=0.0,a=0.5; for(int i=0;i<5;i++){ s+=a*noise(p); p*=2.03; a*=0.5; } return s; }',
+  'void main(){',
+  '  vec2 p=(gl_FragCoord.xy-0.5*u_res.xy)/u_res.y;',
+  '  float t=u_time*0.028;',
+  '  vec2 q=vec2(fbm(p*1.4+t), fbm(p*1.4+vec2(3.1,1.7)-t));',
+  '  float f=fbm(p*2.0+1.7*q+t*0.6);',
+  '  vec3 A=vec3(0.035,0.106,0.145);',   // deep navy
+  '  vec3 B=vec3(0.039,0.482,0.451);',   // teal
+  '  vec3 C=vec3(0.070,0.640,0.740);',   // aqua
+  '  vec3 D=vec3(0.906,0.435,0.345);',   // coral
+  '  vec3 E=vec3(0.855,0.615,0.180);',   // gold
+  '  float s=clamp(u_scroll,0.0,1.0)*4.0;',
+  '  vec3 base;',
+  '  if(s<1.0) base=mix(A,B,smoothstep(0.0,1.0,s));',
+  '  else if(s<2.0) base=mix(B,C,smoothstep(0.0,1.0,s-1.0));',
+  '  else if(s<3.0) base=mix(C,D,smoothstep(0.0,1.0,s-2.0));',
+  '  else base=mix(D,E,smoothstep(0.0,1.0,s-3.0));',
+  '  vec3 col=base*(0.45+0.75*f);',
+  '  col+=0.12*vec3(0.85,0.95,1.0)*pow(f,3.0);',
+  '  col*=smoothstep(1.35,0.15,length(p));',
+  '  col+=(hash(gl_FragCoord.xy)-0.5)*0.018;',
+  '  gl_FragColor=vec4(col,1.0);',
+  '}'].join('\n');
+  function sh(type,src){ var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s); return s; }
+  var prog=gl.createProgram(); gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs)); gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs)); gl.linkProgram(prog); gl.useProgram(prog);
+  var buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 3,-1, -1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(prog,'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var uRes=gl.getUniformLocation(prog,'u_res'), uTime=gl.getUniformLocation(prog,'u_time'), uScroll=gl.getUniformLocation(prog,'u_scroll');
+  var dpr=Math.min(window.devicePixelRatio||1,1.6), scroll=0, target=0;
+  function resize(){ cv.width=Math.floor(innerWidth*dpr); cv.height=Math.floor(innerHeight*dpr); cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px'; gl.viewport(0,0,cv.width,cv.height); }
+  resize(); addEventListener('resize',resize,{passive:true});
+  function onScroll(){ var h=document.documentElement.scrollHeight-innerHeight; target=h>0?Math.min(1,Math.max(0,scrollY/h)):0; }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var start=performance.now(), vis=true;
+  document.addEventListener('visibilitychange',function(){ vis=!document.hidden; if(vis){ start=performance.now()-elapsed*1000; requestAnimationFrame(loop);} });
+  var elapsed=0;
+  function loop(now){
+    if(!vis) return;
+    elapsed = reduce ? 8.0 : (now-start)/1000;
+    scroll += (target-scroll)*0.08;                 // smoothed scroll drive
+    gl.uniform2f(uRes,cv.width,cv.height);
+    gl.uniform1f(uTime,elapsed);
+    gl.uniform1f(uScroll,scroll);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    if(!reduce || Math.abs(target-scroll)>0.001) requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+  if(reduce){ addEventListener('scroll',function(){ requestAnimationFrame(loop); },{passive:true}); }
+
+  // scroll-reveal phases (compositor-friendly)
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.18});
+  document.querySelectorAll('.phase').forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
